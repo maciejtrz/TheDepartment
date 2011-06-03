@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+
+
+    <navigation-rule>
+        <from-view-id>/index.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{auth.validate}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/WelcomePage.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{auth.newUser}</from-action>
+            <from-outcome>go</from-outcome>
+            <to-view-id>/AddUser.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>auth</managed-bean-name>
+        <managed-bean-class>UserBeans.Auth</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>unlog</managed-bean-name>
+        <managed-bean-class>UserBeans.Unlog</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>user</managed-bean-name>
+        <managed-bean-class>UserBeans.User</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>addUser</managed-bean-name>
+        <managed-bean-class>UserBeans.AddUser</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+</faces-config>
+

@@ -1,0 +1,64 @@
+package UserBeans;
+
+
+import Connections.AuthorizationSingleton;
+import Connections.ConnectionSingleton;
+import Connections.EncodingSingleton;
+import java.sql.Statement;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+
+public class AddUser {
+
+    /** Creates a new instance of AddUser */
+    public AddUser() {
+    }
+    private String username;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getId() {
+        return username;
+    }
+
+    public void setPassword(String pass) {
+        password = pass;
+    }
+
+    public void setId(String ID) {
+        username = ID;
+    }
+
+    public void insert() {
+
+        try {
+            Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
+
+            username = username.trim();
+            password = password.trim();
+
+            String encodedPassword = EncodingSingleton.encodePassword(password);
+            String query = "INSERT INTO Players VALUES('" + username + "', '" + encodedPassword + "')";
+            statement.execute(query);
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        logging();
+    }
+
+    public void logging() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+
+        try {
+            AuthorizationSingleton.goToIndexPage(response);
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
+}

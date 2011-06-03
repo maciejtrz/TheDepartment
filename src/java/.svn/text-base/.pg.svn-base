@@ -1,0 +1,5 @@
+setenv PGHOST       db
+setenv PGPORT       5432
+setenv PGDATABASE   g1027104_u
+setenv PGUSER       g1027104_u
+unsetenv PGPASSWORD

@@ -35,7 +35,7 @@ public class ConnectionSingleton {
     public static final String idname = "idname";
     public static final String password = "pass";
     public static final String loggedIn = "loggedin";
-    public static final String gameName = "/Department";
+    public static final String gameName = "/TheDepartment";
     public static final String welcomePage = gameName + "/faces/WelcomePage.jsp";
     public static final String indexPage = gameName + "/faces/index.jsp";
 

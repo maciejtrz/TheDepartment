@@ -58,9 +58,13 @@
 
                  <h:commandButton value="Add Department" action="#{addDepartment.go}" />
                  <%
-                    }
+                    } else {
 
                  %>
+                 <h:commandButton value="Start playing" action="#{department.startPlaying}" />
+                 <h:commandButton value="Delete Department" actionListener="#{department.deleteDepartment}" />
+
+                 <% } %>
             </h:form>
 
         </body>

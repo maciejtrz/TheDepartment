@@ -27,6 +27,8 @@ public class User {
         try {
             Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
             statement.execute("DELETE FROM Players WHERE IdName = '" + username + "'");
+            statement.execute("DELETE FROM PlayerResources WHERE IdName = '" + username + "'");
+            statement.execute("DELETE FROM DepartmentInfo WHERE IdName = '" + username + "'");
         } catch (Exception e) {
             System.out.println(e.toString());
         }

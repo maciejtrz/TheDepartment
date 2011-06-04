@@ -42,17 +42,9 @@
                     String query = "SELECT * FROM DepartmentInfo WHERE IdName = '"
                             + playerName + "'";
 
-                    /* *********************************** */
-                    System.out.println("IM HERE!");
                     ResultSet result = statement.executeQuery(query);
-                    boolean b = result.next();
-                    System.out.println("IM HERE2!");
-                    System.out.println("The value for " + playerName);
-                    System.out.println(b);
 
-                    /* ********************************** */
-
-                    if (!b) {
+                    if (!result.next()) {
                         /* The entry does not exist in the database. */
                  %>
 

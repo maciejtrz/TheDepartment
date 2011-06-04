@@ -4,6 +4,9 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <listener>
+        <listener-class>Connections.SessionCleaner</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -14,22 +17,18 @@
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.jsp</welcome-file>
     </welcome-file-list>
-
-<security-constraint>
-<web-resource-collection>
-<web-resource-name>securedapp</web-resource-name>
-<url-pattern>/*</url-pattern>
-</web-resource-collection>
-<user-data-constraint>
-<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-</user-data-constraint>
-</security-constraint>
-
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>securedapp</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>

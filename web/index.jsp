@@ -45,10 +45,15 @@
                     <h:inputSecret id="password"
                                    value="#{auth.password}" />
 
+                    <h:outputText value="Remember me: " />
+                    <h:selectBooleanCheckbox value="#{auth.remember}"  />
+
                     <h:commandButton action="#{auth.validate}"
                                      value = "Log"/>
                     <h:commandButton action="#{auth.newUser}"
                                      value = "Add New User"/>
+
+
                 </h:panelGrid>
             </h:form>
 

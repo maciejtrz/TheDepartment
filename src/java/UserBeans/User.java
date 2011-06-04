@@ -16,7 +16,7 @@ public class User {
     public User() {
     }
 
-    public void deleteMe() throws IOException {
+    public String deleteMe() throws IOException {
 
         FacesContext facesContext = (FacesContext) FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
@@ -32,6 +32,8 @@ public class User {
         }
 
         logoff();
+
+        return "success";
 
     }
 

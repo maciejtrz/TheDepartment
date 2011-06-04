@@ -15,7 +15,7 @@ public class Unlog {
     public Unlog() {
     }
 
-    public void logoff() throws IOException {
+    public String logoff() throws IOException {
 
         System.out.println("Logging off...");
 
@@ -35,7 +35,7 @@ public class Unlog {
         System.out.println("Logging out!");
         System.out.println("Waiting for index...");
 
-
+        return "success";
 
     }
 

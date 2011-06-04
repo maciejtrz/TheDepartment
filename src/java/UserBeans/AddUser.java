@@ -1,10 +1,8 @@
 package UserBeans;
 
-import Connections.AuthorizationSingleton;
 import Connections.EncodingSingleton;
 import java.sql.Statement;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
+
 
 public class AddUser {
 
@@ -13,6 +11,9 @@ public class AddUser {
     }
     private String username;
     private String password;
+    private String password2;
+    private String email;
+
 
     public String getPassword() {
         return password;
@@ -20,6 +21,22 @@ public class AddUser {
 
     public String getId() {
         return username;
+    }
+
+    public String getPassword2(){
+        return password2;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public void setPassword2(String pass){
+        password2 = pass;
     }
 
     public void setPassword(String pass) {
@@ -30,7 +47,7 @@ public class AddUser {
         username = ID;
     }
 
-    public void insert() {
+    public String insert() {
 
         System.err.println("Inserting...");
 
@@ -39,27 +56,41 @@ public class AddUser {
 
             username = username.trim();
             password = password.trim();
+            password2 = password2.trim();
+            email=email.trim();
+
+            if ( validatePassword() && validateEmail() ) {
+            // if password == password2 && email has @ the insert the record
+            // to database
 
             String encodedPassword = EncodingSingleton.encodePassword(password);
-            String query = "INSERT INTO Players VALUES('" + username + "', '" + encodedPassword + "',false)";
+            String query = "INSERT INTO Players VALUES('" + username + "', '" + encodedPassword + "', '" + email + "',false)";
             System.out.println("Query is: " + query);
             statement.execute(query);
+
+            }
+
+            else {
+                System.out.println("Password or email incorrect");
+            }
 
         } catch (Exception e) {
             System.out.println(e.toString());
         }
 
-        logging();
+        return "success";
     }
 
-    public void logging() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-        try {
-            AuthorizationSingleton.goToIndexPage(response);
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
+    // Auxilary methods
+
+    private boolean validatePassword(){
+        return getPassword().equals(password2);
     }
+
+    private boolean validateEmail(){
+        return getEmail().contains("@");
+    }
+
+    public String goToIndex() { return "go"; }
 }

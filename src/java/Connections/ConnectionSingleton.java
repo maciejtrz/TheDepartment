@@ -16,26 +16,22 @@ public class ConnectionSingleton {
     private static ConnectionSingleton con;
     private static Connection connection;
 
-    // lab computer
-    /*
-     *     private final String connectionURL = "jdbc:postgresql://db:5432/g1027104_u";
-     *     private final String DataBaseDriver = "org.postgresql.Driver";
-     *     private final String username = "g1027104_u";
-     *     private final String dbPassword = "EldyDqOUXi";
-     */
-
-    
-    // private computer
+   /*
+    private final String connectionURL = "jdbc:postgresql://db:5432/g1027104_u";
+    private final String DataBaseDriver = "org.postgresql.Driver";
+    private final String username = "g1027104_u";
+    private final String dbPassword = "EldyDqOUXi"; */
+   
     private final String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "postgres";
-    private final String dbPassword = "postgres";
+    private final String dbPassword = "postgres"; 
     
 
     public static final String idname = "idname";
-    public static final String password = "pass";
+    public static final String password = "password";
     public static final String loggedIn = "loggedin";
-    public static final String gameName = "/TheDepartment";
+    public static final String gameName = "/Department";
     public static final String welcomePage = gameName + "/faces/WelcomePage.jsp";
     public static final String indexPage = gameName + "/faces/index.jsp";
 

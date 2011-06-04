@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="Connections.AuthorizationSingleton"%>
 <%@page import="Connections.ConnectionSingleton"%>
 <%@page import="javax.faces.context.FacesContext"%>
@@ -28,8 +30,37 @@
             <h1>Hello <%=session.getAttribute(ConnectionSingleton.idname)%>!</h1>
 
             <h:form>
-                <h:commandButton value="Get me out of here" actionListener="#{unlog.logoff}"/>
-                <h:commandButton value="Delete me" actionListener="#{user.deleteMe}"/>
+                <h:commandButton value="Get me out of here" action="#{unlog.logoff}"/>
+                <h:commandButton value="Delete me" action="#{user.deleteMe}"/>
+                <%
+                    String playerName
+                        = session.getAttribute(ConnectionSingleton.idname)
+                        .toString();
+                    ConnectionSingleton connection =
+			ConnectionSingleton.createConnection();
+                    Statement statement = connection.getStatement();
+                    String query = "SELECT * FROM DepartmentInfo WHERE IdName = '"
+                            + playerName + "'";
+
+                    /* *********************************** */
+                    System.out.println("IM HERE!");
+                    ResultSet result = statement.executeQuery(query);
+                    boolean b = result.next();
+                    System.out.println("IM HERE2!");
+                    System.out.println("The value for " + playerName);
+                    System.out.println(b);
+
+                    /* ********************************** */
+
+                    if (!b) {
+                        /* The entry does not exist in the database. */
+                 %>
+
+                 <h:commandButton value="Add Department" action="#{addDepartment.go}" />
+                 <%
+                    }
+
+                 %>
             </h:form>
 
         </body>

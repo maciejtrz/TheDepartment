@@ -24,7 +24,7 @@
 
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-            <title>Adding New User</title>
+            <title>The Department:New User</title>
         </head>
 
         <body>
@@ -40,14 +40,23 @@
                     <h:inputSecret id="password"
                                    value="#{addUser.password}" />
 
-                    <h:commandButton actionListener="#{addUser.insert}"
+                    <h:outputText value="Confirm password: "/>
+                    <h:inputSecret id="password2"
+                                   value="#{addUser.password2}" />
+                    
+                    <h:outputText value="E-mail: "/>
+                    <h:inputText id="email"
+                                   value="#{addUser.email}" />
+
+
+                    <h:commandButton action="#{addUser.insert}"
                                      value = "Add User"/>
 
-                    <h:commandButton actionListener="#{addUser.logging}"
+                    <h:commandButton action="#{addUser.goToIndex}"
                                      value = "Logging"/>
 
                 </h:panelGrid>
-            </h:form>
+            </h:form>   
         </body>
     </html>
 </f:view>

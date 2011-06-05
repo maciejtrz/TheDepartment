@@ -31,7 +31,7 @@
     <managed-bean>
         <managed-bean-name>auth</managed-bean-name>
         <managed-bean-class>UserBeans.Auth</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
@@ -110,9 +110,20 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
     <managed-bean>
         <managed-bean-name>department</managed-bean-name>
         <managed-bean-class>UserBeans.Department</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>addResearch</managed-bean-name>
+        <managed-bean-class>ResearchPoints.AddResearch</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>researchSubject</managed-bean-name>
+        <managed-bean-class>ResearchPoints.ResearchSubject</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

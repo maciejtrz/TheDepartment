@@ -7,8 +7,6 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-            System.out.println("Welcome in welcomePage");
-
              if (AuthorizationSingleton.isFacesContext() ||
                     !AuthorizationSingleton.isSessionValid(session)) {
                AuthorizationSingleton.goToIndexPage(response);
@@ -16,16 +14,25 @@
                AuthorizationSingleton.addCookies(response, session);
 
 %>
-
+<f:view>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Playing</title>
+        <title>Research Management</title>
     </head>
     <body>
-        <h1>Playing...</h1>
-        <p> <a href="AddResearch.jsp"> Add Research</a>
+        <h1>Adding research: </h1>
+        <p>Now, you must specify what research you would like to perform.</p>
+        <h:form>
+
+            <h:outputText value="Specify subject: "/>
+            <h:selectOneMenu value="#{researchSubject.nextSWVersion}" >
+   <f:selectItems value="#{researchSubject.nextSWVersionItems}"/>
+</h:selectOneMenu>
+
+
+        </h:form>
     </body>
 </html>
-
+</f:view>
 <% } %>

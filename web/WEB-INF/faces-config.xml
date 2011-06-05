@@ -10,18 +10,18 @@
 
 
     <navigation-rule>
-        <from-view-id>/index.jsp</from-view-id>
+        <from-view-id>/Unlogged/index.jsp</from-view-id>
         <navigation-case>
             <from-action>#{auth.validate}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/WelcomePage.jsp</to-view-id>
+            <to-view-id>/Logged/WelcomePage.jsp</to-view-id>
             <redirect/>
         </navigation-case>
 
         <navigation-case>
             <from-action>#{auth.newUser}</from-action>
             <from-outcome>go</from-outcome>
-            <to-view-id>/AddUser.jsp</to-view-id>
+            <to-view-id>/Unlogged/AddUser.jsp</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -58,58 +58,60 @@
     </managed-bean>
 
     <navigation-rule>
-        <from-view-id>/DeptName.jsp</from-view-id>
+        <from-view-id>/Logged/DeptName.jsp</from-view-id>
         <navigation-case>
             <from-action>#{addDepartment.addDepartment}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/WelcomePage.jsp</to-view-id>
+            <to-view-id>/Logged/WelcomePage.jsp</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/WelcomePage.jsp</from-view-id>
+        <from-view-id>/Logged/WelcomePage.jsp</from-view-id>
         <navigation-case>
             <from-action>#{addDepartment.go}</from-action>
-            <to-view-id>/DeptName.jsp</to-view-id>
+            <to-view-id>/Logged/DeptName.jsp</to-view-id>
             <redirect/>
         </navigation-case>
 
         <navigation-case>
             <from-action>#{unlog.logoff}</from-action>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.jsp</to-view-id>
             <redirect/>
         </navigation-case>
 
         <navigation-case>
             <from-action>#{user.deleteMe}</from-action>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.jsp</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{department.startPlaying}</from-action>
+            <to-view-id>/Logged/Playing.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         
-        <navigation-case>
-            <from-action>#{department.startPlaying}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/Playing.jsp</to-view-id>
-            <redirect/>
-        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/AddUser.jsp</from-view-id>
+        <from-view-id>/Unlogged/AddUser.jsp</from-view-id>
         <navigation-case>
             <from-action>#{addUser.goToIndex}</from-action>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.jsp</to-view-id>
             <redirect/>
         </navigation-case>
 
        <navigation-case>
             <from-action>#{addUser.insert}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.jsp</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
+
 
     <managed-bean>
         <managed-bean-name>department</managed-bean-name>
@@ -126,5 +128,15 @@
         <managed-bean-class>ResearchPoints.ResearchSubject</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <navigation-rule>
+        <from-view-id>/Logged/AddResearch.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{addResearch.startResearch}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Playing.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>
 

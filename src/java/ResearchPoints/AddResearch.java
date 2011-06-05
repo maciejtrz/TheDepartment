@@ -5,7 +5,10 @@
 
 package ResearchPoints;
 
+import Connections.ConnectionSingleton;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -23,14 +26,15 @@ public class AddResearch {
     /* List of participating lectures */
     private List lecturers;
 
-    public AddResearch(String name, int ResearchPoints) {
-        this.name = name;
-        this.ResearchPoints = ResearchPoints;
-    }
+    public AddResearch() {
 
-    public AddResearch(String name, int ResearchPoints, List lecturers) {
-        this(name, ResearchPoints);
-        this.lecturers = lecturers;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        
+        Thread thread = new Thread(new Research("Some title",
+                100,null,session.getAttribute(ConnectionSingleton.idname).toString(),1000));
+        
+        thread.start();
     }
 
     public void setName(String name) { this.name = name; }
@@ -42,4 +46,11 @@ public class AddResearch {
     public void addLecturer(String lecturer) { lecturers.add(lecturer); }
     public void removeLecturer(String lecturer) { lecturers.remove(lecturer); }
     public List getLecturers() { return lecturers; }
+
+
+    public String startResearch() {
+
+        return "success";
+    }
+
 }

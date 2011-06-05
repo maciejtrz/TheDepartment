@@ -4,9 +4,46 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+
+    <filter>
+        <filter-name>loggedFilter</filter-name>
+        <filter-class>Filters.LoggedFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>unloggedFilter</filter-name>
+        <filter-class>Filters.UnloggedFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>loggedFilter</filter-name>
+        <url-pattern>/Logged/AddResearch.jsp</url-pattern>
+        <url-pattern>/Logged/DeptName.jsp</url-pattern>
+        <url-pattern>/Logged/Playing.jsp</url-pattern>
+        <url-pattern>/Logged/WelcomePage.jsp</url-pattern>
+        <url-pattern>/Logged/Playing.xhtml</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+
+
+
+
+    <filter-mapping>
+        <filter-name>unloggedFilter</filter-name>
+        <url-pattern>/Unlogged/AddUser.jsp</url-pattern>
+        <url-pattern>/Unlogged/index.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
     <listener>
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -16,12 +53,18 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+
+
+
+
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
+
     <welcome-file-list>
-        <welcome-file>faces/index.jsp</welcome-file>
+        <welcome-file>faces/Unlogged/index.jsp</welcome-file>
     </welcome-file-list>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>securedapp</web-resource-name>
@@ -31,4 +74,5 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+55
 </web-app>

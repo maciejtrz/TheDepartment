@@ -1,8 +1,12 @@
 package Connections;
 
+import ResearchPoints.Research;
+import UserBeans.Auth;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +45,7 @@ public class AuthorizationSingleton {
     }
 
     public static void checkCookies(HttpServletRequest request, HttpServletResponse response,
-            HttpSession session) throws IOException {
+            HttpSession session, Auth auth) throws IOException{
         Cookie[] cookies = request.getCookies();
         String user = null;
         String password = null;
@@ -62,8 +66,15 @@ public class AuthorizationSingleton {
 
         if (user != null && password != null) {
             System.out.println("Looking up cookies in db...");
-            if(test(user,password,session))
+            if(test(user,password,session)) {
+                session.setAttribute(ConnectionSingleton.researchBag, new HashSet<Research>());
+                session.setAttribute(ConnectionSingleton.Auth, auth);
+                auth.setUsername(user);
+                auth.setPassword(password);
+                auth.updateResearchPoints();
+                
                 response.sendRedirect(ConnectionSingleton.welcomePage);
+            }
 
             }
 
@@ -80,21 +91,15 @@ public class AuthorizationSingleton {
         idname.setMaxAge(0);
         pass.setMaxAge(0);
 
-        System.out.println("Default cookie path(removing): " + idname.getPath());
-
         idname.setPath("/");
         pass.setPath("/");
 
         response.addCookie(idname);
         response.addCookie(pass);
-    
-        session.setAttribute("loggedout", "true");
         
     }
 
     public static boolean test(String username, String password, HttpSession session) {
-         System.out.println("Connecting to server and testing user...");
-
         boolean result = false;
 
         try {
@@ -139,9 +144,7 @@ public class AuthorizationSingleton {
         idname.setMaxAge(24 * 60 * 60);
         pass.setMaxAge(24 * 60 * 60);
 
-        System.out.println("Default cookie path: " + idname.getPath());
-
-                idname.setPath("localhost");
+        idname.setPath("localhost");
         pass.setPath("localhost");
 
         idname.setPath("/");
@@ -166,9 +169,11 @@ public class AuthorizationSingleton {
 
     }
 
-    public void logoff() throws IOException {
+    public static void addAuth(HttpServletResponse response) throws IOException {
+        response.sendRedirect(ConnectionSingleton.addAuth);
+    }
 
-        System.out.println("Logging off...");
+    public void logoff() throws IOException {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -179,12 +184,9 @@ public class AuthorizationSingleton {
 
         session.removeAttribute(ConnectionSingleton.idname);
         session.removeAttribute(ConnectionSingleton.password);
-        session.setAttribute("loggedout","true");
+        session.removeAttribute(ConnectionSingleton.Auth);
 
         removeCookies(request, response, session);
-
-        System.out.println("Logging out!");
-        System.out.println("Waiting for index...");
 
     }
 }

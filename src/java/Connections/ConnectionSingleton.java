@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class ConnectionSingleton {
 
+
     private ConnectionSingleton() {
     }
 
@@ -31,9 +32,16 @@ public class ConnectionSingleton {
     public static final String idname = "idname";
     public static final String password = "password";
     public static final String loggedIn = "loggedin";
+    public static final String researchPoints = "researchpoints";
+    public static final String playerResources = "PlayerResources";
+    public static final String addAuth = "AddAuth.jsp";
+
+    public static final String Auth = "Auth";
+    public static final String researchBag = "researchBag";
+
     public static final String gameName = "/Department";
-    public static final String welcomePage = gameName + "/faces/WelcomePage.jsp";
-    public static final String indexPage = gameName + "/faces/index.jsp";
+    public static final String welcomePage = gameName + "/faces/Logged/WelcomePage.jsp";
+    public static final String indexPage = gameName + "/faces/Unlogged/index.jsp";
 
     public Statement getStatement() {
 

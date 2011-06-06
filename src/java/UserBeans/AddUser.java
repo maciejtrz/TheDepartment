@@ -1,7 +1,7 @@
 package UserBeans;
 
+import ConnectionDataBase.PlayerHelper;
 import Connections.EncodingSingleton;
-import java.sql.Statement;
 
 
 public class AddUser {
@@ -48,30 +48,18 @@ public class AddUser {
     }
 
     public String insert() {
-
-        System.err.println("Inserting...");
-
         try {
-            Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
-
             username = username.trim();
             password = password.trim();
             password2 = password2.trim();
             email=email.trim();
 
             if ( validatePassword() && validateEmail() ) {
-            // if password == password2 && email has @ the insert the record
-            // to database
 
-            String encodedPassword = EncodingSingleton.encodePassword(password);
-            String query = "INSERT INTO Players VALUES('" + username + "', '" + encodedPassword + "', '" + email + "',false)";
-            System.out.println("Query is: " + query);
-            statement.execute(query);
+                String encodedPassword = EncodingSingleton.encodePassword(password);
+                PlayerHelper player = new PlayerHelper();
+                player.addPlayer(username, encodedPassword, email);
 
-            }
-
-            else {
-                System.out.println("Password or email incorrect");
             }
 
         } catch (Exception e) {

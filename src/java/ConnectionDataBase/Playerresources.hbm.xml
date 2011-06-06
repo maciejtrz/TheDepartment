@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-Jun-2011 13:02:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Playerresources" table="playerresources" schema="public">
+        <id name="idname" type="string">
+            <column name="idname" />
+            <generator class="assigned" />
+        </id>
+        <property name="money" type="java.lang.Integer">
+            <column name="money" />
+        </property>
+        <property name="researchpoints" type="java.lang.Integer">
+            <column name="researchpoints" />
+        </property>
+        <property name="undegraduatesnumber" type="java.lang.Integer">
+            <column name="undegraduatesnumber" />
+        </property>
+        <property name="phdsnumber" type="java.lang.Integer">
+            <column name="phdsnumber" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,11 +1,15 @@
 package Connections;
 
+import ConnectionDataBase.PlayerHelper;
+import ConnectionDataBase.Players;
 import ResearchPoints.Research;
 import UserBeans.Auth;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -92,36 +96,33 @@ public class AuthorizationSingleton {
     }
 
     public static boolean test(String username, String password, HttpSession session) {
-        boolean result = false;
+            boolean result = false;
 
-        try {
-            Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Players");
             String encodedPassword = EncodingSingleton.encodePassword(password);
 
-            while (resultSet.next()) {
-                String name = resultSet.getString(ConnectionSingleton.idname);
-                String pass = resultSet.getString(ConnectionSingleton.password);
+            PlayerHelper playerHelper = new PlayerHelper();
+            List<Players> players = playerHelper.getPlayers();
+            Iterator<Players> iterator = players.iterator();
 
-                if (name.equals(username) && pass.equals(encodedPassword)) {
+            while(iterator.hasNext()) {
+                Players player = iterator.next();
+
+                if(username.equals(player.getIdname()) &&
+                        encodedPassword.equals(player.getPassword())) {
 
                     session.setAttribute(ConnectionSingleton.researchBag, new ArrayList<Research>());
                     session.setAttribute(ConnectionSingleton.idname, username);
                     session.setAttribute(ConnectionSingleton.password, password);
 
                     AuthorizationSingleton.updateUserStatus(username,true);
-
-
+                    
                     result = true;
                     break;
-                    
+
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         return result;
     }
@@ -150,15 +151,8 @@ public class AuthorizationSingleton {
 
     public static void updateUserStatus(String idname, boolean logged) {
 
-        try {
-            Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
-            statement.execute("UPDATE Players SET "+ Connections.ConnectionSingleton.loggedIn
-                    + "=" + (logged ? "true" : "false")+ " WHERE "
-                    + Connections.ConnectionSingleton.idname+"='" + idname + "'");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        PlayerHelper playerHelper = new PlayerHelper();
+        playerHelper.updateLoggedStatus(idname,logged);
 
     }
 

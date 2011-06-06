@@ -1,5 +1,6 @@
 package UserBeans;
 
+import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.sql.ResultSet;
@@ -94,26 +95,10 @@ public class Auth {
         this.researchPoints = researchPoints;
     }
 
-    public void updateResearchPoints() {
+    public synchronized void updateResearchPoints() {
 
-        Statement statement = ConnectionSingleton.createConnection().getStatement();
-
-        String query = "SELECT " + ConnectionSingleton.researchPoints
-                + " FROM " + ConnectionSingleton.playerResources + " WHERE "
-                + ConnectionSingleton.idname + "='" + getUsername() + "'";
-        String result = null;
-
-        try {
-        ResultSet resultSet = statement.executeQuery(query);
-
-        if (resultSet.next())
-            result = resultSet.getString(ConnectionSingleton.researchPoints);
-        } catch(Exception e) { }
-
-        if (result != null)
-            setResearchPoints(Integer.parseInt(result));
-        else
-            setResearchPoints(0);
+        PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
+        setResearchPoints(playerResources.getResearchpoints(getUsername()));
       
     }
 

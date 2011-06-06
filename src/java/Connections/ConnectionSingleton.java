@@ -34,7 +34,7 @@ public class ConnectionSingleton {
     public static final String loggedIn = "loggedin";
     public static final String researchPoints = "researchpoints";
     public static final String playerResources = "PlayerResources";
-    public static final String addAuth = "AddAuth.jsp";
+    public static final String addAuth = "/Department/AddAuth.jsp";
 
     public static final String Auth = "Auth";
     public static final String researchBag = "researchBag";

@@ -4,6 +4,8 @@
  */
 package UserBeans;
 
+import ConnectionDataBase.DepartmentinfoHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.ConnectionSingleton;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,29 +38,17 @@ public class AddDepartment {
 
         setName(getName().trim());
 
-
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
-        ConnectionSingleton connection = ConnectionSingleton.createConnection();
-        Statement statement = connection.getStatement();
-
-
         String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
 
-        /* Populating PlayerResources table. */
-        String pr_query = "INSERT INTO PlayerResources"
-                + " VALUES ('" + playerName + "', 100000 , 0 , 0 ,"
-                + " 0)";
-        statement.executeUpdate(pr_query);
+        PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
+        playerResources.createPlayerResources(playerName);
 
         /* Populating DepartmentInfo table. */
-        String dp_query = "INSERT INTO DepartmentInfo"
-                + " VALUES ( '" + playerName + "' , '"
-                + getName() + "')";
-        statement.executeUpdate(dp_query);
-
-        statement.close();
+        DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
+        departmentInfo.createDepartment(playerName,getName());     
 
         return "success";
     }

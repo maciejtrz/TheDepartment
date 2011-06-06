@@ -1,6 +1,9 @@
 package UserBeans;
 
 
+import ConnectionDataBase.DepartmentinfoHelper;
+import ConnectionDataBase.PlayerHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.io.IOException;
@@ -23,15 +26,14 @@ public class User {
 
         String username = (String) session.getAttribute(ConnectionSingleton.idname);
 
-        System.out.println("Deleting: " + username);
-        try {
-            Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
-            statement.execute("DELETE FROM Players WHERE IdName = '" + username + "'");
-            statement.execute("DELETE FROM PlayerResources WHERE IdName = '" + username + "'");
-            statement.execute("DELETE FROM DepartmentInfo WHERE IdName = '" + username + "'");
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
+        playerresources.deleteResources(username);
+
+        DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
+        departmentInfo.deleteDepartment(username);
+
+        PlayerHelper playerHelper = new PlayerHelper();
+        playerHelper.deletePlayer(username);
 
         logoff();
 

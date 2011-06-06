@@ -3,9 +3,8 @@ package UserBeans;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
-import java.sql.ResultSet;
+import Connections.SessionSingleton;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -81,6 +80,9 @@ public class Auth {
         } else {
             result = "failure";
         }
+
+        /* Initializing session. */
+        SessionSingleton.initializeLecturers(session);
 
         logging = true;
 

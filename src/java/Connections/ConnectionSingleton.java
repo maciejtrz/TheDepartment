@@ -33,6 +33,7 @@ public class ConnectionSingleton {
     public static final String password = "password";
     public static final String loggedIn = "loggedin";
     public static final String researchPoints = "researchpoints";
+    public static final String LECTURERSMANAGER = "mgr";
     public static final String playerResources = "PlayerResources";
     public static final String addAuth = "/Department/AddAuth.jsp";
 

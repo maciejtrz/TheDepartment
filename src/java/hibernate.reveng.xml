@@ -5,4 +5,8 @@
   <table-filter match-name="playerresources"/>
   <table-filter match-name="departmentinfo"/>
   <table-filter match-name="players"/>
+  <table-filter match-name="lecturers"/>
+  <table-filter match-name="lecturersowned"/>
+  <table-filter match-name="lecturersavailable"/>
+  <table-filter match-name="lecturersspecializations"/>
 </hibernate-reverse-engineering>

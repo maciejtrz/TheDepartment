@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-Jun-2011 22:06:30 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Lecturers" table="lecturers" schema="public">
+        <id name="lecturername" type="string">
+            <column name="lecturername" />
+            <generator class="assigned" />
+        </id>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" />
+        </property>
+        <property name="rpcontribution" type="java.lang.Integer">
+            <column name="rpcontribution" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -22,25 +22,25 @@ public class DepartmentinfoHelper {
         departmentInfo.setName(departmentName);
 
         Transaction tx = session.beginTransaction();
-        tx.begin();
+        //tx.begin();
 
         session.save(departmentInfo);
        
-        tx.commit();
+        //tx.commit();
 
     }
 
     public void deleteDepartment(String idname) {
         Transaction tx = session.beginTransaction();
 
-        tx.begin();
+        //tx.begin();
         Query q = session.createQuery("from Departmentinfo where idname='"
                 + idname + "'");
         Departmentinfo departmentInfo = (Departmentinfo) q.uniqueResult();
 
         if(departmentInfo != null)
             session.delete(departmentInfo);
-        tx.commit();
+        //tx.commit();
         
     }
 

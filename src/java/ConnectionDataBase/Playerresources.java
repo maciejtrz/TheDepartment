@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 06-Jun-2011 13:02:17 by Hibernate Tools 3.2.1.GA
+// Generated 06-Jun-2011 22:06:30 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -12,7 +12,7 @@ public class Playerresources  implements java.io.Serializable {
      private String idname;
      private Integer money;
      private Integer researchpoints;
-     private Integer undegraduatesnumber;
+     private Integer undergraduatesnumber;
      private Integer phdsnumber;
 
     public Playerresources() {
@@ -22,11 +22,11 @@ public class Playerresources  implements java.io.Serializable {
     public Playerresources(String idname) {
         this.idname = idname;
     }
-    public Playerresources(String idname, Integer money, Integer researchpoints, Integer undegraduatesnumber, Integer phdsnumber) {
+    public Playerresources(String idname, Integer money, Integer researchpoints, Integer undergraduatesnumber, Integer phdsnumber) {
        this.idname = idname;
        this.money = money;
        this.researchpoints = researchpoints;
-       this.undegraduatesnumber = undegraduatesnumber;
+       this.undergraduatesnumber = undergraduatesnumber;
        this.phdsnumber = phdsnumber;
     }
    
@@ -51,12 +51,12 @@ public class Playerresources  implements java.io.Serializable {
     public void setResearchpoints(Integer researchpoints) {
         this.researchpoints = researchpoints;
     }
-    public Integer getUndegraduatesnumber() {
-        return this.undegraduatesnumber;
+    public Integer getUndergraduatesnumber() {
+        return this.undergraduatesnumber;
     }
     
-    public void setUndegraduatesnumber(Integer undegraduatesnumber) {
-        this.undegraduatesnumber = undegraduatesnumber;
+    public void setUndergraduatesnumber(Integer undergraduatesnumber) {
+        this.undergraduatesnumber = undergraduatesnumber;
     }
     public Integer getPhdsnumber() {
         return this.phdsnumber;

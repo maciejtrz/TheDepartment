@@ -76,13 +76,13 @@ public class Auth {
 
         if (username != null && username.length() != 0 && AuthorizationSingleton.test(username, password, session)) {
             updateResearchPoints();
+            /* Initializing session. */
+            SessionSingleton.initializeLecturers(session);
             result = "success";
         } else {
             result = "failure";
         }
 
-        /* Initializing session. */
-        SessionSingleton.initializeLecturers(session);
 
         logging = true;
 

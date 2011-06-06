@@ -10,6 +10,8 @@ public class SessionCleaner implements  HttpSessionListener, HttpSessionAttribut
 
     public void sessionCreated(HttpSessionEvent se) {
 
+        System.out.println("Session creation...");
+
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {

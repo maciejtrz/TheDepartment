@@ -19,7 +19,7 @@ public class ResearchBag {
     }
     
     public List<Research> getResearches() {
-        System.out.println("Someone askses for the list of researches...");
+
         return researchBag;
     }
 

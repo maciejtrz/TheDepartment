@@ -5,7 +5,7 @@
         <param-value>Development</param-value>
     </context-param>
 
-    <filter>
+<filter>
         <filter-name>loggedFilter</filter-name>
         <filter-class>Filters.LoggedFilter</filter-class>
     </filter>
@@ -22,11 +22,7 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-
-
-
-
-
+    
     <filter-mapping>
         <filter-name>unloggedFilter</filter-name>
         <url-pattern>/Unlogged/*</url-pattern>
@@ -35,6 +31,7 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    
     <listener>
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>

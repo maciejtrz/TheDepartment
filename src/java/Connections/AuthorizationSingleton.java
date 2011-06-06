@@ -60,7 +60,6 @@ public class AuthorizationSingleton {
 
         if (user != null && password != null) {
             if(test(user,password,session)) {
-                session.setAttribute(ConnectionSingleton.researchBag, new ArrayList<Research>());
                 session.setAttribute(ConnectionSingleton.Auth, auth);
                 auth.setUsername(user);
                 auth.setPassword(password);
@@ -107,6 +106,7 @@ public class AuthorizationSingleton {
 
                 if (name.equals(username) && pass.equals(encodedPassword)) {
 
+                    session.setAttribute(ConnectionSingleton.researchBag, new ArrayList<Research>());
                     session.setAttribute(ConnectionSingleton.idname, username);
                     session.setAttribute(ConnectionSingleton.password, password);
 
@@ -166,7 +166,7 @@ public class AuthorizationSingleton {
         response.sendRedirect(ConnectionSingleton.addAuth);
     }
 
-    public void logoff() throws IOException {
+    public static void logoff() throws IOException {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -180,6 +180,5 @@ public class AuthorizationSingleton {
         session.removeAttribute(ConnectionSingleton.Auth);
 
         removeCookies(request, response, session);
-
     }
 }

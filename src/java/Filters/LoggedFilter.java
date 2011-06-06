@@ -36,6 +36,8 @@ public class LoggedFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
+
+        System.out.println("Logged filter");
         if (AuthorizationSingleton.isFacesContext()
                 || !AuthorizationSingleton.isSessionValid(session)) {
 
@@ -47,6 +49,7 @@ public class LoggedFilter implements Filter {
             Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
 
             if(auth == null) {
+                 System.out.println("No auth");
                  AuthorizationSingleton.addAuth(res);
                  return;
             }

@@ -4,9 +4,6 @@ import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import UserBeans.Auth;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -33,14 +30,17 @@ public class UnloggedFilter implements Filter {
 
         HttpSession session = req.getSession();
 
-
+        System.out.println("Unlogged Fitler");
+        
          if (AuthorizationSingleton.isFacesContext()) {
+
                 AuthorizationSingleton.goToIndexPage(res);
                 return;
 
          } else if(AuthorizationSingleton.isSessionValid(session)) {
 
                AuthorizationSingleton.goToWelcomePage(res);
+               return;
 
          } else {
 

@@ -101,10 +101,6 @@ public class Auth {
         String query = "SELECT " + ConnectionSingleton.researchPoints
                 + " FROM " + ConnectionSingleton.playerResources + " WHERE "
                 + ConnectionSingleton.idname + "='" + getUsername() + "'";
-
-        System.out.println("Query is: " + query);
-        System.out.println("Asking for result...");
-
         String result = null;
 
         try {
@@ -118,8 +114,7 @@ public class Auth {
             setResearchPoints(Integer.parseInt(result));
         else
             setResearchPoints(0);
-        
-        System.out.println("The result is: " + result);
+      
     }
 
     public String go() {

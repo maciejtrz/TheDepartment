@@ -123,11 +123,7 @@
         <managed-bean-class>ResearchPoints.AddResearch</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>researchSubject</managed-bean-name>
-        <managed-bean-class>ResearchPoints.ResearchSubject</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
     <navigation-rule>
         <from-view-id>/Logged/AddResearch.jsp</from-view-id>
         <navigation-case>
@@ -137,6 +133,12 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>researchBag</managed-bean-name>
+        <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
 </faces-config>
 

@@ -9,7 +9,6 @@ import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import UserBeans.Auth;
 import java.io.IOException;
-import java.util.HashSet;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -37,8 +36,6 @@ public class LoggedFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        System.out.println("Logged filter...");
-
         if (AuthorizationSingleton.isFacesContext()
                 || !AuthorizationSingleton.isSessionValid(session)) {
 
@@ -63,9 +60,6 @@ public class LoggedFilter implements Filter {
 
                 auth.logging = false;
             }
-
-
-
         }
 
         chain.doFilter(request, response);

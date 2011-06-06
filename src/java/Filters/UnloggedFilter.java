@@ -35,7 +35,6 @@ public class UnloggedFilter implements Filter {
 
 
          if (AuthorizationSingleton.isFacesContext()) {
-                System.out.println("No faces context!");
                 AuthorizationSingleton.goToIndexPage(res);
                 return;
 

@@ -20,6 +20,7 @@ public class Research implements Runnable {
     private long researchTime;
     /* The user name of the owner */
     private String userId;
+    private List<Research> list;
 
     public Research(String name, int ResearchPoints) {
         this.name = name;
@@ -61,11 +62,11 @@ public class Research implements Runnable {
         return lecturers;
     }
 
-    private long getResearchTime() {
-        return researchTime;
+    public String getResearchTime() {
+        return "" + researchTime;
     }
 
-    private void setResearchTime(long time) {
+    public void setResearchTime(long time) {
         researchTime = time;
     }
 
@@ -79,7 +80,6 @@ public class Research implements Runnable {
 
         Statement statement = Connections.ConnectionSingleton.createConnection().getStatement();
 
-        System.out.println("Updating data base");
         statement.execute("BEGIN");
 
         statement.execute("SELECT * FROM PlayerResources FOR UPDATE");
@@ -88,35 +88,37 @@ public class Research implements Runnable {
 
         statement.execute("COMMIT");
 
-        System.out.println("Adding points...");
-
-
-
     }
 
     public void run() {
         try {
 
+            researchTime = 10;
+
             while(researchTime > 0) {
                 Thread.sleep(1000);
                 researchTime--;
-            }
-            
-            try {
-                
-                addPointsToUser();
+            }               
 
-            } catch (SQLException ex) {
-                Logger.getLogger(Research.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            addPointsToUser();
+            list.remove(this);
 
-        } catch (InterruptedException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Research.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     private void freeLectuerers() {
+
+    }
+
+    public void addList(List<Research> list) {
+       this.list = list;
+    }
+
+    public void update() {
+
 
     }
 }

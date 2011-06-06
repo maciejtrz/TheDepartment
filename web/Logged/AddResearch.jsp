@@ -17,15 +17,19 @@
         <p>Now, you must specify what research you would like to perform.</p>
         <h:form>
 
+
+            <h:outputText value="Name of research: "/>
+            <h:inputText value="#{addResearch.name}" />
+            <br>
             <h:outputText value="Specify subject: "/>
-            <h:selectOneMenu value="#{researchSubject.subject}" >
-                <f:selectItems value="#{researchSubject.subjects}"/>
+            <h:selectOneMenu value="#{addResearch.subject}" >
+                <f:selectItems value="#{addResearch.subjects}"/>
             </h:selectOneMenu>
 
             <br>
             <h:outputText value="Choose lecturers: "/>
-            <h:selectManyListbox value="#{researchSubject.lecturers}">
-                <f:selectItems value="#{researchSubject.lecturerList}"/>
+            <h:selectManyListbox value="#{addResearch.lecturers}">
+                <f:selectItems value="#{addResearch.lecturerList}"/>
             </h:selectManyListbox>
 
             <br>

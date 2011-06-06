@@ -7,7 +7,9 @@ package ResearchPoints;
 
 import Connections.ConnectionSingleton;
 import java.util.List;
+import java.util.Vector;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 
@@ -23,18 +25,54 @@ public class AddResearch {
     /* Research points awarded to the player for successful completion */
     private int ResearchPoints;
 
-    /* List of participating lectures */
-    private List lecturers;
-
     public AddResearch() {
+                for (int i = 0; i < subjectList.length; i++) {
+            subjects.add(new SelectItem(new Integer(i), subjectList[i]));
+        }
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        
-        Thread thread = new Thread(new Research("Some title",
-                100,null,session.getAttribute(ConnectionSingleton.idname).toString(),1000));
-        
-        thread.start();
+        for (int i = 0; i < lecturerList.length; i++) {
+            lecturers.add(new SelectItem(new Integer(i), lecturerList[i]));
+        }
+    }
+
+
+    private String[] subjectList = {"Artifical Intelligence", "Machine Learning",
+        "Compilers", "Operating System Design", "Networks and Communication",
+        "Models of Computation", "Games and Porn"
+    };
+    private String[] lecturerList = {"Tony Field", "Karol Pysniak", "Krzysztof Huszcza",
+        "Paul Kelly", "Piotr Kraus", "Mark Zuckerberg", "Murzynek Bambo"
+    };
+
+    private Integer subject;  // The index of the selected item
+    // can be given as String/Integer/int ...
+    private Vector<SelectItem> subjects = new Vector<SelectItem>();
+    private Vector<SelectItem> lecturers = new Vector<SelectItem>();
+
+
+    public Vector getSubjects() {
+        return subjects;
+    }
+
+    public Integer getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Integer nextSWVersion) {
+        subject = nextSWVersion;
+    }
+
+    public void setLecturers(Vector chosenLecturers) {
+        for(int i = 0; i < chosenLecturers.size();i++)
+            System.out.println((i+1) + ": " + chosenLecturers.get(i).toString());
+    }
+
+    public Vector getLecturers() {
+        return new Vector();
+    }
+
+    public Vector getLecturerList() {
+        return lecturers;
     }
 
     public void setName(String name) { this.name = name; }
@@ -43,12 +81,27 @@ public class AddResearch {
     public String getName() { return name; }
     public int getResearchPoints() { return ResearchPoints; }
 
-    public void addLecturer(String lecturer) { lecturers.add(lecturer); }
     public void removeLecturer(String lecturer) { lecturers.remove(lecturer); }
-    public List getLecturers() { return lecturers; }
 
 
     public String startResearch() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
+
+        /* Adding research thread to the list of researches of the given user */
+        List<Research> list = (List<Research>) session.getAttribute(Connections.ConnectionSingleton.researchBag);
+
+        /* Creating new object research */
+        Research research = new Research(getName(),
+                100,null,session.getAttribute(ConnectionSingleton.idname).toString(),1000);
+
+        list.add(research);
+        research.addList(list);
+
+        Thread thread = new Thread(research);
+
+        thread.start();
 
         return "success";
     }

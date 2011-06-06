@@ -4,9 +4,8 @@ import ResearchPoints.Research;
 import UserBeans.Auth;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
+import java.util.ArrayList;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +34,6 @@ public class AuthorizationSingleton {
         return session.getAttribute(ConnectionSingleton.idname) != null;
     }
 
-    public static boolean isLoggedOut(HttpSession session) {
-        return session.getAttribute("loggedout") != null &&
-                    session.getAttribute("loggedout").equals("true");
-    }
-
     public static void goToWelcomePage(HttpServletResponse response) throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect(ConnectionSingleton.welcomePage);
     }
@@ -65,9 +59,8 @@ public class AuthorizationSingleton {
         
 
         if (user != null && password != null) {
-            System.out.println("Looking up cookies in db...");
             if(test(user,password,session)) {
-                session.setAttribute(ConnectionSingleton.researchBag, new HashSet<Research>());
+                session.setAttribute(ConnectionSingleton.researchBag, new ArrayList<Research>());
                 session.setAttribute(ConnectionSingleton.Auth, auth);
                 auth.setUsername(user);
                 auth.setPassword(password);

@@ -10,21 +10,32 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-                <h1>Playing...</h1>
+        <h1>Playing...</h1>
 
-                <h:form>
-        <table border="0">
-            <tr><td>Username: </td>
-                <td><h:outputText value="#{auth.username}" /></td></tr>
-            <tr><td>Research Point</td>
-                <td><h:outputText id="count" value="#{auth.researchPoints}" />
-                    <p:poll interval="1"
-                            listener="#{auth.updateResearchPoints}" update="count" />
+        <h:form>
+            <table border="0">
+                <tr><td>Username: </td>
+                    <td><h:outputText value="#{auth.username}" /></td></tr>
+                <tr><td>Research Point</td>
+                    <td><h:outputText id="count" value="#{auth.researchPoints}" />
+                        <p:poll interval="1"
+                                listener="#{auth.updateResearchPoints}" update="count" />
                     </td></tr>
-        </table>
-                </h:form>
+            </table>
+        </h:form>
 
-         <a href="/Department/faces/Logged/AddResearch.jsp">Add Research</a>
+        <h3>Ongoing Researches</h3>
+
+        <h:form>
+            <p:dataList value="#{researchBag.researches}" var="research" itemType="disc"
+                        id="dataGrid">
+                #{research.name}, #{research.researchTime}
+            </p:dataList>
+            <p:poll interval="1" update="dataGrid"/>
+        </h:form>
+
+
+        <a href="/Department/faces/Logged/AddResearch.jsp">Add Research</a>
 
     </h:body>
 </html>

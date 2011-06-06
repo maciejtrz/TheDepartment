@@ -19,6 +19,7 @@ public class ResearchBag {
     }
     
     public List<Research> getResearches() {
+        System.out.println("Someone askses for the list of researches...");
         return researchBag;
     }
 
@@ -26,30 +27,4 @@ public class ResearchBag {
         this.researchBag = researchBag;
     }
 
-
-
-
-
-
 }
-
-/*
-                    <p:outputPanel id="researches">
-                        <p:dataTable value="#{researchBag.researches}" var="research">
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="Title" />
-                </f:facet>
-                <h:outputText value="#{research.name}" />
-            </p:column>
-
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="Time left" />
-                </f:facet>
-                <h:outputText value="#{research.researchTime}" />
-            </p:column>
-
-
-        </p:dataTable>
-    </p:outputPanel> */

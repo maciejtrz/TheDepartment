@@ -139,6 +139,10 @@
         <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>shop</managed-bean-name>
+        <managed-bean-class>UserBeans.Shop</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
 

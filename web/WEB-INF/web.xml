@@ -5,9 +5,7 @@
         <param-value>Development</param-value>
     </context-param>
 
-
-
-    <filter>
+<filter>
         <filter-name>loggedFilter</filter-name>
         <filter-class>Filters.LoggedFilter</filter-class>
     </filter>
@@ -56,7 +54,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>faces/Unlogged/index.jsp</welcome-file>
+        <welcome-file>faces/Unlogged/index.xhtml</welcome-file>
     </welcome-file-list>
 
     <security-constraint>

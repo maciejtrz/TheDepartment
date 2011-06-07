@@ -20,7 +20,7 @@ public class SessionSingleton {
         mgr.readLecturers();
         session.setAttribute(ConnectionSingleton.LECTURERSMANAGER, mgr);
 
-        /* Testing 
+        /*
         mgr.purchaseLecturer("Dziadzia");
 
         ArrayList<Lecturer> lecturers_av = mgr.getAvailableLecturers();
@@ -40,8 +40,6 @@ public class SessionSingleton {
             System.out.println(l.getName() + " " + l.getPrice() + " " +
                     l.getRpContribution());
         }
-
-
-        */
+         */
     }
 }

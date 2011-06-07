@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <title>The Department</title>
+            <link rel="stylesheet" href="/TheDepartment/images/Envision.css" type="text/css"/>
+        </h:head>
+        <body>
+
+
+        <div id="wrap">
+	<div onclick="location.href='Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
+		<h1 id="logo-text">The Department</h1>
+		<h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
+	<div id="header-links">
+	<p> <a href="Unlogged/index.xhtml">Home</a>  | <a href="index.php?menu=apply">Applications</a> | <a href="index.php?menu=quiz">Quiz</a></p>
+
+	</div>
+</div>
+
+<div id="menu">
+	<ul>
+		<li><a href="about:blank">Link</a></li>
+		<li><a href="about:blank">Link</a></li>
+		<li><a href="about:blank">Link</a></li>
+		<li><a href="about:blank">Link</a></li>
+		<li><a href="about:blank">Link</a></li>
+		<li><a href="about:blank">Link</a></li>
+		<li class="last"><a href="about:blank">More...</a></li>
+	</ul>
+</div>
+
+<div id="content-wrap">
+	<div id="sidebar">
+
+
+
+	</div>
+	<div id="main"> <a name="TemplateInfo"></a>
+
+ <h:form>
+                <p:panel header="Insert your name and password">
+                <h:panelGrid id="lpg" columns="2">
+                    <h:outputText value="Username: "/>
+                    <h:inputText id="username"
+                                 value="#{addUser.id}"/>
+
+                    <h:outputText value="Password: "/>
+                    <p:password value="#{addUser.password}" minLength="5" inline="true" />
+
+                    <h:outputText value="Confirm password: "/>
+                    <h:inputSecret id="password2"
+                                   value="#{addUser.password2}" />
+
+                    <h:outputText value="E-mail: "/>
+                    <h:inputText id="email"
+                                   value="#{addUser.email}" />
+
+
+                    <h:commandButton action="#{addUser.insert}"
+                                     value = "Add User"/>
+
+                    <h:commandButton action="#{addUser.goToIndex}"
+                                     value = "Logging"/>
+
+                </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+	</div>
+</div>
+
+	<div id="footer">
+	<p> &copy; 2011 <strong>piotr.kraus09
+maciej.trzcinski09
+karol.pyniak09
+krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.styleshout.com" target="_blank">
+    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.xhtml">Home</a>  | <a href="about:blank">Foots</a>
+    | <a href="about:blank">Foot</a> </p>
+	</div>
+</div>
+
+        </body>
+    </html>

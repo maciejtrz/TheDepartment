@@ -24,7 +24,24 @@ public class LecturersManager {
 
     public synchronized void  repopulateAvailableLec() {
         for (int i = 0 ; i < MAX_AVAILABLE ; i++) {
-            availableLecturers.add(i, generateLecturer());
+            Lecturer newLecturer = generateLecturer();
+            availableLecturers.add(i, newLecturer);
+
+            /* Getting all required hibernate helpers. */
+            LecturersAvailableHelper lecturersAvHelper
+                    = new LecturersAvailableHelper();
+            LecturersHelper lecturersHelper
+                    = new LecturersHelper();
+            LecturersSpecializationsHelper specializationHelper
+                    = new LecturersSpecializationsHelper();
+
+            /* Upadting Lecturers table. */
+            /*
+            String
+            lecturersHelper.addLecturer(, i, i);
+             * 
+             */
+
         }
     }
 
@@ -38,7 +55,6 @@ public class LecturersManager {
 
     /* returns true if successful. */
     public synchronized boolean purchaseLecturer(String lecName) {
-        System.out.println("Purchasing lecturers");
         Lecturer lect = lookUpLecturer(lecName, availableLecturers);
 
         /* Getting all required hibernate helpers. */
@@ -55,6 +71,7 @@ public class LecturersManager {
         int money = resourcesHelper.getMoney(userName);
         // Obtaining lecturers price.
         int price = 0;
+
         Lecturers lecturer = lecturersHelper.getLecturer(lecName);
         if (lecturer != null) {
             price = lecturer.getPrice();
@@ -63,6 +80,8 @@ public class LecturersManager {
         if (price > money) {
             return false;
         }
+
+        System.out.println("Money " + money + " price " + price);
 
         // Updating the database.
         resourcesHelper.updateMoney(userName, (money-price));
@@ -74,66 +93,8 @@ public class LecturersManager {
         ownedLecturers.add(lect);
 
         return true;
-
-        /*
-        Statement statement
-              = Connections.ConnectionSingleton.createConnection()
-                .getStatement();
-        try {
-            int money = 0;
-            int price = 0;
-            
-            // Obtaining player's money.
-            String query = "SELECT money FROM PlayerResources WHERE"
-                    + " IdName = '" + userName + "'";
-            ResultSet result = statement.executeQuery(query);
-            if  (result.next()) {
-                money = result.getInt("money");
-            }
-            else {
-                return false;
-            }
-            
-            // Obtaining lecturer's price.
-            query = "SELECT price FROM lecturers WHERE "
-                    + " LecturerName = '" + lecName + "'";
-            result = statement.executeQuery(query);
-            if (result.next()) {
-                price = result.getInt("price");
-            }
-            else {
-                return false;
-            }
-            
-            //Purchasing the lecturer
-            if (money < price) {
-                return false;
-            }
-          
-            // Updating the database.
-            query = "UPDATE Playerresources SET money = " + (money-price) +
-                    "WHERE IdName = '" + userName + "'";
-            statement.executeUpdate(query);
-            
-            // Deleting the lecturer from the database
-            query = "DELETE FROM LecturersAvailable WHERE "
-                + " LecturerName = '" + lecName + "'";
-            statement.executeUpdate(query);
-
-            // Updating the lists.
-            availableLecturers.remove(lect);
-            ownedLecturers.add(lect);
-
-            return true;
-
-        } catch (SQLException ex) {
-           Logger.getLogger(LecturersManager.class.getName())
-                 .log(Level.SEVERE, null, ex);
-           return false;
-        }
-
-        */
     }
+
 
     public synchronized void readLecturers() {
 
@@ -161,58 +122,9 @@ public class LecturersManager {
             addLecturer(lect.getLecturername(), availableLecturers);
         }
 
-
-        /*
-        try {
-            Statement statement
-              = Connections.ConnectionSingleton.createConnection()
-                .getStatement();
-
-            // Reading already "owned" lecturers.
-            String query = "SELECT * FROM LecturersOwned WHERE "
-                + "IdName = '" + userName + "'";
-            ResultSet result = statement.executeQuery(query);
-
-            // Reading lecturers names.
-            ArrayList<String> lecturersNames = new ArrayList<String>();
-            while (result.next()) {
-                String lecturerName = result.getString("LecturerName");
-                lecturersNames.add(lecturerName);
-            }
-
-            // Creating lecturers objects.
-            Iterator<String> it = lecturersNames.iterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                addLecturer(name, ownedLecturers, statement);
-            }
-
-            // Reading lecturers available for purchase.
-            query = "SELECT * FROM LecturersAvailable WHERE"
-                    + " IdName = '" + userName + "'";
-            System.out.println(query);
-            result = statement.executeQuery(query);
-            lecturersNames = new ArrayList<String>();
-
-            // Reading lecturers names.
-            while (result.next()) {
-                String lecturerName = result.getString("LecturerName");
-                lecturersNames.add(lecturerName);
-            }
-
-            // Creating lecturers objects.
-            it = lecturersNames.iterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                addLecturer(name, availableLecturers, statement);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LecturersManager.class.getName())
-                    .log(Level.SEVERE, null, ex);
-            }
-       */
     }
+
+
 
     private Lecturer generateLecturer () {
 
@@ -226,6 +138,8 @@ public class LecturersManager {
     }
 
     private void addLecturer(String lecturerName, ArrayList<Lecturer> list) {
+        /* Adds a lecturer to the input list, reading all neccessary data
+           from the database. */
 
         // Getting all required hibernate helpers. 
         LecturersHelper lecturersHelper = new LecturersHelper();
@@ -260,53 +174,6 @@ public class LecturersManager {
               = new Lecturer(lecturerName,price,rpContribution,benefitsList);
         list.add(lecturer);
 
-        /*
-        try {
-
-            // Obtaining atributes.
-            String query = "SELECT * FROM Lecturers WHERE "
-                + "LecturerName = '" + lecturerName + "'";
-            ResultSet atributes = statement.executeQuery(query);
- 
-            int price = 0;
-            int rpContribution = 0;
-
-            if (atributes.next()) {
-
-            // Populating Lecturer objects.
-                price = atributes.getInt("Price");
-                rpContribution = atributes.getInt("RPContribution");
-                System.out.println("Price: "
-                          + price + "rpContribution: " + rpContribution);
-            }
-
-            // Obtaining specializations.
-            query = "SELECT * FROM LecturersSpecializations"
-                    + " WHERE LecturerName = '" + lecturerName + "'";
-            ResultSet specializations = statement.executeQuery(query);
-
-            ArrayList<LecturerBenefits> benefitsList 
-                    = new ArrayList<LecturerBenefits>();
-            
-            while (specializations.next()) {
-                String specialization
-                    = specializations.getString("Specialization");
-                int boost = specializations.getInt("Boost");
-                LecturerBenefits benefits 
-                        = new LecturerBenefits(specialization, boost);
-                benefitsList.add(benefits);
-            }
-            
-            Lecturer lecturer 
-                = new Lecturer(lecturerName,price,rpContribution,benefitsList);
-            
-            list.add(lecturer);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LecturersManager.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-        */
     }
 
     private Lecturer lookUpLecturer (String name, ArrayList<Lecturer> list) {

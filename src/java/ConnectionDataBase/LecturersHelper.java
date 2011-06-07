@@ -17,4 +17,14 @@ public class LecturersHelper extends AbstractHelper {
         return lecturer_info;
     }
 
+    public void addLecturer(String lecturerName , int price,
+            int rpcontribution) {
+
+        Session session = createNewSessionAndTransaction();
+        Lecturers newLecturer
+                = new Lecturers(lecturerName, price, rpcontribution);
+        session.save(newLecturer);
+        commitTransaction(session);
+    }
+
 }

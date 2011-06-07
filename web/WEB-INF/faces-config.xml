@@ -10,7 +10,7 @@
 
 
     <navigation-rule>
-        <from-view-id>/Unlogged/index.jsp</from-view-id>
+        <from-view-id>/Unlogged/index.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{auth.validate}</from-action>
             <from-outcome>success</from-outcome>
@@ -21,7 +21,7 @@
         <navigation-case>
             <from-action>#{auth.newUser}</from-action>
             <from-outcome>go</from-outcome>
-            <to-view-id>/Unlogged/AddUser.jsp</to-view-id>
+            <to-view-id>/Unlogged/AddUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -77,13 +77,13 @@
 
         <navigation-case>
             <from-action>#{unlog.logoff}</from-action>
-            <to-view-id>/Unlogged/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
 
         <navigation-case>
             <from-action>#{user.deleteMe}</from-action>
-            <to-view-id>/Unlogged/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
 
@@ -96,17 +96,17 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Unlogged/AddUser.jsp</from-view-id>
+        <from-view-id>/Unlogged/AddUser.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{addUser.goToIndex}</from-action>
-            <to-view-id>/Unlogged/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
 
        <navigation-case>
             <from-action>#{addUser.insert}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/Unlogged/index.jsp</to-view-id>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -134,24 +134,11 @@
         </navigation-case>
     </navigation-rule>
 
-
-
-    <managed-bean>
-        <managed-bean-name>shop</managed-bean-name>
-        <managed-bean-class>UserBeans.Shop</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>research</managed-bean-name>
-        <managed-bean-class>ConnectionDataBase.Research</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>
         <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+
 </faces-config>
 

@@ -13,7 +13,7 @@ public class EncodingSingleton {
     MessageDigest md = null;
     try
     {
-      md = MessageDigest.getInstance("SHA"); 
+      md = MessageDigest.getInstance("SHA");
     }
     catch(NoSuchAlgorithmException e)
     {
@@ -21,16 +21,17 @@ public class EncodingSingleton {
     }
     try
     {
-      md.update(password.getBytes("UTF-8")); 
+      md.update(password.getBytes("UTF-8"));
     }
     catch(UnsupportedEncodingException e)
     {
       System.err.println(e.getMessage());
     }
 
-    byte raw[] = md.digest(); 
-    String hash = (new BASE64Encoder()).encode(raw); 
-    return hash; 
+    byte raw[] = md.digest();
+    String hash = (new BASE64Encoder()).encode(raw);
+    return hash;
   }
 
 }
+

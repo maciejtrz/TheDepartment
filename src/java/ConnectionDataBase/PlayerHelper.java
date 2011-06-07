@@ -13,19 +13,12 @@ import org.hibernate.Transaction;
  *
  * @author karol
  */
-public class PlayerHelper {
-
-    Session session = null;
-
-    public PlayerHelper() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-    }
+public class PlayerHelper extends AbstractHelper {
 
     public List<Players> getPlayers() {
 
         List<Players> list = null;
-
-        org.hibernate.Transaction tx = session.beginTransaction();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Players");
         list = (List<Players>) q.list();
 
@@ -36,7 +29,7 @@ public class PlayerHelper {
     public Players getPlayer(String idname) {
         Players player = null;
 
-        Transaction tx = session.beginTransaction();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Players where idname='"
                 + idname + "'");
         player = (Players) q.uniqueResult();
@@ -45,37 +38,36 @@ public class PlayerHelper {
     }
 
     public void updateLoggedStatus(String idname, boolean logged) {
-        Transaction tx = session.beginTransaction();
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
 
         Query q = session.createQuery("from Players where idname='"
                 + idname + "'");
         Players player = (Players) q.uniqueResult();
-        player.setLoggedin(logged);
-        session.saveOrUpdate(player);
+        if (player != null) {
+            player.setLoggedin(logged);
+            session.saveOrUpdate(player);
+            commitTransaction(session);
+        }
 
-        tx.commit();
     }
 
     public void addPlayer(String idname, String encodedPassword, String email) {
+        Session session = createNewSessionAndTransaction();
         Players player = new Players(idname,encodedPassword,email,false);
 
-        Transaction tx = session.beginTransaction();
-        tx.begin();
         session.save(player);
-        tx.commit();
+        commitTransaction(session);
     }
 
     public void deletePlayer(String idname) {
-        Transaction tx = session.beginTransaction();
-        
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Players where idname='" + idname + "'");
         Players player = (Players) q.uniqueResult();
 
-        if(player != null)
+        if(player != null) {
             session.delete(player);
-        tx.commit();
+            commitTransaction(session);
+        }
     }
 
 

@@ -68,7 +68,6 @@ public class LecturersManager {
         resourcesHelper.updateMoney(userName, (money-price));
         lecturersAvHelper.deleteLecturer(lecName);
         lecturersOwnedHelper.addLecturer(lecName, userName);
-        HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
 
         /* Updating session lists. */
         availableLecturers.remove(lect);

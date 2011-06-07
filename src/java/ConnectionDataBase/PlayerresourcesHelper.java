@@ -4,13 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class PlayerresourcesHelper {
-
-    Session session = null;
-
-    public PlayerresourcesHelper() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-    }
+public class PlayerresourcesHelper extends AbstractHelper {
 
     public void createPlayerResources(String idname) {
         Playerresources playerResources = new Playerresources();
@@ -20,17 +14,15 @@ public class PlayerresourcesHelper {
         playerResources.setUndergraduatesnumber(0);
         playerResources.setResearchpoints(0);
 
-        Transaction tx = session.beginTransaction();
-        tx.begin();
-
+        Session session = createNewSessionAndTransaction();
         session.save(playerResources);
+        commitTransaction(session);
 
-        tx.commit();
 
     }
 
     public Playerresources getResources (String idname) {
-        Transaction tx = session.beginTransaction();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         return (Playerresources)q.uniqueResult();
@@ -39,16 +31,14 @@ public class PlayerresourcesHelper {
     public int getMoney (String idname) {
 
         int money = 0;
-        Transaction tx = session.beginTransaction();
-
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
+        
         Query q = session.createQuery("from Playerresources where idname = '"
                 + idname + "'");
         Playerresources resources = (Playerresources)q.uniqueResult();
         if (resources != null) {
             money = resources.getMoney();
         }
-        tx.commit();
         return money;
     }
     
@@ -56,57 +46,53 @@ public class PlayerresourcesHelper {
 
         int points = 0;
 
-        Transaction tx = session.beginTransaction();
-
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
 
         if(resources != null)
             points = resources.getResearchpoints();
-        tx.commit();
 
         return points;
     }
 
     public void updateMoney (String idname , int newValue) {
-        Transaction tx = session.beginTransaction();
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resource = (Playerresources)q.uniqueResult();
         if (resource != null) {
             resource.setMoney(newValue);
+            commitTransaction(session);
         }
-        tx.commit();
     }
 
     public void deleteResources(String idname) {
 
-        Transaction tx = session.beginTransaction();
-
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
-        if(resources != null)
+        if(resources != null) {
             session.delete(resources);
-        tx.commit();
+            commitTransaction(session);
+        }
 
     }
 
     void addResearchPoints(String userId, Integer researchpoints) {
-        Transaction tx = session.beginTransaction();
 
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='" +
                 userId + "'");
 
         Playerresources resources = (Playerresources) q.uniqueResult();
-        resources.setResearchpoints(resources.getResearchpoints()+researchpoints);
-
-        tx.commit();
+        if (resources != null) {
+            resources.setResearchpoints
+                    (resources.getResearchpoints()+researchpoints);
+           commitTransaction(session);
+        }
     }
 
 

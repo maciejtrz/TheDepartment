@@ -17,16 +17,18 @@ public class ConnectionSingleton {
     private static ConnectionSingleton con;
     private static Connection connection;
 
-   /*
+   
     private final String connectionURL = "jdbc:postgresql://db:5432/g1027104_u";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "g1027104_u";
-    private final String dbPassword = "EldyDqOUXi"; */
-   
+    private final String dbPassword = "EldyDqOUXi"; 
+
+    /*
     private final String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "postgres";
-    private final String dbPassword = "postgres"; 
+    private final String dbPassword = "postgres";
+    */
     
 
     public static final String idname = "idname";
@@ -35,12 +37,12 @@ public class ConnectionSingleton {
     public static final String researchPoints = "researchpoints";
     public static final String LECTURERSMANAGER = "mgr";
     public static final String playerResources = "PlayerResources";
-    public static final String addAuth = "/Department/AddAuth.jsp";
+    public static final String addAuth = "/TheDepartment/AddAuth.jsp";
 
     public static final String Auth = "Auth";
     public static final String researchBag = "researchBag";
 
-    public static final String gameName = "/Department";
+    public static final String gameName = "/TheDepartment";
     public static final String welcomePage = gameName + "/faces/Logged/WelcomePage.jsp";
     public static final String indexPage = gameName + "/faces/Unlogged/index.jsp";
 

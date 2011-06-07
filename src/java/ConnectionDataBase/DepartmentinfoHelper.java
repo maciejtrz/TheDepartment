@@ -8,39 +8,36 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DepartmentinfoHelper {
 
-    Session session = null;
+public class DepartmentinfoHelper extends AbstractHelper {
 
-    public DepartmentinfoHelper() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-    }
 
     public void createDepartment(String idName, String departmentName) {
+
+
+        Session session = createNewSession();
+
         Departmentinfo departmentInfo = new Departmentinfo();
         departmentInfo.setIdname(idName);
         departmentInfo.setName(departmentName);
 
-        Transaction tx = session.beginTransaction();
-        //tx.begin();
-
+        startNewTransaction(session);
         session.save(departmentInfo);
-       
-        //tx.commit();
+        commitTransaction(session);
 
     }
 
     public void deleteDepartment(String idname) {
-        Transaction tx = session.beginTransaction();
+        Session session = createNewSessionAndTransaction();
 
-        //tx.begin();
         Query q = session.createQuery("from Departmentinfo where idname='"
                 + idname + "'");
         Departmentinfo departmentInfo = (Departmentinfo) q.uniqueResult();
 
-        if(departmentInfo != null)
+        if(departmentInfo != null) {
             session.delete(departmentInfo);
-        //tx.commit();
+            commitTransaction(session);
+        }
         
     }
 

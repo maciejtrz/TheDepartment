@@ -1,17 +1,14 @@
 package ConnectionDataBase;
 
+import ConnectionDataBase.HibernateUtil;
+import ConnectionDataBase.Research;
+import ConnectionDataBase.ResearchId;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class ResearchHelper {
-    
-    Session session = null;
-
-    public ResearchHelper() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-    }
+public class ResearchHelper extends AbstractHelper {
     
     public void createResearch(String IdName, String Title, int researchPoints) {
         
@@ -23,22 +20,16 @@ public class ResearchHelper {
 
     void createResearch(Research research) {
 
-        Transaction tx = session.beginTransaction();
-        tx.begin();
+        Session session = createNewSessionAndTransaction();
         session.save(research);
-        tx.commit();
+        commitTransaction(session);
     }
 
     public List<Research> getFinishedResearches(String idname) {
 
-        while(!session.isOpen())
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        Transaction tx = session.beginTransaction();
-
+        Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Research where idname='"
                 + idname + "'");
-        
         return (List<Research>) q.list();
         
     }

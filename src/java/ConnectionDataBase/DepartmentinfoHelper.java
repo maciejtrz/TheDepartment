@@ -41,4 +41,15 @@ public class DepartmentinfoHelper extends AbstractHelper {
         
     }
 
+    public boolean hasDepartment(String idname) {
+
+        Session session = createNewSessionAndTransaction();
+
+        Query q = session.createQuery("from Departmentinfo where idname='"
+                + idname + "'");
+
+        return !q.list().isEmpty();
+
+    }
+
 }

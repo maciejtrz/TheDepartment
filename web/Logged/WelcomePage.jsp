@@ -1,3 +1,4 @@
+<%@page import="ConnectionDataBase.DepartmentinfoHelper"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="Connections.AuthorizationSingleton"%>
@@ -23,19 +24,10 @@
                 <h:commandButton value="Get me out of here" action="#{unlog.logoff}"/>
                 <h:commandButton value="Delete me" action="#{user.deleteMe}"/>
                 <%
-                    String playerName
-                        = session.getAttribute(ConnectionSingleton.idname)
-                        .toString();
-                    ConnectionSingleton connection =
-			ConnectionSingleton.createConnection();
-                    Statement statement = connection.getStatement();
-                    String query = "SELECT * FROM DepartmentInfo WHERE IdName = '"
-                            + playerName + "'";
 
-                    ResultSet result = statement.executeQuery(query);
+                DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
 
-                    if (!result.next()) {
-                        /* The entry does not exist in the database. */
+                if (!departmentInfo.hasDepartment(session.getAttribute(ConnectionSingleton.idname).toString())) {
                  %>
 
                  <h:commandButton value="Add Department" action="#{addDepartment.go}" />
@@ -45,7 +37,6 @@
                  %>
                  <h:commandButton value="Start playing" action="#{department.startPlaying}" />
                  <h:commandButton value="Delete Department" actionListener="#{department.deleteDepartment}" />
-
                  <% } %>
             </h:form>
 

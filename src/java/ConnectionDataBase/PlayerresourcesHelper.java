@@ -21,11 +21,11 @@ public class PlayerresourcesHelper {
         playerResources.setResearchpoints(0);
 
         Transaction tx = session.beginTransaction();
-        //tx.begin();
+        tx.begin();
 
         session.save(playerResources);
 
-        //tx.commit();
+        tx.commit();
 
     }
 
@@ -41,14 +41,14 @@ public class PlayerresourcesHelper {
         int money = 0;
         Transaction tx = session.beginTransaction();
 
-        //tx.begin();
+        tx.begin();
         Query q = session.createQuery("from Playerresources where idname = '"
                 + idname + "'");
         Playerresources resources = (Playerresources)q.uniqueResult();
         if (resources != null) {
             money = resources.getMoney();
         }
-        //tx.commit();
+        tx.commit();
         return money;
     }
     
@@ -58,42 +58,55 @@ public class PlayerresourcesHelper {
 
         Transaction tx = session.beginTransaction();
 
-        //tx.begin();
-        Query q = session.createQuery("from Playerresources where idname = '"
+        tx.begin();
+        Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
 
         if(resources != null)
             points = resources.getResearchpoints();
-        //tx.commit();
+        tx.commit();
 
         return points;
     }
 
     public void updateMoney (String idname , int newValue) {
         Transaction tx = session.beginTransaction();
-        //tx.begin();
+        tx.begin();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resource = (Playerresources)q.uniqueResult();
         if (resource != null) {
             resource.setMoney(newValue);
         }
-        //tx.commit();
+        tx.commit();
     }
 
     public void deleteResources(String idname) {
 
         Transaction tx = session.beginTransaction();
 
-        //tx.begin();
+        tx.begin();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
         if(resources != null)
             session.delete(resources);
-        //tx.commit();
+        tx.commit();
 
+    }
+
+    void addResearchPoints(String userId, Integer researchpoints) {
+        Transaction tx = session.beginTransaction();
+
+        tx.begin();
+        Query q = session.createQuery("from Playerresources where idname='" +
+                userId + "'");
+
+        Playerresources resources = (Playerresources) q.uniqueResult();
+        resources.setResearchpoints(resources.getResearchpoints()+researchpoints);
+
+        tx.commit();
     }
 
 

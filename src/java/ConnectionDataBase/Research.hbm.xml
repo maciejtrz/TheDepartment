@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-Jun-2011 22:44:48 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="ConnectionDataBase.Research" schema="public" table="research">
+    <composite-id class="ConnectionDataBase.ResearchId" name="id">
+      <key-property name="idname" type="string">
+        <column name="idname"/>
+      </key-property>
+      <key-property name="title" type="string">
+        <column name="title"/>
+      </key-property>
+    </composite-id>
+    <property name="researchpoints" type="java.lang.Integer">
+      <column name="researchpoints"/>
+    </property>
+  </class>
+</hibernate-mapping>

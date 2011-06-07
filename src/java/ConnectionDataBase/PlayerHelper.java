@@ -46,7 +46,7 @@ public class PlayerHelper {
 
     public void updateLoggedStatus(String idname, boolean logged) {
         Transaction tx = session.beginTransaction();
-        //tx.begin();
+        tx.begin();
 
         Query q = session.createQuery("from Players where idname='"
                 + idname + "'");
@@ -54,28 +54,28 @@ public class PlayerHelper {
         player.setLoggedin(logged);
         session.saveOrUpdate(player);
 
-        //tx.commit();
+        tx.commit();
     }
 
     public void addPlayer(String idname, String encodedPassword, String email) {
         Players player = new Players(idname,encodedPassword,email,false);
 
         Transaction tx = session.beginTransaction();
-        //tx.begin();
+        tx.begin();
         session.save(player);
-        //tx.commit();
+        tx.commit();
     }
 
     public void deletePlayer(String idname) {
         Transaction tx = session.beginTransaction();
         
-        //tx.begin();
+        tx.begin();
         Query q = session.createQuery("from Players where idname='" + idname + "'");
         Players player = (Players) q.uniqueResult();
 
         if(player != null)
             session.delete(player);
-        //tx.commit();
+        tx.commit();
     }
 
 

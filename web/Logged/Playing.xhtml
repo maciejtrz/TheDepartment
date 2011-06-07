@@ -13,7 +13,7 @@
         <h1>Playing...</h1>
 
         <h:form>
-            <table border="0">
+            <table border="3">
                 <tr><td>Username: </td>
                     <td><h:outputText value="#{auth.username}" /></td></tr>
                 <tr><td>Research Point</td>
@@ -29,10 +29,24 @@
         <h:form>
             <p:dataList value="#{researchBag.researches}" var="research" itemType="disc"
                         id="dataGrid">
-                #{research.name}, #{research.researchTime}
+                <h:outputText value="#{research.name}"/>,
+                <h:outputText value="#{research.researchTime}"/>
             </p:dataList>
             <p:poll interval="1" update="dataGrid"/>
         </h:form>
+
+        <h3>Finished Researches</h3>
+
+        <h:form>
+            <p:dataList value="#{researchBag.finishedResearches}" var="research" itemType="disc"
+                        id="finishedResearches">
+                <h:outputText value="#{research.name}"/>, 
+                <h:outputText value="#{research.researchpoints}"/>
+            </p:dataList>
+            <p:poll interval="1" update="finishedResearches"
+                    listener="#{researchBag.update}" />
+        </h:form>
+
 
 
         <a href="/Department/faces/Logged/AddResearch.jsp">Add Research</a>

@@ -2,11 +2,9 @@ package Connections;
 
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
-import ResearchPoints.Research;
+import ConnectionDataBase.Research;
 import UserBeans.Auth;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

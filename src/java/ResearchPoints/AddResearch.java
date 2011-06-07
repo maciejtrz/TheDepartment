@@ -5,6 +5,7 @@
 
 package ResearchPoints;
 
+import ConnectionDataBase.Research;
 import Connections.ConnectionSingleton;
 import java.util.List;
 import java.util.Vector;
@@ -38,7 +39,7 @@ public class AddResearch {
 
     private String[] subjectList = {"Artifical Intelligence", "Machine Learning",
         "Compilers", "Operating System Design", "Networks and Communication",
-        "Models of Computation", "Games and Porn"
+        "Models of Computation"
     };
     private String[] lecturerList = {"Tony Field", "Karol Pysniak", "Krzysztof Huszcza",
         "Paul Kelly", "Piotr Kraus", "Mark Zuckerberg", "Murzynek Bambo"
@@ -93,8 +94,10 @@ public class AddResearch {
         List<Research> list = (List<Research>) session.getAttribute(Connections.ConnectionSingleton.researchBag);
 
         /* Creating new object research */
-        Research research = new Research(getName(),
-                100,null,session.getAttribute(ConnectionSingleton.idname).toString(),1000);
+        Research research = new Research();
+        research.setName(getName());
+        research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
+        research.setResearchpoints(100);
 
         list.add(research);
         research.addList(list);

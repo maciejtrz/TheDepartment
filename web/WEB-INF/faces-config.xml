@@ -134,14 +134,23 @@
         </navigation-case>
     </navigation-rule>
 
-    <managed-bean>
-        <managed-bean-name>researchBag</managed-bean-name>
-        <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+
     <managed-bean>
         <managed-bean-name>shop</managed-bean-name>
         <managed-bean-class>UserBeans.Shop</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>research</managed-bean-name>
+        <managed-bean-class>ConnectionDataBase.Research</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>researchBag</managed-bean-name>
+        <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

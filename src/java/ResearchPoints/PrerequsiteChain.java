@@ -5,6 +5,8 @@
 
 package ResearchPoints;
 
+import ConnectionDataBase.Research;
+
 /**
  *
  * @author karol

@@ -23,6 +23,13 @@ public class Lecturersspecializations  implements java.io.Serializable {
        this.id = id;
        this.boost = boost;
     }
+
+    public Lecturersspecializations(String name , String specialization, Integer boost) {
+        LecturersspecializationsId id
+                = new LecturersspecializationsId(name, specialization);
+        this.id = id;
+        this.boost = boost;
+    }
    
     public LecturersspecializationsId getId() {
         return this.id;

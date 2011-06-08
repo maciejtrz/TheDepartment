@@ -32,6 +32,10 @@ public class Lecturer {
         return usable;
     }
 
+    public void setUsable(boolean usable) {
+        this.usable = usable;
+    }
+
     public ArrayList<LecturerBenefits> getSpecializations(){
         return specializations;
     }

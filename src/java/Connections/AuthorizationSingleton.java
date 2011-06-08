@@ -2,6 +2,7 @@ package Connections;
 
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
+import game.lecturerSystem.LecturersManager;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -71,6 +72,10 @@ public class AuthorizationSingleton {
             if (username.equals(player.getIdname())
                     && encodedPassword.equals(player.getPassword())) {
 
+                LecturersManager mgr = new LecturersManager(username);
+                mgr.readLecturers();
+                
+                session.setAttribute(ConnectionSingleton.LECTURERSMANAGER, mgr);
                 session.setAttribute(ConnectionSingleton.idname, username);
                 session.setAttribute(ConnectionSingleton.password, password);
 

@@ -7,8 +7,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-
-public class SessionCleaner implements  HttpSessionListener, HttpSessionAttributeListener {
+public class SessionCleaner implements HttpSessionListener, HttpSessionAttributeListener {
 
     public void sessionCreated(HttpSessionEvent se) {
 
@@ -17,26 +16,24 @@ public class SessionCleaner implements  HttpSessionListener, HttpSessionAttribut
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
-
     }
 
     public void attributeAdded(HttpSessionBindingEvent event) {
-
     }
 
     public void attributeRemoved(HttpSessionBindingEvent event) {
-        if(event.getName().equals(ConnectionSingleton.idname))
+        if (event.getName().equals(ConnectionSingleton.idname)) {
             AuthorizationSingleton.updateUserStatus(event.getValue().toString(), false);
-        else if(event.getName().equals(ConnectionSingleton.researchBag)) {
+        } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
             ResearchHelper researchHelper = new ResearchHelper();
             ResearchBag researchBag = (ResearchBag) event.getValue();
-            researchHelper.addResearches(researchBag.getFinishedResearches());
+            if (researchBag != null && !researchBag.getFinishedResearches().isEmpty()) {
+                researchHelper.addResearches(researchBag.getFinishedResearches());
+            }
         }
 
     }
 
     public void attributeReplaced(HttpSessionBindingEvent event) {
-
     }
-
 }

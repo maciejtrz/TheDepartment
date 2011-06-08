@@ -25,7 +25,6 @@ public class LecturersManager {
     public synchronized void  repopulateAvailableLec() {
         for (int i = 0 ; i < MAX_AVAILABLE ; i++) {
             Lecturer newLecturer = generateLecturer();
-            availableLecturers.add(i, newLecturer);
 
             /* Getting all required hibernate helpers. */
             LecturersAvailableHelper lecturersAvHelper
@@ -35,14 +34,31 @@ public class LecturersManager {
             LecturersSpecializationsHelper specializationHelper
                     = new LecturersSpecializationsHelper();
 
-            /* Upadting Lecturers table. */
-            /*
-            String
-            lecturersHelper.addLecturer(, i, i);
-             *  TODO
-             */
+
+            // Obtaining attributes.
+            String name = newLecturer.getName();
+            int price = newLecturer.getPrice();
+            boolean usable = newLecturer.getUsable();
+            ArrayList<LecturerBenefits> specializations
+                    = newLecturer.getSpecializations();
+
+            // Updating the databases.
+            lecturersHelper.addLecturer(name, price, usable);
+            lecturersAvHelper.addLecturer(name, userName);
+
+            Iterator <LecturerBenefits> it
+                    = specializations.iterator();
+            while (it.hasNext()) {
+                LecturerBenefits benefit = it.next();
+                specializationHelper
+                     .setSpecialization(name, benefit.getField(), benefit.getBoost());
+            }
+
+            availableLecturers.add(i, newLecturer);
+
 
         }
+
     }
 
     public synchronized ArrayList<Lecturer> getOwnedLecturers() {
@@ -179,7 +195,7 @@ public class LecturersManager {
 
     }
 
-    private Lecturer lookUpLecturer (String name, ArrayList<Lecturer> list) {
+    public Lecturer lookUpLecturer (String name, ArrayList<Lecturer> list) {
         Lecturer lec = null;
         Iterator<Lecturer> it = list.iterator();
         while (it.hasNext()) {
@@ -190,6 +206,14 @@ public class LecturersManager {
         }
         return lec;
 
+    }
+
+    public void setUsable(Lecturer lecturer , boolean usable) {
+       String lecturerName = lecturer.getName();
+       LecturersHelper lecturersHelper = new LecturersHelper();
+       Lecturers lecturer_record = lecturersHelper.getLecturer(lecturerName);
+       lecturer_record.setUsable(usable);
+       lecturer.setUsable(usable);
     }
 
 

@@ -16,6 +16,7 @@ public class Research implements java.io.Serializable, Runnable {
      private List lecturers;
 
      private int researchTime;
+     private int researchBoost;
 
 
     public Research() {
@@ -47,6 +48,14 @@ public class Research implements java.io.Serializable, Runnable {
 
     public void setResearchpoints(Integer researchpoints) {
         this.researchpoints = researchpoints;
+    }
+
+    public void setResearchBoost (int boost) {
+        this.researchBoost = boost;
+    }
+
+    public int getResearchBoost () {
+        return this.researchBoost;
     }
 
 
@@ -83,11 +92,6 @@ public class Research implements java.io.Serializable, Runnable {
         PlayerresourcesHelper playerResourcesHelper = new PlayerresourcesHelper();
         playerResourcesHelper.addResearchPoints(getUserId(), getResearchpoints());
 
-    }
-
-    public void addResearch() {
-        ResearchHelper researchHelper = new ResearchHelper();
-        researchHelper.createResearch(this);
     }
 
     public void run() {

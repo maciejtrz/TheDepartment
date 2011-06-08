@@ -16,4 +16,12 @@ public class LecturersSpecializationsHelper extends AbstractHelper {
         return (List<Lecturersspecializations>)q.list();
     }
 
+    public void setSpecialization (String name , String specialization , int boost) {
+        Session session = createNewSessionAndTransaction();
+        Lecturersspecializations specialization_record
+                = new Lecturersspecializations(name, specialization,boost);
+        session.save(specialization_record);
+        commitTransaction(session);
+    }
+
 }

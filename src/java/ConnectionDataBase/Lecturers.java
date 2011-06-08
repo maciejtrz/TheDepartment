@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 06-Jun-2011 22:06:30 by Hibernate Tools 3.2.1.GA
+// Generated 08-Jun-2011 10:04:00 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,20 +10,16 @@ public class Lecturers  implements java.io.Serializable {
 
 
      private String lecturername;
-     private Integer price;
-     private Integer rpcontribution;
+     private int price;
+     private boolean usable;
 
     public Lecturers() {
     }
 
-	
-    public Lecturers(String lecturername) {
-        this.lecturername = lecturername;
-    }
-    public Lecturers(String lecturername, Integer price, Integer rpcontribution) {
+    public Lecturers(String lecturername, int price, boolean usable) {
        this.lecturername = lecturername;
        this.price = price;
-       this.rpcontribution = rpcontribution;
+       this.usable = usable;
     }
    
     public String getLecturername() {
@@ -33,19 +29,19 @@ public class Lecturers  implements java.io.Serializable {
     public void setLecturername(String lecturername) {
         this.lecturername = lecturername;
     }
-    public Integer getPrice() {
+    public int getPrice() {
         return this.price;
     }
     
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
-    public Integer getRpcontribution() {
-        return this.rpcontribution;
+    public boolean isUsable() {
+        return this.usable;
     }
     
-    public void setRpcontribution(Integer rpcontribution) {
-        this.rpcontribution = rpcontribution;
+    public void setUsable(boolean usable) {
+        this.usable = usable;
     }
 
 

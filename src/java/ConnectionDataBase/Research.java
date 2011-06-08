@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Research  implements java.io.Serializable, Runnable {
+public class Research implements java.io.Serializable, Runnable {
 
 
      private ResearchId id;
@@ -21,7 +21,7 @@ public class Research  implements java.io.Serializable, Runnable {
         lecturers = new ArrayList();
     }
 
-	
+
     public Research(ResearchId id) {
         this.id = id;
         lecturers = new ArrayList();
@@ -31,18 +31,18 @@ public class Research  implements java.io.Serializable, Runnable {
        this.researchpoints = researchpoints;
        lecturers = new ArrayList();
     }
-   
+
     public ResearchId getId() {
         return this.id;
     }
-    
+
     public void setId(ResearchId id) {
         this.id = id;
     }
     public Integer getResearchpoints() {
         return this.researchpoints;
     }
-    
+
     public void setResearchpoints(Integer researchpoints) {
         this.researchpoints = researchpoints;
     }

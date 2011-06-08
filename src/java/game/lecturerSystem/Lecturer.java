@@ -8,14 +8,14 @@ public class Lecturer {
 
     private String name;
     private int price;
-    private int rpContribution;
+    private boolean usable;
     private ArrayList<LecturerBenefits> specializations;
 
-    public Lecturer(String name , int price, int rpContribution,
+    public Lecturer(String name , int price, boolean usable,
             ArrayList<LecturerBenefits> specializations) {
         this.name = name;
         this.price = price;
-        this.rpContribution = rpContribution;
+        this.usable = usable;
         this.specializations = specializations;
 
     }
@@ -28,8 +28,8 @@ public class Lecturer {
         return price;
     }
 
-    public int getRpContribution(){
-        return rpContribution;
+    public boolean getUsable(){
+        return usable;
     }
 
     public ArrayList<LecturerBenefits> getSpecializations(){

@@ -18,11 +18,11 @@ public class LecturersHelper extends AbstractHelper {
     }
 
     public void addLecturer(String lecturerName , int price,
-            int rpcontribution) {
+            boolean usable) {
 
         Session session = createNewSessionAndTransaction();
         Lecturers newLecturer
-                = new Lecturers(lecturerName, price, rpcontribution);
+                = new Lecturers(lecturerName, price, usable);
         session.save(newLecturer);
         commitTransaction(session);
     }

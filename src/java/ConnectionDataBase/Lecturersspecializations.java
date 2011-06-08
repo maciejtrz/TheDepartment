@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 06-Jun-2011 22:06:30 by Hibernate Tools 3.2.1.GA
+// Generated 08-Jun-2011 10:04:00 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -9,37 +9,45 @@ package ConnectionDataBase;
 public class Lecturersspecializations  implements java.io.Serializable {
 
 
-     private String lecturername;
-     private String specialization;
+     private LecturersspecializationsId id;
      private Integer boost;
 
     public Lecturersspecializations() {
     }
 
 	
-    public Lecturersspecializations(String lecturername) {
-        this.lecturername = lecturername;
+    public Lecturersspecializations(LecturersspecializationsId id) {
+        this.id = id;
     }
-    public Lecturersspecializations(String lecturername, String specialization, Integer boost) {
-       this.lecturername = lecturername;
-       this.specialization = specialization;
+    public Lecturersspecializations(LecturersspecializationsId id, Integer boost) {
+       this.id = id;
        this.boost = boost;
     }
    
+    public LecturersspecializationsId getId() {
+        return this.id;
+    }
+    
+    public void setId(LecturersspecializationsId id) {
+        this.id = id;
+    }
+
     public String getLecturername() {
-        return this.lecturername;
+        return id.getLecturername();
     }
-    
-    public void setLecturername(String lecturername) {
-        this.lecturername = lecturername;
-    }
+
     public String getSpecialization() {
-        return this.specialization;
+        return id.getSpecialization();
     }
-    
+
+    public void setLecturername(String name) {
+        id.setLecturername(name);
+    }
+
     public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+        id.setSpecialization(specialization);
     }
+
     public Integer getBoost() {
         return this.boost;
     }

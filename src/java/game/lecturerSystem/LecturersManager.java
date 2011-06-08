@@ -39,7 +39,7 @@ public class LecturersManager {
             /*
             String
             lecturersHelper.addLecturer(, i, i);
-             * 
+             *  TODO
              */
 
         }
@@ -134,7 +134,7 @@ public class LecturersManager {
 
         LecturerBenefits lb = new LecturerBenefits("AI" , 10);
         specList.add(lb);
-        return new Lecturer("Krzysztof Huszcza" , 10 , 5 , specList);
+        return new Lecturer("Krzysztof Huszcza" , 10 , true , specList);
     }
 
     private void addLecturer(String lecturerName, ArrayList<Lecturer> list) {
@@ -145,9 +145,12 @@ public class LecturersManager {
         LecturersHelper lecturersHelper = new LecturersHelper();
         LecturersSpecializationsHelper specializationsHelper
                 = new LecturersSpecializationsHelper();
-        
+
+        // Default values.
         int price = 0;
-        int rpContribution = 0;
+        boolean usable = true;
+        String specialization = "default";
+        int boost = 0;
         ArrayList<LecturerBenefits> benefitsList 
                = new ArrayList<LecturerBenefits>();
          
@@ -155,7 +158,7 @@ public class LecturersManager {
         Lecturers lecturer_record = lecturersHelper.getLecturer(lecturerName);
         if (lecturer_record != null) {
             price = lecturer_record.getPrice();
-            rpContribution = lecturer_record.getRpcontribution();
+            usable = lecturer_record.isUsable();
         }
 
         // Obtaining specializations
@@ -164,14 +167,14 @@ public class LecturersManager {
         Iterator <Lecturersspecializations> it = specializations.iterator();
         while (it.hasNext()) {
             Lecturersspecializations spec = it.next();
-            String specialization = spec.getSpecialization();
-            int boost = spec.getBoost();
+            specialization = spec.getSpecialization();
+            boost = spec.getBoost();
             benefitsList.add(new LecturerBenefits(specialization,boost));
         }
 
         // Creating Lecturer object
         Lecturer lecturer
-              = new Lecturer(lecturerName,price,rpContribution,benefitsList);
+              = new Lecturer(lecturerName,price,usable,benefitsList);
         list.add(lecturer);
 
     }

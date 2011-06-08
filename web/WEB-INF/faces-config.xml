@@ -134,11 +134,28 @@
         </navigation-case>
     </navigation-rule>
 
+        <navigation-rule>
+        <from-view-id>/Logged/StaffShop.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{shop.submit}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Playing.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>
         <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+
+     <managed-bean>
+        <managed-bean-name>shop</managed-bean-name>
+        <managed-bean-class>UserBeans.Shop</managed-bean-class>
+        <managed-bean-scope></managed-bean-scope>
+    </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>lec</managed-bean-name>
         <managed-bean-class>UserBeans.BuyLecturers</managed-bean-class>

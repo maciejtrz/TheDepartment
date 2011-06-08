@@ -12,6 +12,18 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 
+<jsp:useBean class="UserBeans.Shop" scope="request" id="shop">
+
+<%
+
+String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
+
+shop.setPlayername(playerName);
+
+System.out.println("Here "+shop.getPlayername());
+%>
+
+
 <f:view>
     <html>
         <head>
@@ -20,13 +32,8 @@
         </head>
         <body>
 <h1 ALIGN="CENTER">Buy some staff and hope you don't waste your money</h1>
-<%
-Shop shop = new Shop();
 
-String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
-%>
-
-<p align="center"> Your balance is <%= shop.getBalance(playerName) %> </p>
+<p align="center"> Your balance is <%= shop.getBalance() %> </p>
 
             <h:form>
                 <p align="center">
@@ -36,13 +43,15 @@ String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
                 <h:outputText value="PhD (£20/unit):" />
                 <h:inputText value="#{shop.phds}" />
                 <br>
-                <h:commandButton value="Submit" action="#{shop.sumbit}"/>
+                <h:commandButton value="Submit" action="#{shop.submit}"/>
+
 
                 <br>
-                <a href="/Department/faces/Logged/Playing.xhtml">Go Back to Playing</a>
+                <a href="/TheDepartment/faces/Logged/Playing.xhtml">Go Back to Playing</a>
                 </p>
             </h:form>
 
         </body>
     </html>
 </f:view>
+            </jsp:useBean>

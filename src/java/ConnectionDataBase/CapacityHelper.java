@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
  */
 public class CapacityHelper extends AbstractHelper {
 
-    public void createCapacityHelper(String idname) {
+    public void createCapacity(String idname) {
 
         Capacity capacity = new Capacity();
         capacity.setIdname(idname);

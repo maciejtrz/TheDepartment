@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
  */
 public class BuildingsHelper extends AbstractHelper {
 
-    public void createBuildingsHelper(String idname) {
+    public void createBuildings(String idname) {
 
         Buildings buildings = new Buildings();
         buildings.setIdname(idname);
@@ -30,6 +30,7 @@ public class BuildingsHelper extends AbstractHelper {
 
         Session session = createNewSessionAndTransaction();
         session.save(buildings);
+
         commitTransaction(session);
 
     }

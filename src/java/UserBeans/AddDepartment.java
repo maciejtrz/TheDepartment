@@ -4,6 +4,8 @@
  */
 package UserBeans;
 
+import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.ConnectionSingleton;
@@ -48,7 +50,14 @@ public class AddDepartment {
 
         /* Populating DepartmentInfo table. */
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-        departmentInfo.createDepartment(playerName,getName());     
+        departmentInfo.createDepartment(playerName,getName());
+
+        BuildingsHelper buildinghelper = new BuildingsHelper();
+        buildinghelper.createBuildings(playerName);
+
+        CapacityHelper capacityhelper = new CapacityHelper();
+        capacityhelper.createCapacity(playerName);
+
 
         return "success";
     }

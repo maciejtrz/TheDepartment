@@ -4,12 +4,12 @@
  */
 package UserBeans;
 
+import ConnectionDataBase.Capacity;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.ConnectionSingleton;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -19,16 +19,15 @@ import javax.servlet.http.HttpSession;
  */
 public class Shop {
 
-
     public String playerName;
     public String students;
     public String phds;
     private PlayerresourcesHelper reshelper;
+    private CapacityHelper capacityhelper;
 
-    // public int studentsNum;
-    //  public int phdsNum;
-    public Shop(){
+    public Shop() {
         this.reshelper = new PlayerresourcesHelper();
+        this.capacityhelper = new CapacityHelper();
     }
 
     public void setPlayername(String s) {
@@ -62,11 +61,21 @@ public class Shop {
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         String name = (String) session.getAttribute(ConnectionSingleton.idname);
 
-
+        Capacity capacity = capacityhelper.getCapacity(name);
         Playerresources resources = reshelper.getResources(name);
 
         int studentsNum = Integer.parseInt(students);
+
+        if ((studentsNum + resources.getUndergraduatesnumber()) > capacity.getStudentscapacity()) {
+            System.out.println("Not enough space for studetns");
+            return ("failure");
+        }
         int phdsNum = Integer.parseInt(phds);
+
+        if ((phdsNum + resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
+            System.out.println("Not enough space for new Phds");
+            return ("failure");
+        }
 
         int studentCost = studentsNum * 5;
         int phdCost = phdsNum * 20;
@@ -74,26 +83,22 @@ public class Shop {
         int totalCost = studentCost + phdCost;
 
 
-         System.out.println("Here 2");
-
-        if(resources.getMoney()<totalCost){
+        if (resources.getMoney() < totalCost) {
             System.out.println("Not enought money");
-            return("failure");
+            return ("failure");
         }
 
 
-        reshelper.updateMoney(name, resources.getMoney()-totalCost);
+        reshelper.updateMoney(name, resources.getMoney() - totalCost);
         System.out.println("Here 4");
-        reshelper.updateUndergraduatesnumber(name, resources.getUndergraduatesnumber()+studentsNum);
-        reshelper.updatePhdsNumber(name, resources.getPhdsnumber()+phdsNum);
+        reshelper.updateUndergraduatesnumber(name, resources.getUndergraduatesnumber() + studentsNum);
+        reshelper.updatePhdsNumber(name, resources.getPhdsnumber() + phdsNum);
 
         return "success";
 
     }
 
     //aux methods
-
-
     public String getBalance() throws SQLException {
 
 
@@ -101,7 +106,7 @@ public class Shop {
 
         System.out.println(this.playerName);
 
-        return(balance+"");
+        return (balance + "");
     }
 
     public String go() {

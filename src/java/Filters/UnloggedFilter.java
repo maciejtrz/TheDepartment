@@ -47,9 +47,6 @@ public class UnloggedFilter implements Filter {
             if (cookies != null) {
                 for (int i = 0; i < cookies.length; i++) {
 
-                    response.getWriter().print(cookies[i].getName() + ": ");
-                    response.getWriter().println(cookies[i].getValue());
-
                     if (cookies[i].getName().equals(ConnectionSingleton.idname)) {
                         user = cookies[i].getValue();
                     } else if (cookies[i].getName().equals(ConnectionSingleton.password)) {

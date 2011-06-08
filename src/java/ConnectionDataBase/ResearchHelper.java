@@ -1,12 +1,9 @@
 package ConnectionDataBase;
 
-import ConnectionDataBase.HibernateUtil;
-import ConnectionDataBase.Research;
-import ConnectionDataBase.ResearchId;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 public class ResearchHelper extends AbstractHelper {
     
@@ -32,6 +29,20 @@ public class ResearchHelper extends AbstractHelper {
                 + idname + "'");
         return (List<Research>) q.list();
         
+    }
+
+    public void addResearches(List<Research> finishedResearches) {
+
+        Iterator<Research> iterator = finishedResearches.iterator();
+        while(iterator.hasNext()) {
+
+            Session session = createNewSessionAndTransaction();
+            session.save(iterator.next());
+            commitTransaction(session);
+
+        }
+
+
     }
 
 }

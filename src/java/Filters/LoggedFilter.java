@@ -7,6 +7,7 @@ package Filters;
 
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
+import ResearchPoints.ResearchBag;
 import UserBeans.Auth;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -38,8 +39,7 @@ public class LoggedFilter implements Filter {
 
 
         System.out.println("Logged filter");
-        if (AuthorizationSingleton.isFacesContext()
-                || !AuthorizationSingleton.isSessionValid(session)) {
+        if (!AuthorizationSingleton.isSessionValid(session)) {
 
             AuthorizationSingleton.goToIndexPage(res);
             return;
@@ -47,14 +47,23 @@ public class LoggedFilter implements Filter {
         } else {
 
             Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+            ResearchBag researchBag = (ResearchBag)
+                    session.getAttribute(ConnectionSingleton.researchBag);
 
             if(auth == null) {
                  System.out.println("No auth");
-                 AuthorizationSingleton.addAuth(res);
+                 res.sendRedirect(ConnectionSingleton.addAuth);
                  return;
             }
 
+            if(researchBag == null) {
+                System.out.println("No research bag");
+                res.sendRedirect(ConnectionSingleton.addResearchBag);
+                return;
+            }
+
             if(auth.logging){
+
                 if(auth.getRememberBool()) {
                     AuthorizationSingleton.addCookies(res, session);
                 } else {
@@ -64,7 +73,7 @@ public class LoggedFilter implements Filter {
                 auth.logging = false;
             }
         }
-
+        
         chain.doFilter(request, response);
     }
 

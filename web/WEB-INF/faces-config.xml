@@ -137,7 +137,7 @@
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>
         <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>lec</managed-bean-name>

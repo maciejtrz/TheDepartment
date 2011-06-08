@@ -27,7 +27,7 @@ public class AddResearch {
     private int ResearchPoints;
 
     public AddResearch() {
-                for (int i = 0; i < subjectList.length; i++) {
+        for (int i = 0; i < subjectList.length; i++) {
             subjects.add(new SelectItem(new Integer(i), subjectList[i]));
         }
 
@@ -91,7 +91,8 @@ public class AddResearch {
 
 
         /* Adding research thread to the list of researches of the given user */
-        List<Research> list = (List<Research>) session.getAttribute(Connections.ConnectionSingleton.researchBag);
+        ResearchBag researchBag = (ResearchBag)
+                session.getAttribute(Connections.ConnectionSingleton.researchBag);
 
         /* Creating new object research */
         Research research = new Research();
@@ -99,8 +100,12 @@ public class AddResearch {
         research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
         research.setResearchpoints(100);
 
-        list.add(research);
-        research.addList(list);
+        List<Research> ongoingResearch = researchBag.getResearches();
+        List<Research> finishedResearch = researchBag.getFinishedResearches();
+
+        ongoingResearch.add(research);
+        research.addResearchList(ongoingResearch);
+        research.addFinishedResearchList(finishedResearch);
 
         Thread thread = new Thread(research);
 

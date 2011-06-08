@@ -2,10 +2,7 @@ package Connections;
 
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
-import ConnectionDataBase.Research;
-import UserBeans.Auth;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -37,50 +34,16 @@ public class AuthorizationSingleton {
     }
 
     public static void goToWelcomePage(HttpServletResponse response) throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(ConnectionSingleton.welcomePage);
+        response.sendRedirect(ConnectionSingleton.welcomePage);
     }
 
-    public static void checkCookies(HttpServletRequest request, HttpServletResponse response,
-            HttpSession session, Auth auth) throws IOException{
-        Cookie[] cookies = request.getCookies();
-        String user = null;
-        String password = null;
-
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-
-                response.getWriter().print(cookies[i].getName() + ": ");
-                response.getWriter().println(cookies[i].getValue());
-
-                if (cookies[i].getName().equals(ConnectionSingleton.idname)) {
-                    user = cookies[i].getValue();
-                } else if (cookies[i].getName().equals(ConnectionSingleton.password)) {
-                    password = cookies[i].getValue();
-                }
-            }
-        
-
-        if (user != null && password != null) {
-            if(test(user,password,session)) {
-                session.setAttribute(ConnectionSingleton.Auth, auth);
-                auth.setUsername(user);
-                auth.setPassword(password);
-                auth.updateResearchPoints();
-                
-                response.sendRedirect(ConnectionSingleton.welcomePage);
-            }
-
-            }
-
-        }
-    }
 
     public static void removeCookies(HttpServletRequest request, HttpServletResponse response,
             HttpSession session)
             throws IOException {
 
-        Cookie idname = new Cookie(ConnectionSingleton.idname,"");
-        Cookie pass = new Cookie(ConnectionSingleton.password,"");
+        Cookie idname = new Cookie(ConnectionSingleton.idname, "");
+        Cookie pass = new Cookie(ConnectionSingleton.password, "");
 
         idname.setMaxAge(0);
         pass.setMaxAge(0);
@@ -90,37 +53,34 @@ public class AuthorizationSingleton {
 
         response.addCookie(idname);
         response.addCookie(pass);
-        
+
     }
 
     public static boolean test(String username, String password, HttpSession session) {
-            boolean result = false;
+        boolean result = false;
 
-            String encodedPassword = EncodingSingleton.encodePassword(password);
+        String encodedPassword = EncodingSingleton.encodePassword(password);
 
-            PlayerHelper playerHelper = new PlayerHelper();
-            List<Players> players = playerHelper.getPlayers();
-            Iterator<Players> iterator = players.iterator();
+        PlayerHelper playerHelper = new PlayerHelper();
+        List<Players> players = playerHelper.getPlayers();
+        Iterator<Players> iterator = players.iterator();
 
-            while(iterator.hasNext()) {
-                Players player = iterator.next();
+        while (iterator.hasNext()) {
+            Players player = iterator.next();
 
-                if(username.equals(player.getIdname()) &&
-                        encodedPassword.equals(player.getPassword())) {
+            if (username.equals(player.getIdname())
+                    && encodedPassword.equals(player.getPassword())) {
 
-                    session.setAttribute(ConnectionSingleton.researchBag, new ArrayList<Research>());
-                    session.setAttribute(ConnectionSingleton.idname, username);
-                    session.setAttribute(ConnectionSingleton.password, password);
+                session.setAttribute(ConnectionSingleton.idname, username);
+                session.setAttribute(ConnectionSingleton.password, password);
 
-                    AuthorizationSingleton.updateUserStatus(username,true);
-                    
-                    result = true;
-                    break;
+                AuthorizationSingleton.updateUserStatus(username, true);
 
-                }
+                result = true;
+                break;
+
             }
-
-
+        }
 
         return result;
     }
@@ -141,7 +101,7 @@ public class AuthorizationSingleton {
 
         idname.setPath("/");
         pass.setPath("/");
-        
+
         response.addCookie(idname);
         response.addCookie(pass);
 
@@ -150,12 +110,8 @@ public class AuthorizationSingleton {
     public static void updateUserStatus(String idname, boolean logged) {
 
         PlayerHelper playerHelper = new PlayerHelper();
-        playerHelper.updateLoggedStatus(idname,logged);
+        playerHelper.updateLoggedStatus(idname, logged);
 
-    }
-
-    public static void addAuth(HttpServletResponse response) throws IOException {
-        response.sendRedirect(ConnectionSingleton.addAuth);
     }
 
     public static void logoff() throws IOException {
@@ -165,7 +121,7 @@ public class AuthorizationSingleton {
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-        updateUserStatus(session.getAttribute(ConnectionSingleton.idname).toString(),false);
+        updateUserStatus(session.getAttribute(ConnectionSingleton.idname).toString(), false);
 
         session.removeAttribute(ConnectionSingleton.idname);
         session.removeAttribute(ConnectionSingleton.password);

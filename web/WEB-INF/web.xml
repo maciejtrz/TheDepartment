@@ -16,7 +16,7 @@
 
     <filter-mapping>
         <filter-name>loggedFilter</filter-name>
-        <url-pattern>/Logged/*</url-pattern>
+        <url-pattern>/faces/Logged/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -25,7 +25,7 @@
     
     <filter-mapping>
         <filter-name>unloggedFilter</filter-name>
-        <url-pattern>/Unlogged/*</url-pattern>
+        <url-pattern>/faces/Unlogged/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

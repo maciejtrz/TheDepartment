@@ -38,7 +38,7 @@
 
         </h:form>
             
-            <a href="/Department/faces/Logged/Playing.xhtml">Go Back to Playing</a>
+            <a href="/TheDepartment/faces/Logged/Playing.xhtml">Go Back to Playing</a>
     </body>
 </html>
 </f:view>

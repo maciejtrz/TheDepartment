@@ -12,9 +12,11 @@ public class Research implements java.io.Serializable, Runnable {
      private ResearchId id;
      private Integer researchpoints;
      private List<Research> researchList;
+     private List<Research> finishedResearch;
      private List lecturers;
 
      private int researchTime;
+
 
     public Research() {
         id = new ResearchId();
@@ -99,21 +101,26 @@ public class Research implements java.io.Serializable, Runnable {
             }
 
             addPointsToUser();
-            addResearch();
 
         } catch (Exception ex) {
 
         } finally {
             researchList.remove(this);
+            finishedResearch.add(this);
         }
     }
 
-    public void addList(List<Research> list) {
-        researchList = list;
-    }
 
     public String getResearchTime() {
         return researchTime+"";
+    }
+
+    public void addResearchList(List<Research> ongoingResearch) {
+        researchList = ongoingResearch;
+    }
+
+    public void addFinishedResearchList(List<Research> finishedResearch) {
+        this.finishedResearch = finishedResearch;
     }
 
 }

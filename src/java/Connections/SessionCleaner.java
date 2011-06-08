@@ -1,5 +1,7 @@
 package Connections;
 
+import ConnectionDataBase.ResearchHelper;
+import ResearchPoints.ResearchBag;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
@@ -25,6 +27,12 @@ public class SessionCleaner implements  HttpSessionListener, HttpSessionAttribut
     public void attributeRemoved(HttpSessionBindingEvent event) {
         if(event.getName().equals(ConnectionSingleton.idname))
             AuthorizationSingleton.updateUserStatus(event.getValue().toString(), false);
+        else if(event.getName().equals(ConnectionSingleton.researchBag)) {
+            ResearchHelper researchHelper = new ResearchHelper();
+            ResearchBag researchBag = (ResearchBag) event.getValue();
+            researchHelper.addResearches(researchBag.getFinishedResearches());
+        }
+
     }
 
     public void attributeReplaced(HttpSessionBindingEvent event) {

@@ -153,5 +153,3 @@ public class Research implements java.io.Serializable, Runnable {
     }
 
 }
-
-

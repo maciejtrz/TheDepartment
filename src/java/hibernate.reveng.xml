@@ -10,4 +10,6 @@
   <table-filter match-name="lecturersavailable"/>
   <table-filter match-name="lecturersspecializations"/>
   <table-filter match-name="research"/>
+  <table-filter match-name="capacity"/>
+  <table-filter match-name="buildings"/>
 </hibernate-reverse-engineering>

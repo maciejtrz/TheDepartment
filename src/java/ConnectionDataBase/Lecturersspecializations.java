@@ -15,7 +15,7 @@ public class Lecturersspecializations  implements java.io.Serializable {
     public Lecturersspecializations() {
     }
 
-	
+
     public Lecturersspecializations(LecturersspecializationsId id) {
         this.id = id;
     }
@@ -30,11 +30,11 @@ public class Lecturersspecializations  implements java.io.Serializable {
         this.id = id;
         this.boost = boost;
     }
-   
+
     public LecturersspecializationsId getId() {
         return this.id;
     }
-    
+
     public void setId(LecturersspecializationsId id) {
         this.id = id;
     }
@@ -58,7 +58,7 @@ public class Lecturersspecializations  implements java.io.Serializable {
     public Integer getBoost() {
         return this.boost;
     }
-    
+
     public void setBoost(Integer boost) {
         this.boost = boost;
     }
@@ -67,5 +67,3 @@ public class Lecturersspecializations  implements java.io.Serializable {
 
 
 }
-
-

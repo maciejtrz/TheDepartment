@@ -2,14 +2,14 @@ package ConnectionDataBase;
 // Generated 06-Jun-2011 22:44:46 by Hibernate Tools 3.2.1.GA
 
 import Connections.ConnectionSingleton;
-import game.lecturerSystem.Lecturer;
-import game.lecturerSystem.LecturersManager;
+import utilities.LecturersManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import utilities.Lecturer;
 
 
 public class Research implements java.io.Serializable, Runnable {
@@ -24,7 +24,7 @@ public class Research implements java.io.Serializable, Runnable {
      private int researchTime;
      private int researchBoost;
 
-     /* ------------------------- Backend --------------------- */
+     /* -------------------------  Backend --------------------- */
      ArrayList<Lecturer> researchers;
 
 
@@ -123,16 +123,14 @@ public class Research implements java.io.Serializable, Runnable {
             researchList.remove(this);
             finishedResearch.add(this);
 
-            /* Making all participating lecturer usable again.
-               TO FIX WHEN THERE IS NO SESSION! */
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-            LecturersManager mgr =
-                (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
+            /* Making all participating lecturer usable again.*/
+            LecturersHelper helper
+                    = new LecturersHelper();
+
             Iterator<Lecturer> it = researchers.iterator();
             while (it.hasNext()) {
                 Lecturer lec = it.next();
-                mgr.setUsable(lec, true);
+                helper.setUsable(lec.getName(), true);
             }
 
 
@@ -153,3 +151,5 @@ public class Research implements java.io.Serializable, Runnable {
     }
 
 }
+
+

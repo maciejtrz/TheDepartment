@@ -2,10 +2,7 @@
 
 package UserBeans;
 
-import Connections.ConnectionSingleton;
-import game.lecturerSystem.LecturersManager;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import utilities.LecturersManager;
 
 
 public class BuyLecturers {
@@ -27,9 +24,8 @@ public class BuyLecturers {
     }
 
     public void buy() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
+        LecturersManager mgr 
+                = new LecturersManager(utilities.BasicUtils.getUserName());
         mgr.purchaseLecturer(lecturer);
     }
 

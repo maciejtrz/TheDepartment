@@ -1,7 +1,7 @@
-<%@page import="game.lecturerSystem.Lecturer"%>
+<%@page import="utilities.Lecturer"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="game.lecturerSystem.LecturersManager"%>
+<%@page import="utilities.LecturersManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="UserBeans.BuyLecturers"%>
@@ -28,11 +28,10 @@
 String printList() {
        String list;
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
+        LecturersManager mgr 
+                = new LecturersManager(utilities.BasicUtils.getUserName());
 
-        ArrayList<Lecturer> available = mgr.getAvailableLecturers();
+        ArrayList<Lecturer> available = mgr.getAvailabeLecturers();
 
         Iterator<Lecturer> it = available.iterator();
         list = "AVAILABLE \n";

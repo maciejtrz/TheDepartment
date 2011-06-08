@@ -2,7 +2,7 @@ package Connections;
 
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
-import game.lecturerSystem.LecturersManager;
+import utilities.LecturersManager;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -73,9 +73,6 @@ public class AuthorizationSingleton {
                     && encodedPassword.equals(player.getPassword())) {
 
                 LecturersManager mgr = new LecturersManager(username);
-                mgr.readLecturers();
-                
-                session.setAttribute(ConnectionSingleton.LECTURERSMANAGER, mgr);
                 session.setAttribute(ConnectionSingleton.idname, username);
                 session.setAttribute(ConnectionSingleton.password, password);
 
@@ -131,7 +128,6 @@ public class AuthorizationSingleton {
         session.removeAttribute(ConnectionSingleton.idname);
         session.removeAttribute(ConnectionSingleton.password);
         session.removeAttribute(ConnectionSingleton.Auth);
-        session.removeAttribute(ConnectionSingleton.LECTURERSMANAGER);
 
         removeCookies(request, response, session);
     }

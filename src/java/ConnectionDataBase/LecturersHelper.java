@@ -27,4 +27,15 @@ public class LecturersHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
+    public void setUsable(String lecturerName, boolean usable) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Lecturers where "
+                + "LecturerName = '" + lecturerName + "'" );
+        Lecturers lecturer_info = (Lecturers)q.uniqueResult();
+        if (lecturer_info != null) {
+            lecturer_info.setUsable(usable);
+        }
+        commitTransaction(session);
+    }
+
 }

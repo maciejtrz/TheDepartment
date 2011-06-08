@@ -4,11 +4,12 @@
  */
 package ResearchPoints;
 
+import ConnectionDataBase.LecturersHelper;
 import ConnectionDataBase.Research;
 import Connections.ConnectionSingleton;
-import game.lecturerSystem.Lecturer;
-import game.lecturerSystem.LecturerBenefits;
-import game.lecturerSystem.LecturersManager;
+import utilities.LecturerBenefits;
+import utilities.LecturersManager;
+import utilities.Lecturer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,18 +34,25 @@ public class AddResearch {
     private List<SelectItem> lecturers;
     private List<SelectItem> subjects;
 
+    private String[] subjectList = {"AI", "Machine Learning",
+        "Compilers", "Operating System Design", "Networks and Communication",
+        "Models of Computation"
+    };
+
+
+    private Integer subject;  // The index of the selected item
+    // can be given as String/Integer/int ...
+
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
         subjects = new ArrayList<SelectItem>();
         lecturers = new ArrayList<SelectItem>();
 
-        // Adding lecturers names.
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String playerName = utilities.BasicUtils.getUserName();
+        LecturersManager mgr
+                = new LecturersManager(playerName);
 
-        LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
-
-        List<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
+        ArrayList<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
 
         for (int i = 0; i < owned_lecturers.size(); i++) {
             Lecturer lec = owned_lecturers.get(i);
@@ -61,13 +69,6 @@ public class AddResearch {
             subjects.add(new SelectItem(new Integer(i), subjectList[i]));
         }
     }
-    private String[] subjectList = {"AI", "Machine Learning",
-        "Compilers", "Operating System Design", "Networks and Communication",
-        "Models of Computation"
-    };
-    private Integer subject;  // The index of the selected item
-    // can be given as String/Integer/int ...
-
 
     public List getSubjects() {
         return subjects;
@@ -117,27 +118,43 @@ public class AddResearch {
 
     public String startResearch() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        HttpSession session
+            = (HttpSession) facesContext.getExternalContext().getSession(false);
         Research research = new Research();
 
         /* Adding research thread to the list of researches of the given user */
-        ResearchBag researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
-        LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
-        ArrayList<Lecturer> owned_list = mgr.getOwnedLecturers();
+        ResearchBag researchBag 
+          = (ResearchBag) session.getAttribute
+                         (Connections.ConnectionSingleton.researchBag);
+
+        /* Reading lecturers from the database. */
+        LecturersManager mgr 
+              = new LecturersManager(utilities.BasicUtils.getUserName());
+        ArrayList<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
+
+        /* Getting neccessary hibernate helpers. */
+        LecturersHelper helper
+                = new LecturersHelper();
 
         // Calculacting the boost a given research would give.
         int boost_value = 0;
         for (int i = 0; i < chosenLecturers.size(); i++) {
             String lecturerName = chosenLecturers.get(i);
             System.out.println(lecturerName);
-            Lecturer lecturer = mgr.lookUpLecturer(lecturerName, owned_list);
+            Lecturer lecturer = mgr.lookUpLecturer(lecturerName, owned_lecturers);
             System.out.println("-----------------------------------------");
             System.out.println("LECTURERS OBJECT: " + lecturer.getName());
-            mgr.setUsable(lecturer, false);
+
+            /* Making the researcher unusable. */
+            helper.setUsable(lecturerName, false);
+
+            /* Setting the research object. */
             research.addResearcher(lecturer);
-            ArrayList<LecturerBenefits> benefits = lecturer.getSpecializations();
+
             // Checking whether a given lecturer is has a given research as
             // its attribtues
+            ArrayList<LecturerBenefits> benefits
+                    = lecturer.getSpecializations();
             String research_area = subjectList[subject];
             Iterator<LecturerBenefits> it = benefits.iterator();
             while (it.hasNext()) {
@@ -149,6 +166,7 @@ public class AddResearch {
             }
         }
 
+        
         System.out.println("MY BOOST VALUE IS:" + boost_value);
         /* Setting the research object research */
         research.setName(getName());

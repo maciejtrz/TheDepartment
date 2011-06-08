@@ -1,8 +1,8 @@
 
 package Connections;
 
-import game.lecturerSystem.Lecturer;
-import game.lecturerSystem.LecturersManager;
+
+import utilities.LecturersManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.servlet.http.HttpSession;
@@ -11,14 +11,6 @@ public class SessionSingleton {
 
 
     public static void initializeLecturers(HttpSession session) {
-        /* Responsible for reading user's lecturers from the database. */
-        String userName
-                = (String) session.getAttribute(ConnectionSingleton.idname);
-        LecturersManager mgr = new LecturersManager(userName);
-
-        System.out.println("READING LECTURERS");
-        mgr.readLecturers();
-        session.setAttribute(ConnectionSingleton.LECTURERSMANAGER, mgr);
 
         /*
         mgr.purchaseLecturer("Dziadzia");

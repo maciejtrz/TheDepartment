@@ -17,11 +17,11 @@ public class ConnectionSingleton {
     private static ConnectionSingleton con;
     private static Connection connection;
 
-   
+
     private final String connectionURL = "jdbc:postgresql://db:5432/g1027104_u";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "g1027104_u";
-    private final String dbPassword = "EldyDqOUXi"; 
+    private final String dbPassword = "EldyDqOUXi";
 
     /*
     private final String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
@@ -29,13 +29,12 @@ public class ConnectionSingleton {
     private final String username = "postgres";
     private final String dbPassword = "postgres";
     */
-    
+
 
     public static final String idname = "idname";
     public static final String password = "password";
     public static final String loggedIn = "loggedin";
     public static final String researchPoints = "researchpoints";
-    public static final String LECTURERSMANAGER = "mgr";
     public static final String playerResources = "PlayerResources";
     public static final String addAuth = "/TheDepartment/AddAuth.jsp";
     public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";

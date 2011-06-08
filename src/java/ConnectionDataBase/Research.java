@@ -1,38 +1,55 @@
 package ConnectionDataBase;
 // Generated 06-Jun-2011 22:44:46 by Hibernate Tools 3.2.1.GA
 
+import Connections.ConnectionSingleton;
+import game.lecturerSystem.Lecturer;
+import game.lecturerSystem.LecturersManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 
 public class Research implements java.io.Serializable, Runnable {
 
 
+    /* ------------------------------  GUI --------------------- */
      private ResearchId id;
      private Integer researchpoints;
      private List<Research> researchList;
      private List<Research> finishedResearch;
-     private List lecturers;
 
      private int researchTime;
      private int researchBoost;
 
+     /* ------------------------- Backend --------------------- */
+     ArrayList<Lecturer> researchers;
+
+
 
     public Research() {
         id = new ResearchId();
-        lecturers = new ArrayList();
+        researchers = new ArrayList<Lecturer>();
     }
 
 
     public Research(ResearchId id) {
+        researchBoost = 1;
+        researchTime = 10;
         this.id = id;
-        lecturers = new ArrayList();
+        researchers = new ArrayList<Lecturer>();
     }
     public Research(ResearchId id, Integer researchpoints) {
        this.id = id;
        this.researchpoints = researchpoints;
-       lecturers = new ArrayList();
+       researchers = new ArrayList<Lecturer>();
+    }
+
+
+    public void addResearcher(Lecturer lec) {
+        researchers.add(lec);
     }
 
     public ResearchId getId() {
@@ -58,18 +75,6 @@ public class Research implements java.io.Serializable, Runnable {
         return this.researchBoost;
     }
 
-
-    public void addLecturer(String lecturer) {
-        lecturers.add(lecturer);
-    }
-
-    public void removeLecturer(String lecturer) {
-        lecturers.remove(lecturer);
-    }
-
-    public List getLecturers() {
-        return lecturers;
-    }
 
     public String getName() {
         return id.getTitle();
@@ -99,8 +104,14 @@ public class Research implements java.io.Serializable, Runnable {
 
             researchTime = 10;
 
+            int sleep_time = 20000;
+
+            if (this.researchBoost != 0) {
+                sleep_time = sleep_time/this.researchBoost;
+            }
+
             while(researchTime > 0) {
-                Thread.sleep(1000);
+                Thread.sleep(sleep_time);
                 researchTime--;
             }
 
@@ -111,6 +122,20 @@ public class Research implements java.io.Serializable, Runnable {
         } finally {
             researchList.remove(this);
             finishedResearch.add(this);
+
+            /* Making all participating lecturer usable again.
+               TO FIX WHEN THERE IS NO SESSION! */
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+            LecturersManager mgr =
+                (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
+            Iterator<Lecturer> it = researchers.iterator();
+            while (it.hasNext()) {
+                Lecturer lec = it.next();
+                mgr.setUsable(lec, true);
+            }
+
+
         }
     }
 

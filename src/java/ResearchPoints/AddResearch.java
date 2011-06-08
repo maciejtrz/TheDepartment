@@ -44,15 +44,15 @@ public class AddResearch {
 
         LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
 
-        List<Lecturer> av_lecturers = mgr.getAvailableLecturers();
+        List<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
 
-        for (int i = 0; i < av_lecturers.size(); i++) {
-            Lecturer lec = av_lecturers.get(i);
+        for (int i = 0; i < owned_lecturers.size(); i++) {
+            Lecturer lec = owned_lecturers.get(i);
             if (lec.getUsable()) {
                 // Add lecturer only if he is not occupied with another
                 // research.
                 lecturers.add(new SelectItem(new Integer(i),
-                        av_lecturers.get(i).getName()));
+                        owned_lecturers.get(i).getName()));
             }
         }
 
@@ -61,7 +61,7 @@ public class AddResearch {
             subjects.add(new SelectItem(new Integer(i), subjectList[i]));
         }
     }
-    private String[] subjectList = {"Artifical Intelligence", "Machine Learning",
+    private String[] subjectList = {"AI", "Machine Learning",
         "Compilers", "Operating System Design", "Networks and Communication",
         "Models of Computation"
     };
@@ -81,9 +81,13 @@ public class AddResearch {
         subject = nextSWVersion;
     }
 
-    public void setLecturers(List chosenLecturers) {
-        for (int i = 0; i < chosenLecturers.size(); i++) {
-            System.out.println((i + 1) + ": " + chosenLecturers.get(i).toString());
+    public void setLecturers(List chosenLects) {
+        for (int i = 0; i < chosenLects.size(); i++) {
+            System.out.println("ADDING: " + chosenLects.get(i));
+            String selected_item = chosenLects.get(i).toString();
+            SelectItem item = lecturers.get(Integer.parseInt(selected_item));
+            System.out.println("Adding " + item.getLabel());
+            chosenLecturers.add(item.getLabel());
         }
     }
 
@@ -114,18 +118,23 @@ public class AddResearch {
     public String startResearch() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-
+        Research research = new Research();
 
         /* Adding research thread to the list of researches of the given user */
         ResearchBag researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
         LecturersManager mgr = (LecturersManager) session.getAttribute(ConnectionSingleton.LECTURERSMANAGER);
-        ArrayList<Lecturer> av_list = mgr.getAvailableLecturers();
+        ArrayList<Lecturer> owned_list = mgr.getOwnedLecturers();
 
         // Calculacting the boost a given research would give.
         int boost_value = 0;
         for (int i = 0; i < chosenLecturers.size(); i++) {
             String lecturerName = chosenLecturers.get(i);
-            Lecturer lecturer = mgr.lookUpLecturer(lecturerName, av_list);
+            System.out.println(lecturerName);
+            Lecturer lecturer = mgr.lookUpLecturer(lecturerName, owned_list);
+            System.out.println("-----------------------------------------");
+            System.out.println("LECTURERS OBJECT: " + lecturer.getName());
+            mgr.setUsable(lecturer, false);
+            research.addResearcher(lecturer);
             ArrayList<LecturerBenefits> benefits = lecturer.getSpecializations();
             // Checking whether a given lecturer is has a given research as
             // its attribtues
@@ -140,8 +149,8 @@ public class AddResearch {
             }
         }
 
-        /* Creating new object research */
-        Research research = new Research();
+        System.out.println("MY BOOST VALUE IS:" + boost_value);
+        /* Setting the research object research */
         research.setName(getName());
         research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
         research.setResearchpoints(100);

@@ -35,6 +35,17 @@ public class BuildingsHelper extends AbstractHelper {
 
     }
 
+    public void destroyBuildings(String idname) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Buildings where idname='"
+                + idname + "'");
+        Buildings building_record = (Buildings) q.uniqueResult();
+        if (building_record != null) {
+            session.delete(building_record);
+            commitTransaction(session);
+        }
+     }
+
     public Buildings getBuildings(String idname) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Buildings where idname='"

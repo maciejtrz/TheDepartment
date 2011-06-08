@@ -5,13 +5,11 @@
 
 package UserBeans;
 
+import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
-import Connections.ConnectionSingleton;
 import java.io.IOException;
-import java.sql.Statement;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -26,23 +24,34 @@ public class Department {
 
     public void deleteDepartment() throws IOException {
 
-        FacesContext facesContext
-                = (FacesContext) FacesContext.getCurrentInstance();
-        HttpSession session
-                = (HttpSession) facesContext.getExternalContext()
-                    .getSession(false);
+        String username = utilities.BasicUtils.getUserName();
 
-        String username
-                = (String) session.getAttribute(ConnectionSingleton.idname);
 
+        // Deleting player resources.
         PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
         playerresources.deleteResources(username);
 
+        // Deleting department info.
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
         departmentInfo.deleteDepartment(username);
 
-    }
+        // Deleting capacities.
+        CapacityHelper capacityHelper = new CapacityHelper();
+        capacityHelper.deleteCapacity(username);
 
+        // Deleting buildings.
+        BuildingsHelper buildingsHelper = new BuildingsHelper();
+        buildingsHelper.destroyBuildings(username);
+
+        // Deleting lecturers info.
+        // TODO
+
+
+        // Deleting students info.
+        // TODO
+
+
+    }
 
     public String startPlaying() {
 

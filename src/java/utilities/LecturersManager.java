@@ -61,9 +61,9 @@ public class LecturersManager {
             Iterator <LecturerBenefits> it
                     = specializations.iterator();
             while (it.hasNext()) {
-                LecturerBenefits benefit = it.next();
-                specializationHelper
-                     .setSpecialization(name, benefit.getField(), benefit.getBoost());
+              LecturerBenefits benefit = it.next();
+              specializationHelper
+               .setSpecialization(name, benefit.getField(), benefit.getBoost());
             }
 
         }
@@ -83,6 +83,16 @@ public class LecturersManager {
                 = new LecturersAvailableHelper();
         LecturersOwnedHelper lecturersOwnedHelper
                 =  new LecturersOwnedHelper();
+        CapacityHelper capacityHelper
+                = new CapacityHelper();
+
+        // Checking whether the player is allowed to buy
+        // any lecturers.
+        Capacity capacityRecord = capacityHelper.getCapacity(userName);
+        int profCapacity = capacityRecord.getProfessorscapacity();
+        if (profCapacity <= 0) {
+            return false;
+        }
 
         // Obtaining players money.
         int money = resourcesHelper.getMoney(userName);
@@ -90,9 +100,11 @@ public class LecturersManager {
         int price = 0;
 
         Lecturers lecturer = lecturersHelper.getLecturer(lecName);
-        if (lecturer != null) {
-            price = lecturer.getPrice();
+        if (lecturer == null) {
+            return false;
         }
+
+        price = lecturer.getPrice();
         // Purchasing the lecturer if possible.
         if (price > money) {
             return false;
@@ -240,12 +252,14 @@ public class LecturersManager {
         // Obtaining specializations
         List<Lecturersspecializations> specializations
                 = specializationsHelper.getSpecializationsRecord(lecturerName);
-        Iterator <Lecturersspecializations> it = specializations.iterator();
-        while (it.hasNext()) {
-            Lecturersspecializations spec = it.next();
-            specialization = spec.getSpecialization();
-            boost = spec.getBoost();
-            benefitsList.add(new LecturerBenefits(specialization,boost));
+        if (specializations != null) {
+            Iterator <Lecturersspecializations> it = specializations.iterator();
+            while (it.hasNext()) {
+                Lecturersspecializations spec = it.next();
+                specialization = spec.getSpecialization();
+                boost = spec.getBoost();
+                benefitsList.add(new LecturerBenefits(specialization,boost));
+            }
         }
 
         // Creating Lecturer object

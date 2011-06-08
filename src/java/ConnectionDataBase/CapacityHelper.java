@@ -20,11 +20,24 @@ public class CapacityHelper extends AbstractHelper {
         capacity.setIdname(idname);
         capacity.setPhdscapacity(0);
         capacity.setStudentscapacity(0);
+        capacity.setProfessorscapacity(0);
 
         Session session = createNewSessionAndTransaction();
         session.save(capacity);
         commitTransaction(session);
 
+    }
+
+    public void deleteCapacity(String idname) {
+        Session session = createNewSessionAndTransaction();
+
+        Query q = session.createQuery("from Capacity where idname='"
+                + idname + "'");
+        Capacity capacity = (Capacity) q.uniqueResult();
+        if (capacity !=null) {
+            session.delete(capacity);
+            commitTransaction(session);
+        }
     }
 
     public Capacity getCapacity(String idname) {

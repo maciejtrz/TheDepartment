@@ -21,17 +21,13 @@ public class User {
 
     public String deleteMe() throws IOException {
 
-        FacesContext facesContext = (FacesContext) FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        String username = utilities.BasicUtils.getUserName();
 
-        String username = (String) session.getAttribute(ConnectionSingleton.idname);
+        /* Deleting department. */
+        Department department = new Department();
+        department.deleteDepartment();
 
-        PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
-        playerresources.deleteResources(username);
-
-        DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-        departmentInfo.deleteDepartment(username);
-
+        /* Deleteing player id and password. */
         PlayerHelper playerHelper = new PlayerHelper();
         playerHelper.deletePlayer(username);
 

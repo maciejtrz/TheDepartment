@@ -36,6 +36,7 @@ public class AddResearch {
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
         subjects = new ArrayList<SelectItem>();
+        lecturers = new ArrayList<SelectItem>();
 
         // Adding lecturers names.
         FacesContext facesContext = FacesContext.getCurrentInstance();

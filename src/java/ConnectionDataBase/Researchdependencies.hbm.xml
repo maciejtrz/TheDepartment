@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-Jun-2011 16:59:47 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Researchdependencies" table="researchdependencies" schema="public">
+        <composite-id name="id" class="ConnectionDataBase.ResearchdependenciesId">
+            <key-property name="parentresearchid" type="int">
+                <column name="parentresearchid" />
+            </key-property>
+            <key-property name="childresearchid" type="int">
+                <column name="childresearchid" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

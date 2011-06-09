@@ -2,16 +2,17 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="g1027104_u"/>
-  <table-filter match-name="lecturersspecializations"/>
-  <table-filter match-name="playerresources"/>
-  <table-filter match-name="buildingsposition"/>
-  <table-filter match-name="lecturersavailable"/>
+  <table-filter match-name="researchcatalogue"/>
+  <table-filter match-name="lecturersowned"/>
+  <table-filter match-name="buildings"/>
   <table-filter match-name="lecturers"/>
-  <table-filter match-name="departmentinfo"/>
+  <table-filter match-name="lecturersavailable"/>
   <table-filter match-name="research"/>
   <table-filter match-name="players"/>
   <table-filter match-name="capacity"/>
-  <table-filter match-name="buildings"/>
-  <table-filter match-name="lecturersowned"/>
-  <table-filter match-name="researchcatalogue"/>
+  <table-filter match-name="lecturersspecializations"/>
+  <table-filter match-name="playerresources"/>
+  <table-filter match-name="buildingsposition"/>
+  <table-filter match-name="departmentinfo"/>
+  <table-filter match-name="researchdependencies"/>
 </hibernate-reverse-engineering>

@@ -55,11 +55,6 @@ public class AddDepartment {
         CapacityHelper capacityhelper = new CapacityHelper();
         capacityhelper.createCapacity(playerName);
 
-        /* Populating buildings table. */
-        BuildingsHelper buildingsHelper
-                = new BuildingsHelper();
-        buildingsHelper.createBuildings(playerName);
-
         // POPULATE POSITION TABLE WITH BLACK MARKER AND BOB HERE.
 
         return "success";

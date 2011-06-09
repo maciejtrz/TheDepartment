@@ -9,10 +9,14 @@
 package utilities;
 
 import ConnectionDataBase.*;
+import Connections.ConnectionSingleton;
+import UserBeans.Auth;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import nameGenerator.NamesGenerator;
 import specializationsGenerator.SpecializationsGenerator;
 
@@ -78,8 +82,12 @@ public class LecturersManager {
     public boolean purchaseLecturer(String lecName) {
 
         /* Getting all required hibernate helpers. */
-        PlayerresourcesHelper resourcesHelper
-                = new PlayerresourcesHelper();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+
+        Playerresources resources
+                = auth.getResources();
         LecturersHelper lecturersHelper
                 = new LecturersHelper();
         LecturersAvailableHelper lecturersAvHelper
@@ -98,7 +106,7 @@ public class LecturersManager {
         }
 
         // Obtaining players money.
-        int money = resourcesHelper.getMoney(userName);
+        int money = resources.getMoney();
         // Obtaining lecturers price.
         int price = 0;
 
@@ -116,7 +124,7 @@ public class LecturersManager {
         System.out.println("Money " + money + " price " + price);
 
         // Updating the database.
-        resourcesHelper.updateMoney(userName, (money-price));
+        resources.setMoney(money-price);
         lecturersAvHelper.deleteLecturer(lecName);
         lecturersOwnedHelper.addLecturer(lecName, userName);
 

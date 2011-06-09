@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-Jun-2011 22:33:24 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Lecturerssepciatlizations" table="lecturerssepciatlizations" schema="public">
+        <composite-id name="id" class="ConnectionDataBase.LecturerssepciatlizationsId">
+            <key-property name="lecturername" type="string">
+                <column name="lecturername" />
+            </key-property>
+            <key-property name="specialization" type="string">
+                <column name="specialization" />
+            </key-property>
+        </composite-id>
+        <property name="boost" type="java.lang.Integer">
+            <column name="boost" />
+        </property>
+    </class>
+</hibernate-mapping>

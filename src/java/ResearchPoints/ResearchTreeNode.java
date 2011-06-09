@@ -44,7 +44,8 @@ public class ResearchTreeNode {
         return dependentResearches;
     }
 
-
-
+    public String toString() {
+        return getResearchInstance().getResearchname();
+    }
 
 }

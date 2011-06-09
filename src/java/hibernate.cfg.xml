@@ -4,22 +4,24 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://db:5432/g1027104_u</property>
-    <property name="hibernate.connection.username">g1027104_u</property>
-    <property name="hibernate.connection.password">EldyDqOUXi</property>
-    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">postgres</property>
+    <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Researchcatalogue.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Subject.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Playerresearch.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

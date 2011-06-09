@@ -2,7 +2,6 @@ package ResearchPoints;
 
 import ConnectionDataBase.Research;
 import ConnectionDataBase.ResearchHelper;
-import Connections.ConnectionSingleton;
 import java.util.ArrayList;
 import java.util.List;
 

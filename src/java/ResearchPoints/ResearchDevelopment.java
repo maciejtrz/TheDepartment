@@ -10,10 +10,8 @@ import ConnectionDataBase.ResearchcatalogueHelper;
 import ConnectionDataBase.Researchdependencies;
 import ConnectionDataBase.ResearchdependenciesHelper;
 import ConnectionDataBase.ResearchdependenciesId;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import specializationsGenerator.SpecializationsGenerator;
 
 /**
@@ -36,8 +34,8 @@ public class ResearchDevelopment {
         Iterator<Researchcatalogue> iterator = list.iterator();
         while(iterator.hasNext()) {
             Researchcatalogue rc = iterator.next();
-            System.out.println("Title: " + rc.getResearchname() + " position: " + (rc.getResearchid()-1));
-            researchNodes[rc.getResearchid()-1] =
+            System.out.println("Title: " + rc.getResearchname() + " position: " + (rc.getResearchid()));
+            researchNodes[rc.getResearchid()] =
                     new ResearchTreeNode(rc);
         }
 
@@ -52,11 +50,11 @@ public class ResearchDevelopment {
 
             if(dependencies.isEmpty()) {
                 /* Initially available researches */
-                System.out.println("Adding research at subject: " + researchcatalogue.getResearchsubject() +
-                        " at position: " + researchcatalogue.getResearchsubject());
+                System.out.println("Adding research at subject: " + getSubject(researchcatalogue) +
+                        " at position: " + researchcatalogue.getSubjectid());
                 
-                researchTree.getResearchTreeNode(getSubjectPosition(researchcatalogue.getResearchsubject())).
-                        addResearchTreeNode(researchNodes[researchcatalogue.getResearchid()-1]);
+                researchTree.getResearchTreeNode(researchcatalogue.getSubjectid()).
+                        addResearchTreeNode(researchNodes[researchcatalogue.getResearchid()]);
 
             } else {
                 /* Research tree node with some dependencies */
@@ -66,12 +64,16 @@ public class ResearchDevelopment {
                 while(iter.hasNext()) {
                     ResearchdependenciesId dependencyId = iter.next().getId();
                     
-                    researchNodes[dependencyId.getParentresearchid()-1].
-                            addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()-1]);
+                    researchNodes[dependencyId.getParentresearchid()].
+                            addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()]);
                 }
             }
         }
 
+    }
+
+    public static String getSubject(Researchcatalogue researchcatalogue) {
+        return SpecializationsGenerator.subjectList[researchcatalogue.getSubjectid()];
     }
 
     public static String getSubject(int i) {

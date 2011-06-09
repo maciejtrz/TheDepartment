@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import specializationsGenerator.SpecializationsGenerator;
 import utilities.Lecturer;
 import utilities.LecturersManager;
 
@@ -25,6 +26,11 @@ public class LecturersContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         if (creator == null) {
 
+            /* Initizalization of research development tree */
+            SpecializationsGenerator.initializeSpecializationsGenerator();
+            ResearchDevelopment.initializeDevelopmentTree();
+
+
             System.out.println("IM NOTIFIED ABOUT THE CONTEX!"
                     + " My name is: " + this.toString());
             creator = new CreatorDeamon();
@@ -32,8 +38,7 @@ public class LecturersContextListener implements ServletContextListener {
             creator.setDaemon(true);
             creator.start();
 
-            /* Initizalization of research development tree */
-            ResearchDevelopment.initializeDevelopmentTree();
+
         }
     }
 

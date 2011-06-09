@@ -52,6 +52,10 @@ public abstract class Building {
     /* Informs whether a given player is allowed to build anything on
        a free position. */
 
+    public boolean upgrade(String playerName, int level) {
+        return false;
+    }
+
     protected boolean checkMoneyAndPosition (String playerName, int position) {
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();

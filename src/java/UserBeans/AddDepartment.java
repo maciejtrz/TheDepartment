@@ -45,9 +45,6 @@ public class AddDepartment {
 
         String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
 
-        PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
-        playerResources.createPlayerResources(playerName);
-
         /* Populating DepartmentInfo table. */
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
         departmentInfo.createDepartment(playerName,getName());

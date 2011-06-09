@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-Jun-2011 15:21:06 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Buildingsposition" table="buildingsposition" schema="public">
+        <id name="idname" type="string">
+            <column name="idname" />
+            <generator class="assigned" />
+        </id>
+        <property name="pos1" type="string">
+            <column name="pos1" />
+        </property>
+        <property name="pos2" type="string">
+            <column name="pos2" />
+        </property>
+        <property name="pos3" type="string">
+            <column name="pos3" />
+        </property>
+        <property name="pos4" type="string">
+            <column name="pos4" />
+        </property>
+        <property name="pos5" type="string">
+            <column name="pos5" />
+        </property>
+        <property name="pos6" type="string">
+            <column name="pos6" />
+        </property>
+        <property name="pos7" type="string">
+            <column name="pos7" />
+        </property>
+        <property name="pos8" type="string">
+            <column name="pos8" />
+        </property>
+        <property name="pos9" type="string">
+            <column name="pos9" />
+        </property>
+        <property name="pos10" type="string">
+            <column name="pos10" />
+        </property>
+        <property name="pos11" type="string">
+            <column name="pos11" />
+        </property>
+        <property name="pos12" type="string">
+            <column name="pos12" />
+        </property>
+        <property name="pos13" type="string">
+            <column name="pos13" />
+        </property>
+        <property name="pos14" type="string">
+            <column name="pos14" />
+        </property>
+        <property name="pos15" type="string">
+            <column name="pos15" />
+        </property>
+        <property name="pos16" type="string">
+            <column name="pos16" />
+        </property>
+    </class>
+</hibernate-mapping>

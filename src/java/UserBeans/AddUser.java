@@ -1,6 +1,7 @@
 package UserBeans;
 
 import ConnectionDataBase.PlayerHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.EncodingSingleton;
 
 
@@ -59,6 +60,9 @@ public class AddUser {
                 String encodedPassword = EncodingSingleton.encodePassword(password);
                 PlayerHelper player = new PlayerHelper();
                 player.addPlayer(username, encodedPassword, email);
+
+                PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
+                playerResources.createPlayerResources(username);
 
             }
 

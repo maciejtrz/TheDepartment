@@ -12,4 +12,5 @@
   <table-filter match-name="research"/>
   <table-filter match-name="capacity"/>
   <table-filter match-name="buildings"/>
+  <table-filter match-name="buildingsposition"/>
 </hibernate-reverse-engineering>

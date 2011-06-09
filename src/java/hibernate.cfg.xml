@@ -19,5 +19,6 @@
     <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

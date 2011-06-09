@@ -30,15 +30,15 @@ public class UnloggedFilter implements Filter {
 
         HttpSession session = req.getSession();
 
-        System.out.println("Unlogged Fitler");
+        
         if (AuthorizationSingleton.isSessionValid(session)) {
 
-            System.out.println("Going to welcome page");
+            
             AuthorizationSingleton.goToWelcomePage(res);
             return;
 
         } else {
-            System.out.println("Checking cookies");
+            
 
             Cookie[] cookies = req.getCookies();
             String user = null;

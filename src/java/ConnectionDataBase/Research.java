@@ -2,51 +2,62 @@ package ConnectionDataBase;
 // Generated 06-Jun-2011 22:44:46 by Hibernate Tools 3.2.1.GA
 
 import Connections.ConnectionSingleton;
-import utilities.LecturersManager;
+import UserBeans.Auth;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
 
+public class Research implements java.io.Serializable, Runnable  {
 
-public class Research implements java.io.Serializable, Runnable {
+    private ResearchId id;
+    private Integer researchpoints;
+    private List<Research> researchList;
+    private List<Research> finishedResearch;
+    private int researchTime;
+    private int researchBoost;
+    private final static String RUNNING = "Running";
+    private final static String FINISHED = "Finished";
+    private final static String STOPPED = "Stopped";
+    private String state;
+    private Auth auth;
+    private Integer progress;
+    private Integer money;
 
-
-    /* ------------------------------  GUI --------------------- */
-     private ResearchId id;
-     private Integer researchpoints;
-     private List<Research> researchList;
-     private List<Research> finishedResearch;
-
-     private int researchTime;
-     private int researchBoost;
-
-     /* -------------------------  Backend --------------------- */
-     ArrayList<Lecturer> researchers;
-
+    private List<Lecturer> researchers;
 
 
     public Research() {
         id = new ResearchId();
         researchers = new ArrayList<Lecturer>();
+        state = STOPPED;
+        progress = 0;
     }
-
 
     public Research(ResearchId id) {
-        researchBoost = 1;
-        researchTime = 10;
         this.id = id;
         researchers = new ArrayList<Lecturer>();
-    }
-    public Research(ResearchId id, Integer researchpoints) {
-       this.id = id;
-       this.researchpoints = researchpoints;
-       researchers = new ArrayList<Lecturer>();
+        state = STOPPED;
     }
 
+    public Research(ResearchId id, Integer researchpoints) {
+        this.id = id;
+        this.researchpoints = researchpoints;
+        researchers = new ArrayList<Lecturer>();
+        state = STOPPED;
+    }
+
+    public Research(Auth auth) {
+        this();
+        researchers = new ArrayList<Lecturer>();
+        this.auth = auth;
+    }
 
     public void addResearcher(Lecturer lec) {
         researchers.add(lec);
@@ -59,6 +70,7 @@ public class Research implements java.io.Serializable, Runnable {
     public void setId(ResearchId id) {
         this.id = id;
     }
+
     public Integer getResearchpoints() {
         return this.researchpoints;
     }
@@ -67,11 +79,11 @@ public class Research implements java.io.Serializable, Runnable {
         this.researchpoints = researchpoints;
     }
 
-    public void setResearchBoost (int boost) {
+    public void setResearchBoost(int boost) {
         this.researchBoost = boost;
     }
 
-    public int getResearchBoost () {
+    public int getResearchBoost() {
         return this.researchBoost;
     }
 
@@ -92,36 +104,44 @@ public class Research implements java.io.Serializable, Runnable {
         id.setIdname(userid);
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
     private void addPointsToUser() throws SQLException {
-
-        PlayerresourcesHelper playerResourcesHelper = new PlayerresourcesHelper();
-        playerResourcesHelper.addResearchPoints(getUserId(), getResearchpoints());
-
+        auth.setResearchPoints(getResearchpoints());
+        auth.setMoney(auth.getMoney()-getMoney());
     }
 
     public void run() {
-          try {
+        state = RUNNING;
 
-            researchTime = 10;
+        try {
+            researchTime = 100;
 
-            int sleep_time = 20000;
+            while (researchTime > 0) {
 
-            if (this.researchBoost != 0) {
-                sleep_time = sleep_time/this.researchBoost;
-            }
+                while(state == STOPPED)
+                    Thread.sleep(100);
 
-            while(researchTime > 0) {
-                Thread.sleep(sleep_time);
+                Thread.sleep(100);
                 researchTime--;
             }
-
-            addPointsToUser();
 
         } catch (Exception ex) {
 
         } finally {
             researchList.remove(this);
             finishedResearch.add(this);
+            state = FINISHED;
 
             /* Making all participating lecturer usable again.*/
             LecturersHelper helper
@@ -135,11 +155,15 @@ public class Research implements java.io.Serializable, Runnable {
 
 
         }
+           try {
+                addPointsToUser();
+            } catch (SQLException ex) {
+                Logger.getLogger(Research.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
-
-    public String getResearchTime() {
-        return researchTime+"";
+    public Integer getResearchTime() {
+        return researchTime;
     }
 
     public void addResearchList(List<Research> ongoingResearch) {
@@ -150,6 +174,26 @@ public class Research implements java.io.Serializable, Runnable {
         this.finishedResearch = finishedResearch;
     }
 
+    public String manageResearch() throws IOException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
+        System.out.println("Setting up research...");
+
+        session.setAttribute(ConnectionSingleton.researchName, getName());
+
+        return "go";
+    }
+
+    public void changeState() {
+        if(state == RUNNING) {
+            state = STOPPED;
+        }
+        else  {
+            state = RUNNING;
+        }
+    }
+
+
+
 }
-
-

@@ -37,12 +37,11 @@ public class ResearchHelper extends AbstractHelper {
         while(iterator.hasNext()) {
 
             Session session = createNewSessionAndTransaction();
-            session.save(iterator.next());
+
+            session.saveOrUpdate(iterator.next());
             commitTransaction(session);
 
-        }
-
-
+        } 
     }
 
 }

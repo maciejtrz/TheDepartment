@@ -38,7 +38,6 @@ public class LoggedFilter implements Filter {
         HttpSession session = req.getSession();
 
 
-        System.out.println("Logged filter");
         if (!AuthorizationSingleton.isSessionValid(session)) {
 
             AuthorizationSingleton.goToIndexPage(res);
@@ -51,13 +50,13 @@ public class LoggedFilter implements Filter {
                     session.getAttribute(ConnectionSingleton.researchBag);
 
             if(auth == null) {
-                 System.out.println("No auth");
+     
                  res.sendRedirect(ConnectionSingleton.addAuth);
                  return;
             }
 
             if(researchBag == null) {
-                System.out.println("No research bag");
+               
                 res.sendRedirect(ConnectionSingleton.addResearchBag);
                 return;
             }

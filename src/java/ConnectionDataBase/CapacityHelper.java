@@ -20,7 +20,7 @@ public class CapacityHelper extends AbstractHelper {
         capacity.setIdname(idname);
         capacity.setPhdscapacity(0);
         capacity.setStudentscapacity(0);
-        capacity.setProfessorscapacity(0);
+        capacity.setProfessorscapacity(5);
 
         Session session = createNewSessionAndTransaction();
         session.save(capacity);

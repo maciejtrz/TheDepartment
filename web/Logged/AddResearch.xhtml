@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Add Research</title>
+    </h:head>
+    <h:body>
+        <h1>Adding research: </h1>
+        <p>Now, you must specify what research you would like to perform.</p>
+
+        <h:form>
+
+            <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
+
+                <p:tab id="researchSubject" title="Research Subject" >
+                    <p:panel header="ResarchSubject">
+                        <h:outputText value="Choose research subject: " />
+                        <h:selectOneMenu value="#{addResearch.subject}" >
+                            <f:selectItems value="#{addResearch.subjects}"/>
+                        </h:selectOneMenu>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="researchLecturers" title="Lecturers for Research" >
+                    <p:panel header="Lecturers for Research">
+                        <h:outputText value="Choose lecturers: "/>
+                        <h:selectManyListbox value="#{addResearch.lecturers}">
+                            <f:selectItems value="#{addResearch.lecturerList}"/>
+                        </h:selectManyListbox>
+                    </p:panel>
+                </p:tab>
+
+               <p:tab id="availableResearches" title="Available Researches" >
+                    <p:panel header="Available Researches">
+                        <h:outputText value="Choose research: "/>
+                        <h:inputText value="#{addResearch.name}" />
+                    </p:panel>
+                </p:tab>
+
+                 <p:tab id="moneyAmount" title="Specify money grant for research" >
+                    <p:panel header="Specify money grant for research">
+                        <h:outputText value="Input money min: "/>
+                        <h:outputText value="#{addResearch.minimumMoney}" />
+                        <h:outputText value=" max: " />
+                        <h:outputText value="#{addResearch.maximumMoney}"/>
+                        <h:inputText value="#{addResearch.moneyAmount}" />
+                    </p:panel>
+                </p:tab>
+                
+                <p:tab id="confirmation" title="Research Confirmation" >
+                    <p:panel header="Research Confirmation">
+
+                        <h:panelGrid columns="2" border="1" >
+
+                        <h:outputText value="Name of Research: "/>
+                        <h:outputText value="#{addResearch.name}" />
+
+                        <h:outputText value="Money: "/>
+                        <h:outputText value="#{addResearch.moneyAmount}" />
+
+                        <h:outputText value="Subject: "/>
+                        <h:outputText value="#{addResearch.subjectName}" />
+
+                        <h:commandButton action="#{addResearch.startResearch}" value="Add Research"/>
+                        <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
+
+                        </h:panelGrid>
+
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </h:form>
+
+        <a href="/TheDepartment/faces/Logged/Playing.xhtml">Go Back to Playing</a>
+    </h:body>
+</html>
+

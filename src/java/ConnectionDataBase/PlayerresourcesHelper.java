@@ -2,6 +2,7 @@ package ConnectionDataBase;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class PlayerresourcesHelper extends AbstractHelper {
 
@@ -31,7 +32,7 @@ public class PlayerresourcesHelper extends AbstractHelper {
 
         int money = 0;
         Session session = createNewSessionAndTransaction();
-
+        
         Query q = session.createQuery("from Playerresources where idname = '"
                 + idname + "'");
         Playerresources resources = (Playerresources)q.uniqueResult();
@@ -40,7 +41,7 @@ public class PlayerresourcesHelper extends AbstractHelper {
         }
         return money;
     }
-
+    
     public int getResearchpoints(String idname) {
 
         int points = 0;
@@ -63,28 +64,6 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resource = (Playerresources)q.uniqueResult();
         if (resource != null) {
             resource.setMoney(newValue);
-            commitTransaction(session);
-        }
-    }
-
-     public void updatePhdsNumber (String idname , int phds) {
-        Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Playerresources where idname='"
-                + idname + "'");
-        Playerresources resource = (Playerresources)q.uniqueResult();
-        if (resource != null) {
-            resource.setPhdsnumber(phds);
-            commitTransaction(session);
-        }
-    }
-
-     public void updateUndergraduatesnumber (String idname , int students) {
-        Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Playerresources where idname='"
-                + idname + "'");
-        Playerresources resource = (Playerresources)q.uniqueResult();
-        if (resource != null) {
-            resource.setUndergraduatesnumber(students);
             commitTransaction(session);
         }
     }
@@ -116,5 +95,34 @@ public class PlayerresourcesHelper extends AbstractHelper {
         }
     }
 
+    public void saveOrUpdate(Playerresources resources) {
+        Session session = createNewSessionAndTransaction();
+        session.saveOrUpdate(resources);
+
+        commitTransaction(session);
+    }
+
+
+    public void updatePhdsNumber (String idname , int phds) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Playerresources where idname='"
+                + idname + "'");
+        Playerresources resource = (Playerresources)q.uniqueResult();
+        if (resource != null) {
+            resource.setPhdsnumber(phds);
+            commitTransaction(session);
+        }
+    }
+
+     public void updateUndergraduatesnumber (String idname , int students) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Playerresources where idname='"
+                + idname + "'");
+        Playerresources resource = (Playerresources)q.uniqueResult();
+        if (resource != null) {
+            resource.setUndergraduatesnumber(students);
+            commitTransaction(session);
+        }
+    }
 
 }

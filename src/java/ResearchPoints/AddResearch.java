@@ -7,15 +7,18 @@ package ResearchPoints;
 import ConnectionDataBase.LecturersHelper;
 import ConnectionDataBase.Research;
 import Connections.ConnectionSingleton;
-import utilities.LecturerBenefits;
-import utilities.LecturersManager;
-import utilities.Lecturer;
+import UserBeans.Auth;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+import org.primefaces.event.FlowEvent;
+import utilities.Lecturer;
+import utilities.LecturerBenefits;
+import utilities.LecturersManager;
 
 /**
  *
@@ -33,25 +36,18 @@ public class AddResearch {
     private List<String> chosenLecturers;
     private List<SelectItem> lecturers;
     private List<SelectItem> subjects;
-
-    private String[] subjectList = {"AI", "Machine Learning",
-        "Compilers", "Operating System Design", "Networks and Communication",
-        "Models of Computation"
-    };
-
-
-    private Integer subject;  // The index of the selected item
-    // can be given as String/Integer/int ...
+    private Integer moneyAmount;
 
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
         subjects = new ArrayList<SelectItem>();
         lecturers = new ArrayList<SelectItem>();
 
+        moneyAmount = 50;
+
         String playerName = utilities.BasicUtils.getUserName();
         LecturersManager mgr
                 = new LecturersManager(playerName);
-
         ArrayList<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
 
         for (int i = 0; i < owned_lecturers.size(); i++) {
@@ -64,11 +60,19 @@ public class AddResearch {
             }
         }
 
+
         // Adding subjects names.
         for (int i = 0; i < subjectList.length; i++) {
             subjects.add(new SelectItem(new Integer(i), subjectList[i]));
         }
     }
+    private String[] subjectList = {"Artifical Intelligence", "Machine Learning",
+        "Compilers", "Operating System Design", "Networks and Communication",
+        "Models of Computation"
+    };
+    private Integer subject;  // The index of the selected item
+    // can be given as String/Integer/int ...
+
 
     public List getSubjects() {
         return subjects;
@@ -84,10 +88,8 @@ public class AddResearch {
 
     public void setLecturers(List chosenLects) {
         for (int i = 0; i < chosenLects.size(); i++) {
-            System.out.println("ADDING: " + chosenLects.get(i));
             String selected_item = chosenLects.get(i).toString();
             SelectItem item = lecturers.get(Integer.parseInt(selected_item));
-            System.out.println("Adding " + item.getLabel());
             chosenLecturers.add(item.getLabel());
         }
     }
@@ -101,6 +103,7 @@ public class AddResearch {
     }
 
     public void setName(String name) {
+        System.out.println("The name of research is: " + name);
         this.name = name;
     }
 
@@ -109,6 +112,7 @@ public class AddResearch {
     }
 
     public String getName() {
+        System.out.println("The name of research returned is: " + name);
         return name;
     }
 
@@ -120,7 +124,7 @@ public class AddResearch {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session
             = (HttpSession) facesContext.getExternalContext().getSession(false);
-        Research research = new Research();
+        Research research = new Research((Auth)session.getAttribute(ConnectionSingleton.Auth));
 
         /* Adding research thread to the list of researches of the given user */
         ResearchBag researchBag 
@@ -165,11 +169,11 @@ public class AddResearch {
                 }
             }
         }
+ 
 
-        
-        System.out.println("MY BOOST VALUE IS:" + boost_value);
-        /* Setting the research object research */
+        /* Creating new object research */
         research.setName(getName());
+        research.setMoney(getMoneyAmount());
         research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
         research.setResearchpoints(100);
         research.setResearchBoost(boost_value);
@@ -186,5 +190,39 @@ public class AddResearch {
         thread.start();
 
         return "success";
+    }
+
+    public String onFlowProcess(FlowEvent event) {
+         System.out.println("Next event: " + event.getNewStep());
+         System.out.println("Current event: " + event.getOldStep());
+         return event.getNewStep();
+    }
+
+    public Integer getMoneyAmount() {
+        return moneyAmount;
+    }
+
+    public void setMoneyAmount(Integer moneyAmount) {
+        this.moneyAmount = moneyAmount;
+    }
+
+    public Integer getMinimumMoney() {
+        return new Integer(0);
+    }
+
+    public Integer getMaximumMoney() {
+        return new Integer(100);
+    }
+
+    public String getSubjectName() {
+        return subjectList[getSubject()];
+    }
+
+    public void setSubjectName(String name) {
+
+    }
+
+    public void clean() {
+
     }
 }

@@ -121,11 +121,11 @@
     <managed-bean>
         <managed-bean-name>addResearch</managed-bean-name>
         <managed-bean-class>ResearchPoints.AddResearch</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <navigation-rule>
-        <from-view-id>/Logged/AddResearch.jsp</from-view-id>
+        <from-view-id>/Logged/AddResearch.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{addResearch.startResearch}</from-action>
             <from-outcome>success</from-outcome>
@@ -134,7 +134,8 @@
         </navigation-case>
     </navigation-rule>
 
-        <navigation-rule>
+
+  <navigation-rule>
         <from-view-id>/Logged/StaffShop.jsp</from-view-id>
         <navigation-case>
             <from-action>#{shop.submit}</from-action>
@@ -144,23 +145,25 @@
         </navigation-case>
     </navigation-rule>
 
+
+    <managed-bean>
+        <managed-bean-name>shop</managed-bean-name>
+        <managed-bean-class>UserBeans.Shop</managed-bean-class>
+        <managed-bean-scope></managed-bean-scope>
+    </managed-bean>
+
+
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>
         <managed-bean-class>ResearchPoints.ResearchBag</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-
-     <managed-bean>
-        <managed-bean-name>shop</managed-bean-name>
-        <managed-bean-class>UserBeans.Shop</managed-bean-class>
-        <managed-bean-scope></managed-bean-scope>
-    </managed-bean>
-    
     <managed-bean>
         <managed-bean-name>lec</managed-bean-name>
         <managed-bean-class>UserBeans.BuyLecturers</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 </faces-config>
 
 

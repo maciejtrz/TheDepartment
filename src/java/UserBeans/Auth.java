@@ -1,12 +1,11 @@
 package UserBeans;
 
+import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
-import Connections.SessionSingleton;
 import java.sql.SQLException;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Auth {
@@ -19,7 +18,7 @@ public class Auth {
     private String username;
     private String password;
     private Boolean remember;
-    private int researchPoints;
+    private Playerresources resources;
 
     public boolean logging;
 
@@ -38,6 +37,10 @@ public class Auth {
             setPassword(session.getAttribute(ConnectionSingleton.password).toString());
             setRemember("true");
 
+    }
+
+    public Playerresources getResources() {
+        return resources;
     }
 
     public String getRemember() {
@@ -72,36 +75,57 @@ public class Auth {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
         if (username != null && username.length() != 0 && AuthorizationSingleton.test(username, password, session)) {
             updateResearchPoints();
-            /* Initializing session. */
-            SessionSingleton.initializeLecturers(session);
             result = "success";
         } else {
             result = "failure";
         }
-
 
         logging = true;
 
         return result;
     }
 
-    public String getResearchPoints() {
-        return researchPoints+"";
+    public Integer getResearchPoints() {
+        return resources.getResearchpoints();
     }
 
     public void setResearchPoints(int researchPoints) {
-        this.researchPoints = researchPoints;
+        resources.setResearchpoints(resources.getResearchpoints()+researchPoints);
+    }
+
+    public Integer getUndergraduatesnumber() {
+        return resources.getUndergraduatesnumber();
+    }
+
+    public void setUndergraduatesnumber(Integer number) {
+        resources.setUndergraduatesnumber(number);
+    }
+
+    public void setPhdsnumber(int number){
+        resources.setPhdsnumber(number);
+    }
+
+    public Integer getPhdsnumber() {
+        return resources.getPhdsnumber();
+    }
+
+    public Integer getMoney() {
+        return resources.getMoney();
+    }
+
+    public void setMoney(Integer money) {
+        resources.setMoney(money);
     }
 
     public synchronized void updateResearchPoints() {
 
         PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
-        setResearchPoints(playerResources.getResearchpoints(getUsername()));
-      
+        resources = playerResources.getResources(username);
+        System.out.println("The name is: " + resources);
+
     }
 
     public String go() {

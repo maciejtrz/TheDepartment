@@ -38,6 +38,7 @@ public class ConnectionSingleton {
     public static final String playerResources = "PlayerResources";
     public static final String addAuth = "/TheDepartment/AddAuth.jsp";
     public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";
+    public static final String researchName = "researchName";
 
     public static final String Auth = "Auth";
     public static final String researchBag = "researchBag";

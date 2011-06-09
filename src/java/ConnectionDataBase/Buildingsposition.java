@@ -34,7 +34,10 @@ public class Buildingsposition  implements java.io.Serializable {
     public Buildingsposition(String idname) {
         this.idname = idname;
     }
-    public Buildingsposition(String idname, String pos1, String pos2, String pos3, String pos4, String pos5, String pos6, String pos7, String pos8, String pos9, String pos10, String pos11, String pos12, String pos13, String pos14, String pos15, String pos16) {
+    public Buildingsposition(String idname, String pos1, String pos2, 
+            String pos3, String pos4, String pos5, String pos6, String pos7,
+            String pos8, String pos9, String pos10, String pos11, String pos12,
+            String pos13, String pos14, String pos15, String pos16) {
        this.idname = idname;
        this.pos1 = pos1;
        this.pos2 = pos2;
@@ -62,7 +65,7 @@ public class Buildingsposition  implements java.io.Serializable {
         this.idname = idname;
     }
 
-    public void setPos(int n,String s){
+    public void setPos(int n, String s){
         switch (n){
             case 1: setPos1(s);
             case 2: setPos2(s);

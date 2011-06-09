@@ -1,5 +1,11 @@
 package buildings;
 
+import ConnectionDataBase.Buildings;
+import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
+import utilities.BuildingInfo;
+
 
 public abstract class Building {
 
@@ -42,7 +48,59 @@ public abstract class Building {
     public abstract boolean remove(String playerName , int position);
     /* Removes the building for a given player. */
 
+    public abstract BuildingInfo isAllowedToBuild(String playerName, int position);
+    /* Informs whether a given player is allowed to build anything on
+       a free position. */
 
+    protected boolean checkMoneyAndPosition (String playerName, int position) {
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
+        PlayerresourcesHelper resourcesHelper
+                = new PlayerresourcesHelper();
+
+
+        // Checking if allowed to build.
+        int cash = resourcesHelper.getMoney(playerName);
+        if (cash < cost) {
+            // Cannot build that building.
+            return false;
+        }
+
+        boolean isUnoccupied = posHelper.isAllowedToBuild(playerName, position);
+        if (!isUnoccupied) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    protected BuildingInfo checkMoneyAndPositionInfo(String playerName,
+            int position) {
+
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
+        PlayerresourcesHelper resourcesHelper
+                = new PlayerresourcesHelper();
+
+
+        // Checking money.
+        int cash = resourcesHelper.getMoney(playerName);
+        if (cash < cost) {
+            // Cannot build that building.
+            return new BuildingInfo(false, "Not enough money!");
+        }
+
+        // Checking occupations.
+        boolean isUnoccupied = posHelper.isAllowedToBuild(playerName, position);
+        if (!isUnoccupied) {
+            return new BuildingInfo(false, "The possition is already occupied");
+        }
+
+        return new BuildingInfo(true, "Build me!");
+    }
 
 
 }

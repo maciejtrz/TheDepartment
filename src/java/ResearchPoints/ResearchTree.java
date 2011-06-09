@@ -12,6 +12,8 @@ public class ResearchTree {
 
     public ResearchTree() {
 
+        researchNodes = new ResearchTreeNode[SpecializationsGenerator.subjectList.length];
+
         for(int i = 0;i < SpecializationsGenerator.subjectList.length;i++) {
             researchNodes[i] = new ResearchTreeNode();
         }

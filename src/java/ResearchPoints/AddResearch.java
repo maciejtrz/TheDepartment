@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import org.primefaces.event.FlowEvent;
+import specializationsGenerator.SpecializationsGenerator;
 import utilities.Lecturer;
 import utilities.LecturerBenefits;
 import utilities.LecturersManager;
@@ -36,7 +37,9 @@ public class AddResearch {
     private List<String> chosenLecturers;
     private List<SelectItem> lecturers;
     private List<SelectItem> subjects;
+    private List<SelectItem> researchesList;
     private Integer moneyAmount;
+    private Integer chosenResearch;
 
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
@@ -46,8 +49,7 @@ public class AddResearch {
         moneyAmount = 50;
 
         String playerName = utilities.BasicUtils.getUserName();
-        LecturersManager mgr
-                = new LecturersManager(playerName);
+        LecturersManager mgr = new LecturersManager(playerName);
         ArrayList<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
 
         for (int i = 0; i < owned_lecturers.size(); i++) {
@@ -62,17 +64,15 @@ public class AddResearch {
 
 
         // Adding subjects names.
-        for (int i = 0; i < subjectList.length; i++) {
-            subjects.add(new SelectItem(new Integer(i), subjectList[i]));
+        for (int i = 0; i < getSubjectList().length; i++) {
+            subjects.add(new SelectItem(new Integer(i), getSubjectList()[i]));
         }
     }
-    private String[] subjectList = {"Artifical Intelligence", "Machine Learning",
-        "Compilers", "Operating System Design", "Networks and Communication",
-        "Models of Computation"
-    };
+
+
+
     private Integer subject;  // The index of the selected item
     // can be given as String/Integer/int ...
-
 
     public List getSubjects() {
         return subjects;
@@ -93,6 +93,33 @@ public class AddResearch {
             chosenLecturers.add(item.getLabel());
         }
     }
+    
+    public String getResearchName() {
+        return  researchesList.get(getChosenResearch()).getValue().toString();
+    }
+
+    public Integer getChosenResearch() {
+        return chosenResearch;
+    }
+
+    public void setChosenResearch(Integer chosenResearch) {
+        this.chosenResearch = chosenResearch;
+    }
+
+    public List getAvailableResearches() {
+        researchesList = new ArrayList<SelectItem>();
+
+        List<ResearchTreeNode> researches = ResearchDevelopment.getFirstResearch(getSubject());
+        Iterator<ResearchTreeNode> iterator = researches.iterator();
+
+        int i = 0;
+        while(iterator.hasNext()) {
+            ResearchTreeNode researchNode = iterator.next();
+            researchesList.add(new SelectItem(new Integer(i),researchNode.getResearchInstance().getResearchname()));
+        }
+
+        return researchesList;
+    }
 
     public List getLecturers() {
         return new ArrayList();
@@ -102,43 +129,49 @@ public class AddResearch {
         return lecturers;
     }
 
-    public void setName(String name) {
-        System.out.println("The name of research is: " + name);
-        this.name = name;
-    }
-
     public void setResearchPoints(int rp) {
         ResearchPoints = rp;
     }
 
-    public String getName() {
-        System.out.println("The name of research returned is: " + name);
-        return name;
-    }
 
     public int getResearchPoints() {
         return ResearchPoints;
     }
 
+    public Integer getMoneyAmount() {
+        return moneyAmount;
+    }
+
+    public void setMoneyAmount(Integer moneyAmount) {
+        this.moneyAmount = moneyAmount;
+    }
+
+    public Integer getMinimumMoney() {
+        return new Integer(0);
+    }
+
+    public Integer getMaximumMoney() {
+        return new Integer(100);
+    }
+
+    public String getSubjectName() {
+        return getSubjectList()[getSubject()];
+    }
+
     public String startResearch() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session
-            = (HttpSession) facesContext.getExternalContext().getSession(false);
-        Research research = new Research((Auth)session.getAttribute(ConnectionSingleton.Auth));
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        Research research = new Research((Auth) session.getAttribute(ConnectionSingleton.Auth));
 
         /* Adding research thread to the list of researches of the given user */
-        ResearchBag researchBag 
-          = (ResearchBag) session.getAttribute
-                         (Connections.ConnectionSingleton.researchBag);
+        ResearchBag researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
 
         /* Reading lecturers from the database. */
-        LecturersManager mgr 
-              = new LecturersManager(utilities.BasicUtils.getUserName());
+        LecturersManager mgr = new LecturersManager(utilities.BasicUtils.getUserName());
         ArrayList<Lecturer> owned_lecturers = mgr.getOwnedLecturers();
 
         /* Getting neccessary hibernate helpers. */
-        LecturersHelper helper
-                = new LecturersHelper();
+        LecturersHelper helper = new LecturersHelper();
 
         // Calculacting the boost a given research would give.
         int boost_value = 0;
@@ -157,9 +190,8 @@ public class AddResearch {
 
             // Checking whether a given lecturer is has a given research as
             // its attribtues
-            ArrayList<LecturerBenefits> benefits
-                    = lecturer.getSpecializations();
-            String research_area = subjectList[subject];
+            ArrayList<LecturerBenefits> benefits = lecturer.getSpecializations();
+            String research_area = getSubjectList()[subject];
             Iterator<LecturerBenefits> it = benefits.iterator();
             while (it.hasNext()) {
                 LecturerBenefits benefit = it.next();
@@ -169,10 +201,10 @@ public class AddResearch {
                 }
             }
         }
- 
+
 
         /* Creating new object research */
-        research.setName(getName());
+        research.setName(getResearchName());
         research.setMoney(getMoneyAmount());
         research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
         research.setResearchpoints(100);
@@ -193,36 +225,15 @@ public class AddResearch {
     }
 
     public String onFlowProcess(FlowEvent event) {
-         System.out.println("Next event: " + event.getNewStep());
-         System.out.println("Current event: " + event.getOldStep());
-         return event.getNewStep();
-    }
-
-    public Integer getMoneyAmount() {
-        return moneyAmount;
-    }
-
-    public void setMoneyAmount(Integer moneyAmount) {
-        this.moneyAmount = moneyAmount;
-    }
-
-    public Integer getMinimumMoney() {
-        return new Integer(0);
-    }
-
-    public Integer getMaximumMoney() {
-        return new Integer(100);
-    }
-
-    public String getSubjectName() {
-        return subjectList[getSubject()];
-    }
-
-    public void setSubjectName(String name) {
-
+        System.out.println("Next event: " + event.getNewStep());
+        System.out.println("Current event: " + event.getOldStep());
+        return event.getNewStep();
     }
 
     public void clean() {
+    }
 
+    private String[] getSubjectList() {
+        return SpecializationsGenerator.subjectList;
     }
 }

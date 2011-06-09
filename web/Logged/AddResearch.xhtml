@@ -36,7 +36,9 @@
                <p:tab id="availableResearches" title="Available Researches" >
                     <p:panel header="Available Researches">
                         <h:outputText value="Choose research: "/>
-                        <h:inputText value="#{addResearch.name}" />
+                        <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                            <f:selectItems value="#{addResearch.availableResearches}"/>
+                        </h:selectOneMenu>
                     </p:panel>
                 </p:tab>
 
@@ -56,7 +58,7 @@
                         <h:panelGrid columns="2" border="1" >
 
                         <h:outputText value="Name of Research: "/>
-                        <h:outputText value="#{addResearch.name}" />
+                        <h:outputText value="#{addResearch.researchName}" />
 
                         <h:outputText value="Money: "/>
                         <h:outputText value="#{addResearch.moneyAmount}" />

@@ -9,10 +9,12 @@ public class ResearchdependenciesHelper extends AbstractHelper {
     public List<Researchdependencies> getDependencies(Integer child) {
         
         Session session = createNewSessionAndTransaction();
-        Query q = (Query) session.createQuery("from Researchdependencies where ChildResearchId=ʼ" +
-                child + "ʼ");
+        Query q = (Query) session.createQuery("from Researchdependencies where ChildResearchId=" +child);
+
+        List<Researchdependencies> list = q.list();
+
         
-        return (List<Researchdependencies>) q.list();
+        return list;
     }    
 
 }

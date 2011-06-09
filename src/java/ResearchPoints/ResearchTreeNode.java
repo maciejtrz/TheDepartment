@@ -5,6 +5,7 @@
 
 package ResearchPoints;
 
+import ConnectionDataBase.Researchcatalogue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,29 +15,33 @@ import java.util.List;
  */
 public class ResearchTreeNode {
 
-    List<ResearchTreeNode> dependentResearches = new ArrayList<ResearchTreeNode>();
-    private ResearchInstance researchInstance;
+    private List<ResearchTreeNode> dependentResearches;
+    private Researchcatalogue researchInstance;
     private int uniqueId;
 
     public ResearchTreeNode() {
-
+        dependentResearches = new ArrayList<ResearchTreeNode>();
     }
 
-    public ResearchTreeNode(ResearchInstance instance) {
+    public ResearchTreeNode(Researchcatalogue instance) {
         this();
         researchInstance = instance;
     }
 
-    public void setResearchInstance(ResearchInstance instance) {
+    public void setResearchInstance(Researchcatalogue instance) {
         researchInstance = instance;
     }
 
-    public ResearchInstance getResearchInstance() {
+    public Researchcatalogue getResearchInstance() {
         return researchInstance;
     }
 
     public void addResearchTreeNode(ResearchTreeNode researchNode) {
         dependentResearches.add(researchNode);
+    }
+
+    public List<ResearchTreeNode> getDependentResearches() {
+        return dependentResearches;
     }
 
 

@@ -6,8 +6,8 @@ import java.util.Random;
 public class SpecializationsGenerator {
 
     public static String[] subjectList = {"AI", "Machine Learning",
-        "Compilers", "Operating System Design", "Networks and Communication",
-        "Models of Computation"
+        "Compilers", "Operating system design", "Networks and Communications",
+        "Models of computation"
     };
 
     private static SpecializationsGenerator generator = null;

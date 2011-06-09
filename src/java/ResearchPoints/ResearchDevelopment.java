@@ -22,7 +22,6 @@ import specializationsGenerator.SpecializationsGenerator;
  */
 public class ResearchDevelopment {
 
-    private static Set<ResearchInstance> reseachInstanceBag = new HashSet<ResearchInstance>();
     private static ResearchTree researchTree = new ResearchTree();
     private static ResearchTreeNode researchNodes[];
 
@@ -37,9 +36,9 @@ public class ResearchDevelopment {
         Iterator<Researchcatalogue> iterator = list.iterator();
         while(iterator.hasNext()) {
             Researchcatalogue rc = iterator.next();
+            System.out.println("Title: " + rc.getResearchname() + " position: " + (rc.getResearchid()-1));
             researchNodes[rc.getResearchid()-1] =
-                    new ResearchTreeNode(new ResearchInstance(rc.getResearchname()
-                    ,rc.getResearchsubject(),rc.getResearchdescription()));
+                    new ResearchTreeNode(rc);
         }
 
         /* Setting dependencies between researches */
@@ -53,6 +52,9 @@ public class ResearchDevelopment {
 
             if(dependencies.isEmpty()) {
                 /* Initially available researches */
+                System.out.println("Adding research at subject: " + researchcatalogue.getResearchsubject() +
+                        " at position: " + researchcatalogue.getResearchsubject());
+                
                 researchTree.getResearchTreeNode(getSubjectPosition(researchcatalogue.getResearchsubject())).
                         addResearchTreeNode(researchNodes[researchcatalogue.getResearchid()-1]);
 
@@ -64,8 +66,8 @@ public class ResearchDevelopment {
                 while(iter.hasNext()) {
                     ResearchdependenciesId dependencyId = iter.next().getId();
                     
-                    researchNodes[dependencyId.getParentresearchid()].
-                            addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()]);
+                    researchNodes[dependencyId.getParentresearchid()-1].
+                            addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()-1]);
                 }
             }
         }
@@ -82,6 +84,14 @@ public class ResearchDevelopment {
             if(SpecializationsGenerator.subjectList[i].equals(subject))
                 break;
         return i;
+    }
+
+    static List<ResearchTreeNode> getFirstResearch(Integer subject) {
+        return researchTree.getResearchTreeNode(subject).getDependentResearches();
+    }
+
+    public List<ResearchTreeNode> getFirstResearch(String subject) {
+        return getFirstResearch(getSubjectPosition(subject));
     }
 
 }

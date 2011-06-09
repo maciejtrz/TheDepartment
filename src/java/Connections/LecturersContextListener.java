@@ -7,6 +7,7 @@ import ConnectionDataBase.LecturersHelper;
 import ConnectionDataBase.LecturersSpecializationsHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
+import ResearchPoints.ResearchDevelopment;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,8 @@ public class LecturersContextListener implements ServletContextListener {
             creator.setDaemon(true);
             creator.start();
 
+            /* Initizalization of research development tree */
+            ResearchDevelopment.initializeDevelopmentTree();
         }
     }
 

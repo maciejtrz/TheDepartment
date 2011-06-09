@@ -40,8 +40,8 @@ public class AddResearch {
     private List<SelectItem> researchesList;
     private Integer moneyAmount;
     private Integer chosenResearch;
-    private List<ResearchTreeNode> availableResearches;
-    private List<Lecturer> owned_lecturers;
+    private List<ResearchTreeNode> availableResearches = new ArrayList<ResearchTreeNode>();
+    private List<Lecturer> owned_lecturers = new ArrayList<Lecturer>();
 
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
@@ -56,9 +56,6 @@ public class AddResearch {
             subjects.add(new SelectItem(new Integer(i), getSubjectList()[i]));
         }
     }
-
-
-
     private Integer subject;  // The index of the selected item
     // can be given as String/Integer/int ...
 
@@ -81,7 +78,7 @@ public class AddResearch {
             chosenLecturers.add(item.getLabel());
         }
     }
-    
+
     public Integer getChosenResearch() {
         return chosenResearch;
     }
@@ -93,9 +90,7 @@ public class AddResearch {
     public String getResearchName() {
         ResearchTreeNode selectedNode = availableResearches.get(getChosenResearch());
 
-        System.out.println("Name of selected research: " + selectedNode);
-
-        return  selectedNode.toString();
+        return selectedNode.toString();
     }
 
     public List<SelectItem> getAvailableResearches() {
@@ -105,10 +100,10 @@ public class AddResearch {
         Iterator<ResearchTreeNode> iterator = availableResearches.iterator();
 
         int i = 0;
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             ResearchTreeNode researchNode = iterator.next();
 
-            researchesList.add(new SelectItem(new Integer(i),researchNode.toString()));
+            researchesList.add(new SelectItem(new Integer(i), researchNode.toString()));
         }
 
         return researchesList;
@@ -121,19 +116,20 @@ public class AddResearch {
     public List getLecturerList() {
         String playerName = utilities.BasicUtils.getUserName();
         LecturersManager mgr = new LecturersManager(playerName);
-        owned_lecturers = mgr.getOwnedLecturers();
+        List<Lecturer> owned = mgr.getOwnedLecturers();
 
-      //  lecturers.clear();
+        lecturers = new ArrayList<SelectItem>();
+        owned_lecturers = new ArrayList<Lecturer>();
 
-        for (int i = 0; i < owned_lecturers.size(); i++) {
-            Lecturer lec = owned_lecturers.get(i);
-            if (lec.getUsable()) {
-                // Add lecturer only if he is not occupied with another
-                // research.
+        Iterator<Lecturer> iterator = owned.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
 
-                lecturers.add(new SelectItem(new Integer(i),
-                        owned_lecturers.get(i).getName()));
-            }
+            Lecturer lec = iterator.next();
+           // if (lec.getUsable()) {
+                lecturers.add(new SelectItem(new Integer(i++), lec.getName()));
+                owned_lecturers.add(lec);
+           // }
         }
 
         return lecturers;
@@ -142,7 +138,6 @@ public class AddResearch {
     public void setResearchPoints(int rp) {
         ResearchPoints = rp;
     }
-
 
     public int getResearchPoints() {
         return ResearchPoints;
@@ -235,8 +230,6 @@ public class AddResearch {
     }
 
     public String onFlowProcess(FlowEvent event) {
-        System.out.println("Next event: " + event.getNewStep());
-        System.out.println("Current event: " + event.getOldStep());
         return event.getNewStep();
     }
 

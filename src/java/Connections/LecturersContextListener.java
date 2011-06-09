@@ -30,6 +30,7 @@ public class LecturersContextListener implements ServletContextListener {
             System.out.println(" Starting new thread. !!!!");
             creator.setDaemon(true);
             creator.start();
+
         }
     }
 

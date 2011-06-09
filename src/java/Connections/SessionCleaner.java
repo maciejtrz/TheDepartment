@@ -1,7 +1,10 @@
 package Connections;
 
+import ConnectionDataBase.Playerresources;
+import ConnectionDataBase.PlayerresourcesHelper;
 import ConnectionDataBase.ResearchHelper;
 import ResearchPoints.ResearchBag;
+import UserBeans.Auth;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
@@ -29,6 +32,13 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
             ResearchBag researchBag = (ResearchBag) event.getValue();
             if (researchBag != null && !researchBag.getFinishedResearches().isEmpty()) {
                 researchHelper.addResearches(researchBag.getFinishedResearches());
+            }
+        } else if (event.getName().equals(ConnectionSingleton.Auth)) {
+            Auth auth = (Auth) event.getValue();
+            Playerresources resources = auth.getResources();
+            if (resources != null) {
+                PlayerresourcesHelper helper = new PlayerresourcesHelper();
+                helper.saveOrUpdate(resources);
             }
         }
 

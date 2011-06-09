@@ -7,7 +7,6 @@ package UserBeans;
 import ConnectionDataBase.Capacity;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
-import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.ConnectionSingleton;
 import java.sql.SQLException;
 import javax.faces.context.FacesContext;
@@ -22,12 +21,18 @@ public class Shop {
     public String playerName;
     public String students;
     public String phds;
-    private PlayerresourcesHelper reshelper;
+    private Playerresources resources;
     private CapacityHelper capacityhelper;
+    private String name;
 
     public Shop() {
-        this.reshelper = new PlayerresourcesHelper();
-        this.capacityhelper = new CapacityHelper();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+
+        name = auth.getUsername();
+        resources = auth.getResources();
+        capacityhelper = new CapacityHelper();
     }
 
     public void setPlayername(String s) {
@@ -47,6 +52,8 @@ public class Shop {
         return students;
     }
 
+
+
     public void setStudents(String s) {
         this.students = s;
     }
@@ -57,12 +64,8 @@ public class Shop {
 
     public String submit() throws SQLException {
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        String name = (String) session.getAttribute(ConnectionSingleton.idname);
 
         Capacity capacity = capacityhelper.getCapacity(name);
-        Playerresources resources = reshelper.getResources(name);
 
         int studentsNum = Integer.parseInt(students);
 
@@ -89,10 +92,9 @@ public class Shop {
         }
 
 
-        reshelper.updateMoney(name, resources.getMoney() - totalCost);
-        System.out.println("Here 4");
-        reshelper.updateUndergraduatesnumber(name, resources.getUndergraduatesnumber() + studentsNum);
-        reshelper.updatePhdsNumber(name, resources.getPhdsnumber() + phdsNum);
+        resources.setMoney(resources.getMoney() - totalCost);
+        resources.setUndergraduatesnumber(resources.getUndergraduatesnumber() + studentsNum);
+        resources.setPhdsnumber(resources.getPhdsnumber() + phdsNum);
 
         return "success";
 
@@ -102,7 +104,7 @@ public class Shop {
     public String getBalance() throws SQLException {
 
 
-        int balance = reshelper.getMoney(this.playerName);
+        int balance = resources.getMoney();
 
         System.out.println(this.playerName);
 

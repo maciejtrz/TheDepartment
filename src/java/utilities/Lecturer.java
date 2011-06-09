@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.ArrayList;
+import utilities.LecturerBenefits;
 
 
 /* A helper class used to carry and read information. Has no significant uses.*/

@@ -12,6 +12,9 @@ import ConnectionDataBase.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import nameGenerator.NamesGenerator;
+import specializationsGenerator.SpecializationsGenerator;
 
 
 public class LecturersManager {
@@ -69,7 +72,7 @@ public class LecturersManager {
         }
 
     }
-
+    
 
     /* returns true if successful. */
     public boolean purchaseLecturer(String lecName) {
@@ -215,13 +218,34 @@ public class LecturersManager {
 
     private Lecturer generateLecturer () {
 
+        SpecializationsGenerator specGenerator = null;
+        NamesGenerator nameGenerator = null;
+
+        specGenerator
+             = SpecializationsGenerator.createSpecializationsGenerator();
+        nameGenerator
+             = NamesGenerator.createNamesGenerator();
+
+        /* Generating name. */
+        String name = nameGenerator.generateName();
+
+        /* Generating all atributes. */
+        Random rand = new Random();
+        int boost = rand.nextInt(10);
+        int price = rand.nextInt(20) * 100;
+        boolean usable = true;
+
+        /* Generating specialization. */
+        String specialization
+                = specGenerator.generate();
+
         /* Setting up the specialization. */
         ArrayList<LecturerBenefits> specList
                 = new ArrayList<LecturerBenefits>();
 
-        LecturerBenefits lb = new LecturerBenefits("AI" , 10);
+        LecturerBenefits lb = new LecturerBenefits(specialization , boost);
         specList.add(lb);
-        return new Lecturer("Krzysztof Huszcza" , 10 , true , specList);
+        return new Lecturer(name , price , usable , specList);
     }
 
 

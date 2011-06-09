@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 08-Jun-2011 16:56:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ConnectionDataBase.Lecturersowned" table="lecturersowned" schema="public">
-        <id name="lecturername" type="string">
-            <column name="lecturername" />
-            <generator class="assigned" />
-        </id>
-        <property name="idname" type="string">
-            <column name="idname" />
-        </property>
-    </class>
+  <class name="ConnectionDataBase.Lecturersowned" schema="public" table="lecturersowned">
+    <id name="lecturername" type="string">
+      <column name="lecturername"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="idname" type="string">
+      <column name="idname"/>
+    </property>
+  </class>
 </hibernate-mapping>

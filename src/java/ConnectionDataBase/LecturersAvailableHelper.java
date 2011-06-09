@@ -2,10 +2,10 @@
 
 package ConnectionDataBase;
 
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 
 public class LecturersAvailableHelper extends AbstractHelper {
@@ -20,6 +20,19 @@ public class LecturersAvailableHelper extends AbstractHelper {
         output_list = (List<Lecturersavailable>)q.list();
 
         return output_list;
+    }
+
+    public void removeAvailableLecturers(String idname) {
+        List<Lecturersavailable> av_list
+                = getLecturersList(idname);
+        Session session = createNewSessionAndTransaction();
+        Iterator <Lecturersavailable> it = av_list.iterator();
+        while (it.hasNext()) {
+            Lecturersavailable cur = it.next();
+            session.delete(cur);
+        }
+        commitTransaction(session);
+
     }
 
     public void addLecturer (String lecturerName , String idname) {

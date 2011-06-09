@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 08-Jun-2011 16:56:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ConnectionDataBase.Capacity" table="capacity" schema="public">
-        <id name="idname" type="string">
-            <column name="idname" />
-            <generator class="assigned" />
-        </id>
-        <property name="studentscapacity" type="int">
-            <column name="studentscapacity" not-null="true" />
-        </property>
-        <property name="phdscapacity" type="int">
-            <column name="phdscapacity" not-null="true" />
-        </property>
-        <property name="professorscapacity" type="int">
-            <column name="professorscapacity" not-null="true" />
-        </property>
-    </class>
+  <class name="ConnectionDataBase.Capacity" schema="public" table="capacity">
+    <id name="idname" type="string">
+      <column name="idname"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="studentscapacity" type="int">
+      <column name="studentscapacity" not-null="true"/>
+    </property>
+    <property name="phdscapacity" type="int">
+      <column name="phdscapacity" not-null="true"/>
+    </property>
+    <property name="professorscapacity" type="int">
+      <column name="professorscapacity" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

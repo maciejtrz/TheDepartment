@@ -63,15 +63,15 @@ public class Utilities {
                "Bagin" , "Dabrow" , "Kwiatkow" , "Jankow"};
 
     public static final String[] POLISH_SURNAMES_MALE_SUFFIXES
-            = {"ski" , "czyk" , "cik" , "czak" , "ek" , "ak"};
+            = {"ski" , "czyk" , "cik" , "czak" , "ek" , "ak" , "czek"};
 
     public static final String[] POLISH_SURNAMES_FEMALE_SUFFIXES
-            = {"ska" , "czyk" , "cik" , "czak" , "ek" , "ak" };
+            = {"ska" , "czyk" , "cik" , "czak" , "ek" , "ak" , "czek" };
 
     public static final String[] ITALIAN_SURNAMES
             = {"Rossi" , "Russo" , "Ferrari" , "Bianchi" , "Colombo" , "Ricci" ,
                "Marino" , "Gallo" , "Conti" , "Giordano" , "Rizzo"  , "Lombardi" ,
-               "Mancini" , "Moretti" , "Bruno" , "Marino" , "De Luca" , "Romano" ,
+               "Mancini" , "Moretti" , "Bruno" , "Marino" , "Luca" , "Romano" ,
                "Esposito" , "Greco" , "Costa"};
 
     public static final String[] SPANISH_SURNAMES
@@ -79,6 +79,9 @@ public class Utilities {
                "Lopez" , "Gonzalez" , "Torres" , "Moreno" , "Ruiz" , "Alvarez" ,
                "Diaz" , "Gil" , "Serrano" , "Ruiz" , "Munoz" , "Jimenez" , "Serrano" ,
                "Suarez" , "Castro" , "Ramirez" , "Morales" , "Iglesias" , "Blanco"};
+
+    public static final String[] RANDOM_SEPERATORS
+            = {"van" , "von" , "De" , "Del" , "Du"};
 
     public static String generateName(String[] firstName, String[] surName) {
 

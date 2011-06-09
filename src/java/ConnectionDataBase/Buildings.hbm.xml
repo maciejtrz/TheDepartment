@@ -1,39 +1,38 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 08-Jun-2011 16:56:09 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ConnectionDataBase.Buildings" table="buildings" schema="public">
-        <id name="idname" type="string">
-            <column name="idname" />
-            <generator class="assigned" />
-        </id>
-        <property name="tresco" type="int">
-            <column name="tresco" not-null="true" />
-        </property>
-        <property name="macchicken" type="int">
-            <column name="macchicken" not-null="true" />
-        </property>
-        <property name="docpub" type="int">
-            <column name="docpub" not-null="true" />
-        </property>
-        <property name="studentunion" type="int">
-            <column name="studentunion" not-null="true" />
-        </property>
-        <property name="lectureroom" type="int">
-            <column name="lectureroom" not-null="true" />
-        </property>
-        <property name="phdsoffice" type="int">
-            <column name="phdsoffice" not-null="true" />
-        </property>
-        <property name="professorsoffice" type="int">
-            <column name="professorsoffice" not-null="true" />
-        </property>
-        <property name="labolatories" type="int">
-            <column name="labolatories" not-null="true" />
-        </property>
-        <property name="brain" type="int">
-            <column name="brain" not-null="true" />
-        </property>
-    </class>
+  <class name="ConnectionDataBase.Buildings" schema="public" table="buildings">
+    <id name="idname" type="string">
+      <column name="idname"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="tresco" type="int">
+      <column name="tresco" not-null="true"/>
+    </property>
+    <property name="macchicken" type="int">
+      <column name="macchicken" not-null="true"/>
+    </property>
+    <property name="docpub" type="int">
+      <column name="docpub" not-null="true"/>
+    </property>
+    <property name="studentunion" type="int">
+      <column name="studentunion" not-null="true"/>
+    </property>
+    <property name="lectureroom" type="int">
+      <column name="lectureroom" not-null="true"/>
+    </property>
+    <property name="phdsoffice" type="int">
+      <column name="phdsoffice" not-null="true"/>
+    </property>
+    <property name="professorsoffice" type="int">
+      <column name="professorsoffice" not-null="true"/>
+    </property>
+    <property name="labolatories" type="int">
+      <column name="labolatories" not-null="true"/>
+    </property>
+    <property name="brain" type="int">
+      <column name="brain" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

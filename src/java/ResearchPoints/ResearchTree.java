@@ -17,6 +17,9 @@ public class ResearchTree {
         }
     }
 
+    public ResearchTreeNode getResearchTreeNode(int pos) {
+        return researchNodes[pos];
+    }
 
 
 }

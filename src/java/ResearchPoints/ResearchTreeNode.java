@@ -35,6 +35,10 @@ public class ResearchTreeNode {
         return researchInstance;
     }
 
+    public void addResearchTreeNode(ResearchTreeNode researchNode) {
+        dependentResearches.add(researchNode);
+    }
+
 
 
 

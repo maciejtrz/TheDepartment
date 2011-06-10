@@ -21,6 +21,9 @@ public class Department {
 
     private String username;
 
+    public Department() {
+        
+    }
     /** Creates a new instance of Department */
     public Department(String username) {
         this.username = username;

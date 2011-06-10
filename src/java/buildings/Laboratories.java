@@ -3,6 +3,7 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
 public class Laboratories  extends Building {
@@ -44,9 +45,14 @@ public class Laboratories  extends Building {
         buildingsHelper.updateLabolatories(playerName, Building.BASIC_LEVEL);
 
         /* Updating Position table. */
-   
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_LABS);
+
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
 
         return true;
     }
@@ -54,14 +60,32 @@ public class Laboratories  extends Building {
     @Override
     public boolean remove(String playerName, int position) {
 
-        /* Removing from Buildings table. */
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getLabolatories();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, CODE_LABS)
+            &&!canPositionBeDestoryed(playerName, position, CODE_SUPERLABS)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
         buildingsHelper.updateLabolatories(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
         posHelper.updateBuildingPosition(playerName, position, null);
 
 

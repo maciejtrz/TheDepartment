@@ -59,6 +59,12 @@ public class DocPub extends Building {
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_DOCPUB);
 
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
+
         return true;
     }
 
@@ -66,14 +72,31 @@ public class DocPub extends Building {
     @Override
     public boolean remove(String playerName, int position) {
 
-        /* Removing from Buildings table. */
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getDocpub();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, CODE_DOCPUB)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
         buildingsHelper.updateDocPub(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
         posHelper.updateBuildingPosition(playerName, position, null);
 
 

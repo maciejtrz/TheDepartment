@@ -67,22 +67,22 @@ public class Buildingsposition  implements java.io.Serializable {
 
     public void setPos(int n, String s){
         switch (n){
-            case 1: setPos1(s);
-            case 2: setPos2(s);
-            case 3: setPos3(s);
-            case 4: setPos4(s);
-            case 5: setPos5(s);
-            case 6: setPos6(s);
-            case 7: setPos7(s);
-            case 8: setPos8(s);
-            case 9: setPos9(s);
-            case 10: setPos10(s);
-            case 11: setPos11(s);
-            case 12: setPos12(s);
-            case 13: setPos13(s);
-            case 14: setPos14(s);
-            case 15: setPos15(s);
-            case 16: setPos16(s);
+            case 1: setPos1(s); break;
+            case 2: setPos2(s); break;
+            case 3: setPos3(s); break;
+            case 4: setPos4(s); break;
+            case 5: setPos5(s); break;
+            case 6: setPos6(s); break;
+            case 7: setPos7(s); break;
+            case 8: setPos8(s); break;
+            case 9: setPos9(s); break;
+            case 10: setPos10(s); break;
+            case 11: setPos11(s); break;
+            case 12: setPos12(s); break;
+            case 13: setPos13(s); break;
+            case 14: setPos14(s); break;
+            case 15: setPos15(s); break;
+            case 16: setPos16(s); break;
         }
     }
 

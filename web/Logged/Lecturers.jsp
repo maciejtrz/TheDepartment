@@ -5,6 +5,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="UserBeans.BuyLecturers"%>
+<%@page import="UserBeans.AddBuildings"%>
 <%@page import="Connections.AuthorizationSingleton"%>
 <%@page import="Connections.ConnectionSingleton"%>
 <%@page import="javax.faces.context.FacesContext"%>
@@ -70,6 +71,7 @@ String printList() {
                 <h:inputText value="#{lec.lecturer}" />
                 <br>
                 <h:commandButton value="Submit" action="#{lec.buy}"/>
+                <h:commandButton value="TEST BUILDINGS" action="#{addBuildings.test}"/>
 
                 <br>
                 <a href="/TheDepartment/faces/Logged/Playing.xhtml">Go Back to Playing</a>

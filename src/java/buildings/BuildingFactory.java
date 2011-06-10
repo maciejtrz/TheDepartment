@@ -68,7 +68,7 @@ public class BuildingFactory {
         return pdhOffice;
     }
 
-    public ProfessorsOffice getPorfOffice() {
+    public ProfessorsOffice getProfOffice() {
         return profOffice;
     }
 

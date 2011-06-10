@@ -37,7 +37,6 @@ public abstract class Building {
 
     protected int cost;
 
-
     public int getCost() {
         return cost;
     }
@@ -104,6 +103,17 @@ public abstract class Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    // Checks whether a given building occupies a given position.
+    protected boolean canPositionBeDestoryed(String playerName, int position,
+            String buildingAcronym) {
+
+        BuildingsPositionHelper helper
+                = new BuildingsPositionHelper();
+        String occupant = helper.getPosition(playerName, position);
+        return (occupant != null && occupant.equals(buildingAcronym));
+
     }
 
 

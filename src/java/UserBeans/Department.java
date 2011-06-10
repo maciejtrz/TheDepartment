@@ -29,8 +29,8 @@ public class Department {
 
 
         // Deleting player resources.
-        PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
-        playerresources.deleteResources(username);
+        //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
+        //playerresources.deleteResources(username);
 
         // Deleting department info.
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();

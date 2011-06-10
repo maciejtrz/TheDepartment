@@ -9,8 +9,8 @@ import utilities.BuildingInfo;
 public class Brain extends Building {
 
 
-    public Brain (int cost) {
-        this.cost = cost;
+    public Brain () {
+        this.cost = 5000;
     }
 
     @Override
@@ -128,6 +128,11 @@ public class Brain extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

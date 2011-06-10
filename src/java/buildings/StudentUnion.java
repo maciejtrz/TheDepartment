@@ -8,8 +8,7 @@ import utilities.BuildingInfo;
 
 public class StudentUnion extends Building {
 
-    public StudentUnion (int cost) {
-        this.cost = cost;
+    public StudentUnion () {
     }
 
     @Override
@@ -114,6 +113,11 @@ public class StudentUnion extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

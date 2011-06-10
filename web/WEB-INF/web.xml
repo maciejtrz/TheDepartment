@@ -36,6 +36,10 @@
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>Connections.LecturersContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

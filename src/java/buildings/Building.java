@@ -35,10 +35,25 @@ public abstract class Building {
     public static final String CODE_BOB = "bs1";
     public static final String CODE_UNION = "su1";
 
-    protected int cost;
+    /* Initial values. */
+    protected int cost = 1000;
+    protected int max_level = BASIC_LEVEL;
+
+    // The cost of each upgrade is calculated the below value by building's
+    // current level.
+    protected int upgrade_base_cost = 0;
 
     public int getCost() {
         return cost;
+    }
+
+    public int getMaxLevel() {
+        return max_level;
+    }
+
+    public int getUpgradeCost(String userName) {
+        // Just a stub, userName is ignored.
+        return upgrade_base_cost;
     }
 
     public abstract boolean build (String playerName, int position);
@@ -47,13 +62,13 @@ public abstract class Building {
     public abstract boolean remove(String playerName , int position);
     /* Removes the building for a given player. */
 
+    public abstract boolean upgrade(String playerName , int position);
+    /* Upgrades the building by one level. */
+
     public abstract BuildingInfo isAllowedToBuild(String playerName, int position);
     /* Informs whether a given player is allowed to build anything on
        a free position. */
 
-    public boolean upgrade(String playerName, int level) {
-        return false;
-    }
 
     protected boolean checkMoneyAndPosition (String playerName, int position) {
         BuildingsPositionHelper posHelper
@@ -61,7 +76,6 @@ public abstract class Building {
 
         PlayerresourcesHelper resourcesHelper
                 = new PlayerresourcesHelper();
-
 
         // Checking if allowed to build.
         int cash = resourcesHelper.getMoney(playerName);
@@ -88,7 +102,6 @@ public abstract class Building {
         PlayerresourcesHelper resourcesHelper
                 = new PlayerresourcesHelper();
 
-
         // Checking money.
         int cash = resourcesHelper.getMoney(playerName);
         if (cash < cost) {
@@ -104,6 +117,7 @@ public abstract class Building {
 
         return new BuildingInfo(true, "Build me!");
     }
+
 
     // Checks whether a given building occupies a given position.
     protected boolean canPositionBeDestoryed(String playerName, int position,

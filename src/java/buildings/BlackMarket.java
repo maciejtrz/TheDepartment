@@ -7,8 +7,7 @@ import utilities.BuildingInfo;
 public class BlackMarket extends Building {
 
 
-    public BlackMarket (int cost) {
-        this.cost = cost;
+    public BlackMarket () {
     }
 
     @Override
@@ -28,6 +27,11 @@ public class BlackMarket extends Building {
     public BuildingInfo isAllowedToBuild(String playerName, int position) {
         /* Not supported*/
         return new BuildingInfo(false, "Already built!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 

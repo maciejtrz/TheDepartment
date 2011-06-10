@@ -9,8 +9,7 @@ import utilities.BuildingInfo;
 public class MacChicken extends Building {
 
 
-    public MacChicken (int cost) {
-        this.cost = cost;
+    public MacChicken () {
     }
 
     @Override
@@ -125,6 +124,11 @@ public class MacChicken extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

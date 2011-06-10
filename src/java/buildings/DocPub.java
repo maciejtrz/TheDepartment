@@ -11,8 +11,8 @@ import utilities.BuildingInfo;
 public class DocPub extends Building {
 
 
-    public DocPub (int cost) {
-        this.cost = cost;
+    public DocPub () {
+        this.cost = 4000;
     }
 
     @Override
@@ -142,5 +142,10 @@ public class DocPub extends Building {
 
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 }

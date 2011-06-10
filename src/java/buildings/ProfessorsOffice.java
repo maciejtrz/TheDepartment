@@ -4,13 +4,16 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
 public class ProfessorsOffice extends Building {
 
-    public ProfessorsOffice (int cost) {
-        this.cost = cost;
+    public ProfessorsOffice () {
+        cost = 3000;
+        max_level = ADVANCED_LEVEL;
+        upgrade_base_cost = 2000;
     }
 
     @Override
@@ -119,4 +122,59 @@ public class ProfessorsOffice extends Building {
         return new BuildingInfo(true, "Build me!");
     }
 
+    @Override
+    public boolean upgrade(String playerName, int position) {
+
+        // Getting all required helpers.
+        BuildingsHelper buildingHelper
+                = new BuildingsHelper();
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+        PlayerresourcesHelper resourcesHelper
+                = new PlayerresourcesHelper();
+
+
+        /* Checking whether the building is eligible for an upgrade. */
+        // Getting current level
+        Buildings building_record = buildingHelper.getBuildings(playerName);
+        if (building_record == null) {
+            // This should not happen, problem with initialization.
+            return false;
+        }
+        int cur_level = building_record.getProfessorsoffice();
+        if (cur_level == max_level || cur_level == NOT_BUILT_LEVEL) {
+            // Cannot be upgraded any more or not yet built.
+            return false;
+        }
+
+        // Checking whether the player has sufficient cash.
+        int upgrade_cost = cur_level * upgrade_base_cost;
+        int cash = resourcesHelper.getMoney(playerName);
+        if (cash < upgrade_cost) {
+            return false;
+        }
+
+        // Upgrading with respect to the current level
+        String occupant = posHelper.getPosition(playerName, position);
+        if (cur_level == BASIC_LEVEL) {
+            if (!occupant.equals(CODE_PROF_OFFICE_1)) {
+                return false;
+            }
+            // Upgrading to the room lvl_1
+            buildingHelper.updatePorfessorsOffice(playerName, MEDIUM_LEVEL);
+            posHelper.updateBuildingPosition(playerName, position, CODE_PROF_OFFICE_2);
+            resourcesHelper.updateMoney(playerName, cash - cost);
+        }
+        else {
+            if (!occupant.equals(CODE_PROF_OFFICE_2)) {
+                return false;
+            }
+            // Upgrading to the room lvl_2
+            buildingHelper.updatePorfessorsOffice(playerName, ADVANCED_LEVEL);
+            posHelper.updateBuildingPosition(playerName, position, CODE_PROF_OFFICE_3);
+            resourcesHelper.updateMoney(playerName, cash - cost);
+        }
+
+        return true;
+    }
 }

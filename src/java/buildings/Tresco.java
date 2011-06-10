@@ -9,8 +9,7 @@ import utilities.BuildingInfo;
 
 public class Tresco extends Building {
 
-    public Tresco (int cost) {
-        this.cost = cost;
+    public Tresco () {
     }
 
     
@@ -118,6 +117,11 @@ public class Tresco extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

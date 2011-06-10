@@ -13,7 +13,7 @@ import specializationsGenerator.SpecializationsGenerator;
 public class ResearchBag {
 
     private List<Research> researchBag = new ArrayList<Research>();
-    private List<Integer> finishedResearch;
+    private List<Integer> availableResearch;
     private String username;
     private ResearchHelper researchHelper;
     private Research selectedResearch;
@@ -24,8 +24,16 @@ public class ResearchBag {
 
     public void initialize(String username) {
         this.username = username;
-        finishedResearch = researchHelper.getFinishedResearches(username);
+        availableResearch = researchHelper.getAvailableResearches(username);
         researchHelper = new ResearchHelper();
+    }
+
+    public String getUserid() {
+        return username;
+    }
+
+    public List<Integer> getAvailableResearch() {
+        return availableResearch;
     }
 
     public Research getSelectedResearch() {
@@ -62,8 +70,10 @@ public class ResearchBag {
 
             while (iterator.hasNext()) {
                 ResearchTreeNode treeNode = iterator.next();
-                setChildNodes(new DefaultTreeNode(treeNode.getResearchInstance().getResearchname(),
-                        subjectNode), treeNode);
+                if (!availableResearch.contains(treeNode.getResearchInstance().getResearchid())) {
+                    setChildNodes(new DefaultTreeNode(treeNode.getResearchInstance().getResearchname(),
+                            subjectNode), treeNode);
+                }
             }
         }
 
@@ -75,12 +85,16 @@ public class ResearchBag {
 
         while (iterator.hasNext()) {
             ResearchTreeNode treeNode = iterator.next();
-            if (!finishedResearch.contains(treeNode.getResearchInstance().getResearchid())) {
+            System.out.println("Considering research with id: "
+                    + treeNode.getResearchInstance().getResearchid());
+
+            if (!availableResearch.contains(treeNode.getResearchInstance().getResearchid())) {
                 DefaultTreeNode nextParentNode =
-                    new DefaultTreeNode(treeNode.getResearchInstance().getResearchname(),
-                    parentTreeNode);
+                        new DefaultTreeNode(treeNode.getResearchInstance().getResearchname(),
+                        parentTreeNode);
                 setChildNodes(nextParentNode, treeNode);
             }
+
         }
     }
 

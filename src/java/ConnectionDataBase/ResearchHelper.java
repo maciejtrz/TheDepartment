@@ -26,18 +26,19 @@ public class ResearchHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
-    public List<Integer> getFinishedResearches(String idname) {
+    public List<Integer> getAvailableResearches(String idname) {
 
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Research where idname='"
                 + idname + "'");
 
-        List<Integer> idFinishedResearch = new ArrayList<Integer>();
+        List<Integer> idAvailableResearch = new ArrayList<Integer>();
         Iterator<Research> iterator = q.list().iterator();
-        while(iterator.hasNext())
-            idFinishedResearch.add(iterator.next().getId().getResearchid());
 
-        return idFinishedResearch;
+        while(iterator.hasNext())
+            idAvailableResearch.add(iterator.next().getId().getResearchid());
+
+        return idAvailableResearch;
         
     }
 
@@ -87,6 +88,22 @@ public class ResearchHelper extends AbstractHelper {
             commitTransaction(session);
         }
 
+    }
+
+    public void addResearches(String userid, List<Integer> availableResearch) {
+        deleteAllResearches(userid);
+
+        Session session;
+
+        Iterator<Integer> iterator = availableResearch.iterator();
+        while(iterator.hasNext()) {
+            Integer id = iterator.next();
+            ResearchId researchId = new ResearchId(userid,id);
+            Research research = new Research(researchId);
+            session = createNewSessionAndTransaction();
+            session.save(research);
+            commitTransaction(session);
+        }
     }
 
 }

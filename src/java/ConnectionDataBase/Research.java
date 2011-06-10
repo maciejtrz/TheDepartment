@@ -2,6 +2,7 @@ package ConnectionDataBase;
 
 import Connections.ConnectionSingleton;
 import ResearchPoints.ResearchDevelopment;
+import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ public class Research  implements java.io.Serializable, Runnable {
     private ResearchId id;
     private Integer researchpoints;
     private List<Research> researchList;
-    private List<Research> finishedResearch;
+    private List<Integer> availableResearch;
     private int researchTime;
     private int researchBoost;
     private final static String RUNNING = "Running";
@@ -53,6 +54,10 @@ public class Research  implements java.io.Serializable, Runnable {
         researchers = new ArrayList<Lecturer>();
         this.auth = auth;
         this.researchNumber = researchNumber;
+
+        ResearchTreeNode treeNode = ResearchDevelopment.getResearchTreeNode(researchNumber);
+        id = new ResearchId(auth.getUsername(),researchNumber);
+        
     }
 
     public void addResearcher(Lecturer lec) {
@@ -133,8 +138,25 @@ public class Research  implements java.io.Serializable, Runnable {
         } catch (Exception ex) {
 
         } finally {
+            System.out.println("Finishing: " + getName());
+
             researchList.remove(this);
-            finishedResearch.add(this);
+
+            Integer researchId = getId().getResearchid();
+            ResearchTreeNode researchTreeNode =
+                    ResearchDevelopment.getResearchTreeNode(researchId);
+
+            Iterator<ResearchTreeNode> iterator =
+                    researchTreeNode.getDependentResearches().iterator();
+
+            while(iterator.hasNext()) {
+
+                ResearchTreeNode newTreeNode = iterator.next();
+                System.out.println("Adding: " + newTreeNode.getResearchInstance().getResearchid());
+                availableResearch.add(newTreeNode.getResearchInstance().getResearchid());
+            }
+
+            availableResearch.remove(researchId);
             state = FINISHED;
 
             /* Making all participating lecturer usable again.*/
@@ -163,8 +185,8 @@ public class Research  implements java.io.Serializable, Runnable {
         researchList = ongoingResearch;
     }
 
-    public void addFinishedResearchList(List<Research> finishedResearch) {
-        this.finishedResearch = finishedResearch;
+    public void addAvailableResearchList(List<Integer> availableResearch) {
+        this.availableResearch = availableResearch;
     }
 
     public String manageResearch() throws IOException {

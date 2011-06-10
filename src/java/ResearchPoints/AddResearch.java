@@ -141,13 +141,23 @@ public class AddResearch {
 
         Iterator<Lecturer> iterator = owned.iterator();
         int i = 0;
+        LecturerBenefits lecturerBenefits =
+                new LecturerBenefits(SpecializationsGenerator.subjectList[getSubject()]);
+
         while (iterator.hasNext()) {
 
             Lecturer lec = iterator.next();
-           // if (lec.getUsable()) {
+            List<LecturerBenefits> list = lec.getSpecializations();
+
+            System.out.println("Lecturer's name is: " + lec.getName());
+            System.out.println("Current lecturer's spec is: " + lecturerBenefits.getField());
+            
+            if (lec.getUsable() && list.contains(lecturerBenefits) ) {
+
                 lecturers.add(new SelectItem(new Integer(i++), lec.getName()));
                 owned_lecturers.add(lec);
-           // }
+
+            }
         }
 
         return lecturers;

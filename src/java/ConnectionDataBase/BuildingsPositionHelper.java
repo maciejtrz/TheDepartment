@@ -69,4 +69,19 @@ public class BuildingsPositionHelper extends AbstractHelper {
         }
     }
 
+    // Denetrmines whether anything is built on that position.
+    public boolean isAllowedToBuild(String idname, int position) {
+
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Buildingsposition where idname='"
+                + idname + "'");
+        Buildingsposition bp = (Buildingsposition) q.uniqueResult();
+        if (bp != null) {
+            String result = bp.getPos(position);
+            return (result != null);
+        }
+        return false;
+
+    }
+
 }

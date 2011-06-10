@@ -1,7 +1,9 @@
 package buildings;
 
+import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import utilities.BuildingInfo;
 
 public class Laboratories  extends Building {
 
@@ -12,14 +14,37 @@ public class Laboratories  extends Building {
 
     @Override
     public boolean build(String playerName, int position) {
-        /* Updating Buildings table. */
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
-        buildingsHelper.updateBrain(playerName, Building.BASIC_LEVEL);
 
-        /* Updating Position table. */
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();
+
+        // Checking money and position.
+        boolean result = checkMoneyAndPosition(playerName, position);
+        if (!result) {
+            return false;
+        }
+
+        // Checkng whether labs were not already built.
+        Buildings building_record
+                = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+
+        int labs_level = building_record.getLabolatories();
+        if (labs_level != Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+
+        
+        /* Updating Buildings table. */
+        buildingsHelper.updateLabolatories(playerName, Building.BASIC_LEVEL);
+
+        /* Updating Position table. */
+   
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_LABS);
 
@@ -32,7 +57,7 @@ public class Laboratories  extends Building {
         /* Removing from Buildings table. */
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
-        buildingsHelper.updateBrain(playerName, Building.NOT_BUILT_LEVEL);
+        buildingsHelper.updateLabolatories(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
         BuildingsPositionHelper posHelper
@@ -41,6 +66,33 @@ public class Laboratories  extends Building {
 
 
         return true;
+    }
+
+    @Override
+    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+
+        BuildingsHelper buildingsHelper
+                = new BuildingsHelper();
+
+        // Checking money and position.
+        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        if (!info.getResult()) {
+            return info;
+        }
+
+        // Checkng whether labs were not already built.
+        Buildings building_record
+                = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return new BuildingInfo(false, "Player does not exist");
+        }
+
+        int labs_level = building_record.getLabolatories();
+        if (labs_level != Building.NOT_BUILT_LEVEL) {
+            return new BuildingInfo(false, "Labs are already built");
+        }
+
+        return new BuildingInfo(true, "Build me!");
     }
 
     

@@ -26,8 +26,8 @@ public class User {
         logoff();
 
         /* Deleting department. */
-        DepartmentinfoHelper department = new DepartmentinfoHelper();
-        department.deleteDepartment(username);
+        Department department = new Department(username);
+        department.deleteDepartment();
 
         /* Deleteing player id and password. */
         PlayerHelper playerHelper = new PlayerHelper();

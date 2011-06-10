@@ -8,6 +8,7 @@ import ConnectionDataBase.LecturersSpecializationsHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
 import ResearchPoints.ResearchDevelopment;
+import ResearchPoints.ResearchTreeShowcase;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +30,7 @@ public class LecturersContextListener implements ServletContextListener {
             /* Initizalization of research development tree */
             SpecializationsGenerator.initializeSpecializationsGenerator();
             ResearchDevelopment.initializeDevelopmentTree();
+            ResearchTreeShowcase.initializeResearchTreeShowcase();
 
 
             System.out.println("IM NOTIFIED ABOUT THE CONTEX!"

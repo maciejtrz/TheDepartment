@@ -33,7 +33,7 @@
                     </p:panel>
                 </p:tab>
 
-               <p:tab id="availableResearches" title="Available Researches" >
+                <p:tab id="availableResearches" title="Available Researches" >
                     <p:panel header="Available Researches">
                         <h:outputText value="Choose research: "/>
                         <h:selectOneMenu value="#{addResearch.chosenResearch}" >
@@ -42,7 +42,7 @@
                     </p:panel>
                 </p:tab>
 
-                 <p:tab id="moneyAmount" title="Specify money grant for research" >
+                <p:tab id="moneyAmount" title="Specify money grant for research" >
                     <p:panel header="Specify money grant for research">
                         <h:outputText value="Input money min: "/>
                         <h:outputText value="#{addResearch.minimumMoney}" />
@@ -51,23 +51,23 @@
                         <h:inputText value="#{addResearch.moneyAmount}" />
                     </p:panel>
                 </p:tab>
-                
+
                 <p:tab id="confirmation" title="Research Confirmation" >
                     <p:panel header="Research Confirmation">
 
                         <h:panelGrid columns="2" border="1" >
 
-                        <h:outputText value="Name of Research: "/>
-                        <h:outputText value="#{addResearch.researchName}" />
+                            <h:outputText value="Name of Research: "/>
+                            <h:outputText value="#{addResearch.researchName}" />
 
-                        <h:outputText value="Money: "/>
-                        <h:outputText value="#{addResearch.moneyAmount}" />
+                            <h:outputText value="Money: "/>
+                            <h:outputText value="#{addResearch.moneyAmount}" />
 
-                        <h:outputText value="Subject: "/>
-                        <h:outputText value="#{addResearch.subjectName}" />
+                            <h:outputText value="Subject: "/>
+                            <h:outputText value="#{addResearch.subjectName}" />
 
-                        <h:commandButton action="#{addResearch.startResearch}" value="Add Research"/>
-                        <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
+                            <h:commandButton action="#{addResearch.startResearch}" value="Add Research"/>
+                            <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
 
                         </h:panelGrid>
 
@@ -75,6 +75,17 @@
                     </p:panel>
                 </p:tab>
             </p:wizard>
+        </h:form>
+
+        <h3>Available researches: </h3>
+
+        <h:form>
+            <p:tree value="#{addResearch.root}" var="node">
+                <p:treeNode>
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>  
+            </p:tree>
+
         </h:form>
 
         <a href="/TheDepartment/faces/Logged/Playing.xhtml">Go Back to Playing</a>

@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.TreeNode;
 import specializationsGenerator.SpecializationsGenerator;
 import utilities.Lecturer;
 import utilities.LecturerBenefits;
@@ -238,5 +239,9 @@ public class AddResearch {
 
     private String[] getSubjectList() {
         return SpecializationsGenerator.subjectList;
+    }
+
+    public TreeNode getRoot() {
+       return ResearchTreeShowcase.getRoot();
     }
 }

@@ -30,9 +30,9 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
         } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
             ResearchHelper researchHelper = new ResearchHelper();
             ResearchBag researchBag = (ResearchBag) event.getValue();
-            if (researchBag != null && !researchBag.getFinishedResearches().isEmpty()) {
-                researchHelper.addResearches(researchBag.getFinishedResearches());
-            }
+           // if (researchBag != null && !researchBag.getFinishedResearches().isEmpty()) {
+        //        researchHelper.addResearches(researchBag.getFinishedResearches());
+          //  }
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
             Auth auth = (Auth) event.getValue();
             Playerresources resources = auth.getResources();

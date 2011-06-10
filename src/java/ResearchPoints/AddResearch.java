@@ -167,7 +167,8 @@ public class AddResearch {
     public String startResearch() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        Research research = new Research((Auth) session.getAttribute(ConnectionSingleton.Auth));
+        Research research = new Research((Auth) 
+                session.getAttribute(ConnectionSingleton.Auth),getChosenResearch());
 
         /* Adding research thread to the list of researches of the given user */
         ResearchBag researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
@@ -210,18 +211,16 @@ public class AddResearch {
 
 
         /* Creating new object research */
-        research.setName(getResearchName());
         research.setMoney(getMoneyAmount());
         research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
-        research.setResearchpoints(100);
         research.setResearchBoost(boost_value);
 
         List<Research> ongoingResearch = researchBag.getResearches();
-        List<Research> finishedResearch = researchBag.getFinishedResearches();
+       // List<Integer> finishedResearch = researchBag.getFinishedResearches();
 
         ongoingResearch.add(research);
         research.addResearchList(ongoingResearch);
-        research.addFinishedResearchList(finishedResearch);
+       // research.addFinishedResearchList(finishedResearch);
 
         Thread thread = new Thread(research);
 

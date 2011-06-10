@@ -2,6 +2,7 @@ package UserBeans;
 
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
+import ConnectionDataBase.ResearchHelper;
 import Connections.EncodingSingleton;
 
 
@@ -63,6 +64,9 @@ public class AddUser {
 
                 PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
                 playerResources.createPlayerResources(username);
+
+                ResearchHelper researchHelper = new ResearchHelper();
+                researchHelper.initializedResearchTree(username);
 
             }
 

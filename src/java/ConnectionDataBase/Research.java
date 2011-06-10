@@ -1,7 +1,7 @@
 package ConnectionDataBase;
-// Generated 06-Jun-2011 22:44:46 by Hibernate Tools 3.2.1.GA
 
 import Connections.ConnectionSingleton;
+import ResearchPoints.ResearchDevelopment;
 import UserBeans.Auth;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
 
-public class Research implements java.io.Serializable, Runnable  {
+public class Research  implements java.io.Serializable, Runnable {
+
 
     private ResearchId id;
     private Integer researchpoints;
@@ -31,7 +32,7 @@ public class Research implements java.io.Serializable, Runnable  {
     private Integer money;
 
     private List<Lecturer> researchers;
-
+    private Integer researchNumber = new Integer(0);
 
     public Research() {
         id = new ResearchId();
@@ -41,28 +42,24 @@ public class Research implements java.io.Serializable, Runnable  {
     }
 
     public Research(ResearchId id) {
+        this();
         this.id = id;
         researchers = new ArrayList<Lecturer>();
         state = STOPPED;
     }
 
-    public Research(ResearchId id, Integer researchpoints) {
-        this.id = id;
-        this.researchpoints = researchpoints;
-        researchers = new ArrayList<Lecturer>();
-        state = STOPPED;
-    }
-
-    public Research(Auth auth) {
+    public Research(Auth auth, Integer researchNumber) {
         this();
         researchers = new ArrayList<Lecturer>();
         this.auth = auth;
+        this.researchNumber = researchNumber;
     }
 
     public void addResearcher(Lecturer lec) {
         researchers.add(lec);
     }
 
+    /* ID - composite key of the table */
     public ResearchId getId() {
         return this.id;
     }
@@ -71,14 +68,13 @@ public class Research implements java.io.Serializable, Runnable  {
         this.id = id;
     }
 
+    /* Amlunt of reseach points rewarded for successful finishing of research */
     public Integer getResearchpoints() {
-        return this.researchpoints;
+        return ResearchDevelopment.getResearchTreeNode(getId().getResearchid()).
+                getResearchInstance().getResearchpoints();
     }
 
-    public void setResearchpoints(Integer researchpoints) {
-        this.researchpoints = researchpoints;
-    }
-
+    /* Boost of the reseach - how long it takes to finish a research */
     public void setResearchBoost(int boost) {
         this.researchBoost = boost;
     }
@@ -88,12 +84,10 @@ public class Research implements java.io.Serializable, Runnable  {
     }
 
 
+    /* Name of the research */
     public String getName() {
-        return id.getTitle();
-    }
-
-    public void setName(String name) {
-        id.setTitle(name);
+        return ResearchDevelopment.getResearchTreeNode(getId().getResearchid()).
+                getResearchInstance().getResearchname();
     }
 
     public String getUserId() {
@@ -153,7 +147,6 @@ public class Research implements java.io.Serializable, Runnable  {
                 helper.setUsable(lec.getName(), true);
             }
 
-
         }
            try {
                 addPointsToUser();
@@ -194,6 +187,11 @@ public class Research implements java.io.Serializable, Runnable  {
         }
     }
 
+    public boolean equals(Research research) {
+        return research.getId().getResearchid() == getId().getResearchid();
+    }
 
 
 }
+
+

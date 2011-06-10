@@ -57,17 +57,12 @@
 
         <h3>Finished Researches</h3>
 
-                <h:form>
-            <p:dataTable id="finishedResearches" var="research" value="#{researchBag.finishedResearches}">
-
-                <p:column headerText="Research Title">
-                    <h:outputText value="#{research.name}" />
-                </p:column>
-
-                <p:column headerText="Research Points">
-                    <h:outputText value="#{research.researchpoints}" />
-                </p:column>
-            </p:dataTable>
+         <h:form>
+             <p:tree value="#{researchBag.finishedReserchTree}" var="node">
+                <p:treeNode>
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+            </p:tree>
             <p:poll interval="1" update="finishedResearches" />
         </h:form>
 

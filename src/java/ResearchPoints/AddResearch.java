@@ -43,11 +43,20 @@ public class AddResearch {
     private Integer chosenResearch;
     private List<ResearchTreeNode> availableResearches = new ArrayList<ResearchTreeNode>();
     private List<Lecturer> owned_lecturers = new ArrayList<Lecturer>();
+    private ResearchBag researchBag;
+    private Auth auth;
 
     public AddResearch() {
         chosenLecturers = new ArrayList<String>();
         subjects = new ArrayList<SelectItem>();
         lecturers = new ArrayList<SelectItem>();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+
+        /* Adding research thread to the list of researches of the given user */
+        researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
+        auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
 
         moneyAmount = 50;
         chosenResearch = 0;
@@ -96,15 +105,23 @@ public class AddResearch {
 
     public List<SelectItem> getAvailableResearches() {
         researchesList = new ArrayList<SelectItem>();
+        availableResearches = new ArrayList<ResearchTreeNode>();
 
-        availableResearches = ResearchDevelopment.getFirstResearch(getSubject());
-        Iterator<ResearchTreeNode> iterator = availableResearches.iterator();
+        List<ResearchTreeNode> subjectList =
+                ResearchDevelopment.getFirstResearch(getSubject());
+
+        List<Integer> integerList = researchBag.getAvailableResearch();
 
         int i = 0;
-        while (iterator.hasNext()) {
-            ResearchTreeNode researchNode = iterator.next();
+        Iterator<Integer> iterator = integerList.iterator();
+        while(iterator.hasNext()) {
+            Integer researchId = iterator.next();
+            ResearchTreeNode researchNode = ResearchDevelopment.getResearchTreeNode(researchId);
 
-            researchesList.add(new SelectItem(new Integer(i), researchNode.toString()));
+            if(researchNode.getResearchInstance().getSubjectid() == getSubject()) {
+                availableResearches.add(researchNode);
+                researchesList.add(new SelectItem(new Integer(i), researchNode.toString()));
+            }
         }
 
         return researchesList;
@@ -165,14 +182,9 @@ public class AddResearch {
     }
 
     public String startResearch() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        Research research = new Research((Auth) 
-                session.getAttribute(ConnectionSingleton.Auth),
-                availableResearches.get(getChosenResearch()).getResearchInstance().getResearchid());
 
-        /* Adding research thread to the list of researches of the given user */
-        ResearchBag researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
+        Research research = new Research(auth,availableResearches.get(getChosenResearch()).
+                getResearchInstance().getResearchid());
 
         /* Reading lecturers from the database. */
         LecturersManager mgr = new LecturersManager(utilities.BasicUtils.getUserName());
@@ -214,7 +226,7 @@ public class AddResearch {
         research.addAvailableResearchList(researchBag.getAvailableResearch());
         research.addResearchList(researchBag.getResearches());
         research.setMoney(getMoneyAmount());
-        research.setUserId(session.getAttribute(ConnectionSingleton.idname).toString());
+        research.setUserId(auth.getUsername());
         research.setResearchBoost(boost_value);
 
         List<Research> ongoingResearch = researchBag.getResearches();

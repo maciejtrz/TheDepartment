@@ -5,6 +5,8 @@
 
 package events;
 
+import utilities.LecturersManager;
+
 /**
  *
  * @author kwh109
@@ -12,8 +14,18 @@ package events;
 public class HighRanking extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // No prerequirements.
+
+        // Update lecturers boost.
+        LecturersManager mgr = new LecturersManager(playerName);
+        if (!mgr.updateLecturersBoost(2)) {
+            return false;
+        }
+
+        // Updating phD satisfaction.
+        return (increaseSatisfaction(playerName, LotteryManager.LOW));
     }
 
     @Override

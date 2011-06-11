@@ -1,6 +1,8 @@
 
 package events;
 
+import ConnectionDataBase.Extrastats;
+import ConnectionDataBase.ExtrastatsHelper;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -45,6 +47,121 @@ public abstract class Event {
         return (level > (LotteryManager.LOWER_BOUND + update_value)) ?
                (level - update_value) : LotteryManager.LOWER_BOUND;
     }
+
+    protected boolean increaseSatisfaction (String playerName , int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int satisfaction = stats_record.getSatisfaction();
+        int sat_update
+              = this.getIncreasedValue(satisfaction, value);
+
+        statsHelper.updateSatisfaction(playerName, sat_update);
+        return true;
+    }
+
+    protected boolean decreaseSatisfaction (String playerName, int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int satisfaction = stats_record.getSatisfaction();
+        int sat_update
+              = this.getDecreasedValue(satisfaction, value);
+
+        statsHelper.updateSatisfaction(playerName, sat_update);
+        return true;
+    }
+
+    protected boolean increaseAlcoholizm (String playerName, int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int alcoholizm = stats_record.getAlcoholizm();
+        int alco_update
+              = this.getIncreasedValue(alcoholizm, value);
+        
+        statsHelper.updateAlcoholizm(playerName, alco_update);
+        return true;
+    }
+
+    protected boolean decreaseAlcoholizm (String playerName, int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int alcoholizm = stats_record.getAlcoholizm();
+        int alco_update
+              = this.getDecreasedValue(alcoholizm, value);
+
+        statsHelper.updateAlcoholizm(playerName, alco_update);
+        return true;
+    }
+
+    protected boolean increaseStarvation (String playerName, int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int starvation = stats_record.getStarvation();
+        int starv_update
+              = this.getIncreasedValue(starvation, value);
+
+        statsHelper.updateStarvation(playerName, starv_update);
+        return true;
+    }
+
+    protected boolean decreaseStarvation (String playerName, int value) {
+
+        ExtrastatsHelper statsHelper
+                = new ExtrastatsHelper();
+
+        Extrastats stats_record
+                = statsHelper.getPlayerStatsRecrod(playerName);
+        if(stats_record == null) {
+            return false;
+        }
+
+        int starvation = stats_record.getStarvation();
+        int starv_update
+              = this.getDecreasedValue(starvation, value);
+
+        statsHelper.updateStarvation(playerName, starv_update);
+        return true;
+    }
+
 
     // Invokes a given event.
     public abstract boolean invoke(String playerName);

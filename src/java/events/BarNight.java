@@ -19,25 +19,10 @@ public class BarNight extends Event {
         }
 
         /* Updating database accordingly. */
-        ExtrastatsHelper statsHelper
-                = new ExtrastatsHelper();
-        Extrastats stats_record
-                = statsHelper.getPlayerStatsRecrod(playerName);
-        if(stats_record == null) {
-            return false;
-        }
-        int alcoholizm = stats_record.getAlcoholizm();
-        int satisfaction = stats_record.getSatisfaction();
+        boolean b1 = increaseAlcoholizm(playerName, LotteryManager.HIGH);
+        boolean b2 = increaseSatisfaction(playerName, LotteryManager.HIGH);
 
-        int alco_update 
-              = this.getIncreasedValue(alcoholizm, LotteryManager.HIGH);
-        int sat_update
-              = this.getDecreasedValue(satisfaction, LotteryManager.HIGH);
-
-        statsHelper.updateAlcoholizm(playerName, alco_update);
-        statsHelper.updateSatisfaction(playerName, sat_update);
-
-        return true;
+        return (b1 && b2);
     }
 
     @Override

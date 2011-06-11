@@ -1,10 +1,17 @@
 package events;
 
+import utilities.LecturersManager;
+
 public class HaskellConference extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String userName) {
+
+        // No prerequirements.
+
+        // Updating the database, adding one boost value to each lecturer.
+        LecturersManager mgr = new LecturersManager (userName);
+        return mgr.updateLecturersBoost(1);
     }
 
     @Override

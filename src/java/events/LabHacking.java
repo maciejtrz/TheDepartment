@@ -1,10 +1,28 @@
 package events;
 
+import ConnectionDataBase.Buildings;
+import ConnectionDataBase.BuildingsHelper;
+import buildings.Building;
+
 public class LabHacking extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // Has to have at least SuperLabs.
+        BuildingsHelper buildingsHelper
+                = new BuildingsHelper();
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        int labs_level = building_record.getLabolatories();
+        if (labs_level < Building.ADVANCED_LEVEL) {
+            return false;
+        }
+
+        // Decreasing student satisfaction.
+        return (decreaseSatisfaction(playerName, LotteryManager.LOW));
     }
 
     @Override

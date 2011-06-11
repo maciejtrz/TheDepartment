@@ -36,4 +36,10 @@ public class LecturersSpecializationsHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
+    public void setBoost(Lecturersspecializations spec, int newValue) {
+        Session session = createNewSessionAndTransaction();
+        spec.setBoost(newValue);
+        commitTransaction(session);
+    }
+
 }

@@ -5,6 +5,9 @@ package utilities;
    user specializatins. */
 
 public class LecturerBenefits {
+
+    public static final int MAX_BOOST = 100;
+
     private String field;
     private int boost;
 

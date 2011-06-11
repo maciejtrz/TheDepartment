@@ -224,6 +224,40 @@ public class LecturersManager {
     }
 
 
+    /* Updates all lecturers performance by given value. */
+    public boolean updateLecturersBoost(int update_value) {
+
+        LecturersSpecializationsHelper specializationsHelper
+                = new LecturersSpecializationsHelper();
+        int max_boost = LecturerBenefits.MAX_BOOST;
+
+        ArrayList<Lecturer> owned_list = getOwnedLecturers();
+        if (owned_list == null) {
+            return false;
+        }
+        Iterator<Lecturer> it = owned_list.iterator();
+        while (it.hasNext()) {
+            Lecturer lec = it.next();
+            List<Lecturersspecializations> spec_list =
+                   specializationsHelper.getSpecializationsRecord(lec.getName());
+            if (spec_list == null) {
+                return false;
+            }
+            Iterator<Lecturersspecializations> spec_it = spec_list.iterator();
+            while (spec_it.hasNext()) {
+                Lecturersspecializations spec = spec_it.next();
+                int cur_boost = spec.getBoost();
+                if (cur_boost + update_value <= max_boost) {
+                    specializationsHelper.setBoost(spec, cur_boost + update_value);
+                }
+
+            }
+
+        }
+        return true;
+    }
+
+
     private Lecturer generateLecturer () {
 
         SpecializationsGenerator specGenerator = null;

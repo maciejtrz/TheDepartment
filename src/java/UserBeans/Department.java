@@ -6,6 +6,7 @@
 package UserBeans;
 
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
@@ -42,6 +43,13 @@ public class Department {
         // Deleting buildings.
         BuildingsHelper buildingsHelper = new BuildingsHelper();
         buildingsHelper.destroyBuildings(username);
+
+        // Deleting buildings positions.
+        BuildingsPositionHelper positionHelper
+                = new BuildingsPositionHelper();
+        positionHelper.deleteBuildingsPosition(username);
+
+        // 
 
         // Deleting lecturers info.
         // TODO

@@ -22,7 +22,7 @@ public class Department {
     private String username;
 
     public Department() {
-        
+        username = utilities.BasicUtils.getUserName();
     }
     /** Creates a new instance of Department */
     public Department(String username) {
@@ -35,24 +35,24 @@ public class Department {
         //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
         //playerresources.deleteResources(username);
 
-        String userName = utilities.BasicUtils.getUserName();
+
 
         // Deleting department info.
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-        departmentInfo.deleteDepartment(userName);
+        departmentInfo.deleteDepartment(username);
 
         // Deleting capacities.
         CapacityHelper capacityHelper = new CapacityHelper();
-        capacityHelper.deleteCapacity(userName);
+        capacityHelper.deleteCapacity(username);
 
         // Deleting buildings.
         BuildingsHelper buildingsHelper = new BuildingsHelper();
-        buildingsHelper.destroyBuildings(userName);
+        buildingsHelper.destroyBuildings(username);
 
         // Deleting buildings positions.
         BuildingsPositionHelper positionHelper
                 = new BuildingsPositionHelper();
-        positionHelper.deleteBuildingsPosition(userName);
+        positionHelper.deleteBuildingsPosition(username);
 
         // 
 

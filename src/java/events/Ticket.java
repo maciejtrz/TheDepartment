@@ -12,8 +12,9 @@ public class Ticket {
         return owner;
     }
 
-    public void donate(Event newOnwer) {
+    public void donate(Event newOwner) {
 
-        // TODO all funcionality of donating itself here.
+        newOwner.addOneTicket(this);
+        owner = newOwner;
     }
 }

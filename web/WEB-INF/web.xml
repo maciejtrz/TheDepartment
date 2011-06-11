@@ -6,7 +6,7 @@
         <param-value>Development</param-value>
         <context-param>
             <param-name>primefaces.THEME</param-name>
-            <param-value>vader</param-value>
+            <param-value>redmont</param-value>
         </context-param>
     </context-param>
     <context-param>

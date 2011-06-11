@@ -191,7 +191,7 @@ public class AddResearch {
         return getSubjectList()[getSubject()];
     }
 
-    public String startResearch() {
+    public void startResearch() {
 
         Research research = new Research(auth,availableResearches.get(getChosenResearch()).
                 getResearchInstance().getResearchid());
@@ -250,7 +250,6 @@ public class AddResearch {
 
         thread.start();
 
-        return "success";
     }
 
     public String onFlowProcess(FlowEvent event) {

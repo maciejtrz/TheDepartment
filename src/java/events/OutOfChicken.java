@@ -1,6 +1,6 @@
 package events;
 
-public class LabsInFire extends Event {
+public class OutOfChicken extends Event {
 
     @Override
     public void invoke() {
@@ -9,12 +9,12 @@ public class LabsInFire extends Event {
 
     @Override
     public String getInfo() {
-        return "LabsInFire";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean isEqual(String name) {
-        return (name.equals(LotteryManager.LABS_FIRE));
+        return (name.equals(LotteryManager.OUT_OF_CHICKEN));
     }
 
 }

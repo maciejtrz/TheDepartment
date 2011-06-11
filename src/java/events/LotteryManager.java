@@ -29,6 +29,16 @@ public class LotteryManager {
     public static final String HASKELL_CONFERENCE = "HASKELL_CONFERENCE";
     public static final String LECTURER_PROMOTION = "LECTURER_PROMOTION";
 
+    // Event special statistics update levels
+    public static final int LOW = 5;
+    public static final int MEDIUM = 10;
+    public static final int HIGH = 15;
+    public static final int MEGA = 20;
+
+    // Statistics upper and lower bound
+    public static final int LOWER_BOUND = 0;
+    public static final int UPPER_BOUND = 100;
+
 
     private static LotteryManager mgr = null;
     private static final int TICKETS_NUMBER = 100;
@@ -36,12 +46,15 @@ public class LotteryManager {
     private Ticket[] lottery_pool;
     private List<Event> event_list;
 
+    /* Extra stats dependent lists. */
+    private List<Event> 
 
 
     private LotteryManager() {
         lottery_pool = new Ticket[TICKETS_NUMBER];
         initializeLottery();
         event_list = new ArrayList<Event>();
+
     }
 
     public static LotteryManager getManager() {

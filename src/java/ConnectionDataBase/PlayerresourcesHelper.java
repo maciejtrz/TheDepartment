@@ -125,4 +125,10 @@ public class PlayerresourcesHelper extends AbstractHelper {
         }
     }
 
+    public void updateResources(Playerresources resources) {
+        Session session = createNewSessionAndTransaction();
+        session.saveOrUpdate(resources);
+        commitTransaction(session);
+    }
+
 }

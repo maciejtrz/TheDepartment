@@ -17,26 +17,22 @@ and open the template in the editor.
 
 
         <div id="wrap">
-	<div onclick="location.href='Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
+	<div onclick="location.href='/TheDepartment/faces/Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
 		<h1 id="logo-text">The Department</h1>
 		<h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
 	<div id="header-links">
-	<p> <a href="Unlogged/index.xhtml">Home</a>  | <a href="index.php?menu=apply">Applications</a> | <a href="index.php?menu=quiz">Quiz</a></p>
+	<p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a>  | <a href="about:blank">Link</a> | <a href="about:blank">Link</a></p>
 
 	</div>
 </div>
 
 <div id="menu">
 	<ul>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
+		<li><a href="/TheDepartment/faces/Unlogged/index.xhtml">Log in</a></li>
 		<li class="last"><a href="about:blank">More...</a></li>
 	</ul>
 </div>
+
 
 <div id="content-wrap">
 	<div id="sidebar">
@@ -47,32 +43,31 @@ and open the template in the editor.
 	<div id="main"> <a name="TemplateInfo"></a>
 
  <h:form>
-                <p:panel header="Insert your name and password">
+                <p:panel>
                 <h:panelGrid id="lpg" columns="2">
+                      
                     <h:outputText value="Username: "/>
-                    <h:inputText id="username"
+                    <p:inputText id="username"
                                  value="#{addUser.id}"/>
 
                     <h:outputText value="Password: "/>
                     <p:password value="#{addUser.password}" minLength="5" inline="true" />
 
                     <h:outputText value="Confirm password: "/>
-                    <h:inputSecret id="password2"
+                    <p:password id="password2"
                                    value="#{addUser.password2}" />
 
                     <h:outputText value="E-mail: "/>
-                    <h:inputText id="email"
+                    <p:inputText id="email"
                                    value="#{addUser.email}" />
 
 
-                    <h:commandButton action="#{addUser.insert}"
+                    <p:commandButton action="#{addUser.insert}"
                                      value = "Add User"/>
-
-                    <h:commandButton action="#{addUser.goToIndex}"
-                                     value = "Logging"/>
-
+  
                 </h:panelGrid>
                 </p:panel>
+
             </h:form>
 
 	</div>
@@ -83,8 +78,7 @@ and open the template in the editor.
 maciej.trzcinski09
 karol.pyniak09
 krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.styleshout.com" target="_blank">
-    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.xhtml">Home</a>  | <a href="about:blank">Foots</a>
-    | <a href="about:blank">Foot</a> </p>
+    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a> </p>
 	</div>
 </div>
 

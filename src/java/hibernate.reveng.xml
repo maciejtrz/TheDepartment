@@ -19,5 +19,6 @@
   <table-filter match-name="researchcatalogue"/>
   <table-filter match-name="departmentinfo"/>
   <table-filter match-name="messagesystem"/>
+  <table-filter match-name="extrastats"/>
   
 </hibernate-reverse-engineering>

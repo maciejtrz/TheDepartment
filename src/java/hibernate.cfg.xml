@@ -8,21 +8,22 @@
     <property name="hibernate.connection.username">g1027104_u</property>
     <property name="hibernate.connection.password">EldyDqOUXi</property>
     <mapping resource="ConnectionDataBase/Playerresearch.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Extrastats.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Messagesystem.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Subject.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Researchcatalogue.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

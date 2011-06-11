@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-Jun-2011 18:04:56 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Extrastats" table="extrastats" schema="public">
+        <id name="idname" type="string">
+            <column name="idname" />
+            <generator class="assigned" />
+        </id>
+        <property name="satisfaction" type="int">
+            <column name="satisfaction" not-null="true" />
+        </property>
+        <property name="starvation" type="int">
+            <column name="starvation" not-null="true" />
+        </property>
+        <property name="alcoholizm" type="int">
+            <column name="alcoholizm" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

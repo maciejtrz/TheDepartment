@@ -35,22 +35,24 @@ public class Department {
         //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
         //playerresources.deleteResources(username);
 
+        String userName = utilities.BasicUtils.getUserName();
+
         // Deleting department info.
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-        departmentInfo.deleteDepartment(username);
+        departmentInfo.deleteDepartment(userName);
 
         // Deleting capacities.
         CapacityHelper capacityHelper = new CapacityHelper();
-        capacityHelper.deleteCapacity(username);
+        capacityHelper.deleteCapacity(userName);
 
         // Deleting buildings.
         BuildingsHelper buildingsHelper = new BuildingsHelper();
-        buildingsHelper.destroyBuildings(username);
+        buildingsHelper.destroyBuildings(userName);
 
         // Deleting buildings positions.
         BuildingsPositionHelper positionHelper
                 = new BuildingsPositionHelper();
-        positionHelper.deleteBuildingsPosition(username);
+        positionHelper.deleteBuildingsPosition(userName);
 
         // 
 

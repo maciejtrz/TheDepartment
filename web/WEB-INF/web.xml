@@ -4,8 +4,7 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-
-<filter>
+    <filter>
         <filter-name>loggedFilter</filter-name>
         <filter-class>Filters.LoggedFilter</filter-class>
     </filter>
@@ -13,7 +12,6 @@
         <filter-name>unloggedFilter</filter-name>
         <filter-class>Filters.UnloggedFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>loggedFilter</filter-name>
         <url-pattern>/faces/Logged/*</url-pattern>
@@ -22,7 +20,6 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
     <filter-mapping>
         <filter-name>unloggedFilter</filter-name>
         <url-pattern>/faces/Unlogged/*</url-pattern>
@@ -31,15 +28,12 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
     <listener>
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>
-
     <listener>
-        <listener-class>Connections.LecturersContextListener</listener-class>
+        <listener-class>Connections.ApplicationContextInitializer</listener-class>
     </listener>
-
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -49,16 +43,12 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-
-
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-
     <welcome-file-list>
         <welcome-file>faces/Unlogged/index.xhtml</welcome-file>
     </welcome-file-list>
-
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>securedapp</web-resource-name>
@@ -68,5 +58,4 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-
 </web-app>

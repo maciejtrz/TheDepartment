@@ -64,6 +64,18 @@ public class BuildingsHelper extends AbstractHelper {
         }
     }
 
+    public void updatePorfessorsOffice(String idname, int newValue) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Buildings where idname='"
+                + idname + "'");
+        Buildings buildings = (Buildings) q.uniqueResult();
+        if (buildings != null) {
+            buildings.setProfessorsoffice(newValue);
+            commitTransaction(session);
+        }
+    }
+    
+
     public void updateDocPub(String idname, int newValue) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Buildings where idname='"

@@ -43,6 +43,10 @@ public class Auth {
         return resources;
     }
 
+    public void setResources(Playerresources resources) {
+        this.resources = resources;
+    }
+
     public String getRemember() {
         return remember.toString();
     }

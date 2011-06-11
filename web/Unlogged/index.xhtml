@@ -17,23 +17,18 @@ and open the template in the editor.
 
 
         <div id="wrap">
-	<div onclick="location.href='Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
+	<div onclick="location.href='/TheDepartment/faces/Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
 		<h1 id="logo-text">The Department</h1>
 		<h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
 	<div id="header-links">
-	<p> <a href="Unlogged/index.xhtml">Home</a>  | <a href="index.php?menu=apply">Applications</a> | <a href="index.php?menu=quiz">Quiz</a></p>
+	<p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a>  | <a href="about:blank">Link</a> | <a href="about:blank">Link</a></p>
 
 	</div>
 </div>
 
 <div id="menu">
 	<ul>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
-		<li><a href="about:blank">Link</a></li>
+		<li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
 		<li class="last"><a href="about:blank">More...</a></li>
 	</ul>
 </div>
@@ -42,34 +37,36 @@ and open the template in the editor.
 	<div id="sidebar">
 
 
+                 <h:form>
+                   
+                    <h:panelGrid columns="1">
+                    <h:outputText value="Username"/>
+                    <h:inputText id="username"
+                                 value="#{auth.username}"/>
+
+                    <h:outputText value="Password"/>
+                    <h:inputSecret id="password"
+                                   value="#{auth.password}" />
+                    </h:panelGrid>
+
+                     <h:panelGrid columns="2">
+                    <h:outputText value="Remember me" />
+                    <h:selectBooleanCheckbox value="#{auth.remember}"  />
+
+                    <p:commandButton action="#{auth.validate}"
+                                     value = "Log in"/>
+
+                    </h:panelGrid>
+                       
+                </h:form>
 
 	</div>
 	<div id="main"> <a name="TemplateInfo"></a>
 
-                <h:form>
-                <p:panel header="Enter your passwords">
-                <h:panelGrid id="lpg" columns="2">
-                    <h:outputText value="Username: "/>
-                    <h:inputText id="username"
-                                 value="#{auth.username}"/>
-
-                    <h:outputText value="Password: "/>
-                    <h:inputSecret id="password"
-                                   value="#{auth.password}" />
-
-                    <h:outputText value="Remember me: " />
-                    <h:selectBooleanCheckbox value="#{auth.remember}"  />
-
-                    <h:commandButton action="#{auth.validate}"
-                                     value = "Log"/>
-                    <h:commandButton action="#{auth.newUser}"
-                                     value = "Add New User"/>
-
-                </h:panelGrid>
-                </p:panel>
-                </h:form>
+            <img src="/TheDepartment/images/sal.jpg"/>
 
 	</div>
+
 </div>
 
 	<div id="footer">
@@ -77,8 +74,7 @@ and open the template in the editor.
 maciej.trzcinski09
 karol.pyniak09
 krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.styleshout.com" target="_blank">
-    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.xhtml">Home</a>  | <a href="about:blank">Foots</a>
-    | <a href="about:blank">Foot</a> </p>
+    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a> </p>
 	</div>
 </div>
 

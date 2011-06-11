@@ -28,11 +28,15 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
         if (event.getName().equals(ConnectionSingleton.idname)) {
             AuthorizationSingleton.updateUserStatus(event.getValue().toString(), false);
         } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
+
             ResearchHelper researchHelper = new ResearchHelper();
             ResearchBag researchBag = (ResearchBag) event.getValue();
-            if (researchBag != null && !researchBag.getFinishedResearches().isEmpty()) {
-                researchHelper.addResearches(researchBag.getFinishedResearches());
-            }
+
+           if (researchBag != null && !researchBag.getAvailableResearch().isEmpty()) {
+
+                researchHelper.addResearches(researchBag.getUserid(),
+                        researchBag.getAvailableResearch());
+           }
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
             Auth auth = (Auth) event.getValue();
             Playerresources resources = auth.getResources();

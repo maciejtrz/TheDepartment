@@ -3,12 +3,12 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
 public class StudentUnion extends Building {
 
-    public StudentUnion (int cost) {
-        this.cost = cost;
+    public StudentUnion () {
     }
 
     @Override
@@ -46,20 +46,43 @@ public class StudentUnion extends Building {
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_UNION);
 
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
+
         return true;
     }
 
     @Override
     public boolean remove(String playerName, int position) {
 
-        /* Removing from Buildings table. */
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getStudentunion();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, this.CODE_UNION)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
         buildingsHelper.updateStudentUnion(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
         posHelper.updateBuildingPosition(playerName, position, null);
 
 
@@ -90,6 +113,11 @@ public class StudentUnion extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

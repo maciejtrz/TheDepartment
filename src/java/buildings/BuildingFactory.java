@@ -1,7 +1,5 @@
 package buildings;
 
-import ConnectionDataBase.BuildingsHelper;
-
 public class BuildingFactory {
 
     /* Create all neccessary building objects. */
@@ -11,7 +9,7 @@ public class BuildingFactory {
     private Brain brain;
     private DocPub docPub;
     private Laboratories labs;
-    private LecturerRoom lecturerRoom;
+    private LectureRoom lecturerRoom;
     private MacChicken macChicken;
     private PhdOffice pdhOffice;
     private ProfessorsOffice profOffice;
@@ -20,17 +18,17 @@ public class BuildingFactory {
 
     public void initializeBuildings() {
 
-        blackMarket = new BlackMarket(100);
-        bob = new BobTheBuilder(100);
-        brain = new Brain(100);
-        docPub = new DocPub(100);
-        labs = new Laboratories(100);
-        lecturerRoom = new LecturerRoom(100);
-        macChicken = new MacChicken(100);
-        pdhOffice = new PhdOffice(100);
-        profOffice = new ProfessorsOffice(100);
-        studentUnion = new StudentUnion(100);
-        tresco = new Tresco(100);
+        blackMarket = new BlackMarket();
+        bob = new BobTheBuilder();
+        brain = new Brain();
+        docPub = new DocPub();
+        labs = new Laboratories();
+        lecturerRoom = new LectureRoom();
+        macChicken = new MacChicken();
+        pdhOffice = new PhdOffice();
+        profOffice = new ProfessorsOffice();
+        studentUnion = new StudentUnion();
+        tresco = new Tresco();
 
     }
 
@@ -56,7 +54,7 @@ public class BuildingFactory {
         return labs;
     }
 
-    public LecturerRoom getLecturerRoom() {
+    public LectureRoom getLecturerRoom() {
         return lecturerRoom;
     }
 
@@ -68,7 +66,7 @@ public class BuildingFactory {
         return pdhOffice;
     }
 
-    public ProfessorsOffice getPorfOffice() {
+    public ProfessorsOffice getProfOffice() {
         return profOffice;
     }
 

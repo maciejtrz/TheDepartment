@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 09-Jun-2011 22:33:22 by Hibernate Tools 3.2.1.GA
+// Generated 10-Jun-2011 13:45:11 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -13,15 +13,24 @@ public class Researchcatalogue  implements java.io.Serializable {
      private String researchdescription;
      private int researchid;
      private int subjectid;
+     private Integer researchpoints;
 
     public Researchcatalogue() {
     }
 
+	
     public Researchcatalogue(String researchname, String researchdescription, int researchid, int subjectid) {
+        this.researchname = researchname;
+        this.researchdescription = researchdescription;
+        this.researchid = researchid;
+        this.subjectid = subjectid;
+    }
+    public Researchcatalogue(String researchname, String researchdescription, int researchid, int subjectid, Integer researchpoints) {
        this.researchname = researchname;
        this.researchdescription = researchdescription;
        this.researchid = researchid;
        this.subjectid = subjectid;
+       this.researchpoints = researchpoints;
     }
    
     public String getResearchname() {
@@ -51,6 +60,13 @@ public class Researchcatalogue  implements java.io.Serializable {
     
     public void setSubjectid(int subjectid) {
         this.subjectid = subjectid;
+    }
+    public Integer getResearchpoints() {
+        return this.researchpoints;
+    }
+    
+    public void setResearchpoints(Integer researchpoints) {
+        this.researchpoints = researchpoints;
     }
 
 

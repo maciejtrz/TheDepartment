@@ -15,8 +15,8 @@
     <mapping resource="ConnectionDataBase/Researchcatalogue.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Subject.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>

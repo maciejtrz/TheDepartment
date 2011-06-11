@@ -3,13 +3,16 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.Playerresources;
+import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
 public class Laboratories  extends Building {
 
-
-    public Laboratories (int cost) {
-        this.cost = cost;
+    public Laboratories () {
+        this.cost = 500;
+        max_level = MEDIUM_LEVEL;
+        upgrade_base_cost = 1000;
     }
 
     @Override
@@ -44,9 +47,14 @@ public class Laboratories  extends Building {
         buildingsHelper.updateLabolatories(playerName, Building.BASIC_LEVEL);
 
         /* Updating Position table. */
-   
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_LABS);
+
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
 
         return true;
     }
@@ -54,14 +62,32 @@ public class Laboratories  extends Building {
     @Override
     public boolean remove(String playerName, int position) {
 
-        /* Removing from Buildings table. */
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getLabolatories();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, CODE_LABS)
+            &&!canPositionBeDestoryed(playerName, position, CODE_SUPERLABS)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
         buildingsHelper.updateLabolatories(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
         posHelper.updateBuildingPosition(playerName, position, null);
 
 
@@ -95,6 +121,63 @@ public class Laboratories  extends Building {
         return new BuildingInfo(true, "Build me!");
     }
 
-    
+    @Override
+    public boolean upgrade(String playerName, int position) {
+
+        // Getting all required helpers.
+        BuildingsHelper buildingHelper
+                = new BuildingsHelper();
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+        PlayerresourcesHelper resources
+                = new PlayerresourcesHelper();
+
+
+        /* Checking whether the building is eligible for an upgrade. */
+        // Getting current level
+        Buildings building_record = buildingHelper.getBuildings(playerName);
+        if (building_record == null) {
+            // This should not happen, problem with initialization.
+            return false;
+        }
+        int cur_level = building_record.getLabolatories();
+        if (cur_level == max_level || cur_level == NOT_BUILT_LEVEL) {
+            // Cannot be upgraded any more or not yet built.
+            return false;
+        }
+
+        // Checking whether the player has sufficient cash.
+        int upgrade_cost = cur_level * upgrade_base_cost;
+        int cash = resources.getMoney(playerName);
+        if (cash < upgrade_cost) {
+            return false;
+        }
+
+        // Checking whether the input position is correct.
+        String occupant = posHelper.getPosition(playerName, position);
+        if (!occupant.equals(this.CODE_LABS)) {
+            return false;
+        }
+
+        // Upgrading to the superlabs
+        buildingHelper.updateLabolatories(playerName, MEDIUM_LEVEL);
+        posHelper.updateBuildingPosition(playerName, position, CODE_SUPERLABS);
+        resources.updateMoney(playerName, cash - upgrade_cost);
+
+        return true;
+    }
+
+
+    @Override
+    public int getUpgradeCost(String playerName) {
+        BuildingsHelper buildingHelper = new BuildingsHelper();
+        Buildings building_record = buildingHelper.getBuildings(playerName);
+        if (building_record == null) {
+            // This should not happen, problem with initialization.
+            return 0;
+        }
+        int cur_level = building_record.getLabolatories();
+        return cur_level * upgrade_base_cost;
+    }
 
 }

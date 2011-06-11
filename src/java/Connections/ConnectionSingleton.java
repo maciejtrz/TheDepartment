@@ -18,17 +18,20 @@ public class ConnectionSingleton {
     private static Connection connection;
 
 
+    /*
     private final String connectionURL = "jdbc:postgresql://db:5432/g1027104_u";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "g1027104_u";
     private final String dbPassword = "EldyDqOUXi";
 
-    /*
+     *
+     */
+    
     private final String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
     private final String DataBaseDriver = "org.postgresql.Driver";
     private final String username = "postgres";
     private final String dbPassword = "postgres";
-    */
+ 
 
 
     public static final String idname = "idname";

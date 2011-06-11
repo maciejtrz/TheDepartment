@@ -63,6 +63,9 @@ public class ResearchDevelopment {
                 
                 while(iter.hasNext()) {
                     ResearchdependenciesId dependencyId = iter.next().getId();
+
+                    System.out.println(researchcatalogue.getResearchid() + " depends on " +
+                            dependencyId.getChildresearchid());
                     
                     researchNodes[dependencyId.getParentresearchid()].
                             addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()]);
@@ -88,12 +91,16 @@ public class ResearchDevelopment {
         return i;
     }
 
-    static List<ResearchTreeNode> getFirstResearch(Integer subject) {
+    public static List<ResearchTreeNode> getFirstResearch(Integer subject) {
         return researchTree.getResearchTreeNode(subject).getDependentResearches();
     }
 
-    public List<ResearchTreeNode> getFirstResearch(String subject) {
+    public static List<ResearchTreeNode> getFirstResearch(String subject) {
         return getFirstResearch(getSubjectPosition(subject));
+    }
+
+    public static ResearchTreeNode getResearchTreeNode(int i) {
+        return researchNodes[i];
     }
 
 }

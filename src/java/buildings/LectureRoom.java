@@ -7,17 +7,17 @@ import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
-public class PhdOffice extends Building {
+public class LectureRoom extends Building {
 
-    public PhdOffice () {
-        cost = 2000;
+
+    public LectureRoom () {
+        cost = 1000;
         max_level = ADVANCED_LEVEL;
-        upgrade_base_cost = 1000;
+        upgrade_base_cost = 500;
     }
 
     @Override
     public boolean build(String playerName, int position) {
-
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
@@ -31,26 +31,24 @@ public class PhdOffice extends Building {
             return false;
         }
 
-        // Checking other requirements.
+        // Checking whether the building was not already built.
         Buildings building_record = buildingsHelper.getBuildings(playerName);
-        if (building_record == null ) {
+        if (building_record == null) {
             return false;
         }
 
-        // Checking whether PhdOffice was not already built
-        int phd_level = building_record.getPhdsoffice();
-        if (phd_level != Building.NOT_BUILT_LEVEL) {
+        int lecturer_room_level = building_record.getLectureroom();
+        if (lecturer_room_level != Building.NOT_BUILT_LEVEL) {
             return false;
         }
 
 
         /* Updating Buildings table. */
-        buildingsHelper.updatePhDsOffice(playerName, Building.BASIC_LEVEL);
+        buildingsHelper.updateLectureRoom(playerName, Building.BASIC_LEVEL);
 
         /* Updating Position table. */
         posHelper.createBuildingPosition(playerName, position,
-                Building.CODE_PHD_OFFICE_1);
-
+                Building.CODE_LECTURER_ROOM_1);
 
         /* Updating players money. */
         PlayerresourcesHelper player_record
@@ -76,20 +74,19 @@ public class PhdOffice extends Building {
             return false;
         }
         //Checking whether is already built.
-        int cur_level = building_record.getPhdsoffice();
+        int cur_level = building_record.getLectureroom();
         if (cur_level == Building.NOT_BUILT_LEVEL) {
             return false;
         }
         // Checking if the the input position is correct.
-        if (!canPositionBeDestoryed(playerName, position, CODE_PHD_OFFICE_1)
-            &&!canPositionBeDestoryed(playerName, position, CODE_PHD_OFFICE_2)
-            &&!canPositionBeDestoryed(playerName, position, CODE_PHD_OFFICE_3)) {
+        if (!canPositionBeDestoryed(playerName, position, CODE_LECTURER_ROOM_1)
+            &&!canPositionBeDestoryed(playerName, position, CODE_LECTURER_ROOM_2)
+            &&!canPositionBeDestoryed(playerName, position, CODE_LECTURER_ROOM_3)) {
             return false;
         }
 
-
         /* Removing from Buildings table. */
-        buildingsHelper.updatePhDsOffice(playerName, Building.NOT_BUILT_LEVEL);
+        buildingsHelper.updateLectureRoom(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
         posHelper.updateBuildingPosition(playerName, position, null);
@@ -110,21 +107,18 @@ public class PhdOffice extends Building {
             return info;
         }
 
-        // Checkng whether Phd office was not already built.
-        Buildings building_record
-                = buildingsHelper.getBuildings(playerName);
+        // Checking whether the building was not already built.
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
         if (building_record == null) {
             return new BuildingInfo(false, "Player does not exist");
         }
 
-        // Checking whether PhdOffice was not already built
-        int phd_level = building_record.getPhdsoffice();
-        if (phd_level != Building.NOT_BUILT_LEVEL) {
-            return new BuildingInfo(false, "Phd office already built");
+        int lecturer_room_level = building_record.getLectureroom();
+        if (lecturer_room_level != Building.NOT_BUILT_LEVEL) {
+            return new BuildingInfo(false, "Lecturer room was already built.");
         }
 
-        return new BuildingInfo(true, "Build me");
-
+        return new BuildingInfo(true, "Build me!");
     }
 
     @Override
@@ -146,7 +140,7 @@ public class PhdOffice extends Building {
             // This should not happen, problem with initialization.
             return false;
         }
-        int cur_level = building_record.getPhdsoffice();
+        int cur_level = building_record.getLectureroom();
         if (cur_level == max_level || cur_level == NOT_BUILT_LEVEL) {
             // Cannot be upgraded any more or not yet built.
             return false;
@@ -162,27 +156,26 @@ public class PhdOffice extends Building {
         // Upgrading with respect to the current level
         String occupant = posHelper.getPosition(playerName, position);
         if (cur_level == BASIC_LEVEL) {
-            if (!occupant.equals(CODE_PHD_OFFICE_1)) {
+            if (!occupant.equals(CODE_LECTURER_ROOM_1)) {
                 return false;
             }
-            // Upgrading to the room lvl_2
-            buildingHelper.updatePhDsOffice(playerName, MEDIUM_LEVEL);
-            posHelper.updateBuildingPosition(playerName, position, CODE_PHD_OFFICE_2);
+            // Upgrading to the room lvl_1
+            buildingHelper.updateLectureRoom(playerName, MEDIUM_LEVEL);
+            posHelper.updateBuildingPosition(playerName, position, CODE_LECTURER_ROOM_2);
             resourcesHelper.updateMoney(playerName, cash - cost);
         }
         else {
-            if (!occupant.equals(CODE_PHD_OFFICE_2)) {
+            if (!occupant.equals(CODE_LECTURER_ROOM_2)) {
                 return false;
             }
-            // Upgrading to the room lvl_3
-            buildingHelper.updatePhDsOffice(playerName, ADVANCED_LEVEL);
-            posHelper.updateBuildingPosition(playerName, position, CODE_PHD_OFFICE_3);
+            // Upgrading to the room lvl_2
+            buildingHelper.updateLectureRoom(playerName, ADVANCED_LEVEL);
+            posHelper.updateBuildingPosition(playerName, position, CODE_LECTURER_ROOM_3);
             resourcesHelper.updateMoney(playerName, cash - cost);
         }
 
         return true;
     }
-
 
 
 }

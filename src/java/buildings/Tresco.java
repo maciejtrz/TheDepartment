@@ -4,12 +4,12 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;
 
 public class Tresco extends Building {
 
-    public Tresco (int cost) {
-        this.cost = cost;
+    public Tresco () {
     }
 
     
@@ -48,6 +48,12 @@ public class Tresco extends Building {
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_TRESCO);
 
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
+
         return true;
     }
 
@@ -55,14 +61,32 @@ public class Tresco extends Building {
     @Override
     public boolean remove(String playerName, int position) {
 
-        /* Removing from Buildings table. */
-        BuildingsHelper buildingsHelper
-                = new BuildingsHelper();
-        buildingsHelper.updateBrain(playerName, Building.NOT_BUILT_LEVEL);
-
-        /* Removing from Position table. */
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();
+
+        BuildingsHelper buildingsHelper
+                = new BuildingsHelper();
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getTresco();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, CODE_TRESCO)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
+        buildingsHelper.updateTresco(playerName, Building.NOT_BUILT_LEVEL);
+
+        /* Removing from Position table. */
         posHelper.updateBuildingPosition(playerName, position, null);
 
 
@@ -93,6 +117,11 @@ public class Tresco extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

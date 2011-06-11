@@ -4,6 +4,7 @@ package UserBeans;
 import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
+import ConnectionDataBase.ResearchHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.io.IOException;
@@ -22,19 +23,25 @@ public class User {
     public String deleteMe() throws IOException {
 
         String username = utilities.BasicUtils.getUserName();
+        logoff();
 
         /* Deleting department. */
-        Department department = new Department();
+        Department department = new Department(username);
         department.deleteDepartment();
 
         /* Deleteing player id and password. */
         PlayerHelper playerHelper = new PlayerHelper();
         playerHelper.deletePlayer(username);
 
-        logoff();
+        /* Deleting researches history */
+        ResearchHelper researchHelper = new ResearchHelper();
+        researchHelper.deleteAllResearches(username);
+
+        /* Removing player's resources */
+        PlayerresourcesHelper resourcesHelper = new PlayerresourcesHelper();
+        resourcesHelper.deleteResources(username);
 
         return "success";
-
     }
 
     private void logoff() throws IOException {

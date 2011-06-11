@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-Jun-2011 22:33:24 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Subject" table="subject" schema="public">
+        <id name="subjectname" type="string">
+            <column name="subjectname" />
+            <generator class="assigned" />
+        </id>
+        <property name="subjectid" type="int">
+            <column name="subjectid" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -14,34 +14,24 @@ import org.hibernate.Session;
  */
 public class BuildingsPositionHelper extends AbstractHelper {
 
-    /*
-    public void createBuildingsPosition(String idname) {
+    
+    public void initiateBuildingsPosition(String idname) {
 
 
-        Buildingsposition buildingspos = new Buildingsposition();
-        Random rand = new Random();
-        int num = rand.nextInt(15) + 1;
-        buildingspos.setPos(num, "bm1");
-        num = rand.nextInt(15)+1;
-        while(buildingspos.getPos(num) != null){
-           num = rand.nextInt(15)+1;
-        }
-        buildingspos.setPos(num, "bs1");
-
-
+        Session session = createNewSessionAndTransaction();
+        Buildingsposition buildingspos = new Buildingsposition(idname);
+        //Random rand = new Random();
+        buildingspos.setPos(1, "bm1");
+        buildingspos.setPos(2, "bs1");
+        session.save(buildingspos);
+        commitTransaction(session);
     }
-    */
 
     public void createBuildingPosition( String idname , int position ,
             String acronym) {
 
-        Session session = createNewSessionAndTransaction();
-        Buildingsposition buildingspos = new Buildingsposition();
-        buildingspos.setIdname(idname);
-        buildingspos.setPos(position, acronym);
-        commitTransaction(session);
 
-
+            updateBuildingPosition(idname, position, acronym);
     }
 
     public void deleteBuildingsPosition(String idname) {
@@ -69,6 +59,19 @@ public class BuildingsPositionHelper extends AbstractHelper {
         }
     }
 
+    // Returns the acronym of building that occupies given position.
+    public String getPosition(String idname, int position) {
+        String output = null;
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Buildingsposition where idname='"
+                + idname + "'");
+        Buildingsposition bp = (Buildingsposition) q.uniqueResult();
+        if (bp != null) {
+            output = bp.getPos(position);
+        }
+        return output;
+    }
+
     // Denetrmines whether anything is built on that position.
     public boolean isAllowedToBuild(String idname, int position) {
 
@@ -78,7 +81,7 @@ public class BuildingsPositionHelper extends AbstractHelper {
         Buildingsposition bp = (Buildingsposition) q.uniqueResult();
         if (bp != null) {
             String result = bp.getPos(position);
-            return (result != null);
+            return (result == null);
         }
         return false;
 

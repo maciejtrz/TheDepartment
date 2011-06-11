@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 08-Jun-2011 16:56:09 by Hibernate Tools 3.2.1.GA
+// Generated 10-Jun-2011 13:45:11 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,14 +10,14 @@ public class ResearchId  implements java.io.Serializable {
 
 
      private String idname;
-     private String title;
+     private int researchid;
 
     public ResearchId() {
     }
 
-    public ResearchId(String idname, String title) {
+    public ResearchId(String idname, int researchid) {
        this.idname = idname;
-       this.title = title;
+       this.researchid = researchid;
     }
    
     public String getIdname() {
@@ -27,12 +27,12 @@ public class ResearchId  implements java.io.Serializable {
     public void setIdname(String idname) {
         this.idname = idname;
     }
-    public String getTitle() {
-        return this.title;
+    public int getResearchid() {
+        return this.researchid;
     }
     
-    public void setTitle(String title) {
-        this.title = title;
+    public void setResearchid(int researchid) {
+        this.researchid = researchid;
     }
 
 
@@ -43,14 +43,14 @@ public class ResearchId  implements java.io.Serializable {
 		 ResearchId castOther = ( ResearchId ) other; 
          
 		 return ( (this.getIdname()==castOther.getIdname()) || ( this.getIdname()!=null && castOther.getIdname()!=null && this.getIdname().equals(castOther.getIdname()) ) )
- && ( (this.getTitle()==castOther.getTitle()) || ( this.getTitle()!=null && castOther.getTitle()!=null && this.getTitle().equals(castOther.getTitle()) ) );
+ && (this.getResearchid()==castOther.getResearchid());
    }
    
    public int hashCode() {
          int result = 17;
          
          result = 37 * result + ( getIdname() == null ? 0 : this.getIdname().hashCode() );
-         result = 37 * result + ( getTitle() == null ? 0 : this.getTitle().hashCode() );
+         result = 37 * result + this.getResearchid();
          return result;
    }   
 

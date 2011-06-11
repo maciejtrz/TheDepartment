@@ -13,11 +13,20 @@ public class LecturerBenefits {
         this.boost = boost;
     }
 
+    public LecturerBenefits(String field) {
+        this.field = field;
+        boost = 0;
+    }
+
     public String getField () {
         return field;
     }
 
     public int getBoost() {
         return boost;
+    }
+
+    public boolean equals(Object benefits) {
+        return field.equals( ((LecturerBenefits)benefits).getField());
     }
 }

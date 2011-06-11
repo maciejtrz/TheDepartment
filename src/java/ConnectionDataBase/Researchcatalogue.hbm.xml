@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 09-Jun-2011 16:37:58 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 10-Jun-2011 13:45:11 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="ConnectionDataBase.Researchcatalogue" table="researchcatalogue" schema="public">
         <id name="researchname" type="string">
             <column name="researchname" />
             <generator class="assigned" />
         </id>
-        <property name="researchsubject" type="string">
-            <column name="researchsubject" not-null="true" />
-        </property>
         <property name="researchdescription" type="string">
             <column name="researchdescription" not-null="true" />
         </property>
         <property name="researchid" type="int">
             <column name="researchid" not-null="true" unique="true" />
+        </property>
+        <property name="subjectid" type="int">
+            <column name="subjectid" not-null="true" />
+        </property>
+        <property name="researchpoints" type="java.lang.Integer">
+            <column name="researchpoints" />
         </property>
     </class>
 </hibernate-mapping>

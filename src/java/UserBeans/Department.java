@@ -19,18 +19,23 @@ import java.io.IOException;
  */
 public class Department {
 
-    /** Creates a new instance of Department */
+    private String username;
+
     public Department() {
+        username = utilities.BasicUtils.getUserName();
+    }
+    /** Creates a new instance of Department */
+    public Department(String username) {
+        this.username = username;
     }
 
     public void deleteDepartment() throws IOException {
-
-        String username = utilities.BasicUtils.getUserName();
-
-
+        
         // Deleting player resources.
-        PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
-        playerresources.deleteResources(username);
+        //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
+        //playerresources.deleteResources(username);
+
+
 
         // Deleting department info.
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();

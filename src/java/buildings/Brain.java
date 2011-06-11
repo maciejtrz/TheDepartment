@@ -9,8 +9,8 @@ import utilities.BuildingInfo;
 public class Brain extends Building {
 
 
-    public Brain (int cost) {
-        this.cost = cost;
+    public Brain () {
+        this.cost = 5000;
     }
 
     @Override
@@ -53,20 +53,44 @@ public class Brain extends Building {
         posHelper.createBuildingPosition(playerName, position,
                 Building.CODE_BRAIN);
 
+        /* Updating players money. */
+        PlayerresourcesHelper player_record
+                = new PlayerresourcesHelper();
+        int money = player_record.getMoney(playerName);
+        player_record.updateMoney(playerName, money - cost);
+
         return true;
     }
 
     @Override
     public boolean remove(String playerName, int position) {
-        
-        /* Removing from Buildings table. */
+
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
+
+
+        /* Checking prerequirements. */
+        Buildings building_record = buildingsHelper.getBuildings(playerName);
+        if (building_record == null) {
+            return false;
+        }
+        //Checking whether is already built.
+        int cur_level = building_record.getBrain();
+        if (cur_level == Building.NOT_BUILT_LEVEL) {
+            return false;
+        }
+        // Checking if the the input position is correct.
+        if (!canPositionBeDestoryed(playerName, position, CODE_BRAIN)) {
+            return false;
+        }
+
+        /* Removing from Buildings table. */
         buildingsHelper.updateBrain(playerName, Building.NOT_BUILT_LEVEL);
 
         /* Removing from Position table. */
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
         posHelper.updateBuildingPosition(playerName, position, null);
 
 
@@ -104,6 +128,11 @@ public class Brain extends Building {
         }
 
         return new BuildingInfo(true, "Build me!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

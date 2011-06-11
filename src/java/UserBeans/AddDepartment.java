@@ -5,12 +5,12 @@
 package UserBeans;
 
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
-import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.ConnectionSingleton;
+import buildings.*;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -55,12 +55,9 @@ public class AddDepartment {
         CapacityHelper capacityhelper = new CapacityHelper();
         capacityhelper.createCapacity(playerName);
 
-        /* Populating buildings table. */
-        BuildingsHelper buildingsHelper
-                = new BuildingsHelper();
-        buildingsHelper.createBuildings(playerName);
-
-        // POPULATE POSITION TABLE WITH BLACK MARKER AND BOB HERE.
+        BuildingsPositionHelper buildingsPosition =
+                new BuildingsPositionHelper();
+        buildingsPosition.initiateBuildingsPosition(playerName);
 
         return "success";
     }

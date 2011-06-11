@@ -5,8 +5,7 @@ import utilities.BuildingInfo;
 public class BobTheBuilder extends Building {
 
 
-    public BobTheBuilder (int cost) {
-        this.cost = cost;
+    public BobTheBuilder () {
     }
 
     @Override
@@ -25,6 +24,11 @@ public class BobTheBuilder extends Building {
     public BuildingInfo isAllowedToBuild(String playerName, int position) {
         /* Not supported*/
         return new BuildingInfo(false, "Already built!");
+    }
+
+    @Override
+    public boolean upgrade(String playerName, int position) {
+        return false;
     }
 
 }

@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 09-Jun-2011 16:37:51 by Hibernate Tools 3.2.1.GA
+// Generated 10-Jun-2011 13:45:11 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,18 +10,27 @@ public class Researchcatalogue  implements java.io.Serializable {
 
 
      private String researchname;
-     private String researchsubject;
      private String researchdescription;
      private int researchid;
+     private int subjectid;
+     private Integer researchpoints;
 
     public Researchcatalogue() {
     }
 
-    public Researchcatalogue(String researchname, String researchsubject, String researchdescription, int researchid) {
+	
+    public Researchcatalogue(String researchname, String researchdescription, int researchid, int subjectid) {
+        this.researchname = researchname;
+        this.researchdescription = researchdescription;
+        this.researchid = researchid;
+        this.subjectid = subjectid;
+    }
+    public Researchcatalogue(String researchname, String researchdescription, int researchid, int subjectid, Integer researchpoints) {
        this.researchname = researchname;
-       this.researchsubject = researchsubject;
        this.researchdescription = researchdescription;
        this.researchid = researchid;
+       this.subjectid = subjectid;
+       this.researchpoints = researchpoints;
     }
    
     public String getResearchname() {
@@ -30,13 +39,6 @@ public class Researchcatalogue  implements java.io.Serializable {
     
     public void setResearchname(String researchname) {
         this.researchname = researchname;
-    }
-    public String getResearchsubject() {
-        return this.researchsubject;
-    }
-    
-    public void setResearchsubject(String researchsubject) {
-        this.researchsubject = researchsubject;
     }
     public String getResearchdescription() {
         return this.researchdescription;
@@ -51,6 +53,20 @@ public class Researchcatalogue  implements java.io.Serializable {
     
     public void setResearchid(int researchid) {
         this.researchid = researchid;
+    }
+    public int getSubjectid() {
+        return this.subjectid;
+    }
+    
+    public void setSubjectid(int subjectid) {
+        this.subjectid = subjectid;
+    }
+    public Integer getResearchpoints() {
+        return this.researchpoints;
+    }
+    
+    public void setResearchpoints(Integer researchpoints) {
+        this.researchpoints = researchpoints;
     }
 
 

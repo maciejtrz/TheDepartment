@@ -126,7 +126,7 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setProfessorsoffice(newValue);
+            buildings.setPhdsoffice(newValue);
             commitTransaction(session);
         }
     }

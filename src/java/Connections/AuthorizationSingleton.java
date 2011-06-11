@@ -128,6 +128,7 @@ public class AuthorizationSingleton {
         session.removeAttribute(ConnectionSingleton.idname);
         session.removeAttribute(ConnectionSingleton.password);
         session.removeAttribute(ConnectionSingleton.Auth);
+        session.removeAttribute(ConnectionSingleton.researchBag);
 
 
         removeCookies(request, response, session);

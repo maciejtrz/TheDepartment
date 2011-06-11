@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 11-Jun-2011 13:31:16 by Hibernate Tools 3.2.1.GA
+// Generated 11-Jun-2011 15:25:24 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -15,24 +15,27 @@ public class Messagesystem  implements java.io.Serializable {
      private String date;
      private String subcjet;
      private String msg;
+     private boolean read;
 
     public Messagesystem() {
     }
 
 	
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, boolean read) {
         this.msgnumber = msgnumber;
         this.senderid = senderid;
         this.receiverid = receiverid;
         this.date = date;
+        this.read = read;
     }
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, String subcjet, String msg) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, String subcjet, String msg, boolean read) {
        this.msgnumber = msgnumber;
        this.senderid = senderid;
        this.receiverid = receiverid;
        this.date = date;
        this.subcjet = subcjet;
        this.msg = msg;
+       this.read = read;
     }
    
     public int getMsgnumber() {
@@ -76,6 +79,13 @@ public class Messagesystem  implements java.io.Serializable {
     
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+    public boolean isRead() {
+        return this.read;
+    }
+    
+    public void setRead(boolean read) {
+        this.read = read;
     }
 
 

@@ -22,6 +22,11 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
     }
 
     public void attributeAdded(HttpSessionBindingEvent event) {
+
+        if(event.getName().equals(ConnectionSingleton.Auth)) {
+            Auth auth = (Auth) event.getValue();
+            UserManager.addUser(auth);
+        }
     }
 
     public void attributeRemoved(HttpSessionBindingEvent event) {
@@ -39,11 +44,7 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
            }
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
             Auth auth = (Auth) event.getValue();
-            Playerresources resources = auth.getResources();
-            if (resources != null) {
-                PlayerresourcesHelper helper = new PlayerresourcesHelper();
-                helper.saveOrUpdate(resources);
-            }
+            UserManager.removeUser(auth.getUsername());
         }
 
     }

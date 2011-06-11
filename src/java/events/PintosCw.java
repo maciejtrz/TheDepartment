@@ -12,4 +12,9 @@ public class PintosCw extends Event {
         return "PintosCw";
     }
 
+
+    @Override
+    public boolean isEqual(String name) {
+        return (name.equals(LotteryManager.PINTOS_CW));
+    }
 }

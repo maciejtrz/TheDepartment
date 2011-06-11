@@ -42,4 +42,8 @@ public abstract class Event {
     // Returns the information about a given event.
     public abstract String getInfo();
 
+    // Returns true if input name corresponds to the given event.
+    public abstract boolean isEqual(String name);
+
+
 }

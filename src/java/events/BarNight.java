@@ -12,4 +12,9 @@ public class BarNight extends Event {
         return "BarNight";
     }
 
+    @Override
+    public boolean isEqual(String name) {
+        return (name.equals(LotteryManager.BAR_NIGHT));
+    }
+
 }

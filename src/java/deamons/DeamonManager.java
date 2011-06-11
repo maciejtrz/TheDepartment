@@ -28,9 +28,9 @@ public class DeamonManager {
 
     public synchronized void createLecturersPopulator() {
         if (!lec_pop_started && lecturers_populator == null) {
+            lec_pop_started = true;
             System.out.println(" MANAGER is starting new thread. !!!!");
             lecturers_populator = new LecturersPopulator();
-            lec_pop_started = true;
         }
     }
 

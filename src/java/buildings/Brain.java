@@ -57,7 +57,7 @@ public class Brain extends Building {
         PlayerresourcesHelper player_record
                 = new PlayerresourcesHelper();
         int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+
 
         return true;
     }

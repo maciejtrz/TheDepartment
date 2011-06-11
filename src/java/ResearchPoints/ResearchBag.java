@@ -2,7 +2,6 @@ package ResearchPoints;
 
 import ConnectionDataBase.Research;
 import ConnectionDataBase.ResearchHelper;
-import ConnectionDataBase.ResearchId;
 import Connections.UserManager;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,15 +23,19 @@ public class ResearchBag {
 
     public void initialize(String username) {
 
+        System.out.println("Initialization research bag for: " + username);
+        researchHelper = new ResearchHelper();
+
+        this.username = username;
+        
         if(UserManager.containsResearchBag(username)) {
 
             ResearchBag researchBag = UserManager.getResearchBag(username);
             ongoingResearches = researchBag.getResearches();
+            availableResearch = researchBag.getAvailableResearch();
 
         } else {
 
-            this.username = username;
-            researchHelper = new ResearchHelper();
             availableResearch = researchHelper.getAvailableResearches(username);
             researchHelper = new ResearchHelper();
             

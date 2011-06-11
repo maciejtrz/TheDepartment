@@ -26,9 +26,6 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
         if(event.getName().equals(ConnectionSingleton.Auth)) {
             Auth auth = (Auth) event.getValue();
             UserManager.addUser(auth);
-        } else if(event.getName().equals(ConnectionSingleton.researchBag)) {
-            ResearchBag researchBag = (ResearchBag) event.getValue();
-            UserManager.addResearchBag(researchBag);
         }
     }
 
@@ -39,23 +36,18 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
         } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
 
-            ResearchHelper researchHelper = new ResearchHelper();
             ResearchBag researchBag = (ResearchBag) event.getValue();
 
-           if (!UserManager.containsResearchBag(researchBag.getUserid()) &&
-                    !researchBag.getAvailableResearch().isEmpty()) {
-
-                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
-
-           }
-
+            System.out.println("Removing research bag of: " + researchBag.getUserid());
             UserManager.removeResearchBag(researchBag.getUserid());
 
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
 
             System.out.println("Removing auth in session listener");
             Auth auth = (Auth) event.getValue();
+
             UserManager.removeUser(auth.getUsername());
+
             Playerresources resources = auth.getResources();
             PlayerresourcesHelper resourcesHelper = new PlayerresourcesHelper();
             resourcesHelper.updateResources(resources);

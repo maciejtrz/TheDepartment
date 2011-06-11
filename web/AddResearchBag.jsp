@@ -1,3 +1,4 @@
+<%@page import="Connections.UserManager"%>
 <%@page import="Connections.AuthorizationSingleton"%>
 <%@page import="Connections.ConnectionSingleton"%>
 <%@page import="UserBeans.Auth"%>
@@ -11,15 +12,11 @@
 <%
     Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
 
-    System.out.println("Auth username: " + auth.getUsername());
-
-    if(researchBag == null) {
-        System.out.println("Research bag is null");
-        } else {
-        System.out.println("Research bag is NOT null");
-     }
-    researchBag.initialize(auth.getUsername());
+    researchBag.initialize(new String(auth.getUsername()));
+    System.out.println("Name in research bag: " + researchBag.getUserid());
+    
     session.setAttribute(ConnectionSingleton.researchBag, researchBag);
+    UserManager.addResearchBag(researchBag);
 
     System.out.println("Creating research bag bean...");
     AuthorizationSingleton.goToWelcomePage(response);

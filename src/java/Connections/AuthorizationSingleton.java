@@ -131,10 +131,11 @@ public class AuthorizationSingleton {
         session.removeAttribute(ConnectionSingleton.password);
         System.out.println("Removing auth in Authorization Singleton");
         session.removeAttribute(ConnectionSingleton.Auth);
-        System.out.println("Removing auth in Authorization Singleton");
+        System.out.println("Removing research bag in Authorization Singleton");
         session.removeAttribute(ConnectionSingleton.researchBag);
 
 
         removeCookies(request, response, session);
+        session.invalidate();
     }
 }

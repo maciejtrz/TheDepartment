@@ -118,4 +118,5 @@ public class ResearchHelper extends AbstractHelper {
            commitTransaction(session);
     }
 
+
 }

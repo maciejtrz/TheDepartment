@@ -6,12 +6,9 @@ import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
@@ -123,14 +120,14 @@ public class Research  implements java.io.Serializable, Runnable {
         state = RUNNING;
 
         try {
-            researchTime = 100;
+            researchTime = 30;
 
             while (researchTime > 0) {
 
                 while(state == STOPPED)
                     Thread.sleep(2000);
 
-                Thread.sleep(100);
+                Thread.sleep(1000);
                 researchTime--;
             }
 

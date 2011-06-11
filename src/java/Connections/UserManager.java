@@ -16,6 +16,8 @@ import UserBeans.Auth;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -94,8 +96,25 @@ public class UserManager {
     }
 
     static public void removeResearchBag(String username) {
-        if(isUserMonitored(username)) {
-            sessionResearchBag.remove(username);
+        System.out.println("Is user monitored: " + isUserMonitored(username));
+       // System.out.println("Are all researches finished: " + )
+        if(!isUserMonitored(username) && getResearchBag(username).getResearches().isEmpty()) {
+
+            ResearchBag researchBag = getResearchBag(username);
+            ResearchHelper researchHelper = new ResearchHelper();
+
+            researchHelper.deleteAllResearches(researchBag.getUserid());
+
+
+            System.out.println("Writing researches to DB...");
+            
+            if (!researchBag.getAvailableResearch().isEmpty()) {
+
+                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
+
+           }
+
+           sessionResearchBag.remove(username);
         }
     }
 
@@ -175,16 +194,19 @@ public class UserManager {
     }
 
     static synchronized private void addResearchFromDB(Research research) {
+
+            ResearchBag researchBag = getResearchBag(research.getUserId());
+
+            researchBag.getResearches().remove(research);
+
             Integer researchId = research.getId().getResearchid();
             ResearchTreeNode researchTreeNode =
                     ResearchDevelopment.getResearchTreeNode(researchId);
-
 
             Iterator<ResearchTreeNode> iterator =
                     researchTreeNode.getDependentResearches().iterator();
 
             ResearchHelper researchHelper = new ResearchHelper();
-
 
             while(iterator.hasNext()) {
                 ResearchTreeNode newTreeNode = iterator.next();
@@ -202,8 +224,10 @@ public class UserManager {
     static synchronized private void addResearchFromMemory(Research research) {
         
             ResearchBag researchBag = getResearchBag(research.getUserId());
-
             researchBag.getResearches().remove(research);
+
+            System.out.println("user mananger - userId: " + research.getUserId());
+            System.out.println("Size of researchs: " + researchBag.getResearches().size());
 
             Integer researchId = research.getId().getResearchid();
             ResearchTreeNode researchTreeNode =
@@ -219,13 +243,14 @@ public class UserManager {
             }
 
             researchBag.getAvailableResearch().remove(researchId);
+            
     }
 
     static synchronized public void addResearch(Research research) {
         System.out.println("Adding research points...");
         addResearchPoints(research.getUserId(),research.getResearchpoints());
 
-        if(isUserMonitored(research.getUserId())) {
+        if(containsResearchBag(research.getUserId())) {
             
             System.out.println("Adding info about research to main memory");
             addResearchFromMemory(research);
@@ -236,6 +261,9 @@ public class UserManager {
             addResearchFromDB(research);
 
         }
+
+           removeResearchBag(research.getUserId());
+
     }
 
 

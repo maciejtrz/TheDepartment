@@ -19,18 +19,46 @@ and open the template in the editor.
 
     <body>
 
-        
+<h:form id="tform">
+    <p:toolbar id="tbar">
+    <p:toolbarGroup align="left">
+        <p:commandButton type="push" value="New" image="ui-icon-document" />
 
-<h:form id="lmenu">
+        <p:commandButton type="push" value="Open" image="ui-icon-folder-open"/>
 
-    <p:menu id="lmenu">
+        <p:divider />
+
+        <p:commandButton type="push" title="Save" image="ui-icon-disk"/>
+        <p:commandButton type="push" title="Delete" image="ui-icon-trash"/>
+        <p:commandButton type="push" title="Print" image="ui-icon-print"/>
+    </p:toolbarGroup>
+
+    <p:divider />
+
+    <p:toolbarGroup align="right">
+        <p:menuButton value="Navigate">
+            <p:menuitem value="Home" url="http://www.primefaces.org" />
+            <p:menuitem value="ShowCase"
+                        url="http://www.primefaces.org/showcase" />
+            <p:menuitem value="TouchFaces"
+                        url="http://www.primefaces.org/showcase/touch" />
+        </p:menuButton>
+    </p:toolbarGroup>
+
+  </p:toolbar>
+</h:form>
+                
+
+<h:form id="lform">
+
+    <p:menu id="lmenu" style="width: 200px">
         <p:submenu label="Messages">
             <p:menuitem value="New" onclick="newmsg.show();" actionListener="#{buttonBean.save}" />
             <p:menuitem value="Inbox" actionListener="#{buttonBean.update}"  />
         </p:submenu>
 
         <p:submenu label="Reasearches">
-            <p:menuitem value="New" actionListener="#{buttonBean.save}" />
+            <p:menuitem value="New" onclick="newres.show();" actionListener="#{buttonBean.save}" />
             <p:menuitem value="Manage" actionListener="#{buttonBean.update}" />
         </p:submenu>
 
@@ -51,11 +79,101 @@ and open the template in the editor.
 
 
 
-        <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700" 
+<p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700" 
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
    
     <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
+</p:dialog>
+
+
+
+<p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700" 
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <h1>Adding research: </h1>
+        <p>Now, you must specify what research you would like to perform.</p>
+
+        <h:form>
+
+            <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
+
+                <p:tab id="researchSubject" title="Research Subject" >
+                    <p:panel header="ResarchSubject">
+                        <h:outputText value="Choose research subject: " />
+                        <h:selectOneMenu value="#{addResearch.subject}" >
+                            <f:selectItems value="#{addResearch.subjects}"/>
+                        </h:selectOneMenu>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="researchLecturers" title="Lecturers for Research" >
+                    <p:panel header="Lecturers for Research">
+                        <h:outputText value="Choose lecturers: "/>
+                        <h:selectManyListbox value="#{addResearch.lecturers}">
+                            <f:selectItems value="#{addResearch.lecturerList}"/>
+                        </h:selectManyListbox>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="availableResearches" title="Available Researches" >
+                    <p:panel header="Available Researches">
+                        <h:outputText value="Choose research: "/>
+                        <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                            <f:selectItems value="#{addResearch.availableResearches}"/>
+                        </h:selectOneMenu>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="moneyAmount" title="Specify money grant for research" >
+                    <p:panel header="Specify money grant for research">
+                        <h:outputText value="Input money min: "/>
+                        <h:outputText value="#{addResearch.minimumMoney}" />
+                        <h:outputText value=" max: " />
+                        <h:outputText value="#{addResearch.maximumMoney}"/>
+                        <h:inputText value="#{addResearch.moneyAmount}" />
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirmation" title="Research Confirmation" >
+                    <p:panel header="Research Confirmation">
+
+                        <h:panelGrid columns="2" border="1" >
+
+                            <h:outputText value="Name of Research: "/>
+                            <h:outputText value="#{addResearch.researchName}" />
+
+                            <h:outputText value="Money: "/>
+                            <h:outputText value="#{addResearch.moneyAmount}" />
+
+                            <h:outputText value="Subject: "/>
+                            <h:outputText value="#{addResearch.subjectName}" />
+
+                            <h:commandButton actionListener="#{addResearch.startResearch}" value="Add Research"/>
+                            <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
+
+                        </h:panelGrid>
+
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </h:form>
+
+        <h3>Available researches: </h3>
+
+        <h:form>
+            <p:tree value="#{addResearch.root}" var="node">
+                <p:treeNode>
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+            </p:tree>
+
+        </h:form>
+
+        <a onclick="newres.hide()">Go Back to Playing</a>
+
 </p:dialog>
 
 

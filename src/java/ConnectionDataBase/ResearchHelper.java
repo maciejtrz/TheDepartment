@@ -106,4 +106,14 @@ public class ResearchHelper extends AbstractHelper {
         }
     }
 
+    public void addResearch(Research researchInstance) {
+            Session session = createNewSessionAndTransaction();
+            session.save(researchInstance);
+            commitTransaction(session);
+    }
+
+    public void deleteResearch(Research researchInstance) {
+           
+    }
+
 }

@@ -7,8 +7,13 @@ package Connections;
 
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
+import ConnectionDataBase.Research;
+import ConnectionDataBase.ResearchHelper;
+import ResearchPoints.ResearchDevelopment;
+import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -98,7 +103,7 @@ public class UserManager {
 
     }
 
-    static synchronized public void addResourcesPoints(String username, int researchPoints) {
+    static synchronized public void addResearchPoints(String username, int researchPoints) {
             Playerresources resources = getResources(username);
             resources.setResearchpoints(resources.getResearchpoints()+researchPoints);
             saveResources(username,resources);
@@ -147,6 +152,59 @@ public class UserManager {
             Playerresources resources = getResources(username);
             resources.setUndergraduatesnumber(resources.getUndergraduatesnumber()+undergraduatesnumber);
             saveResources(username,resources);
+    }
+
+    static synchronized private void addResearchFromDB(Research research) {
+            Integer researchId = research.getId().getResearchid();
+            ResearchTreeNode researchTreeNode =
+                    ResearchDevelopment.getResearchTreeNode(researchId);
+
+            Iterator<ResearchTreeNode> iterator =
+                    researchTreeNode.getDependentResearches().iterator();
+
+            ResearchHelper researchHelper = new ResearchHelper();
+
+
+            while(iterator.hasNext()) {
+                ResearchTreeNode newTreeNode = iterator.next();
+                Research researchInstance = new Research(newTreeNode.getResearchInstance().getResearchname(),
+                                                           newTreeNode.getResearchInstance().getResearchid());
+
+                researchHelper.addResearch(researchInstance);
+            }
+
+            researchHelper.deleteResearch(research);
+    }
+
+    static synchronized private void addResearchFromMemory(Research research) {
+        
+            Integer researchId = research.getId().getResearchid();
+            ResearchTreeNode researchTreeNode =
+                    ResearchDevelopment.getResearchTreeNode(researchId);
+
+            Iterator<ResearchTreeNode> iterator =
+                    researchTreeNode.getDependentResearches().iterator();
+
+            while(iterator.hasNext()) {
+
+                ResearchTreeNode newTreeNode = iterator.next();
+                research.getAvailableResearch().add(newTreeNode.getResearchInstance().getResearchid());
+            }
+
+            research.getAvailableResearch().remove(researchId);
+    }
+
+    static synchronized public void addResearch(Research research) {
+        System.out.println("Adding research points...");
+        addResearchPoints(research.getUserId(),research.getResearchpoints());
+
+        if(isUserMonitored(research.getUserId())) {
+            System.out.println("Adding info about research to main memory");
+            addResearchFromMemory(research);
+        } else {
+            System.out.println("Adding info about research to DB");
+            addResearchFromDB(research);
+        }
     }
 
 

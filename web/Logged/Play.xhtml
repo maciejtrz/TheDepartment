@@ -13,6 +13,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title> The Department </title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/themes/cupertino/skin.css"/>
         <p:resources/>
     </h:head>
 
@@ -20,14 +21,42 @@ and open the template in the editor.
 
         
 
-<h:form id="helloWorldPageForm">
-<p:panel id="primefacesPanel" header="Hello World"
-footer="Footer"
-style="position: relative; width: 500px; " >
-<h:outputText value="Primefaces is great. My first application using Primefaces"/>
-</p:panel>
+<h:form id="lmenu">
+
+    <p:menu id="lmenu">
+        <p:submenu label="Messages">
+            <p:menuitem value="New" onclick="newmsg.show();" actionListener="#{buttonBean.save}" />
+            <p:menuitem value="Inbox" actionListener="#{buttonBean.update}"  />
+        </p:submenu>
+
+        <p:submenu label="Reasearches">
+            <p:menuitem value="New" actionListener="#{buttonBean.save}" />
+            <p:menuitem value="Manage" actionListener="#{buttonBean.update}" />
+        </p:submenu>
+
+        <p:submenu label="Buy">
+            <p:menuitem value="Professor" actionListener="#{buttonBean.save}"  />
+            <p:menuitem value="PhD" actionListener="#{buttonBean.update}" />
+            <p:menuitem value="Students" actionListener="#{buttonBean.update}"  />
+        </p:submenu>
+
+        <p:submenu label="Department">
+            <p:menuitem value="Change Name" actionListener="#{buttonBean.save}"/>
+            <p:menuitem value="Delete" actionListener="#{buttonBean.update}" icon="ui-icon ui-icon-close" />
+            <p:menuitem value="Logout" actionListener="#{buttonBean.update}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
+        </p:submenu>
+
+    </p:menu>
 </h:form>
 
+
+
+        <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700" 
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+   
+    <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
+</p:dialog>
 
 
     </body>

@@ -1,6 +1,17 @@
+@namespace p "http://primefaces.prime.com.tr/ui";
+
 body { 
 background:url('bg.jpg');
 background-position:center top;
 background-repeat:no-repeat;
 background-attachment:scroll;
+
+font-size: 14px;
+}
+
+#lmenu {
+width:180px;
+position: absolute;
+top: 200px;
+left: 40px;
 }

@@ -9,9 +9,9 @@
 <jsp:useBean class="UserBeans.Auth" id="auth" scope="session" />
 
 <%
-    session.setAttribute(ConnectionSingleton.Auth, auth);
     auth.setUsername(session.getAttribute(ConnectionSingleton.idname).toString());
     auth.updateResearchPoints();
+    session.setAttribute(ConnectionSingleton.Auth, auth);
 
     System.out.println("Creating auth bean... username: " + auth.getUsername());
     AuthorizationSingleton.goToWelcomePage(response);

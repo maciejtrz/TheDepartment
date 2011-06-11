@@ -18,4 +18,6 @@
   <table-filter match-name="researchdependencies"/>
   <table-filter match-name="researchcatalogue"/>
   <table-filter match-name="departmentinfo"/>
+  <table-filter match-name="messagesystem"/>
+  
 </hibernate-reverse-engineering>

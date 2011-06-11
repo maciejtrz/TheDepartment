@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-Jun-2011 13:31:16 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ConnectionDataBase.Messagesystem" table="messagesystem" schema="public">
+        <id name="msgnumber" type="int">
+            <column name="msgnumber" />
+            <generator class="assigned" />
+        </id>
+        <property name="senderid" type="string">
+            <column name="senderid" not-null="true" />
+        </property>
+        <property name="receiverid" type="string">
+            <column name="receiverid" not-null="true" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" not-null="true" />
+        </property>
+        <property name="subcjet" type="string">
+            <column name="subcjet" />
+        </property>
+        <property name="msg" type="string">
+            <column name="msg" />
+        </property>
+    </class>
+</hibernate-mapping>

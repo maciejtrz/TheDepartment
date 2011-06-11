@@ -191,7 +191,7 @@ public class AddResearch {
         return getSubjectList()[getSubject()];
     }
 
-    public void startResearch() {
+    public String startResearch() {
 
         Research research = new Research(auth,availableResearches.get(getChosenResearch()).
                 getResearchInstance().getResearchid());
@@ -249,6 +249,8 @@ public class AddResearch {
         Thread thread = new Thread(research);
 
         thread.start();
+
+        return "success";
 
     }
 

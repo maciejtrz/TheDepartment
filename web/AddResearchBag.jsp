@@ -1,5 +1,6 @@
 <%@page import="Connections.AuthorizationSingleton"%>
 <%@page import="Connections.ConnectionSingleton"%>
+<%@page import="UserBeans.Auth"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,8 +9,17 @@
 <jsp:useBean class="ResearchPoints.ResearchBag" id="researchBag" scope="session" />
 
 <%
+    Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+
+    System.out.println("Auth username: " + auth.getUsername());
+
+    if(researchBag == null) {
+        System.out.println("Research bag is null");
+        } else {
+        System.out.println("Research bag is NOT null");
+     }
+    researchBag.initialize(auth.getUsername());
     session.setAttribute(ConnectionSingleton.researchBag, researchBag);
-    researchBag.initialize(session.getAttribute(ConnectionSingleton.idname).toString());
 
     System.out.println("Creating research bag bean...");
     AuthorizationSingleton.goToWelcomePage(response);

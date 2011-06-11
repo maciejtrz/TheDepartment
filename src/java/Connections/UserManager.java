@@ -9,6 +9,7 @@ import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import ConnectionDataBase.Research;
 import ConnectionDataBase.ResearchHelper;
+import ResearchPoints.ResearchBag;
 import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
@@ -24,6 +25,15 @@ public class UserManager {
 
     /* Set of all user currently having sessions */
     private static Map<String,Auth> sessionMap = new HashMap<String,Auth>();
+    private static Map<String,ResearchBag> sessionResearchBag = new HashMap<String,ResearchBag>();
+
+    public static boolean containsResearchBag(String username) {
+        return sessionResearchBag.containsKey(username);
+    }
+
+    public static ResearchBag getResearchBag(String username) {
+        return sessionResearchBag.get(username);
+    }
 
     /* Singleton */
     private UserManager() {
@@ -75,8 +85,18 @@ public class UserManager {
         sessionMap.put(auth.getUsername(), auth);
     }
 
+    static public void addResearchBag(ResearchBag researchBag) {
+        sessionResearchBag.put(researchBag.getUserid(), researchBag);
+    }
+
     static synchronized public void removeUser(String username) {
-        saveToDatabase(getUser(username).getResources());
+        sessionMap.remove(username);
+    }
+
+    static public void removeResearchBag(String username) {
+        if(isUserMonitored(username)) {
+            sessionResearchBag.remove(username);
+        }
     }
 
     static synchronized public void addMoney(String username, int money) {
@@ -159,6 +179,7 @@ public class UserManager {
             ResearchTreeNode researchTreeNode =
                     ResearchDevelopment.getResearchTreeNode(researchId);
 
+
             Iterator<ResearchTreeNode> iterator =
                     researchTreeNode.getDependentResearches().iterator();
 
@@ -167,17 +188,23 @@ public class UserManager {
 
             while(iterator.hasNext()) {
                 ResearchTreeNode newTreeNode = iterator.next();
-                Research researchInstance = new Research(newTreeNode.getResearchInstance().getResearchname(),
-                                                           newTreeNode.getResearchInstance().getResearchid());
+                Research researchInstance = new Research(research.getUserId(), newTreeNode.getResearchInstance().getResearchid());
 
                 researchHelper.addResearch(researchInstance);
             }
 
+            System.out.println("Removing researchId: " + research.getId().getResearchid() +
+                    " at user id: " + research.getId().getIdname());
+            
             researchHelper.deleteResearch(research);
     }
 
     static synchronized private void addResearchFromMemory(Research research) {
         
+            ResearchBag researchBag = getResearchBag(research.getUserId());
+
+            researchBag.getResearches().remove(research);
+
             Integer researchId = research.getId().getResearchid();
             ResearchTreeNode researchTreeNode =
                     ResearchDevelopment.getResearchTreeNode(researchId);
@@ -188,10 +215,10 @@ public class UserManager {
             while(iterator.hasNext()) {
 
                 ResearchTreeNode newTreeNode = iterator.next();
-                research.getAvailableResearch().add(newTreeNode.getResearchInstance().getResearchid());
+                researchBag.getAvailableResearch().add(newTreeNode.getResearchInstance().getResearchid());
             }
 
-            research.getAvailableResearch().remove(researchId);
+            researchBag.getAvailableResearch().remove(researchId);
     }
 
     static synchronized public void addResearch(Research research) {
@@ -199,11 +226,15 @@ public class UserManager {
         addResearchPoints(research.getUserId(),research.getResearchpoints());
 
         if(isUserMonitored(research.getUserId())) {
+            
             System.out.println("Adding info about research to main memory");
             addResearchFromMemory(research);
+
         } else {
+
             System.out.println("Adding info about research to DB");
             addResearchFromDB(research);
+
         }
     }
 

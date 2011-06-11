@@ -128,7 +128,7 @@ public class Research  implements java.io.Serializable, Runnable {
             while (researchTime > 0) {
 
                 while(state == STOPPED)
-                    Thread.sleep(500);
+                    Thread.sleep(2000);
 
                 Thread.sleep(100);
                 researchTime--;
@@ -138,8 +138,6 @@ public class Research  implements java.io.Serializable, Runnable {
 
         } finally {
             System.out.println("Finishing: " + getName());
-
-            researchList.remove(this);
 
             /* updating research table and adding research points */
             UserManager.addResearch(this);
@@ -171,6 +169,7 @@ public class Research  implements java.io.Serializable, Runnable {
     }
 
     public String manageResearch() throws IOException {
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
@@ -179,6 +178,7 @@ public class Research  implements java.io.Serializable, Runnable {
         session.setAttribute(ConnectionSingleton.researchName, getName());
 
         return "go";
+
     }
 
     public void changeState() {

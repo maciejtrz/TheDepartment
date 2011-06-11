@@ -113,7 +113,9 @@ public class ResearchHelper extends AbstractHelper {
     }
 
     public void deleteResearch(Research researchInstance) {
-           
+           Session session = createNewSessionAndTransaction();
+           session.delete(researchInstance);
+           commitTransaction(session);
     }
 
 }

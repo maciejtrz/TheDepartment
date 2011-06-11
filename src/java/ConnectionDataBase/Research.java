@@ -1,6 +1,7 @@
 package ConnectionDataBase;
 
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
 
 public class Research  implements java.io.Serializable, Runnable {
-
 
     private ResearchId id;
     private Integer researchpoints;
@@ -40,6 +40,10 @@ public class Research  implements java.io.Serializable, Runnable {
         researchers = new ArrayList<Lecturer>();
         state = STOPPED;
         progress = 0;
+    }
+
+    public Research(String name, int researchId) {
+        id = new ResearchId(name, researchId);
     }
 
     public Research(ResearchId id) {
@@ -115,11 +119,6 @@ public class Research  implements java.io.Serializable, Runnable {
         this.money = money;
     }
 
-    private void addPointsToUser() throws SQLException {
-        auth.setResearchPoints(getResearchpoints());
-        auth.setMoney(auth.getMoney()-getMoney());
-    }
-
     public void run() {
         state = RUNNING;
 
@@ -129,7 +128,7 @@ public class Research  implements java.io.Serializable, Runnable {
             while (researchTime > 0) {
 
                 while(state == STOPPED)
-                    Thread.sleep(100);
+                    Thread.sleep(500);
 
                 Thread.sleep(100);
                 researchTime--;
@@ -142,23 +141,10 @@ public class Research  implements java.io.Serializable, Runnable {
 
             researchList.remove(this);
 
-            Integer researchId = getId().getResearchid();
-            ResearchTreeNode researchTreeNode =
-                    ResearchDevelopment.getResearchTreeNode(researchId);
+            /* updating research table and adding research points */
+            UserManager.addResearch(this);
 
-            Iterator<ResearchTreeNode> iterator =
-                    researchTreeNode.getDependentResearches().iterator();
-
-            while(iterator.hasNext()) {
-
-                ResearchTreeNode newTreeNode = iterator.next();
-                System.out.println("Adding: " + newTreeNode.getResearchInstance().getResearchid());
-                availableResearch.add(newTreeNode.getResearchInstance().getResearchid());
-            }
-
-            availableResearch.remove(researchId);
             state = FINISHED;
-
             /* Making all participating lecturer usable again.*/
             LecturersHelper helper
                     = new LecturersHelper();
@@ -170,11 +156,6 @@ public class Research  implements java.io.Serializable, Runnable {
             }
 
         }
-           try {
-                addPointsToUser();
-            } catch (SQLException ex) {
-                Logger.getLogger(Research.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }
 
     public Integer getResearchTime() {
@@ -211,6 +192,10 @@ public class Research  implements java.io.Serializable, Runnable {
 
     public boolean equals(Research research) {
         return research.getId().getResearchid() == getId().getResearchid();
+    }
+
+    public List<Integer> getAvailableResearch() {
+        return availableResearch;
     }
 
 

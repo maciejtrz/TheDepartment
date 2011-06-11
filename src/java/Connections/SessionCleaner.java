@@ -38,10 +38,9 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
             ResearchBag researchBag = (ResearchBag) event.getValue();
 
            if (researchBag != null && !researchBag.getAvailableResearch().isEmpty()) {
-
-                researchHelper.addResearches(researchBag.getUserid(),
-                        researchBag.getAvailableResearch());
+                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
            }
+
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
             Auth auth = (Auth) event.getValue();
             UserManager.removeUser(auth.getUsername());

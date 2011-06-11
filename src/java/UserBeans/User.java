@@ -46,21 +46,7 @@ public class User {
 
     private void logoff() throws IOException {
 
-        System.out.println("Logging off...");
-
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-
-        session.removeAttribute(ConnectionSingleton.idname);
-        session.removeAttribute(ConnectionSingleton.password);
-
-
-        AuthorizationSingleton.removeCookies(request, response, session);
-
-        System.out.println("Logging out!");
-        System.out.println("Waiting for index...");
+        AuthorizationSingleton.logoff();
 
     }
 }

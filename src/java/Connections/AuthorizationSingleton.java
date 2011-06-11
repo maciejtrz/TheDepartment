@@ -125,6 +125,8 @@ public class AuthorizationSingleton {
 
         updateUserStatus(session.getAttribute(ConnectionSingleton.idname).toString(), false);
 
+        System.out.println("Logging off...");
+
         session.removeAttribute(ConnectionSingleton.idname);
         session.removeAttribute(ConnectionSingleton.password);
         session.removeAttribute(ConnectionSingleton.Auth);

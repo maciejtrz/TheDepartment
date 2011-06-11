@@ -22,7 +22,7 @@ public class User {
 
     public String deleteMe() throws IOException {
 
-        String username = new String(utilities.BasicUtils.getUserName());
+        String username = utilities.BasicUtils.getUserName();
         logoff();
 
         /* Deleting department. */

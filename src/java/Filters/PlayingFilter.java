@@ -32,28 +32,23 @@ public class PlayingFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        System.out.println("Going through playing filter...");
-
         if (!AuthorizationSingleton.isSessionValid(session)) {
 
             AuthorizationSingleton.goToIndexPage(res);
             return;
 
         } else {
-
-
             DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-
-            System.out.println("Our context path is: " + req.getPathTranslated());
 
             boolean isItWelcomePage = req.getPathTranslated().endsWith(ConnectionSingleton.AddDepartment);
             boolean hasDepartment = departmentInfo.hasDepartment(session.
                     getAttribute(ConnectionSingleton.idname).toString());
+
            if (!hasDepartment && !isItWelcomePage) {
                 AuthorizationSingleton.goToWelcomePage(res);
                 return;
            } else if(hasDepartment && isItWelcomePage) {
-                res.sendRedirect("/TheDepartment/faces/Logged/Play.xhtml");
+                res.sendRedirect("/TheDepartment/faces/Logged/Playing.xhtml");
                 return;
            }
 

@@ -21,23 +21,9 @@
             <h1><h:outputText value="#{auth.username}" /></h1>
 
             <h:form>
-                <h:commandButton value="Get me out of here" action="#{unlog.logoff}"/>
-                <h:commandButton value="Delete me" action="#{user.deleteMe}"/>
-                <%
-
-                DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
-
-                if (!departmentInfo.hasDepartment(session.getAttribute(ConnectionSingleton.idname).toString())) {
-                 %>
-
-                 <h:commandButton value="Add Department" action="#{addDepartment.go}" />
-                 <%
-                    } else {
-
-                 %>
-                 <h:commandButton value="Start playing" action="#{department.startPlaying}" />
-                 <h:commandButton value="Delete Department" action="#{department.deleteDepartment}" />
-                 <% } %>
+                <h:outputText value="Department Name:" />
+                <h:inputText value="#{addDepartment.name}" />
+                <h:commandButton value="Add Department" action="#{addDepartment.addDepartment}"/>
             </h:form>
 
         </body>

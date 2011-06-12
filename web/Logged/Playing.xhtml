@@ -69,8 +69,11 @@
         <a href="/TheDepartment/faces/Logged/AddResearch.xhtml">Add Research</a>
         <a href="/TheDepartment/faces/Logged/StaffShop.jsp">Buy Staff</a>
         <a href="/TheDepartment/faces/Logged/Lecturers.jsp">Buy Lecturers</a>
-        <a href="/TheDepartment">Go To Welcome Page </a>
 
+        <h:form>
+        <h:commandButton value="Get me out of here" action="#{unlog.logoff}"/>
+        <h:commandButton value="Delete me" action="#{user.deleteMe}"/>
+        </h:form>
     </h:body>
 </html>
 

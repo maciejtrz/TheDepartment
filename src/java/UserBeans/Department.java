@@ -29,7 +29,7 @@ public class Department {
         this.username = username;
     }
 
-    public void deleteDepartment() throws IOException {
+    public String deleteDepartment() throws IOException {
         
         // Deleting player resources.
         //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
@@ -63,6 +63,7 @@ public class Department {
         // Deleting students info.
         // TODO
 
+        return "success";
 
     }
 

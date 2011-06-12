@@ -63,7 +63,7 @@ public class Shop {
     }
 
     public String submit() throws SQLException {
-
+//TO DO: DIVIDE INTO TWO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         Capacity capacity = capacityhelper.getCapacity(name);
 

@@ -48,7 +48,7 @@ public class PlayingFilter implements Filter {
                 AuthorizationSingleton.goToWelcomePage(res);
                 return;
            } else if(hasDepartment && isItWelcomePage) {
-                res.sendRedirect("/TheDepartment/faces/Logged/Playing.xhtml");
+                res.sendRedirect("/TheDepartment/faces/Logged/Play.xhtml");
                 return;
            }
 

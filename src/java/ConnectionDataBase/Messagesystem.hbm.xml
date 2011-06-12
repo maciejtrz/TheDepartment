@@ -6,7 +6,7 @@
     <class name="ConnectionDataBase.Messagesystem" table="messagesystem" schema="public">
         <id name="msgnumber" type="int">
             <column name="msgnumber" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="senderid" type="string">
             <column name="senderid" not-null="true" />

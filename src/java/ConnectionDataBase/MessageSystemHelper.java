@@ -21,8 +21,7 @@ public class MessageSystemHelper extends AbstractHelper {
     public void createMessage(String SenderID, String ReceiverID, String subject, String text, int messageType) {
 
         Messagesystem msg = new Messagesystem();
-        int num = getMsgNum();
-        msg.setMsgnumber(num);
+
         msg.setSenderid(SenderID);
         msg.setReceiverid(ReceiverID);
 

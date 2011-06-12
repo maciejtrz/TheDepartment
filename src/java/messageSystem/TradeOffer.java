@@ -115,7 +115,7 @@ public class TradeOffer extends MessageManager {
         setAmountWanted(getNumber(nextPosition++,message));
 
         setSubject(getOneLine(nextPosition++,message));
-        setTradeDescription(getTradeDesrciption(nextPosition++,message));
+        setTradeDescription(getTradeDesrciptionText(nextPosition++,message));
     }
 
     private int getNumber(Integer nextPosition, char[] encodedMessage) {
@@ -137,7 +137,7 @@ public class TradeOffer extends MessageManager {
         return builder.toString();
     }
 
-    public String getTradeDesrciption(Integer nextPosition, char[] message) {
+    public String getTradeDesrciptionText(Integer nextPosition, char[] message) {
         StringBuilder builder = new StringBuilder();
 
         for( ; nextPosition < message.length; nextPosition++)
@@ -149,7 +149,10 @@ public class TradeOffer extends MessageManager {
     public String encode() {
         return getResourcesOfferedType() + "=" + getAmountOffered() + " " +
                 getResourcesWantedType() + "=" + getAmountWanted() + " " +
-                getSubject() + "\n" + getText();
+                (getSubject() == null || getSubject().isEmpty()
+                        ? "" : getSubject()) + "\n" +
+                (getTradeDescription() == null || getSubject().isEmpty()
+                        ? "" : getTradeDescription());
     }
 
 }

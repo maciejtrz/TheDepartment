@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package UserBeans;
 
 import ConnectionDataBase.MessageSystemHelper;
-import Connections.ConnectionSingleton;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
+import ConnectionDataBase.PlayerHelper;
+import ConnectionDataBase.Players;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -17,64 +18,81 @@ import javax.servlet.http.HttpSession;
  */
 public class Message {
 
-   // public String sender;
+    // public String sender;
     public String receiver;
     public String subject;
     public String text;
 
+    /*Selected reicever*/
+    private int selectedReceiver;
+
+    /*List of users*/
+    public List<Players> users;
 
     /** Creates a new instance of Message */
     public Message() {
         System.out.println("Creating new Message Bean");
-    }
-/*
-    public void setSender(String sender){
-        this.sender=sender;
+        this.users = new ArrayList<Players>();
     }
 
-    public String getSender(){
-        return this.sender;
-    }
-    */
-
-    public void setReceiver(String receiver){
-        this.receiver=receiver;
+    public void setSelectedReceiver(int s) {
+        this.selectedReceiver = s;
     }
 
-    public String getReceiver(){
+    public int getSelectedReceiver() {
+        return this.selectedReceiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReceiver() {
         return this.receiver;
     }
 
-    public void setSubject(String subject){
-        this.subject=subject;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public String getSubject(){
+    public String getSubject() {
         return this.subject;
     }
 
-    public void setText(String text){
-        this.text=text;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getText(){
+    public String getText() {
         return this.text;
     }
 
-    public void send(){
+    public void send() {
 
-        System.out.println ("Send method invoked");
+        System.out.println("Send method invoked");
         String name = utilities.BasicUtils.getUserName();
 
-
         MessageSystemHelper msghelp = new MessageSystemHelper();
-        // System.out.println(name);
-       /* System.out.println(getReceiver());
-        System.out.println(getSubject());
-        System.out.println(getText());
-        100% working, fields not null
-        */
-        msghelp.createMsg(name,getReceiver(), getSubject(), getText());
+        msghelp.createMsg(name, users.get(selectedReceiver).getIdname(), getSubject(), getText());
 
+    }
+
+    public List<SelectItem> getReceivers() {
+        List<SelectItem> receiverList = new ArrayList<SelectItem>();
+        int i = 0;
+
+        PlayerHelper ph = new PlayerHelper();
+
+        Iterator<Players> iterator = ph.getPlayers().iterator();
+
+        while (iterator.hasNext()) {
+            Players player = iterator.next();
+
+            receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
+            users.add(player);
+            System.out.println(player.getIdname());
+        }
+
+        return receiverList;
     }
 }

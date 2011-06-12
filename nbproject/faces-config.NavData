@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="Unlogged/index.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="Logged/Playing.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="Unlogged/AddUser.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="Logged/StaffShop.jsp" x="150" y="450" zoom="true"/>
+        <Node id="Logged/Lecturers.jsp" x="900" y="300" zoom="true"/>
+        <Node id="Logged/WelcomePage.jsp" x="650" y="150" zoom="true"/>
+        <Node id="Logged/AddResearch.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="Logged/Play.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="Logged/Msg.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="Logged/DeptName.jsp" x="150" y="150" zoom="true"/>
+        <Node id="AddAuth.jsp" x="900" y="150" zoom="true"/>
+        <Node id="AddResearchBag.jsp" x="150" y="300" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

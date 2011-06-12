@@ -14,20 +14,20 @@ and open the template in the editor.
         <title>TODO supply a title</title>
     </head>
     <body>
-        <form>
+        <h:form>
 
             <h:outputText value="To:" />
             <h:inputText value="#{message.receiver}"/>
             <br></br>
-                    <h:outputText value="Subject:"/>
+            -<h:outputText value="Subject:"/>
             <h:inputText value="#{message.subject}"/>
             <br></br>
                 
-            <h:inputTextarea style="width:300px;height:100px;"/>
+            <h:inputTextarea style="width:300px;height:100px;" value="#{message.text}"/>
             <br></br>
 
-             <h:commandButton value="Send" action="#{message.send}"/>
+            <h:commandButton value="Send" action="#{message.send}"/>
 
-        </form>
+        </h:form>
     </body>
 </html>

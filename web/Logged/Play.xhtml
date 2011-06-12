@@ -155,11 +155,48 @@ and open the template in the editor.
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
 
+            <h:form>
+            <h:outputText value="To: " />
+                <h:selectOneMenu value="#{tradeMessageWriter.selectedReceiver}">
+                    <f:selectItems value="#{tradeMessageWriter.receivers}"/>
+                </h:selectOneMenu>
+
+            <br/>
+                <h:outputText value="Title of the trade: "/>
+                <h:inputText value="#{tradeMessageWriter.subject}" />
+            <br/>
+                <h:outputText value="Offered resources:" />
+                <h:selectOneMenu value="#{tradeMessageWriter.resourcesOfferedType}">
+                    <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
+                </h:selectOneMenu>
+
+                <h:outputText value="Offered amount: "/>
+                <p:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" />
+                <p:slider for="offeredAmount"/>
+                <br/>
+                <h:outputText value="Wanted resources:" />
+                <h:selectOneMenu value="#{tradeMessageWriter.resourcesWantedType}">
+                    <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
+                </h:selectOneMenu>
+
+                <h:outputText value="Wanted amount: "/>
+                <p:inputText id="wantedAmount" value="#{tradeMessageWriter.amountWanted}" />
+                <p:slider for="wantedAmount"/>
+                <br/>
+                <h:outputText value="Trade description (arguments?)"/>
+                <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
+                                 value="#{tradeMessageWriter.tradeDescription}"/>
+
+                <h:commandButton value="Make Trade Offer" actionListener="#{tradeMessageWriter.sendTrade}" />
+            </h:form>
+
+
             <a onclick="newtrade.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
         <p:dialog header="View Trades" widgetVar="viewtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
 
 
             <a onclick="viewtrade.hide()"> CLICK THIS TO HIDE </a>

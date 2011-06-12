@@ -5,14 +5,17 @@
 
 package messageSystem;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.model.SelectItem;
+
 /**
  *
  * @author kp1209
  */
 public class TradeOffer extends MessageManager {
 
-    private String receiverId;
-    private String giverId;
+    private static List<SelectItem> resources;
 
     private String subject;
     private String tradeDescription;
@@ -31,22 +34,17 @@ public class TradeOffer extends MessageManager {
 
         resourcesWantedType = 0;
         amountWanted = 0;
+
+        if(resources == null) {
+            resources = new ArrayList<SelectItem>();
+            for(int i = 0;i < ResourcesType.getResourcesList().length;i++) {
+                resources.add(new SelectItem(new Integer(i),ResourcesType.getResourcesList()[i]));
+            }
+        }
     }
 
-    public String getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(String receiverId) {
-        this.receiverId = receiverId;
-    }
-
-    public String getGiverId() {
-        return giverId;
-    }
-
-    public void setGiverId(String giverId) {
-        this.giverId = giverId;
+    public List<SelectItem> getAvailableResources() {
+        return resources;
     }
 
     public String getSubject() {

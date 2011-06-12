@@ -18,7 +18,7 @@ import org.hibernate.Session;
  */
 public class MessageSystemHelper extends AbstractHelper {
 
-    public void createMsg(String SenderID, String ReceiverID, String subject, String text, int messageType) {
+    public void createMessage(String SenderID, String ReceiverID, String subject, String text, int messageType) {
 
         Messagesystem msg = new Messagesystem();
         int num = getMsgNum();
@@ -74,9 +74,10 @@ public class MessageSystemHelper extends AbstractHelper {
         return (q.list().size());
     }
 
-    public List<Messagesystem> getMessages(String receiver) {
+    public List<Messagesystem> getMessages(String receiver, int messageType) {
         Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Messagesystem where ReceiverId = '" + receiver + "'");
+        Query q = session.createQuery("from Messagesystem where ReceiverId = '" + receiver + "'"
+                + "and type=" + messageType);
 
         return q.list();
     }

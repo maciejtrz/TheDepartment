@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 09-Jun-2011 17:14:20 by Hibernate Tools 3.2.1.GA
+// Generated 11-Jun-2011 15:50:27 by Hibernate Tools 3.2.1.GA
 
 
 

@@ -31,19 +31,26 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
     public void attributeRemoved(HttpSessionBindingEvent event) {
         if (event.getName().equals(ConnectionSingleton.idname)) {
+
             AuthorizationSingleton.updateUserStatus(event.getValue().toString(), false);
+
         } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
 
-            ResearchHelper researchHelper = new ResearchHelper();
             ResearchBag researchBag = (ResearchBag) event.getValue();
 
-           if (researchBag != null && !researchBag.getAvailableResearch().isEmpty()) {
-                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
-           }
+            System.out.println("Removing research bag of: " + researchBag.getUserid());
+            UserManager.removeResearchBag(researchBag.getUserid());
 
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
+
+            System.out.println("Removing auth in session listener");
             Auth auth = (Auth) event.getValue();
+
             UserManager.removeUser(auth.getUsername());
+
+            Playerresources resources = auth.getResources();
+            PlayerresourcesHelper resourcesHelper = new PlayerresourcesHelper();
+            resourcesHelper.updateResources(resources);
         }
 
     }

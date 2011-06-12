@@ -2,7 +2,7 @@ package ResearchPoints;
 
 import ConnectionDataBase.Research;
 import ConnectionDataBase.ResearchHelper;
-import ConnectionDataBase.ResearchId;
+import Connections.UserManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,20 +12,34 @@ import specializationsGenerator.SpecializationsGenerator;
 
 public class ResearchBag {
 
-    private List<Research> researchBag = new ArrayList<Research>();
+    private List<Research> ongoingResearches = new ArrayList<Research>();
     private List<Integer> availableResearch;
     private String username;
     private ResearchHelper researchHelper;
     private Research selectedResearch;
 
     public ResearchBag() {
-        researchHelper = new ResearchHelper();
     }
 
     public void initialize(String username) {
-        this.username = username;
-        availableResearch = researchHelper.getAvailableResearches(username);
+
+        System.out.println("Initialization research bag for: " + username);
         researchHelper = new ResearchHelper();
+
+        this.username = username;
+        
+        if(UserManager.containsResearchBag(username)) {
+
+            ResearchBag researchBag = UserManager.getResearchBag(username);
+            ongoingResearches = researchBag.getResearches();
+            availableResearch = researchBag.getAvailableResearch();
+
+        } else {
+
+            availableResearch = researchHelper.getAvailableResearches(username);
+            researchHelper = new ResearchHelper();
+            
+        }
     }
 
     public String getUserid() {
@@ -47,11 +61,11 @@ public class ResearchBag {
     }
 
     public List<Research> getResearches() {
-        return researchBag;
+        return ongoingResearches;
     }
 
-    public void setResearches(List<Research> researchBag) {
-        this.researchBag = researchBag;
+    public void setResearches(List<Research> ongoingResearches) {
+        this.ongoingResearches = ongoingResearches;
     }
 
     public void update() {

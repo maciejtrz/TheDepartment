@@ -21,27 +21,27 @@ public class PlayerresourcesHelper extends AbstractHelper {
 
     }
 
-    public Playerresources getResources (String idname) {
+    public Playerresources getResources(String idname) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
-        return (Playerresources)q.uniqueResult();
+        return (Playerresources) q.uniqueResult();
     }
 
-    public int getMoney (String idname) {
+    public int getMoney(String idname) {
 
         int money = 0;
         Session session = createNewSessionAndTransaction();
-        
+
         Query q = session.createQuery("from Playerresources where idname = '"
                 + idname + "'");
-        Playerresources resources = (Playerresources)q.uniqueResult();
+        Playerresources resources = (Playerresources) q.uniqueResult();
         if (resources != null) {
             money = resources.getMoney();
         }
         return money;
     }
-    
+
     public int getResearchpoints(String idname) {
 
         int points = 0;
@@ -51,17 +51,18 @@ public class PlayerresourcesHelper extends AbstractHelper {
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
 
-        if(resources != null)
+        if (resources != null) {
             points = resources.getResearchpoints();
+        }
 
         return points;
     }
 
-    public void updateMoney (String idname , int newValue) {
+    public void updateMoney(String idname, int newValue) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
-        Playerresources resource = (Playerresources)q.uniqueResult();
+        Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setMoney(newValue);
             commitTransaction(session);
@@ -74,7 +75,7 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
         Playerresources resources = (Playerresources) q.uniqueResult();
-        if(resources != null) {
+        if (resources != null) {
             session.delete(resources);
             commitTransaction(session);
         }
@@ -84,14 +85,13 @@ public class PlayerresourcesHelper extends AbstractHelper {
     void addResearchPoints(String userId, Integer researchpoints) {
 
         Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Playerresources where idname='" +
-                userId + "'");
+        Query q = session.createQuery("from Playerresources where idname='"
+                + userId + "'");
 
         Playerresources resources = (Playerresources) q.uniqueResult();
         if (resources != null) {
-            resources.setResearchpoints
-                    (resources.getResearchpoints()+researchpoints);
-           commitTransaction(session);
+            resources.setResearchpoints(resources.getResearchpoints() + researchpoints);
+            commitTransaction(session);
         }
     }
 
@@ -102,23 +102,22 @@ public class PlayerresourcesHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
-
-    public void updatePhdsNumber (String idname , int phds) {
+    public void updatePhdsNumber(String idname, int phds) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
-        Playerresources resource = (Playerresources)q.uniqueResult();
+        Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setPhdsnumber(phds);
             commitTransaction(session);
         }
     }
 
-     public void updateUndergraduatesnumber (String idname , int students) {
+    public void updateUndergraduatesnumber(String idname, int students) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
-        Playerresources resource = (Playerresources)q.uniqueResult();
+        Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setUndergraduatesnumber(students);
             commitTransaction(session);
@@ -130,5 +129,4 @@ public class PlayerresourcesHelper extends AbstractHelper {
         session.saveOrUpdate(resources);
         commitTransaction(session);
     }
-
 }

@@ -64,12 +64,14 @@ public class Department {
         // Deleting students info.
         // TODO
 
-        return "success";
-
         // Deleting extra stats
         ExtrastatsHelper extrasHelper
                 = new ExtrastatsHelper();
         extrasHelper.deleteRecord(username);
+
+
+        return "success";
+
 
     }
 

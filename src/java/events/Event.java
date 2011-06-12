@@ -178,5 +178,6 @@ public abstract class Event {
     // Returns true if input name corresponds to the given event.
     public abstract boolean isEqual(String name);
 
+    // Returns the name of a given 
 
 }

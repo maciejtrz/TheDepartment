@@ -9,23 +9,21 @@ background-attachment:scroll;
 font-size: 14px;
 }
 
-#tform {
-width: 500px;
-
+#tbar {
+width: 800px;
 margin-left: auto;
 margin-right: auto;
 }
 
-#tbar {
-
-}
 
 #lform {
+font-size: 18px;
 position: absolute;
-top: 40px;
+top: 160px;
 left: 40px;
+
 }
 
 #lmenu {
-width: 200px;
+width: 100px;
 }

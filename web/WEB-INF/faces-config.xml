@@ -3,9 +3,9 @@
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
 <faces-config version="2.0"
-    xmlns="http://java.sun.com/xml/ns/javaee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
 
 
@@ -15,7 +15,7 @@
         <navigation-case>
             <from-action>#{auth.validate}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/Logged/WelcomePage.jsp</to-view-id>
+            <to-view-id>/Logged/Welcome.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
 
@@ -28,7 +28,7 @@
     </navigation-rule>
 
 
-    
+
     <managed-bean>
         <managed-bean-name>auth</managed-bean-name>
         <managed-bean-class>UserBeans.Auth</managed-bean-class>
@@ -57,23 +57,14 @@
         <managed-bean-class>UserBeans.AddDepartment</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>message</managed-bean-name>
+        <managed-bean-class>UserBeans.Message</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
 
 
-    <navigation-rule>
-        <from-view-id>/Logged/Playing.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{unlog.logoff}</from-action>
-            <to-view-id>/Unlogged/index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-
-        <navigation-case>
-            <from-action>#{user.deleteMe}</from-action>
-            <to-view-id>/Unlogged/index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
 
     <navigation-rule>
         <from-view-id>/Unlogged/AddUser.xhtml</from-view-id>
@@ -83,7 +74,7 @@
             <redirect/>
         </navigation-case>
 
-       <navigation-case>
+        <navigation-case>
             <from-action>#{addUser.insert}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
@@ -115,20 +106,11 @@
     </navigation-rule>
 
 
-  <navigation-rule>
-        <from-view-id>/Logged/StaffShop.jsp</from-view-id>
-        <navigation-case>
-            <from-action>#{shop.submit}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/Logged/Playing.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
 
     <managed-bean>
         <managed-bean-name>shop</managed-bean-name>
         <managed-bean-class>UserBeans.Shop</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
 
@@ -147,16 +129,7 @@
         <managed-bean-class>UserBeans.AddBuildings</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-    
-    <navigation-rule>
-        <from-view-id>/Logged/WelcomePage.jsp</from-view-id>
-        <navigation-case>
-            <from-action>#{addDepartment.addDepartment}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/Logged/Playing.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
+
 
     <navigation-rule>
         <from-view-id>/Logged/Play.xhtml</from-view-id>
@@ -171,9 +144,37 @@
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+
+        <navigation-case>
+            <from-action>#{department.deleteDepartment}</from-action>
+            <to-view-id>/Logged/Welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
     </navigation-rule>
-    
+
+    <navigation-rule>
+        <from-view-id>/Logged/Welcome.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-action>#{addDepartment.addDepartment}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Play.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>plainMessageReader</managed-bean-name>
+        <managed-bean-class>messageSystem.PlainMessageReader</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 </faces-config>
+
+
+
 
 
 

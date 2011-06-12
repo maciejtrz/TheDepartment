@@ -11,231 +11,316 @@ and open the template in the editor.
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title> The Department </title>
+        <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/themes/cupertino/skin.css"/>
+
         <p:resources/>
     </h:head>
 
     <body>
 
-<h:form id="tform">
-    <p:toolbar id="tbar">
-    <p:toolbarGroup align="left">
-        <p:commandButton type="push" value="New" image="ui-icon-document" />
+        <h:form id="tbar">
+            <p:toolbar>
+                <p:toolbarGroup  align="left">
+                    <p:commandButton disabled="true" value="Username" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <h:outputText value="#{auth.username}"  /> <h:outputText value="" /> <!-- SEPARATOR -->
 
-        <p:commandButton type="push" value="Open" image="ui-icon-folder-open"/>
+                    <p:commandButton disabled="true" value="Points" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <h:outputText value="#{auth.researchPoints}"/>  <h:outputText value="" /> <!-- SEPARATOR -->
 
-        <p:divider />
+                    <p:commandButton disabled="true" value="Money" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <h:outputText value="#{auth.money}" />  <h:outputText value="" /> <!-- SEPARATOR -->
 
-        <p:commandButton type="push" title="Save" image="ui-icon-disk"/>
-        <p:commandButton type="push" title="Delete" image="ui-icon-trash"/>
-        <p:commandButton type="push" title="Print" image="ui-icon-print"/>
-    </p:toolbarGroup>
+                    <p:commandButton disabled="true" value="Students" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <h:outputText value="#{auth.undergraduatesnumber}"/> <h:outputText value="" /> <!-- SEPARATOR -->
 
-    <p:divider />
+                    <p:commandButton disabled="true" value="PhDs"  />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <h:outputText value="#{auth.phdsnumber}"/> <h:outputText value="" /> <!-- SEPARATOR -->
 
-    <p:toolbarGroup align="right">
-        <p:menuButton value="Navigate">
-            <p:menuitem value="Home" url="http://www.primefaces.org" />
-            <p:menuitem value="ShowCase"
-                        url="http://www.primefaces.org/showcase" />
-            <p:menuitem value="TouchFaces"
-                        url="http://www.primefaces.org/showcase/touch" />
-        </p:menuButton>
-    </p:toolbarGroup>
+                </p:toolbarGroup>
 
-  </p:toolbar>
-</h:form>
-                
+                <p:toolbarGroup align="right">
 
-<h:form id="lform">
+                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{unlog.logoff}" value="Log out" />
+                </p:toolbarGroup>
 
-    <p:menu id="lmenu" style="width: 200px">
-        <p:submenu label="Messages">
-            <p:menuitem value="New" onclick="newmsg.show();" actionListener="#{buttonBean.save}" />
-            <p:menuitem value="Inbox" actionListener="#{buttonBean.update}"  />
-        </p:submenu>
+            </p:toolbar>
 
-        <p:submenu label="Reasearches">
-            <p:menuitem value="New" onclick="newres.show();" />
-            <p:menuitem value="Manage" onclick="resmag.show();" />
-        </p:submenu>
-
-        <p:submenu label="Buy">
-            <p:menuitem value="Professor" actionListener="#{buttonBean.save}"  />
-            <p:menuitem value="PhD" actionListener="#{buttonBean.update}" />
-            <p:menuitem value="Students" actionListener="#{buttonBean.update}"  />
-        </p:submenu>
-
-        <p:submenu label="Department">
-            <p:menuitem value="Change Name" actionListener="#{buttonBean.save}"/>
-            <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
-            <p:menuitem value="Logout" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
-        </p:submenu>
-
-    </p:menu>
-</h:form>
+            <p:poll interval="10" update="tbar"/>
+        </h:form>
 
 
+        <h:form id="lform">
 
-<p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700" 
+            <p:menu id="lmenu" style="width: 200px">
+                <p:submenu label="Messages">
+                    <p:menuitem value="New" onclick="newmsg.show();"  />
+                    <p:menuitem value="Inbox" onclick="readmsg.show();"   />
+                </p:submenu>
+
+                <p:submenu label="Reasearches">
+                    <p:menuitem value="New" onclick="newres.show();" />
+                    <p:menuitem value="Manage" onclick="resmag.show();" />
+                </p:submenu>
+
+                <p:submenu label="Buy">
+                    <p:menuitem value="Professor" onclick="buypro.show();"  />
+                    <p:menuitem value="PhDs" onclick="buyphd.show();" />
+                    <p:menuitem value="Students" onclick="buystu.show();"  />
+                </p:submenu>
+
+                <p:submenu label="Department">
+                    <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
+                    <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
+                    <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
+                </p:submenu>
+
+                <p:submenu label="User">
+                    <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
+                </p:submenu>
+
+            </p:menu>
+        </h:form>
+
+
+
+        <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-   
-    <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
-</p:dialog>
+            <h:form>
 
+                <h:outputText value="To: " />
+                <h:selectOneMenu value="#{plainMessageReader.selectedMessage}">
+                    <f:selectItems value="#{messageReader.receivers}"/>
+                </h:selectOneMenu>
 
+                <br></br>
+                <h:outputText value="Subject:"/>
+                <h:inputText value="#{message.subject}"/>
+                <br></br>
 
-<p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700" 
+                <h:outputText value="To:" />
+                <h:inputText value="#{message.receiver}"/>
+                <br></br>
+
+                <h:inputTextarea style="width:300px;height:100px;" value="#{message.text}"/>
+                <br></br>
+
+                <h:commandButton value="Send" action="#{message.send}"/>
+
+            </h:form>
+
+            <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+        <p:dialog header="Message inbox" widgetVar="readmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
+            <h:form>
 
-            <h1>Adding research: </h1>
-        <p>Now, you must specify what research you would like to perform.</p>
+                <p:wizard widgetVar="wizzard"  flowListener="#{plainMessageReader.onFlowProcess}">
 
-        <h:form>
+                    <p:tab id="subject" title="MessageSubject">
 
-            <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
+                        <p:panel header="Message subject">
 
-                <p:tab id="researchSubject" title="Research Subject" >
-                    <p:panel header="ResarchSubject">
-                        <h:outputText value="Choose research subject: " />
-                        <h:selectOneMenu value="#{addResearch.subject}" >
-                            <f:selectItems value="#{addResearch.subjects}"/>
-                        </h:selectOneMenu>
-                    </p:panel>
-                </p:tab>
+                            <h:outputText value="Choose message subject: " />
+                            <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
+                                <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
 
-                <p:tab id="researchLecturers" title="Lecturers for Research" >
-                    <p:panel header="Lecturers for Research">
-                        <h:outputText value="Choose lecturers: "/>
-                        <h:selectManyListbox value="#{addResearch.lecturers}">
-                            <f:selectItems value="#{addResearch.lecturerList}"/>
-                        </h:selectManyListbox>
-                    </p:panel>
-                </p:tab>
+                    <p:tab title="MessageText" id="text">
+                        <p:panel header="Message data" >
+                            <h:outputText value="Message: "/>
+                            <br/>
+                            <h:outputText value="#{plainMessageReader.text}" />
 
-                <p:tab id="availableResearches" title="Available Researches" >
-                    <p:panel header="Available Researches">
-                        <h:outputText value="Choose research: "/>
-                        <h:selectOneMenu value="#{addResearch.chosenResearch}" >
-                            <f:selectItems value="#{addResearch.availableResearches}"/>
-                        </h:selectOneMenu>
-                    </p:panel>
-                </p:tab>
-
-                <p:tab id="moneyAmount" title="Specify money grant for research" >
-                    <p:panel header="Specify money grant for research">
-                        <h:outputText value="Input money min: "/>
-                        <h:outputText value="#{addResearch.minimumMoney}" />
-                        <h:outputText value=" max: " />
-                        <h:outputText value="#{addResearch.maximumMoney}"/>
-                        <h:inputText value="#{addResearch.moneyAmount}" />
-                    </p:panel>
-                </p:tab>
-
-                <p:tab id="confirmation" title="Research Confirmation" >
-                    <p:panel header="Research Confirmation">
-
-                        <h:panelGrid columns="2" border="1" >
-
-                            <h:outputText value="Name of Research: "/>
-                            <h:outputText value="#{addResearch.researchName}" />
-
-                            <h:outputText value="Money: "/>
-                            <h:outputText value="#{addResearch.moneyAmount}" />
-
-                            <h:outputText value="Subject: "/>
-                            <h:outputText value="#{addResearch.subjectName}" />
-
-                            <h:commandButton actionListener="#{addResearch.startResearch}" value="Add Research"/>
-                            <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
-
-                        </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
 
 
-                    </p:panel>
-                </p:tab>
-            </p:wizard>
-        </h:form>
+                </p:wizard>
+            </h:form>
 
-        <h3>Available researches: </h3>
-
-        <h:form>
-            <p:tree value="#{addResearch.root}" var="node">
-                <p:treeNode>
-                    <h:outputText value="#{node}"/>
-                </p:treeNode>
-            </p:tree>
-
-        </h:form>
-
-        <a onclick="newres.hide()">Go Back to Playing</a>
-
-</p:dialog>
+            <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
 
 
 
-<p:dialog header="Manage researches" widgetVar="resmag" modal="true" height="500" width="700"
-          showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+        <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-    <h:form id="infoTable">
-            <table border="3">
-                <tr><td>Username: </td>
-                    <td><h:outputText value="#{auth.username}" /></td></tr>
-                <tr><td>Research Points: </td>
-                    <td><h:outputText id="count" value="#{auth.researchPoints}" />
-                    </td></tr>
-                <tr><td>Money: </td>
-                    <td><h:outputText id="money" value="#{auth.money}"/>
-                    </td></tr>
-                <tr><td>Undergraduates Number: </td>
-                    <td><h:outputText id="undergraduatesnumber" value="#{auth.undergraduatesnumber}" /></td></tr>
-                <tr><td>PhDs Number: </td>
-                    <td><h:outputText id="phdsnumber" value="#{auth.phdsnumber}"/></td></tr>
-            </table>
-            <p:poll interval="1" update="infoTable"/>
-        </h:form>
+            <p>Now, you must specify what research you would like to perform.</p>
+
+            <h:form>
+
+                <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
+
+                    <p:tab id="researchSubject" title="Research Subject" >
+                        <p:panel header="ResarchSubject">
+                            <h:outputText value="Choose research subject: " />
+                            <h:selectOneMenu value="#{addResearch.subject}" >
+                                <f:selectItems value="#{addResearch.subjects}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="researchLecturers" title="Lecturers for Research" >
+                        <p:panel header="Lecturers for Research">
+                            <h:outputText value="Choose lecturers: "/>
+                            <h:selectManyListbox value="#{addResearch.lecturers}">
+                                <f:selectItems value="#{addResearch.lecturerList}"/>
+                            </h:selectManyListbox>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="availableResearches" title="Available Researches" >
+                        <p:panel header="Available Researches">
+                            <h:outputText value="Choose research: "/>
+                            <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                                <f:selectItems value="#{addResearch.availableResearches}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="moneyAmount" title="Specify money grant for research" >
+                        <p:panel header="Specify money grant for research">
+                            <h:outputText value="Input money min: "/>
+                            <h:outputText value="#{addResearch.minimumMoney}" />
+                            <h:outputText value=" max: " />
+                            <h:outputText value="#{addResearch.maximumMoney}"/>
+                            <h:inputText value="#{addResearch.moneyAmount}" />
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirmation" title="Research Confirmation" >
+                        <p:panel header="Research Confirmation">
+
+                            <h:panelGrid columns="2" border="1" >
+
+                                <h:outputText value="Name of Research: "/>
+                                <h:outputText value="#{addResearch.researchName}" />
+
+                                <h:outputText value="Money: "/>
+                                <h:outputText value="#{addResearch.moneyAmount}" />
+
+                                <h:outputText value="Subject: "/>
+                                <h:outputText value="#{addResearch.subjectName}" />
+
+                                <h:commandButton actionListener="#{addResearch.startResearch}" value="Add Research"/>
+                                <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
+
+                            </h:panelGrid>
 
 
-        <h3>Ongoing Researches</h3>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+            </h:form>
 
-        <h:form>
-            <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}">
+            <h3>Available researches: </h3>
 
-                <p:column headerText="Research Title">
-                    <h:outputText value="#{research.name}" />
-                </p:column>
+            <h:form>
+                <p:tree value="#{addResearch.root}" var="node">
+                    <p:treeNode>
+                        <h:outputText value="#{node}"/>
+                    </p:treeNode>
+                </p:tree>
 
-                <p:column headerText="Progress Bar">
-                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{research.researchTime}" />
-                </p:column>
+            </h:form>
 
-                <p:column headerText="Control button">
-                    <p:commandButton value="#{research.state}" >
-                     <f:setPropertyActionListener value="#{research}" target="#{researchBag.selectedResearch}" />
-
-                 </p:commandButton>
-                </p:column>
-            </p:dataTable>
-            <p:poll interval="1" update="ongoingResearches" />
-        </h:form>
-
-        <h3>Finished Researches</h3>
-
-         <h:form>
-             <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
-                <p:treeNode>
-                    <h:outputText value="#{node}"/>
-                </p:treeNode>
-            </p:tree>
-            <p:poll interval="1" update="finishedResearches" />
-        </h:form>
+        </p:dialog>
 
 
-</p:dialog>
+
+        <p:dialog header="Manage researches" widgetVar="resmag" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+                <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}">
+
+                    <p:column headerText="Research Title">
+                        <h:outputText value="#{research.name}" />
+                    </p:column>
+
+                    <p:column headerText="Progress Bar">
+                        <p:progressBar widgetVar="pbAjax" ajax="true" value="#{research.researchTime}" />
+                    </p:column>
+
+                    <p:column headerText="Control button">
+                        <p:commandButton value="#{research.state}" >
+                            <f:setPropertyActionListener value="#{research}" target="#{researchBag.selectedResearch}" />
+
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:poll interval="10" update="ongoingResearches" />
+            </h:form>
+
+            <h3>Finished Researches</h3>
+
+            <h:form>
+                <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
+                    <p:treeNode>
+                        <h:outputText value="#{node}"/>
+                    </p:treeNode>
+                </p:tree>
+                <p:poll interval="10" update="finishedResearches" />
+            </h:form>
+
+
+        </p:dialog>
+
+
+        <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+                <h:outputText value="Type lecturers name" />
+                <p:inputText value="#{lec.lecturer}" />
+                <br/>
+                <p:commandButton value="Submit" action="#{lec.buy}"/>
+                <br/>
+
+            </h:form>
+
+        </p:dialog>
+
+        <p:dialog header="Buy PhDs" widgetVar="buyphd" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <h:outputText value="PhD (£20/unit):" />
+                <p:inputText value="#{shop.phds}" />
+                <br/>
+                <p:commandButton value="Submit" action="#{shop.submitphds}"/>
+
+            </h:form>
+
+
+
+
+        </p:dialog>
+
+        <p:dialog header="Buy Students" widgetVar="buystu" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <h:outputText value="Student (£5/unit):" />
+                <p:inputText value="#{shop.students}" />
+                <br/>
+                <p:commandButton value="Submit" action="#{shop.submitstudents}"/>
+
+            </h:form>
+
+
+
+        </p:dialog>
+
 
 
     </body>

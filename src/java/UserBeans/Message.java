@@ -6,6 +6,9 @@
 package UserBeans;
 
 import ConnectionDataBase.MessageSystemHelper;
+import Connections.ConnectionSingleton;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -14,7 +17,7 @@ import ConnectionDataBase.MessageSystemHelper;
  */
 public class Message {
 
-    public String sender;
+   // public String sender;
     public String receiver;
     public String subject;
     public String text;
@@ -22,8 +25,9 @@ public class Message {
 
     /** Creates a new instance of Message */
     public Message() {
+        System.out.println("Creating new Message Bean");
     }
-
+/*
     public void setSender(String sender){
         this.sender=sender;
     }
@@ -31,6 +35,7 @@ public class Message {
     public String getSender(){
         return this.sender;
     }
+    */
 
     public void setReceiver(String receiver){
         this.receiver=receiver;
@@ -56,11 +61,20 @@ public class Message {
         return this.text;
     }
 
-    public String sendMsg(){
+    public void send(){
+
+        System.out.println ("Send method invoked");
+        String name = utilities.BasicUtils.getUserName();
+
 
         MessageSystemHelper msghelp = new MessageSystemHelper();
-        msghelp.createMsg(getSender(), getReceiver(), getSubject(), getText());
+        // System.out.println(name);
+       /* System.out.println(getReceiver());
+        System.out.println(getSubject());
+        System.out.println(getText());
+        100% working, fields not null
+        */
+        msghelp.createMsg(name,getReceiver(), getSubject(), getText());
 
-        return "success";
     }
 }

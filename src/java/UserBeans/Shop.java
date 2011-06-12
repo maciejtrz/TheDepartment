@@ -52,8 +52,6 @@ public class Shop {
         return students;
     }
 
-
-
     public void setStudents(String s) {
         this.students = s;
     }
@@ -62,7 +60,31 @@ public class Shop {
         this.phds = p;
     }
 
-    public String submit() throws SQLException {
+    public String submitphds() throws SQLException {
+
+        Capacity capacity = capacityhelper.getCapacity(name);
+
+        int phdsNum = Integer.parseInt(phds);
+
+        if ((phdsNum + resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
+            System.out.println("Not enough space for new Phds");
+            return ("failure");
+        }
+        int phdsCost = phdsNum * 20;
+
+
+        if (resources.getMoney() < phdsCost) {
+            System.out.println("Not enought money");
+            return ("failure");
+        }
+
+        resources.setMoney(resources.getMoney() - phdsCost);
+        resources.setPhdsnumber(resources.getPhdsnumber() + phdsNum);
+
+        return "success";
+    }
+
+    public String submitstudents() throws SQLException {
 
 
         Capacity capacity = capacityhelper.getCapacity(name);
@@ -73,28 +95,16 @@ public class Shop {
             System.out.println("Not enough space for studetns");
             return ("failure");
         }
-        int phdsNum = Integer.parseInt(phds);
-
-        if ((phdsNum + resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
-            System.out.println("Not enough space for new Phds");
-            return ("failure");
-        }
 
         int studentCost = studentsNum * 5;
-        int phdCost = phdsNum * 20;
 
-        int totalCost = studentCost + phdCost;
-
-
-        if (resources.getMoney() < totalCost) {
+        if (resources.getMoney() < studentCost) {
             System.out.println("Not enought money");
             return ("failure");
         }
 
-
-        resources.setMoney(resources.getMoney() - totalCost);
+        resources.setMoney(resources.getMoney() - studentCost);
         resources.setUndergraduatesnumber(resources.getUndergraduatesnumber() + studentsNum);
-        resources.setPhdsnumber(resources.getPhdsnumber() + phdsNum);
 
         return "success";
 

@@ -36,8 +36,9 @@ public class DepartmentinfoHelper extends AbstractHelper {
 
         if(departmentInfo != null) {
             session.delete(departmentInfo);
-            commitTransaction(session);
         }
+
+        commitTransaction(session);
         
     }
 
@@ -47,8 +48,11 @@ public class DepartmentinfoHelper extends AbstractHelper {
 
         Query q = session.createQuery("from Departmentinfo where idname='"
                 + idname + "'");
+        boolean hasDepartment = !q.list().isEmpty();
 
-        return !q.list().isEmpty();
+        commitTransaction(session);
+
+        return hasDepartment;
 
     }
 

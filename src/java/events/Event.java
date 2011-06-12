@@ -9,9 +9,19 @@ import java.util.ArrayList;
 public abstract class Event {
 
     private List<Ticket> tickets;
+    private List<Event> onChangeList;
 
     public Event() {
         tickets = new ArrayList<Ticket>();
+    }
+
+    public void setOnChangeList(List<Event> list) {
+        list.add(this);
+        onChangeList = list;
+    }
+
+    public List<Event> getOnChangeList() {
+        return onChangeList;
     }
 
     // Returns and removes one ticket from this Event object.
@@ -20,7 +30,7 @@ public abstract class Event {
     public Ticket getOneTicket() {
         Ticket ticket = null;
         int size = getNumOfTickets();
-        if (size > 2) {
+        if (size > 1) {
             // Get the first ticket
             ticket = tickets.remove(size - 1);
         }

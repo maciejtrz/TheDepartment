@@ -11,8 +11,6 @@ public class LecturersPopulator extends Thread {
 
     public LecturersPopulator() {
         setDaemon(true);
-        start();
-
     }
 
     @Override

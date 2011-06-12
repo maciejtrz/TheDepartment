@@ -101,7 +101,11 @@ public abstract class MessageReader {
 
 
     public String getText() {
-        return getMessages().get(getSelectedMessage()).getDate();
+        String result = null;
+
+        if(getMessages().size() < getSelectedMessage())
+            result = getMessages().get(getSelectedMessage()).getDate();
+        return result;
     }
 
 

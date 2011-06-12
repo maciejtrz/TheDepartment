@@ -57,4 +57,11 @@ public class FacebookBlocked extends Event {
     public String getName() {
         return ("Facebook blocked in labs!");
     }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setFacebookBooked(playerName, getNumOfTickets());
+    }
 }

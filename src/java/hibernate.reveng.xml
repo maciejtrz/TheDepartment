@@ -19,4 +19,5 @@
   <table-filter match-name="researchcatalogue"/>
   <table-filter match-name="lecturers"/>
   <table-filter match-name="buildings"/>
+  <table-filter match-name="events"/>
 </hibernate-reverse-engineering>

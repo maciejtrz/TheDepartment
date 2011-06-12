@@ -1,6 +1,7 @@
 package events;
 
 import ConnectionDataBase.CapacityHelper;
+import ConnectionDataBase.EventsHelper;
 
 public class GirlsArrival extends Event {
 
@@ -33,5 +34,11 @@ public class GirlsArrival extends Event {
         return ("100 young virgins arrival!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setGirlsArrival(playerName, getNumOfTickets());
+    }
 
 }

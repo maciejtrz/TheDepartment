@@ -178,6 +178,8 @@ public abstract class Event {
         return true;
     }
 
+    // Writes itself to the database
+    public abstract void writeToDb(String playerName);
 
     // Invokes a given event.
     public abstract boolean invoke(String playerName);

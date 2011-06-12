@@ -2,6 +2,7 @@ package events;
 
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 
 public class OutOfChicken extends Event {
@@ -40,5 +41,12 @@ public class OutOfChicken extends Event {
     @Override
     public String getName() {
         return ("MacChicken has run out of chicken!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setOutOfChicken(playerName, getNumOfTickets());
     }
 }

@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import Connections.UserManager;
 import java.util.Random;
 
@@ -33,4 +34,10 @@ public class PrivateCompanyGrant extends Event {
         return ("Private investor grant received!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setPrivateCompanyGrant(playerName, getNumOfTickets());
+    }
 }

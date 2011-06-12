@@ -2,6 +2,7 @@ package events;
 
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 
 public class LabHacking extends Event {
@@ -39,5 +40,11 @@ public class LabHacking extends Event {
     public String getName() {
         return ("Labs Hacked!");
     }
-    
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setLabsHacking(playerName, getNumOfTickets());
+    }
 }

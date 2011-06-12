@@ -47,4 +47,11 @@ public class BarNight extends Event {
         return ("Bar Night!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setBarNight(playerName, getNumOfTickets());
+    }
+
 }

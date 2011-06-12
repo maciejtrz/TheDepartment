@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import utilities.LecturersManager;
 
 public class NobelPrice extends Event {
@@ -30,5 +31,12 @@ public class NobelPrice extends Event {
     @Override
     public String getName() {
         return ("Nobel price award won!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setNobelPrice(playerName, getNumOfTickets());
     }
 }

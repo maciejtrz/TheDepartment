@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import Connections.UserManager;
 import utilities.LecturersManager;
 
@@ -36,5 +37,12 @@ public class LecturerPromotion extends Event {
     @Override
     public String getName() {
         return ("Lecturer Promotion!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setLecturerPromotion(playerName, getNumOfTickets());
     }
 }

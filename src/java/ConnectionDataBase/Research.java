@@ -6,12 +6,9 @@ import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
@@ -123,14 +120,14 @@ public class Research  implements java.io.Serializable, Runnable {
         state = RUNNING;
 
         try {
-            researchTime = 100;
+            researchTime = 30;
 
             while (researchTime > 0) {
 
                 while(state == STOPPED)
-                    Thread.sleep(500);
+                    Thread.sleep(2000);
 
-                Thread.sleep(100);
+                Thread.sleep(1000);
                 researchTime--;
             }
 
@@ -138,8 +135,6 @@ public class Research  implements java.io.Serializable, Runnable {
 
         } finally {
             System.out.println("Finishing: " + getName());
-
-            researchList.remove(this);
 
             /* updating research table and adding research points */
             UserManager.addResearch(this);
@@ -171,6 +166,7 @@ public class Research  implements java.io.Serializable, Runnable {
     }
 
     public String manageResearch() throws IOException {
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
@@ -179,6 +175,7 @@ public class Research  implements java.io.Serializable, Runnable {
         session.setAttribute(ConnectionSingleton.researchName, getName());
 
         return "go";
+
     }
 
     public void changeState() {

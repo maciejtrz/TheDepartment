@@ -9,6 +9,7 @@
 
 
 
+
     <navigation-rule>
         <from-view-id>/Unlogged/index.xhtml</from-view-id>
         <navigation-case>
@@ -57,24 +58,10 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
-    <navigation-rule>
-        <from-view-id>/Logged/DeptName.jsp</from-view-id>
-        <navigation-case>
-            <from-action>#{addDepartment.addDepartment}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/Logged/WelcomePage.jsp</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
+
 
     <navigation-rule>
-        <from-view-id>/Logged/WelcomePage.jsp</from-view-id>
-        <navigation-case>
-            <from-action>#{addDepartment.go}</from-action>
-            <to-view-id>/Logged/DeptName.jsp</to-view-id>
-            <redirect/>
-        </navigation-case>
-
+        <from-view-id>/Logged/Playing.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{unlog.logoff}</from-action>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
@@ -86,13 +73,6 @@
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-
-        <navigation-case>
-            <from-action>#{department.startPlaying}</from-action>
-            <to-view-id>/Logged/Playing.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        
     </navigation-rule>
 
     <navigation-rule>
@@ -149,7 +129,6 @@
     <managed-bean>
         <managed-bean-name>shop</managed-bean-name>
         <managed-bean-class>UserBeans.Shop</managed-bean-class>
-        <managed-bean-scope></managed-bean-scope>
     </managed-bean>
 
 
@@ -168,6 +147,33 @@
         <managed-bean-class>UserBeans.AddBuildings</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/Logged/WelcomePage.jsp</from-view-id>
+        <navigation-case>
+            <from-action>#{addDepartment.addDepartment}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Playing.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Logged/Play.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{unlog.logoff}</from-action>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.deleteMe}</from-action>
+            <to-view-id>/Unlogged/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>
+
 
 

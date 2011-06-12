@@ -1,5 +1,3 @@
-
-
 package UserBeans;
 
 import utilities.LecturersManager;

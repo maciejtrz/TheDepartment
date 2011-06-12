@@ -58,6 +58,12 @@ and open the template in the editor.
                     <p:menuitem value="Inbox" onclick="readmsg.show();"   />
                 </p:submenu>
 
+                <p:submenu label="Trading">
+                    <p:menuitem value="Make Offer" onclick="newtrade.show();"/>
+                    <p:menuitem value="View offers" onclick="viewtrade.show();"/>
+                    <p:menuitem value="Pending offers" onclick="pendtrade.show();" />
+                </p:submenu>
+
                 <p:submenu label="Reasearches">
                     <p:menuitem value="New" onclick="newres.show();" />
                     <p:menuitem value="Manage" onclick="resmag.show();" />
@@ -144,6 +150,27 @@ and open the template in the editor.
             <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
+
+        <p:dialog header="New Trade" widgetVar="newtrade" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <a onclick="newtrade.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+        <p:dialog header="View Trades" widgetVar="viewtrade" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <a onclick="viewtrade.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+        <p:dialog header="Pending Trades" widgetVar="pendtrade" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <a onclick="pendtrade.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
 
 
         <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"

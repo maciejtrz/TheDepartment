@@ -22,6 +22,10 @@
         <filter-name>unloggedFilter</filter-name>
         <filter-class>Filters.UnloggedFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>departmentFilter</filter-name>
+        <filter-class>Filters.PlayingFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>loggedFilter</filter-name>
         <url-pattern>/faces/Logged/*</url-pattern>
@@ -33,6 +37,14 @@
     <filter-mapping>
         <filter-name>unloggedFilter</filter-name>
         <url-pattern>/faces/Unlogged/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>departmentFilter</filter-name>
+        <url-pattern>/faces/Logged/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>

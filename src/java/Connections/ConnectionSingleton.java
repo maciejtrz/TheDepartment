@@ -47,6 +47,7 @@ public class ConnectionSingleton {
     public static final String researchBag = "researchBag";
 
     public static final String gameName = "/TheDepartment";
+    public static final String AddDepartment = "WelcomePage.jsp";
     public static final String welcomePage = gameName + "/faces/Logged/WelcomePage.jsp";
     public static final String indexPage = gameName + "/faces/Unlogged/index.xhtml";
 

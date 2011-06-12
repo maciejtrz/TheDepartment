@@ -165,6 +165,12 @@
 
     </navigation-rule>
 
+    <managed-bean>
+        <managed-bean-name>plainMessageReader</managed-bean-name>
+        <managed-bean-class>messageSystem.PlainMessageReader</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 </faces-config>
 
 

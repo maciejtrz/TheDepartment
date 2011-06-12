@@ -54,8 +54,8 @@ and open the template in the editor.
 
     <p:menu id="lmenu" style="width: 200px">
         <p:submenu label="Messages">
-            <p:menuitem value="New" onclick="newmsg.show();" actionListener="#{buttonBean.save}" />
-            <p:menuitem value="Inbox" actionListener="#{buttonBean.update}"  />
+            <p:menuitem value="New" onclick="newmsg.show();"  />
+            <p:menuitem value="Inbox" onclick="readmsg.show();"   />
         </p:submenu>
 
         <p:submenu label="Reasearches">
@@ -87,8 +87,45 @@ and open the template in the editor.
 <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
+        <h:form>
 
+            <h:outputText value="To:" />
+            <h:inputText value="#{message.receiver}"/>
+            <br></br>
+            -<h:outputText value="Subject:"/>
+            <h:inputText value="#{message.subject}"/>
+            <br></br>
+
+            <h:inputTextarea style="width:300px;height:100px;" value="#{message.text}"/>
+            <br></br>
+
+            <h:commandButton value="Send" action="#{message.send}"/>
+
+        </h:form>
     <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
+</p:dialog>
+
+<p:dialog header="Message inbox" widgetVar="readmsg" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+                <h:form>
+
+
+                        <h:outputText value="Choose message subject: " />
+                        <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
+                            <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
+                        </h:selectOneMenu>
+
+
+                        <h:outputText value="Message: "/>
+                        <br/>
+                        <h:outputText value="#{plainMessageReader.text}" />
+
+                        <h:commandButton value="Show message" actionListener="plainMessageReader.update"/>
+
+            </h:form>
+
+    <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
 </p:dialog>
 
 

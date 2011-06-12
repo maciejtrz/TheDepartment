@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </p:toolbar>
 
-            <p:poll interval="1" update="tbar"/>
+            <p:poll interval="10" update="tbar"/>
         </h:form>
 
 
@@ -89,11 +89,18 @@ and open the template in the editor.
 
             <h:form>
 
+                <h:outputText value="To: " />
+                <h:selectOneMenu value="#{plainMessageReader.selectedMessage}">
+                    <f:selectItems value="#{messageReader.receivers}"/>
+                </h:selectOneMenu>
+
+                <br></br>
+                <h:outputText value="Subject:"/>
+                <h:inputText value="#{message.subject}"/>
+                <br></br>
+
                 <h:outputText value="To:" />
                 <h:inputText value="#{message.receiver}"/>
-                <br></br>
-                -<h:outputText value="Subject:"/>
-                <h:inputText value="#{message.subject}"/>
                 <br></br>
 
                 <h:inputTextarea style="width:300px;height:100px;" value="#{message.text}"/>
@@ -102,6 +109,7 @@ and open the template in the editor.
                 <h:commandButton value="Send" action="#{message.send}"/>
 
             </h:form>
+
             <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
@@ -116,19 +124,19 @@ and open the template in the editor.
 
                         <p:panel header="Message subject">
 
-                        <h:outputText value="Choose message subject: " />
-                        <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
-                            <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
-                        </h:selectOneMenu>
-                     </p:panel>
+                            <h:outputText value="Choose message subject: " />
+                            <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
+                                <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
                     </p:tab>
 
                     <p:tab title="MessageText" id="text">
                         <p:panel header="Message data" >
-                        <h:outputText value="Message: "/>
-                        <br/>
-                        <h:outputText value="#{plainMessageReader.text}" />
-                        
+                            <h:outputText value="Message: "/>
+                            <br/>
+                            <h:outputText value="#{plainMessageReader.text}" />
+
                         </p:panel>
                     </p:tab>
 
@@ -248,7 +256,7 @@ and open the template in the editor.
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
-                <p:poll interval="1" update="ongoingResearches" />
+                <p:poll interval="10" update="ongoingResearches" />
             </h:form>
 
             <h3>Finished Researches</h3>
@@ -259,7 +267,7 @@ and open the template in the editor.
                         <h:outputText value="#{node}"/>
                     </p:treeNode>
                 </p:tree>
-                <p:poll interval="1" update="finishedResearches" />
+                <p:poll interval="10" update="finishedResearches" />
             </h:form>
 
 

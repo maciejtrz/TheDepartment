@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
@@ -31,6 +30,9 @@ public abstract class MessageReader {
 
     /* Selected message */
     private Integer selectedMessage;
+
+    /*Selected reicever*/
+    private int selectedReceiver;
 
     public MessageReader(int messageType) {
         this.messageType = messageType;
@@ -66,8 +68,6 @@ public abstract class MessageReader {
     public void updateMessages() {
 
         /* Reading messages from database and updating list */
-        
-
     }
 
     public List<SelectItem> getMessagesSubjects() {
@@ -75,11 +75,11 @@ public abstract class MessageReader {
         int i = 0;
 
         Iterator<Messagesystem> iterator = getMessages().iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
 
             Messagesystem message = iterator.next();
             messagesSubjects.add(new SelectItem(new Integer(i++), message.getSubcjet()));
-            
+
         }
 
         return messagesSubjects;
@@ -91,24 +91,25 @@ public abstract class MessageReader {
 
     public Integer getSelectedMessage() {
         return selectedMessage;
-        }
+    }
 
     public String getChosenMessage() {
         String result = null;
-        if(getMessages().size() > getSelectedMessage())
+        if (getMessages().size() > getSelectedMessage()) {
             result = getMessages().get(getSelectedMessage()).getDate();
+        }
 
         return result;
     }
-
 
     public String getText() {
         String result = null;
 
         System.out.println("Get text invoked: selected item is: " + getSelectedMessage());
 
-        if(getMessages().size() > getSelectedMessage())
+        if (getMessages().size() > getSelectedMessage()) {
             result = getMessages().get(getSelectedMessage()).getMsg();
+        }
         return result;
     }
 
@@ -118,5 +119,18 @@ public abstract class MessageReader {
         return event.getNewStep();
     }
 
+    public List<SelectItem> getReceivers() {
+        List<SelectItem> receiverList = new ArrayList<SelectItem>();
+        int i = 0;
 
+        Iterator<Messagesystem> iterator = getMessages().iterator();
+        while (iterator.hasNext()) {
+            Messagesystem message = iterator.next();
+
+            receiverList.add(new SelectItem(new Integer(i), message.getReceiverid()));
+            System.out.println(message.getReceiverid() + " This is what i get in getRecievers");
+        }
+
+        return receiverList;
+    }
 }

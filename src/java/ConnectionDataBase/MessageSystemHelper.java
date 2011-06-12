@@ -6,6 +6,7 @@ package ConnectionDataBase;
 
 
 import java.util.Date;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -77,6 +78,13 @@ public class MessageSystemHelper extends AbstractHelper {
         Query q = session.createQuery("from Messagesystem");
         System.out.print("NEXT MSG NUMBER = "  + q.list().size() + " +1 " );
         return (q.list().size());
+    }
+
+    public List<Messagesystem> getMessages(String receiver) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Messagesystem where ReceiverId = '" + receiver + "'");
+
+        return q.list();
     }
 
     /* HUJ */

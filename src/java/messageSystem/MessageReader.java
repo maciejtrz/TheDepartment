@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import utilities.BasicUtils;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -75,9 +76,10 @@ public abstract class MessageReader {
 
         Iterator<Messagesystem> iterator = getMessages().iterator();
         while(iterator.hasNext()) {
-            Messagesystem message = iterator.next();
 
-            messagesSubjects.add(new SelectItem(new Integer(i), message.getSubcjet()));
+            Messagesystem message = iterator.next();
+            messagesSubjects.add(new SelectItem(new Integer(i++), message.getSubcjet()));
+            
         }
 
         return messagesSubjects;
@@ -103,9 +105,17 @@ public abstract class MessageReader {
     public String getText() {
         String result = null;
 
-        if(getMessages().size() < getSelectedMessage())
-            result = getMessages().get(getSelectedMessage()).getDate();
+        System.out.println("Get text invoked: selected item is: " + getSelectedMessage());
+
+        if(getMessages().size() > getSelectedMessage())
+            result = getMessages().get(getSelectedMessage()).getMsg();
         return result;
+    }
+
+    public String onFlowProcess(FlowEvent event) {
+        System.out.println("Old step: " + event.getOldStep());
+        System.out.println("New step: " + event.getNewStep());
+        return event.getNewStep();
     }
 
 

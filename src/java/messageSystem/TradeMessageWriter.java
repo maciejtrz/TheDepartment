@@ -5,6 +5,8 @@
 
 package messageSystem;
 
+import ConnectionDataBase.MessageSystemHelper;
+
 
 public class TradeMessageWriter extends TradeOffer{
 
@@ -15,6 +17,10 @@ public class TradeMessageWriter extends TradeOffer{
     /* reading offers and accepting/decling... */
 
     public void sendTrade() {
+
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        messageSystemHelper.createMessage(getSender(),getSelectedReceiverId(),
+                getSubject(),encode(),getMessageType());
         
     }
 

@@ -6,6 +6,8 @@ package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
+import ConnectionDataBase.PlayerHelper;
+import ConnectionDataBase.Players;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,12 +33,21 @@ public abstract class MessageManager {
     /* Selected message */
     private Integer selectedMessage;
 
+    /*Selected reicever*/
+    private int selectedReceiver;
+
+    /*List of users*/
+    public List<Players> users;
+
+
     public MessageManager(int messageType) {
         this.messageType = messageType;
         username = BasicUtils.getUserName();
         selectedMessage = new Integer(0);
         MessageSystemHelper messageHelper = new MessageSystemHelper();
-        messages = messageHelper.getMessages(username);
+        messages = messageHelper.getMessages(username,messageType);
+        users = new ArrayList<Players>();
+        selectedReceiver = 0;
     }
 
     public int getMessageType() {
@@ -55,10 +66,14 @@ public abstract class MessageManager {
         return username;
     }
 
+    public String getSelectedReceiverId() {
+        return users.get(getSelectedReceiver()).getIdname();
+    }
+
     public void sendMessage(String receiver, String subject, String text) {
 
         MessageSystemHelper messageHelper = new MessageSystemHelper();
-        messageHelper.createMsg(getSender(),receiver,subject,text, getMessageType());
+        messageHelper.createMessage(getSender(),receiver,subject,text, getMessageType());
 
     }
 
@@ -114,5 +129,33 @@ public abstract class MessageManager {
         System.out.println("Old step: " + event.getOldStep());
         System.out.println("New step: " + event.getNewStep());
         return event.getNewStep();
+    }
+
+        public List<SelectItem> getReceivers() {
+        List<SelectItem> receiverList = new ArrayList<SelectItem>();
+        users = new ArrayList<Players>();
+        int i = 0;
+
+        PlayerHelper ph = new PlayerHelper();
+
+        Iterator<Players> iterator = ph.getPlayers().iterator();
+
+        while (iterator.hasNext()) {
+            Players player = iterator.next();
+
+            receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
+            users.add(player);
+            System.out.println(player.getIdname());
+        }
+
+        return receiverList;
+    }
+
+    public void setSelectedReceiver(int selectedReceiver) {
+        this.selectedReceiver = selectedReceiver;
+    }
+
+    public int getSelectedReceiver() {
+        return this.selectedReceiver;
     }
 }

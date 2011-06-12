@@ -74,7 +74,7 @@ public class Message {
         String name = utilities.BasicUtils.getUserName();
 
         MessageSystemHelper msghelp = new MessageSystemHelper();
-        msghelp.createMsg(name, users.get(selectedReceiver).getIdname(), getSubject(), 
+        msghelp.createMessage(name, users.get(selectedReceiver).getIdname(), getSubject(),
                 getText(), MessageSingleton.PLAIN_MESSAGE);
 
     }

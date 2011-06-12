@@ -170,7 +170,11 @@
         <managed-bean-class>messageSystem.PlainMessageReader</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>tradeMessageReader</managed-bean-name>
+        <managed-bean-class>messageSystem.TradeMessageReader</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
 
 

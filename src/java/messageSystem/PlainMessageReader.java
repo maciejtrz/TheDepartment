@@ -5,20 +5,14 @@
 
 package messageSystem;
 
-import org.primefaces.event.FlowEvent;
-
 /**
  *
  * @author kp1209
  */
-public class PlainMessageReader extends MessageReader {
+public class PlainMessageReader extends MessageManager {
 
     public PlainMessageReader() {
         super(MessageSingleton.PLAIN_MESSAGE);
-    }
-
-    public String onFlowProcess(FlowEvent event) {
-        return event.getNewStep();
     }
 
     public void update() {

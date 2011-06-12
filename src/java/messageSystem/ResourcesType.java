@@ -11,4 +11,21 @@ package messageSystem;
  */
 class ResourcesType {
 
+    private static String[] resourcesList = {"Money","Undegraduates","Phds"};
+
+    public static String[] getResourcesList() {
+        return resourcesList;
+    }
+
+    public int getResourcesListSize() {
+        return resourcesList.length;
+    }
+
+    public String getResourcesElement(int pos) {
+        return resourcesList[pos];
+    }
+
+    
+
+
 }

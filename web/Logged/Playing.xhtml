@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>Playing...</h1>
+
+        <h:form id="infoTable">
+            <table border="3">
+                <tr><td>Username: </td>
+                    <td><h:outputText value="#{auth.username}" /></td></tr>
+                <tr><td>Research Points: </td>
+                    <td><h:outputText id="count" value="#{auth.researchPoints}" />
+                    </td></tr>
+                <tr><td>Money: </td>
+                    <td><h:outputText id="money" value="#{auth.money}"/>
+                    </td></tr>
+                <tr><td>Undergraduates Number: </td>
+                    <td><h:outputText id="undergraduatesnumber" value="#{auth.undergraduatesnumber}" /></td></tr>
+                <tr><td>PhDs Number: </td>
+                    <td><h:outputText id="phdsnumber" value="#{auth.phdsnumber}"/></td></tr>
+            </table>
+            <p:poll interval="1" update="infoTable"/>
+        </h:form>
+
+
+        <h3>Ongoing Researches</h3>
+
+        <h:form>
+            <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}">
+
+                <p:column headerText="Research Title">
+                    <h:outputText value="#{research.name}" />
+                </p:column>
+
+                <p:column headerText="Progress Bar">
+                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{research.researchTime}" />
+                </p:column>
+
+                <p:column headerText="Control button">
+                    <p:commandButton value="#{research.state}" >
+                     <f:setPropertyActionListener value="#{research}" target="#{researchBag.selectedResearch}" />
+
+                 </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:poll interval="1" update="ongoingResearches" />
+        </h:form>
+
+        <h3>Finished Researches</h3>
+
+         <h:form>
+             <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
+                <p:treeNode>
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+            </p:tree>
+            <p:poll interval="1" update="finishedResearches" />
+        </h:form>
+
+        <a href="/TheDepartment/faces/Logged/AddResearch.xhtml">Add Research</a>
+        <a href="/TheDepartment/faces/Logged/StaffShop.jsp">Buy Staff</a>
+        <a href="/TheDepartment/faces/Logged/Lecturers.jsp">Buy Lecturers</a>
+        <a href="/TheDepartment/faces/Logged/Msg.xhtml">Send Msg</a>
+
+        <h:form>
+        <h:commandButton value="Get me out of here" action="#{unlog.logoff}"/>
+        <h:commandButton value="Delete me" action="#{user.deleteMe}"/>
+        </h:form>
+    </h:body>
+</html>
+

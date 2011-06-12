@@ -6,10 +6,6 @@
 package messageSystem;
 
 
-/**
- *
- * @author root
- */
 public class TradeMessageReader extends TradeOffer {
     
     public TradeMessageReader() {

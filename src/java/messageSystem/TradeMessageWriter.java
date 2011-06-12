@@ -14,4 +14,8 @@ public class TradeMessageWriter extends TradeOffer{
 
     /* reading offers and accepting/decling... */
 
+    public void sendTrade() {
+        
+    }
+
 }

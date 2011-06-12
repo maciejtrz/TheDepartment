@@ -18,29 +18,23 @@ import org.hibernate.Session;
  */
 public class MessageSystemHelper extends AbstractHelper {
 
-    public void createMsg(String SenderID, String ReceiverID, String subject, String text) {
+    public void createMsg(String SenderID, String ReceiverID, String subject, String text, int messageType) {
 
         Messagesystem msg = new Messagesystem();
-        System.out.println("Creating Message");
         int num = getMsgNum();
         msg.setMsgnumber(num);
-        System.out.println("Msg number is: " + num);
         msg.setSenderid(SenderID);
-        System.out.println("Sender ID is: " + SenderID );
         msg.setReceiverid(ReceiverID);
-        System.out.println("Receiver ID is: " + ReceiverID );
 
         Date date = new Date();
         String time = (date.getHours() + date.getMinutes() + "|" + date.getDate() + "|" + date.getMonth() + "|" + date.getYear());
-
         msg.setDate(time);
-        System.out.println("Date is: " + time);
-        msg.setSubcjet(subject);
-        System.out.println("Msg Number is: " + subject);
+
+        msg.setSubject(subject);
         msg.setMsg(text);
-        System.out.println("Text of msg is:" + text);
         msg.setRead(false);
 
+        msg.setType(messageType);
         // commiting transaction
         Session session = createNewSessionAndTransaction();
         session.save(msg);

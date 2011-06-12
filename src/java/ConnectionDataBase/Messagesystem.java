@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 11-Jun-2011 15:50:27 by Hibernate Tools 3.2.1.GA
+// Generated 12-Jun-2011 20:48:40 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -13,29 +13,32 @@ public class Messagesystem  implements java.io.Serializable {
      private String senderid;
      private String receiverid;
      private String date;
-     private String subcjet;
+     private String subject;
      private String msg;
      private boolean read;
+     private int type;
 
     public Messagesystem() {
     }
 
 	
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, boolean read) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, boolean read, int type) {
         this.msgnumber = msgnumber;
         this.senderid = senderid;
         this.receiverid = receiverid;
         this.date = date;
         this.read = read;
+        this.type = type;
     }
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, String subcjet, String msg, boolean read) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, String subject, String msg, boolean read, int type) {
        this.msgnumber = msgnumber;
        this.senderid = senderid;
        this.receiverid = receiverid;
        this.date = date;
-       this.subcjet = subcjet;
+       this.subject = subject;
        this.msg = msg;
        this.read = read;
+       this.type = type;
     }
    
     public int getMsgnumber() {
@@ -66,12 +69,12 @@ public class Messagesystem  implements java.io.Serializable {
     public void setDate(String date) {
         this.date = date;
     }
-    public String getSubcjet() {
-        return this.subcjet;
+    public String getSubject() {
+        return this.subject;
     }
     
-    public void setSubcjet(String subcjet) {
-        this.subcjet = subcjet;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
     public String getMsg() {
         return this.msg;
@@ -86,6 +89,13 @@ public class Messagesystem  implements java.io.Serializable {
     
     public void setRead(boolean read) {
         this.read = read;
+    }
+    public int getType() {
+        return this.type;
+    }
+    
+    public void setType(int type) {
+        this.type = type;
     }
 
 

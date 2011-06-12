@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 11-Jun-2011 15:50:31 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 12-Jun-2011 20:48:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="ConnectionDataBase.Messagesystem" table="messagesystem" schema="public">
         <id name="msgnumber" type="int">
@@ -17,14 +17,17 @@
         <property name="date" type="string">
             <column name="date" not-null="true" />
         </property>
-        <property name="subcjet" type="string">
-            <column name="subcjet" />
+        <property name="subject" type="string">
+            <column name="subject" />
         </property>
         <property name="msg" type="string">
             <column name="msg" />
         </property>
         <property name="read" type="boolean">
             <column name="read" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="type" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

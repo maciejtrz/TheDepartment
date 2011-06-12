@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.model.SelectItem;
+import messageSystem.MessageSingleton;
 
 /**
  *
@@ -73,7 +74,8 @@ public class Message {
         String name = utilities.BasicUtils.getUserName();
 
         MessageSystemHelper msghelp = new MessageSystemHelper();
-        msghelp.createMsg(name, users.get(selectedReceiver).getIdname(), getSubject(), getText());
+        msghelp.createMsg(name, users.get(selectedReceiver).getIdname(), getSubject(), 
+                getText(), MessageSingleton.PLAIN_MESSAGE);
 
     }
 

@@ -51,14 +51,14 @@ public abstract class MessageManager {
         this.messages = messages;
     }
 
-    public String getReceiver() {
+    public String getSender() {
         return username;
     }
 
     public void sendMessage(String receiver, String subject, String text) {
 
         MessageSystemHelper messageHelper = new MessageSystemHelper();
-        messageHelper.createMsg(getReceiver(), receiver, subject, text);
+        messageHelper.createMsg(getSender(),receiver,subject,text, getMessageType());
 
     }
 
@@ -75,7 +75,7 @@ public abstract class MessageManager {
         while (iterator.hasNext()) {
 
             Messagesystem message = iterator.next();
-            messagesSubjects.add(new SelectItem(new Integer(i++), message.getSubcjet()));
+            messagesSubjects.add(new SelectItem(new Integer(i++), message.getSubject()));
 
         }
 

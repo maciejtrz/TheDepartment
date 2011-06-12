@@ -78,4 +78,6 @@ public class MessageSystemHelper extends AbstractHelper {
         System.out.print("NEXT MSG NUMBER = "  + q.list().size() + " +1 " );
         return (q.list().size());
     }
+
+    /* HUJ */
 }

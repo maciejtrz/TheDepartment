@@ -9,6 +9,7 @@ import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
+import ConnectionDataBase.ExtrastatsHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import java.io.IOException;
 
@@ -63,6 +64,11 @@ public class Department {
         // Deleting students info.
         // TODO
 
+
+        // Deleting extra stats
+        ExtrastatsHelper extrasHelper
+                = new ExtrastatsHelper();
+        extrasHelper.deleteRecord(username);
 
     }
 

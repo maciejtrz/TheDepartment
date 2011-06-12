@@ -281,8 +281,11 @@ public class LecturersManager {
             Iterator<Lecturersspecializations> spec_it = spec_list.iterator();
             while (spec_it.hasNext()) {
                 Lecturersspecializations spec = spec_it.next();
+                System.out.println("Updating boost: " + spec.getSpecialization());
                 int cur_boost = spec.getBoost();
+                System.out.println("Current boost: " + cur_boost);
                 if (cur_boost + update_value <= max_boost) {
+                    System.out.println("Update_value: "  + update_value);
                     specializationsHelper.setBoost(spec, cur_boost + update_value);
                 }
 

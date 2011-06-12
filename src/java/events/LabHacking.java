@@ -17,7 +17,7 @@ public class LabHacking extends Event {
             return false;
         }
         int labs_level = building_record.getLabolatories();
-        if (labs_level < Building.ADVANCED_LEVEL) {
+        if (labs_level < Building.MEDIUM_LEVEL) {
             return false;
         }
 

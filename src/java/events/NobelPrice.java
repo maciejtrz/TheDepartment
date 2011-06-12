@@ -11,7 +11,7 @@ public class NobelPrice extends Event {
 
         // Increase the boost of all researchers.
         LecturersManager mgr = new LecturersManager(playerName);
-        mgr.updateLecturersBoost(LotteryManager.MEGA);
+        mgr.updateLecturersBoost(LotteryManager.MEDIUM);
 
         // Increase players satisfaction.
         return (increaseSatisfaction(playerName, LotteryManager.MEGA));

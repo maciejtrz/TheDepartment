@@ -16,6 +16,19 @@ public class ExtrastatsHelper extends AbstractHelper {
 
     }
 
+    public void deleteRecord(String idname) {
+
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Extrastats where idname='"
+                + idname + "'");
+        Extrastats stats_record = (Extrastats)q.uniqueResult();
+
+        if (stats_record != null) {
+            session.delete(stats_record);
+            commitTransaction(session);
+        }
+    }
+
     public void updateSatisfaction (String idname, int satisfacation) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Extrastats where idname='"

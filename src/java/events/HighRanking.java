@@ -5,7 +5,6 @@
 
 package events;
 
-import ConnectionDataBase.Capacity;
 import ConnectionDataBase.CapacityHelper;
 import utilities.LecturersManager;
 

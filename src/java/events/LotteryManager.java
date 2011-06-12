@@ -57,7 +57,6 @@ public class LotteryManager {
 
     private LotteryManager() {
         lottery_pool = new Ticket[TICKETS_NUMBER];
-        initializeLottery();
         event_list = new ArrayList<Event>();
         onAlcoIncrease = new ArrayList<Event>();
         onAlcoDecrease = new ArrayList<Event>();
@@ -65,6 +64,7 @@ public class LotteryManager {
         onSatiDecrease = new ArrayList<Event>();
         onStarIncrease = new ArrayList<Event>();
         onStarDecrease = new ArrayList<Event>();
+        initializeLottery();
     }
 
     public static LotteryManager getManager() {
@@ -129,35 +129,57 @@ public class LotteryManager {
 
         int index = 0;
 
-        Event labsInFire = new LabsInFire();
-        // Giving labs 20% chances.
-        int chances = 20;
-        giveTickets(labsInFire , chances , index);
-        index += chances;
-
-        Event pintosCw = new PintosCw();
-        // Giving pintos 20% chances.
-        chances = 20;
-        giveTickets(pintosCw, chances, index);
-        index += chances;
-
         Event barNight = new BarNight();
         // Giving barNight 20% chances.
-        chances = 20;
+        int chances = 20;
         giveTickets(barNight, chances, index);
+        event_list.add(barNight);
         index += chances;
+
+        Event facebookBlocked = new FacebookBlocked();
+        event_list.add(facebookBlocked);
+
+        Event haskellConference = new HaskellConference();
+        event_list.add(haskellConference);
+
+        Event highRanking = new HighRanking();
+        event_list.add(highRanking);
+
 
         Event labHacking = new LabHacking();
         // Giving labHacking 10% chances.
         chances = 10;
         giveTickets(labHacking, chances, index);
         index += chances;
+        event_list.add(labHacking);
 
-        Event phdPromotion = new PhdPromotion();
-        // Giving phdPromotion 10% chances
-        chances = 10;
-        giveTickets(phdPromotion, chances, index);
+        
+        Event labsInFire = new LabsInFire();
+        // Giving labs 20% chances.
+        chances = 20;
+        giveTickets(labsInFire , chances , index);
+        event_list.add(labsInFire);
         index += chances;
+        event_list.add(labsInFire);
+
+
+        Event lecturerPromotion = new LecturerPromotion();
+        event_list.add(lecturerPromotion);
+
+        Event malice = new Malice();
+        event_list.add(malice);
+
+
+        Event nobel = new NobelPrice();
+        // Giving nobel price 1% chances
+        chances = 1;
+        giveTickets(nobel, chances, index);
+        index += 1;
+        event_list.add(nobel);
+
+
+        Event outOfChicken = new OutOfChicken();
+        event_list.add(outOfChicken);
 
 
         Event paperLeak = new PaperLeak();
@@ -165,14 +187,32 @@ public class LotteryManager {
         chances = 19;
         giveTickets(paperLeak, chances, index);
         index += 19;
-
-        Event nobel = new NobelPrice();
-        // Giving nobel price 1% chances
-        chances = 1;
-        giveTickets(nobel, chances, index);
-        index += 1;
+        event_list.add(paperLeak);
 
 
+        Event phdPromotion = new PhdPromotion();
+        // Giving phdPromotion 10% chances
+        chances = 10;
+        giveTickets(phdPromotion, chances, index);
+        index += chances;
+        event_list.add(phdPromotion);
+
+
+        Event pintosCw = new PintosCw();
+        // Giving pintos 20% chances.
+        chances = 20;
+        giveTickets(pintosCw, chances, index);
+        index += chances;
+        event_list.add(pintosCw);
+
+        Event pubDemolished = new PubDemolished();
+        event_list.add(pubDemolished);
+
+        Event tresco = new TrescoTragedy();
+        event_list.add(tresco);
+
+        Event union = new UnionParty();
+        event_list.add(union);
     }
 
     // Returns a random event from the given list.
@@ -193,9 +233,5 @@ public class LotteryManager {
             lottery_pool[index] = t;
         }
     }
-
-
-
-
 
 }

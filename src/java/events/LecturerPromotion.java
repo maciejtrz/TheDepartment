@@ -12,6 +12,7 @@ public class LecturerPromotion extends Event {
 
         // Removes one PhD provided he exists
         if (!UserManager.removePhdsnumber(playerName, 1)) {
+            System.out.println("Not enough phd");
             return false;
         }
 

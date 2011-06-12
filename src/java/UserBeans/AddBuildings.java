@@ -6,6 +6,8 @@
 package UserBeans;
 
 import buildings.*;
+import events.Event;
+import events.LotteryManager;
 import utilities.BuildingInfo;
 
 
@@ -20,6 +22,38 @@ public class AddBuildings {
     }
 
     public void test() {
+
+        String playerName = utilities.BasicUtils.getUserName();
+        BuildingFactory factory = new BuildingFactory();
+        factory.initializeBuildings();
+
+
+        Tresco tresco = factory.getTresco();
+        tresco.build(playerName, 3);
+
+
+        MacChicken macChicken = factory.getMacChicken();
+        macChicken.build(playerName, 4);
+
+        StudentUnion union = factory.getStudentUnion();
+        union.build(playerName, 6);
+
+        DocPub pub = factory.getPub();
+        pub.build(playerName, 5);
+
+        factory.getLabs().build(playerName, 7);
+        factory.getLabs().upgrade(playerName, 7);
+
+
+        LotteryManager mgr = LotteryManager.getManager();
+        Event e = mgr.getEvent(LotteryManager.UNION_PARTY);
+        if (e.invoke(playerName)) {
+            System.out.println ("SUCCESS!");
+        }
+        else {
+            System.out.println ("Fail!");
+        }
+
        /* TEST CODE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
         /*

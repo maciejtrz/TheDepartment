@@ -15,8 +15,7 @@ public class PhdPromotion extends Event {
         }
 
         // Increasing the PhD population.
-        CapacityHelper capHelper = new CapacityHelper();
-        capHelper.updatePhDsCapacity(playerName, LotteryManager.MEGA);
+        UserManager.addPhdsnumber(playerName, LotteryManager.MEGA);
 
         return true;
 

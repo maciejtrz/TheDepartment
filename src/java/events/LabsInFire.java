@@ -29,6 +29,12 @@ public class LabsInFire extends Event {
                 posHelper.getPosition(playerName, Building.CODE_LABS);
 
         if (labs_position == 0) {
+            // Checking for superlabs
+            labs_position
+               = posHelper.getPosition(playerName, Building.CODE_SUPERLABS);
+        }
+
+        if (labs_position == 0) {
             // Inconsistency in the database, given that labs are built this
             // should not happen.
             System.err.println("Incosistency in the databse, could not find" +

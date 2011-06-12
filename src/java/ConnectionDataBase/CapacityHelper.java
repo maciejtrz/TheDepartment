@@ -56,6 +56,7 @@ public class CapacityHelper extends AbstractHelper {
         if (capacity != null) {
             int student_cap = capacity.getStudentscapacity();
             capacity.setStudentscapacity(student_cap + updateValue);
+            session.update(capacity);
             commitTransaction(session);
         }
     }
@@ -67,7 +68,8 @@ public class CapacityHelper extends AbstractHelper {
         Capacity capacity = (Capacity) q.uniqueResult();
         if (capacity != null) {
             int phd_cap = capacity.getPhdscapacity();
-            capacity.setStudentscapacity(phd_cap + updateValue);
+            capacity.setPhdscapacity(phd_cap + updateValue);
+            session.update(capacity);
             commitTransaction(session);
         }
     }
@@ -80,6 +82,7 @@ public class CapacityHelper extends AbstractHelper {
         if (capacity != null) {
             int prof_cap = capacity.getProfessorscapacity();
             capacity.setProfessorscapacity(prof_cap + updateValue);
+            session.update(capacity);
             commitTransaction(session);
         }
     }

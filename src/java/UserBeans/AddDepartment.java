@@ -8,6 +8,7 @@ import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
+import ConnectionDataBase.ExtrastatsHelper;
 import Connections.ConnectionSingleton;
 import buildings.*;
 import java.sql.SQLException;
@@ -58,6 +59,12 @@ public class AddDepartment {
         BuildingsPositionHelper buildingsPosition =
                 new BuildingsPositionHelper();
         buildingsPosition.initiateBuildingsPosition(playerName);
+
+        /* Populating speical events table. */
+        ExtrastatsHelper extraStatsHelper
+                = new ExtrastatsHelper();
+        extraStatsHelper
+                .createInitialStats(playerName, 50, 50, 50);
 
         return "success";
     }

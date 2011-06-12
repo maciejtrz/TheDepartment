@@ -23,15 +23,7 @@ public class FacebookBlocked extends Event {
 
         
         // Getting the satisfaction update value
-        ExtrastatsHelper statsHelper
-                = new ExtrastatsHelper();
-        Extrastats stats_record = statsHelper.getPlayerStatsRecrod(playerName);
-        if (stats_record == null) {
-            return false;
-        }
-        int satisfaction_level = stats_record.getSatisfaction();
-        int sat_update
-              = getDecreasedValue(satisfaction_level, LotteryManager.MEDIUM);
+        decreaseSatisfaction(playerName, LotteryManager.HIGH);
 
         // Getting the population update value
         CapacityHelper capHelper = new CapacityHelper();

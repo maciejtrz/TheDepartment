@@ -39,12 +39,9 @@ public class FacebookBlocked extends Event {
         if (cap_record == null) {
             return false;
         }
-        int new_value = cap_record.getStudentscapacity() + 100;
-
-
+        
         // Updating the databases if everything went ok
-        statsHelper.updateSatisfaction(playerName, sat_update);
-        capHelper.updateStudentsCapacity(playerName, new_value);
+        capHelper.updateStudentsCapacity(playerName, 100);
 
         return true;
     }

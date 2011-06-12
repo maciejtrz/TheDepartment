@@ -60,7 +60,7 @@ public class BuildingsPositionHelper extends AbstractHelper {
     }
 
     // Returns the acronym of building that occupies given position.
-    public String getPosition(String idname, int position) {
+    public String getAtPosition(String idname, int position) {
         String output = null;
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Buildingsposition where idname='"
@@ -85,6 +85,29 @@ public class BuildingsPositionHelper extends AbstractHelper {
         }
         return false;
 
+    }
+
+    // Returns the position of a given building specified by its
+    // acronym. Returns 0 if the acronym is not built, which should not happen.
+    public int getPosition (String idname, String acronym) {
+        int output = 0;
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Buildingsposition where idname='"
+                + idname + "'");
+        Buildingsposition bp = (Buildingsposition) q.uniqueResult();
+        if (bp != null) {
+            // Magic numbers
+            for (int i = 1 ; i <= 16 ; i++) {
+                String cur = bp.getPos(i);
+                if (cur != null) {
+                    if (cur.equals(acronym)) {
+                        output = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return output;
     }
 
 }

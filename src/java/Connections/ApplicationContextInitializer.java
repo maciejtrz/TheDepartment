@@ -3,6 +3,7 @@ package Connections;
 
 import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeShowcase;
+import buildings.BuildingFactory;
 import deamons.DeamonManager;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,6 +21,7 @@ public class ApplicationContextInitializer implements ServletContextListener {
             SpecializationsGenerator.initializeSpecializationsGenerator();
             ResearchDevelopment.initializeDevelopmentTree();
             ResearchTreeShowcase.initializeResearchTreeShowcase();
+            BuildingFactory.initializeBuildings();
             DeamonManager mgr = DeamonManager.getManager();
 
 

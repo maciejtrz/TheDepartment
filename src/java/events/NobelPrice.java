@@ -1,10 +1,20 @@
 package events;
 
+import utilities.LecturersManager;
+
 public class NobelPrice extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // No prerequirements.
+
+        // Increase the boost of all researchers.
+        LecturersManager mgr = new LecturersManager(playerName);
+        mgr.updateLecturersBoost(LotteryManager.MEGA);
+
+        // Increase players satisfaction.
+        return (increaseSatisfaction(playerName, LotteryManager.MEGA));
     }
 
     @Override

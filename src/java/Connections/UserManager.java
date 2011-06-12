@@ -45,7 +45,7 @@ public class UserManager {
         return sessionMap.containsKey(username);
     }
 
-    private Playerresources getPlayerResources(String username) {
+    public Playerresources getPlayerResources(String username) {
         return getUser(username).getResources();
     }
 

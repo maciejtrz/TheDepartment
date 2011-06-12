@@ -5,6 +5,8 @@
 
 package events;
 
+import ConnectionDataBase.Capacity;
+import ConnectionDataBase.CapacityHelper;
 import utilities.LecturersManager;
 
 /**
@@ -25,7 +27,17 @@ public class HighRanking extends Event {
         }
 
         // Updating phD satisfaction.
-        return (increaseSatisfaction(playerName, LotteryManager.LOW));
+        if (!increaseSatisfaction(playerName, LotteryManager.LOW)) {
+            return false;
+        }
+
+        // Increasing students and phds capacity.
+        CapacityHelper capacityHelper = new CapacityHelper();
+        capacityHelper.updateStudentsCapacity(playerName, LotteryManager.HIGH);
+        capacityHelper.updatePhDsCapacity(playerName, LotteryManager.MEDIUM);
+        capacityHelper.updateProfessorsCapacity(playerName, LotteryManager.LOW);
+        
+        return true;
     }
 
     @Override

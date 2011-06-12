@@ -47,14 +47,24 @@ public class LotteryManager {
     private List<Event> event_list;
 
     /* Extra stats dependent lists. */
-    private List<Event> 
+    private List<Event> onAlcoIncrease;
+    private List<Event> onAlcoDecrease;
+    private List<Event> onSatiIncrease;
+    private List<Event> onSatiDecrease;
+    private List<Event> onStarIncrease;
+    private List<Event> onStarDecrease;
 
 
     private LotteryManager() {
         lottery_pool = new Ticket[TICKETS_NUMBER];
         initializeLottery();
         event_list = new ArrayList<Event>();
-
+        onAlcoIncrease = new ArrayList<Event>();
+        onAlcoDecrease = new ArrayList<Event>();
+        onSatiIncrease = new ArrayList<Event>();
+        onSatiDecrease = new ArrayList<Event>();
+        onStarIncrease = new ArrayList<Event>();
+        onStarDecrease = new ArrayList<Event>();
     }
 
     public static LotteryManager getManager() {
@@ -165,11 +175,11 @@ public class LotteryManager {
 
     }
 
-    // Returns a random event from the pool.
-    private Event getRandomEvent() {
+    // Returns a random event from the given list.
+    private Event getRandomEvent(List<Event> input_list) {
         Random rand = new Random();
-        int index = rand.nextInt(event_list.size());
-        return event_list.get(index);
+        int index = rand.nextInt(input_list.size());
+        return input_list.get(index);
     }
 
     // Creates n ticket for a given event. Also, asigns n places for that

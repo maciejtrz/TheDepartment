@@ -76,6 +76,41 @@ public class LecturersManager {
         }
 
     }
+
+    /* Generates one lecturer and adds him to the player's owned list. */
+    public void generateOneOwnedLecturer() {
+
+            Lecturer newLecturer = generateLecturer();
+
+            /* Getting all required hibernate helpers. */
+            LecturersOwnedHelper lecturersOwned
+                    = new LecturersOwnedHelper();
+            LecturersHelper lecturersHelper
+                    = new LecturersHelper();
+            LecturersSpecializationsHelper specializationHelper
+                    = new LecturersSpecializationsHelper();
+
+
+            // Obtaining attributes.
+            String name = newLecturer.getName();
+            int price = newLecturer.getPrice();
+            boolean usable = newLecturer.getUsable();
+            ArrayList<LecturerBenefits> specializations
+                    = newLecturer.getSpecializations();
+
+            // Updating the databases.
+            lecturersHelper.addLecturer(name, price, usable);
+            lecturersOwned.addLecturer(name, userName);
+
+            Iterator <LecturerBenefits> it
+                    = specializations.iterator();
+            while (it.hasNext()) {
+              LecturerBenefits benefit = it.next();
+              specializationHelper
+               .setSpecialization(name, benefit.getField(), benefit.getBoost());
+            }
+
+    }
     
 
     /* returns true if successful. */

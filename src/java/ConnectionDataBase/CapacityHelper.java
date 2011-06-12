@@ -47,35 +47,39 @@ public class CapacityHelper extends AbstractHelper {
         return (Capacity) q.uniqueResult();
     }
 
-    public void updateStudentsCapacity(String idname, int newValue) {
+    /* The following methods increase capacities by update values. */
+    public void updateStudentsCapacity(String idname, int updateValue) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Capacity where idname='"
                 + idname + "'");
         Capacity capacity = (Capacity) q.uniqueResult();
         if (capacity != null) {
-            capacity.setStudentscapacity(newValue);
+            int student_cap = capacity.getStudentscapacity();
+            capacity.setStudentscapacity(student_cap + updateValue);
             commitTransaction(session);
         }
     }
 
-    public void updatePhDsCapacity(String idname, int newValue) {
+    public void updatePhDsCapacity(String idname, int updateValue) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Capacity where idname='"
                 + idname + "'");
         Capacity capacity = (Capacity) q.uniqueResult();
         if (capacity != null) {
-            capacity.setStudentscapacity(newValue);
+            int phd_cap = capacity.getPhdscapacity();
+            capacity.setStudentscapacity(phd_cap + updateValue);
             commitTransaction(session);
         }
     }
 
-    public void updateProfessorsCapacity(String idname, int newValue) {
+    public void updateProfessorsCapacity(String idname, int updateValue) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Capacity where idname='"
                 + idname + "'");
         Capacity capacity = (Capacity) q.uniqueResult();
         if (capacity != null) {
-            capacity.setProfessorscapacity(newValue);
+            int prof_cap = capacity.getProfessorscapacity();
+            capacity.setProfessorscapacity(prof_cap + updateValue);
             commitTransaction(session);
         }
     }

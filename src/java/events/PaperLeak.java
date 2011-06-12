@@ -3,8 +3,14 @@ package events;
 public class PaperLeak extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // No prerequirements.
+
+        // Increasing students satisfaction
+        increaseSatisfaction(playerName, LotteryManager.HIGH);
+
+        return true;
     }
 
     @Override

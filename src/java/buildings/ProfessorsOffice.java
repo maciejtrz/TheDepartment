@@ -155,7 +155,7 @@ public class ProfessorsOffice extends Building {
         }
 
         // Upgrading with respect to the current level
-        String occupant = posHelper.getPosition(playerName, position);
+        String occupant = posHelper.getAtPosition(playerName, position);
         if (cur_level == BASIC_LEVEL) {
             if (!occupant.equals(CODE_PROF_OFFICE_1)) {
                 return false;

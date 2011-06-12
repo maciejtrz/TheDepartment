@@ -1,10 +1,25 @@
 package events;
 
+import Connections.UserManager;
+import utilities.LecturersManager;
+
 public class LecturerPromotion extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // No prerequirements.
+
+        // Removes one PhD provided he exists
+        if (!UserManager.removePhdsnumber(playerName, 1)) {
+            return false;
+        }
+
+        // Generates one lecturers for the lucky player.
+        LecturersManager mgr = new LecturersManager(playerName);
+        mgr.generateOneOwnedLecturer();
+
+        return true;
     }
 
     @Override

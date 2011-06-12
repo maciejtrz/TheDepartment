@@ -1,10 +1,22 @@
 package events;
 
+import Connections.UserManager;
+
 public class Malice extends Event {
 
     @Override
-    public void invoke() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean invoke(String playerName) {
+
+        // No prerequirements.
+
+        // Decreasing students satisfaction.
+        decreaseSatisfaction(playerName, LotteryManager.MEGA);
+
+        // Decreasing students population.
+        UserManager.removeUndegraduatesnumber(playerName, LotteryManager.MEGA);
+        UserManager.removePhdsnumber(playerName, LotteryManager.MEDIUM);
+
+        return true;
     }
 
     @Override

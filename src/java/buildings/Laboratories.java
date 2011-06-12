@@ -154,7 +154,7 @@ public class Laboratories  extends Building {
         }
 
         // Checking whether the input position is correct.
-        String occupant = posHelper.getPosition(playerName, position);
+        String occupant = posHelper.getAtPosition(playerName, position);
         if (!occupant.equals(this.CODE_LABS)) {
             return false;
         }

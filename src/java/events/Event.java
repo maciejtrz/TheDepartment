@@ -56,6 +56,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");
             return false;
         }
 
@@ -75,6 +76,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");
             return false;
         }
 
@@ -94,6 +96,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");
             return false;
         }
 
@@ -113,6 +116,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");
             return false;
         }
 
@@ -132,6 +136,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");
             return false;
         }
 
@@ -151,6 +156,7 @@ public abstract class Event {
         Extrastats stats_record
                 = statsHelper.getPlayerStatsRecrod(playerName);
         if(stats_record == null) {
+            System.err.println("Player record does not exist!");  
             return false;
         }
 

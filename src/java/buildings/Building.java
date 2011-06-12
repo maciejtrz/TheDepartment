@@ -125,7 +125,7 @@ public abstract class Building {
 
         BuildingsPositionHelper helper
                 = new BuildingsPositionHelper();
-        String occupant = helper.getPosition(playerName, position);
+        String occupant = helper.getAtPosition(playerName, position);
         return (occupant != null && occupant.equals(buildingAcronym));
 
     }

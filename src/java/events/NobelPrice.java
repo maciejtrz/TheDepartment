@@ -27,4 +27,8 @@ public class NobelPrice extends Event {
         return (name.equals(LotteryManager.NOBEL_PRICE));
     }
 
+    @Override
+    public String getName() {
+        return ("Nobel price award won!");
+    }
 }

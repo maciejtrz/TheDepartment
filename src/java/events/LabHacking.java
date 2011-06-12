@@ -34,5 +34,10 @@ public class LabHacking extends Event {
     public boolean isEqual(String name) {
         return (name.equals(LotteryManager.LAB_HACKING));
     }
+
+    @Override
+    public String getName() {
+        return ("Labs Hacked!");
+    }
     
 }

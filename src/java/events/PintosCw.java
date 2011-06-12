@@ -27,4 +27,9 @@ public class PintosCw extends Event {
     public boolean isEqual(String name) {
         return (name.equals(LotteryManager.PINTOS_CW));
     }
+
+    @Override
+    public String getName() {
+        return ("Pintos course work released!");
+    }
 }

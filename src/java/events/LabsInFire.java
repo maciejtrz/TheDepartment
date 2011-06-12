@@ -58,4 +58,9 @@ public class LabsInFire extends Event {
         return (name.equals(LotteryManager.LABS_FIRE));
     }
 
+    @Override
+    public String getName() {
+        return ("Fire in the labs!");
+    }
+
 }

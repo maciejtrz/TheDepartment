@@ -49,4 +49,8 @@ public class HighRanking extends Event {
         return name.equals(LotteryManager.HIGH_RANKING);
     }
 
+    @Override
+    public String getName() {
+        return ("High university ranking.");
+    }
 }

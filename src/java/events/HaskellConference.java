@@ -24,4 +24,8 @@ public class HaskellConference extends Event {
         return name.equals(LotteryManager.HASKELL_CONFERENCE);
     }
 
+    @Override
+    public String getName() {
+        return ("Haskell Conference!");
+    }
 }

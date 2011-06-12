@@ -65,5 +65,9 @@ public class PubDemolished extends Event {
         return (name.equals(LotteryManager.PUB_DEMOLISHED));
     }
 
+    @Override
+    public String getName() {
+        return ("Pub Demolished!");
+    }
 
 }

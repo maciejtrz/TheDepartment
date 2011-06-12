@@ -33,4 +33,8 @@ public class LecturerPromotion extends Event {
         return name.equals(LotteryManager.LECTURER_PROMOTION);
     }
 
+    @Override
+    public String getName() {
+        return ("Lecturer Promotion!");
+    }
 }

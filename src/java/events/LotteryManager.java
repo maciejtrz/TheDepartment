@@ -28,6 +28,11 @@ public class LotteryManager {
     public static final String FACEBOOK_BLOCKED = "FACEBOOK_BLOCKED";
     public static final String HASKELL_CONFERENCE = "HASKELL_CONFERENCE";
     public static final String LECTURER_PROMOTION = "LECTURER_PROMOTION";
+    public static final String GIRLS_ARRIVAL = "GIRLS_ARRIVAL";
+    public static final String TRESCO_MIRACLE = "TRESCO_MIRACLE";
+    public static final String MAC_PROMOTION = "MAC_CHICKEN_PROMOTION";
+    public static final String GOVERNMENT_GRANT = "GOVERNMENT_GRANT";
+    public static final String PRIVATE_INVESTOR_GRANT = "PRIVATE_GRANT";
 
     // Event special statistics update levels
     public static final int LOW = 5;

@@ -24,4 +24,9 @@ public class PaperLeak extends Event {
     }
 
 
+    @Override
+    public String getName() {
+        return ("Examination paper leak!");
+    }
+
 }

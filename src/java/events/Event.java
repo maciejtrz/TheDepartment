@@ -179,5 +179,5 @@ public abstract class Event {
     public abstract boolean isEqual(String name);
 
     // Returns the name of a given 
-
+    public abstract String getName();
 }

@@ -31,4 +31,8 @@ public class PhdPromotion extends Event {
         return (name.equals(LotteryManager.PHD_PROMOTION));
     }
 
+    @Override
+    public String getName() {
+        return ("PhD promotion!");
+    }
 }

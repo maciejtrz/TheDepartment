@@ -38,4 +38,10 @@ public class TrescoTragedy extends Event {
     public boolean isEqual(String name) {
         return (name.equals(LotteryManager.TRESCO_TRAGEDY));
     }
+
+    @Override
+    public String getName() {
+        return ("Tresco tragedy!");
+    }
 }
+

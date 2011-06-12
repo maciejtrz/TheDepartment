@@ -29,5 +29,9 @@ public class Malice extends Event {
         return name.equals(LotteryManager.MALICE);
     }
 
+    @Override
+    public String getName() {
+        return ("Malice Course work released!");
+    }
 
 }

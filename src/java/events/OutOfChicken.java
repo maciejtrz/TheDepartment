@@ -37,4 +37,8 @@ public class OutOfChicken extends Event {
         return (name.equals(LotteryManager.OUT_OF_CHICKEN));
     }
 
+    @Override
+    public String getName() {
+        return ("MacChicken has run out of chicken!");
+    }
 }

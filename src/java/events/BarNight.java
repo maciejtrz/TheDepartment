@@ -42,4 +42,9 @@ public class BarNight extends Event {
         return (name.equals(LotteryManager.BAR_NIGHT));
     }
 
+    @Override
+    public String getName() {
+        return ("Bar Night!");
+    }
+
 }

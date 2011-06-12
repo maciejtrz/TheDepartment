@@ -53,4 +53,8 @@ public class FacebookBlocked extends Event {
         return name.equals(LotteryManager.FACEBOOK_BLOCKED);
     }
 
+    @Override
+    public String getName() {
+        return ("Facebook blocked in labs!");
+    }
 }

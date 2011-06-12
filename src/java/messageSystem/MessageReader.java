@@ -31,9 +31,6 @@ public abstract class MessageReader {
     /* Selected message */
     private Integer selectedMessage;
 
-    /*Selected reicever*/
-    private int selectedReceiver;
-
     public MessageReader(int messageType) {
         this.messageType = messageType;
         username = BasicUtils.getUserName();
@@ -117,20 +114,5 @@ public abstract class MessageReader {
         System.out.println("Old step: " + event.getOldStep());
         System.out.println("New step: " + event.getNewStep());
         return event.getNewStep();
-    }
-
-    public List<SelectItem> getReceivers() {
-        List<SelectItem> receiverList = new ArrayList<SelectItem>();
-        int i = 0;
-
-        Iterator<Messagesystem> iterator = getMessages().iterator();
-        while (iterator.hasNext()) {
-            Messagesystem message = iterator.next();
-
-            receiverList.add(new SelectItem(new Integer(i), message.getReceiverid()));
-            System.out.println(message.getReceiverid() + " This is what i get in getRecievers");
-        }
-
-        return receiverList;
     }
 }

@@ -16,8 +16,9 @@ import UserBeans.Auth;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import messageSystem.TradeOffer;
+import resources.Resource;
+import resources.ResourcesType;
 
 /**
  *
@@ -264,6 +265,32 @@ public class UserManager {
 
            removeResearchBag(research.getUserId());
 
+    }
+
+    public boolean makeTrade(TradeOffer tradeOffer) {
+        Auth sender = getUser(tradeOffer.getSenderid());
+        Auth receiver = getUser(tradeOffer.getReceiverid());
+
+        Playerresources senResources = sender.getResources();
+        Playerresources recResources = receiver.getResources();
+
+        Resource resourceOffered = ResourcesType.getResourcesElement(tradeOffer.getResourcesOfferedType());
+        Resource resourceWanted = ResourcesType.getResourcesElement(tradeOffer.getResourcesWantedType());
+
+        boolean result = false;
+
+        if(resourceOffered.canRemove(senResources, tradeOffer.getAmountOffered()) &&
+                resourceWanted.canRemove(recResources, tradeOffer.getAmountWanted())) {
+            result = true;
+
+            resourceOffered.remove(senResources, tradeOffer.getAmountOffered());
+            resourceOffered.add(recResources, tradeOffer.getAmountOffered());
+
+            resourceWanted.remove(senResources, tradeOffer.getAmountWanted());
+            resourceWanted.add(recResources, tradeOffer.getAmountWanted());
+        }
+
+        return result;
     }
 
 

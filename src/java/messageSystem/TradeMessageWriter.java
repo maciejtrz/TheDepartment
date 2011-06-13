@@ -5,6 +5,7 @@
 
 package messageSystem;
 
+import resources.ResourcesType;
 import ConnectionDataBase.MessageSystemHelper;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class TradeMessageWriter extends MessageManager{
             resources = new ArrayList<SelectItem>();
             
             for(int i = 0;i < ResourcesType.getResourcesList().length;i++) {
-                resources.add(new SelectItem(new Integer(i),ResourcesType.getResourcesList()[i]));
+                resources.add(new SelectItem(new Integer(i),ResourcesType.getResourcesList()[i].getResourcesName()));
             }
     }
 

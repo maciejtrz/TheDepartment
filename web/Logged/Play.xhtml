@@ -156,15 +156,15 @@ and open the template in the editor.
 
 
             <h:form>
-            <h:outputText value="To: " />
+                <h:outputText value="To: " />
                 <h:selectOneMenu value="#{tradeMessageWriter.selectedReceiver}">
                     <f:selectItems value="#{tradeMessageWriter.receivers}"/>
                 </h:selectOneMenu>
 
-            <br/>
+                <br/>
                 <h:outputText value="Title of the trade: "/>
                 <h:inputText value="#{tradeMessageWriter.subject}" />
-            <br/>
+                <br/>
                 <h:outputText value="Offered resources:" />
                 <h:selectOneMenu value="#{tradeMessageWriter.resourcesOfferedType}">
                     <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
@@ -196,8 +196,8 @@ and open the template in the editor.
 
         <p:dialog header="View Trades" widgetVar="viewtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-  <h:form>
-      <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}">
+            <h:form>
+                <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}">
 
                     <p:column headerText="Trade sender">
                         <h:outputText value="#{tradeOffer.senderid}" />
@@ -207,26 +207,32 @@ and open the template in the editor.
                         <h:outputText value="#{tradeOffer.receiverid}" />
                     </p:column>
 
-          <p:column headerText="Resource offered: ">
-              <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
-          </p:column>
+                    <p:column headerText="Resource offered: ">
+                        <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+                    </p:column>
 
-          <p:column headerText="Amount offered: " >
-          <h:outputText value="#{tradeOffer.amountOffered}"/>
-          </p:column>
+                    <p:column headerText="Amount offered: " >
+                        <h:outputText value="#{tradeOffer.amountOffered}"/>
+                    </p:column>
 
-          <p:column headerText="Resources wanted: ">
-              <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
-          </p:column>
+                    <p:column headerText="Resources wanted: ">
+                        <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+                    </p:column>
 
-          <p:column headerText="Amounte wanted: ">
-              <h:outputText value="#{tradeOffer.amountWanted}" />
-          </p:column>
+                    <p:column headerText="Amounte wanted: ">
+                        <h:outputText value="#{tradeOffer.amountWanted}" />
+                    </p:column>
 
-          <p:column>
-              <h:commandButton value="Accept" />
-              <h:commandButton value="Decline" />
-          </p:column>
+                    <p:column>
+                        <h:commandButton value="Accept" >
+                            <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
+                        </h:commandButton>
+
+                        <h:commandButton value="Decline" >
+                            <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
+                        </h:commandButton>
+
+                    </p:column>
 
 
                 </p:dataTable>

@@ -11,15 +11,13 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class TradeMessageReader extends TradeOffer {
+public class TradeMessageReader extends MessageManager {
     
     public TradeMessageReader() {
+        super(MessageSingleton.TRADE_OFFER);
     }
 
     public List<TradeOffer> offeredTrades;
-
-    public void sendOffer() {       
-    }
 
     public List<TradeOffer> getOfferedTrades() {
         offeredTrades = new ArrayList<TradeOffer>();
@@ -32,13 +30,11 @@ public class TradeMessageReader extends TradeOffer {
 
             TradeOffer tradeOffer  = new TradeOffer();
 
-            System.out.println("Parsing: " + message.getMsg());
-
             tradeOffer.parse(message.getMsg());
-            tradeOffer.setSender(message.getSenderid());
-            tradeOffer.setReceiver(message.getReceiverid());
+            tradeOffer.setSenderid(message.getSenderid());
+            tradeOffer.setReceiverid(message.getReceiverid());
             tradeOffer.setDate(message.getDate());
-            tradeOffer.setUniqueid(message.getMsgnumber());
+            tradeOffer.setMsgnumber(message.getMsgnumber());
 
             offeredTrades.add(tradeOffer);
         }

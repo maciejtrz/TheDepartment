@@ -15,8 +15,4 @@ public class PlainMessageReader extends MessageManager {
         super(MessageSingleton.PLAIN_MESSAGE);
     }
 
-    public void update() {
-        
-    }
-
 }

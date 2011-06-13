@@ -200,12 +200,33 @@ and open the template in the editor.
       <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}">
 
                     <p:column headerText="Trade sender">
-                        <h:outputText value="#{tradeOffer.sender}" />
+                        <h:outputText value="#{tradeOffer.senderid}" />
                     </p:column>
 
                     <p:column headerText="Trade receiver">
-                        <h:outputText value="#{tradeOffer.receiver}" />
+                        <h:outputText value="#{tradeOffer.receiverid}" />
                     </p:column>
+
+          <p:column headerText="Resource offered: ">
+              <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+          </p:column>
+
+          <p:column headerText="Amount offered: " >
+          <h:outputText value="#{tradeOffer.amountOffered}"/>
+          </p:column>
+
+          <p:column headerText="Resources wanted: ">
+              <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+          </p:column>
+
+          <p:column headerText="Amounte wanted: ">
+              <h:outputText value="#{tradeOffer.amountWanted}" />
+          </p:column>
+
+          <p:column>
+              <h:commandButton value="Accept" />
+              <h:commandButton value="Decline" />
+          </p:column>
 
 
                 </p:dataTable>

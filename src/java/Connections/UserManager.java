@@ -46,13 +46,10 @@ public class UserManager {
         return sessionMap.containsKey(username);
     }
 
-    public Playerresources getPlayerResources(String username) {
-        return getUser(username).getResources();
-    }
 
-    static private void saveResources(String username, Playerresources resources) {
+    static private void saveResources(Playerresources resources) {
 
-        if(!isUserMonitored(username)) {
+        if(!isUserMonitored(resources.getIdname())) {
              saveToDatabase(resources);
         }
 
@@ -123,7 +120,7 @@ public class UserManager {
 
             Playerresources resources = getResources(username);
             resources.setMoney(resources.getMoney() + money);
-            saveResources(username,resources);
+            saveResources(resources);
 
     }
 
@@ -135,7 +132,7 @@ public class UserManager {
 
             if(resources.getMoney() - money >= 0) {
                 resources.setMoney(resources.getMoney() - money);
-                saveResources(username,resources);
+                saveResources(resources);
                 result = true;
             }
 
@@ -146,7 +143,7 @@ public class UserManager {
     static synchronized public void addResearchPoints(String username, int researchPoints) {
             Playerresources resources = getResources(username);
             resources.setResearchpoints(resources.getResearchpoints()+researchPoints);
-            saveResources(username,resources);
+            saveResources(resources);
     }
 
 
@@ -158,7 +155,7 @@ public class UserManager {
 
             if(resources.getPhdsnumber() - phdsnumber >= 0) {
                 resources.setMoney(resources.getPhdsnumber() - phdsnumber);
-                saveResources(username,resources);
+                saveResources(resources);
                 result = true;
             }
 
@@ -169,7 +166,7 @@ public class UserManager {
     static synchronized public void addPhdsnumber(String username, int phdsnumber) {
             Playerresources resources = getResources(username);
             resources.setPhdsnumber(resources.getPhdsnumber()+ phdsnumber);
-            saveResources(username,resources);
+            saveResources(resources);
     }
 
     static synchronized public boolean removeUndegraduatesnumber(String username, int undergraduatesnumber) {
@@ -180,7 +177,7 @@ public class UserManager {
 
             if(resources.getUndergraduatesnumber() - undergraduatesnumber >= 0) {
                 resources.setMoney(resources.getUndergraduatesnumber() - undergraduatesnumber);
-                saveResources(username,resources);
+                saveResources(resources);
                 result = true;
             }
 
@@ -191,7 +188,7 @@ public class UserManager {
     static synchronized public void addUndegraduatesnumber(String username, int undergraduatesnumber) {
             Playerresources resources = getResources(username);
             resources.setUndergraduatesnumber(resources.getUndergraduatesnumber()+undergraduatesnumber);
-            saveResources(username,resources);
+            saveResources(resources);
     }
 
     static synchronized private void addResearchFromDB(Research research) {
@@ -269,11 +266,9 @@ public class UserManager {
 
     synchronized public static boolean makeTrade(TradeOffer tradeOffer) {
         
-        Auth sender = getUser(tradeOffer.getSenderid());
-        Auth receiver = getUser(tradeOffer.getReceiverid());
 
-        Playerresources senResources = sender.getResources();
-        Playerresources recResources = receiver.getResources();
+        Playerresources senResources = getResources(tradeOffer.getSenderid());
+        Playerresources recResources = getResources(tradeOffer.getReceiverid());
 
         Resource resourceOffered = ResourcesType.getResourcesElement(tradeOffer.getResourcesOfferedType());
         Resource resourceWanted = ResourcesType.getResourcesElement(tradeOffer.getResourcesWantedType());
@@ -290,6 +285,9 @@ public class UserManager {
             resourceWanted.remove(recResources, tradeOffer.getAmountWanted());
             resourceWanted.add(senResources, tradeOffer.getAmountWanted());
         }
+
+        saveResources(senResources);
+        saveResources(recResources);
 
         return result;
     }

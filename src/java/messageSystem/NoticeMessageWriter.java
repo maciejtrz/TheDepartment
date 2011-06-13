@@ -31,7 +31,6 @@ public class NoticeMessageWriter extends MessageManager {
     public NoticeMessageWriter() {
         super(MessageSingleton.NOTICE_BOARD_OFFER);
         tradeOffer = new TradeOffer();
-        tradeOffer.setReceiverid(MessageSingleton.NOTICE_BOARD);
     }
 
     public void setSubject(String subject) {
@@ -90,7 +89,8 @@ public class NoticeMessageWriter extends MessageManager {
     public void sendNoticeOffer() {
 
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
-        messageSystemHelper.createMessage(getUsername(),getReceiverid(),tradeOffer.getSubject(),
+        System.out.println("Adding new notice offer...");
+        messageSystemHelper.createMessage(getUsername(),MessageSingleton.NOTICE_BOARD,tradeOffer.getSubject(),
                 tradeOffer.encode(),getMessageType());
 
     }

@@ -49,6 +49,16 @@ public abstract class MessageManager {
         selectedReceiver = 0;
     }
 
+    public MessageManager(String username, int messageType) {
+        this.messageType = messageType;
+        this.username = username;
+
+        selectedMessage = new Integer(0);
+
+        users = new ArrayList<Players>();
+        selectedReceiver = 0;
+    }
+
     public int getMessageType() {
         return messageType;
     }

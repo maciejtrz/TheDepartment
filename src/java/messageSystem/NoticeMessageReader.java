@@ -9,6 +9,7 @@ import ConnectionDataBase.Messagesystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import utilities.BasicUtils;
 
 /**
  *
@@ -16,17 +17,20 @@ import java.util.List;
  */
 public class NoticeMessageReader extends MessageManager {
 
-     public NoticeMessageReader() {
-        super(MessageSingleton.NOTICE_BOARD_OFFER);
+    public NoticeMessageReader() {
+        super(MessageSingleton.NOTICE_BOARD,MessageSingleton.NOTICE_BOARD_OFFER);
     }
 
-    public List<TradeOffer> offeredTrades;
+    public List<TradeOffer> offeredNoticeTrades;
 
-    public List<TradeOffer> getOfferedTrades() {
-        offeredTrades = new ArrayList<TradeOffer>();
+    public List<TradeOffer> getOfferedNoticeTrades() {
+        offeredNoticeTrades = new ArrayList<TradeOffer>();
 
         List<Messagesystem> encodedTrades = getMessages();
         Iterator<Messagesystem> iterator = encodedTrades.iterator();
+
+        System.out.println("Adding new messages from DB...");
+        System.out.println("Number of notice boards: " + encodedTrades.size());
 
         while(iterator.hasNext()) {
             Messagesystem message = iterator.next();
@@ -35,25 +39,23 @@ public class NoticeMessageReader extends MessageManager {
 
             tradeOffer.parse(message.getMsg());
             tradeOffer.setSenderid(message.getSenderid());
-            tradeOffer.setReceiverid(message.getReceiverid());
             tradeOffer.setDate(message.getDate());
             tradeOffer.setMsgnumber(message.getMsgnumber());
 
-            offeredTrades.add(tradeOffer);
+            offeredNoticeTrades.add(tradeOffer);
         }
 
-        return offeredTrades;
+        return offeredNoticeTrades;
     }
 
 
-    public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
-        acceptedTradeOffer.accept();
-        offeredTrades.remove(acceptedTradeOffer);
-    }
+    public void setAnswerTradeOffer(TradeOffer answeredTradeOffer) {
+        System.out.println("Answering trade offer...");
+        answeredTradeOffer.setReceiverid(BasicUtils.getUserName());
+        if(answeredTradeOffer.accept()) {
+             offeredNoticeTrades.remove(answeredTradeOffer);
+        }
 
-    public void setDeclineTradeOffer(TradeOffer declinedTradeOffer) {
-        declinedTradeOffer.decline();
-        offeredTrades.remove(declinedTradeOffer);
     }
 
 }

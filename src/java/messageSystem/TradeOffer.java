@@ -154,16 +154,17 @@ public class TradeOffer extends Messagesystem {
                         ? "" : getTradeDescription());
     }
 
-    public void accept() {
+    public boolean accept() {
         System.out.println("Accepting...");
         System.out.println("Sender: " + getSenderid());
         System.out.println("Receiver: " + getReceiverid());
 
-        UserManager.makeTrade(this);
+        boolean result = UserManager.makeTrade(this);
 
-        finishOffer();
+        if(result)
+            finishOffer();
 
-
+       return result;
     }
 
     public void decline() {

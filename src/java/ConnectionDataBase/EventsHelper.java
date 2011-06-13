@@ -15,6 +15,14 @@ public class EventsHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
+    public Events getPlayerRecord(String idname) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Events where idname='"
+                + idname + "'");
+        Events event_record = (Events) q.uniqueResult();
+        return event_record;
+    }
+
     public void setBarNight(String idname, int new_value) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Events where idname='"

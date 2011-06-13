@@ -5,8 +5,10 @@
 
 package messageSystem;
 
+import ConnectionDataBase.MessageSystemHelper;
 import resources.ResourcesType;
 import ConnectionDataBase.Messagesystem;
+import Connections.UserManager;
 
 /**
  *
@@ -157,10 +159,21 @@ public class TradeOffer extends Messagesystem {
         System.out.println("Sender: " + getSenderid());
         System.out.println("Receiver: " + getReceiverid());
 
+        UserManager.makeTrade(this);
+
+        finishOffer();
+
+
     }
 
     public void decline() {
         System.out.println("Declining...");
+        finishOffer();
+    }
+
+    private void finishOffer() {
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        messageSystemHelper.deleteMsg(getMsgnumber());
     }
 
 

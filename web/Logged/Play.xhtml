@@ -196,8 +196,8 @@ and open the template in the editor.
 
         <p:dialog header="View Trades" widgetVar="viewtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <h:form>
-                <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}">
+            <h:form >
+                <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}" >
 
                     <p:column headerText="Trade sender">
                         <h:outputText value="#{tradeOffer.senderid}" />
@@ -234,9 +234,10 @@ and open the template in the editor.
 
                     </p:column>
 
-
                 </p:dataTable>
+                <p:poll interval="5" update="offeredTrades" />
             </h:form>
+
 
 
             <a onclick="viewtrade.hide()"> CLICK THIS TO HIDE </a>

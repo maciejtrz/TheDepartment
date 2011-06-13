@@ -45,10 +45,12 @@ public class TradeMessageReader extends MessageManager {
 
     public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
         acceptedTradeOffer.accept();
+        offeredTrades.remove(acceptedTradeOffer);
     }
 
     public void setDeclineTradeOffer(TradeOffer declinedTradeOffer) {
         declinedTradeOffer.decline();
+        offeredTrades.remove(declinedTradeOffer);
     }
 
 

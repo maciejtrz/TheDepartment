@@ -267,7 +267,8 @@ public class UserManager {
 
     }
 
-    public boolean makeTrade(TradeOffer tradeOffer) {
+    synchronized public static boolean makeTrade(TradeOffer tradeOffer) {
+        
         Auth sender = getUser(tradeOffer.getSenderid());
         Auth receiver = getUser(tradeOffer.getReceiverid());
 
@@ -286,8 +287,8 @@ public class UserManager {
             resourceOffered.remove(senResources, tradeOffer.getAmountOffered());
             resourceOffered.add(recResources, tradeOffer.getAmountOffered());
 
-            resourceWanted.remove(senResources, tradeOffer.getAmountWanted());
-            resourceWanted.add(recResources, tradeOffer.getAmountWanted());
+            resourceWanted.remove(recResources, tradeOffer.getAmountWanted());
+            resourceWanted.add(senResources, tradeOffer.getAmountWanted());
         }
 
         return result;

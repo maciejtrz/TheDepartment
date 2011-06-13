@@ -7,6 +7,7 @@ package UserBeans;
 import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
+import Connections.UserManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -76,6 +77,22 @@ public class Message {
         MessageSystemHelper msghelp = new MessageSystemHelper();
         msghelp.createMessage(name, users.get(selectedReceiver).getIdname(), getSubject(),
                 getText(), MessageSingleton.PLAIN_MESSAGE);
+
+        UserManager.notifyUserAboutMessage(users.get(selectedReceiver).getIdname());
+
+        /*
+        System.out.println("Here I am 2");
+        System.out.println("Receiver id is:" + users.get(selectedReceiver).getIdname());
+        FacesContext receiverContext = UserManager.getFacesContext(users.get(selectedReceiver).getIdname());
+        receiverContext.addMessage(null, new FacesMessage("You've got a new message!"));
+
+        // MessageSingleton.inboxThreads.get(users.get(selectedReceiver).getIdname()).run();
+
+        /*ActionEvent sendClicked = new ActionEvent(this.sendButton);
+        System.out.println("HERE");
+        sendClicked.
+        System.out.println("HERE 2");
+        this.listener.processAction(sendClicked);*/
 
     }
 

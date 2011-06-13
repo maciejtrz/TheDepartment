@@ -292,5 +292,12 @@ public class UserManager {
         return result;
     }
 
+    public static void notifyUserAboutMessage(String username) {
+        if(isUserMonitored(username)) {
+            Auth auth = getUser(username);
+            auth.notifyUserAboutMessage();
+        }
+    }
+
 
 }

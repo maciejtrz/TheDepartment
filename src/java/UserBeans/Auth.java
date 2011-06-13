@@ -5,6 +5,7 @@ import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -14,10 +15,12 @@ public class Auth {
     public Auth() {
         remember = false;
         logging = false;
+        hasNewMessage = false;
     }
     private String username;
     private String password;
     private Boolean remember;
+    private boolean hasNewMessage;
     private Playerresources resources;
 
     public boolean logging;
@@ -135,4 +138,25 @@ public class Auth {
     public String go() {
         return "success";
     }
+
+    public void notifyUserAboutMessage() {
+        setHasNewMessage(true);
+    }
+
+    private synchronized void setHasNewMessage(boolean value) {
+        hasNewMessage = value;
+    }
+
+    private boolean getHasNewMessage() {
+        return hasNewMessage;
+    }
+
+    public void hasNewMessage() {
+        if(getHasNewMessage()) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Message System","You've got a new message"));
+            setHasNewMessage(false);
+        }
+    }
+
 }

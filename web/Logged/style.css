@@ -1,4 +1,4 @@
-@namespace p "http://primefaces.prime.com.tr/ui";
+
 
 body { 
 background:url('bg.jpg');
@@ -15,6 +15,10 @@ margin-left: auto;
 margin-right: auto;
 }
 
+#build {
+position:fixed;
+}
+
 
 #lform {
 font-size: 18px;
@@ -26,4 +30,74 @@ left: 40px;
 
 #lmenu {
 width: 100px;
+}
+
+
+/*
+horizontal distance: 233px
+vertical distance: 141px
+*/
+
+#p1 {
+position: absolute; left: -95px; top: 26px;
+}
+
+#p2 {
+position: absolute; left: -211px; top: 97px;
+}
+
+#p3 {
+position: absolute; left: 21px; top: 97px;
+}
+
+#p4 {
+position: absolute; left: -328px; top: 167px;
+}
+
+#p5 {
+position: absolute; left: -95px; top: 167px;
+}
+
+#p6 {
+position: absolute; left: 138px; top: 167px;
+}
+
+#p7 {
+position: absolute; left: -445px; top: 237px;
+}
+
+#p8 {
+position: absolute; left: -212px; top: 237px;
+}
+
+#p9 {
+position: absolute; left: 21px; top: 237px;
+}
+
+#p10 {
+position: absolute; left: 254px; top: 237px;
+}
+
+#p11 {
+position: absolute; left: -328px; top: 307px;
+}
+
+#p12 {
+position: absolute; left: -95px; top: 307px;
+}
+
+#p13 {
+position: absolute; left: 138px; top: 307px;
+}
+
+#p14 {
+position: absolute; left: -212px; top: 378px;
+}
+
+#p15 {
+position: absolute; left: 21px; top: 378px;
+}
+
+#p16 {
+position: absolute; left: -95px; top: 447px;
 }

@@ -27,7 +27,7 @@ public class ApplicationContextInitializer implements ServletContextListener {
 
             System.out.println(" Starting new threads in CONTEXT. !!!!");
             mgr.createLecturersPopulator();
-            mgr.createEventDeamon();
+            //mgr.createEventDeamon();
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

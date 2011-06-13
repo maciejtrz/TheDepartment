@@ -4,19 +4,20 @@ public class BuildingFactory {
 
     /* Create all neccessary building objects. */
 
-    private static BlackMarket blackMarket;
-    private static BobTheBuilder bob;
-    private static Brain brain;
-    private static DocPub docPub;
-    private static Laboratories labs;
-    private static LectureRoom lecturerRoom;
-    private static MacChicken macChicken;
-    private static PhdOffice pdhOffice;
-    private static ProfessorsOffice profOffice;
-    private static StudentUnion studentUnion;
-    private static Tresco tresco;
+    private BlackMarket blackMarket;
+    private BobTheBuilder bob;
+    private Brain brain;
+    private DocPub docPub;
+    private Laboratories labs;
+    private LectureRoom lecturerRoom;
+    private MacChicken macChicken;
+    private PhdOffice pdhOffice;
+    private ProfessorsOffice profOffice;
+    private StudentUnion studentUnion;
+    private Tresco tresco;
 
-    public static void initializeBuildings() {
+    
+    public void initializeBuildings() {
 
         blackMarket = new BlackMarket();
         bob = new BobTheBuilder();
@@ -34,47 +35,58 @@ public class BuildingFactory {
 
     /* All neccessary getters. */
 
-    public static BlackMarket getBlackMarket () {
+    public BlackMarket getBlackMarket () {
+        blackMarket = new BlackMarket();
         return blackMarket;
     }
 
-    public static BobTheBuilder getBob() {
+    public BobTheBuilder getBob() {
+        bob = new BobTheBuilder();
         return bob;
     }
 
-    public static Brain getBrain () {
+    public Brain getBrain () {
+        brain = new Brain();
         return brain;
     }
 
-    public static DocPub getPub() {
+    public DocPub getPub() {
+        docPub = new DocPub();
         return docPub;
     }
 
-    public static Laboratories getLabs() {
+    public Laboratories getLabs() {
+        labs = new Laboratories();
         return labs;
     }
 
-    public static LectureRoom getLecturerRoom() {
+    public LectureRoom getLecturerRoom() {
+        lecturerRoom = new LectureRoom();
         return lecturerRoom;
     }
 
-    public static MacChicken getMacChicken() {
+    public MacChicken getMacChicken() {
+        macChicken = new MacChicken();
         return macChicken;
     }
 
-    public static PhdOffice getPdhOffice() {
+    public PhdOffice getPdhOffice() {
+        pdhOffice = new PhdOffice();
         return pdhOffice;
     }
 
-    public static ProfessorsOffice getProfOffice() {
+    public ProfessorsOffice getProfOffice() {
+        profOffice = new ProfessorsOffice();
         return profOffice;
     }
 
-    public static StudentUnion getStudentUnion() {
+    public StudentUnion getStudentUnion() {
+        studentUnion = new StudentUnion();
         return studentUnion;
     }
 
-    public static Tresco getTresco() {
+    public Tresco getTresco() {
+        tresco = new Tresco();
         return tresco;
     }
 

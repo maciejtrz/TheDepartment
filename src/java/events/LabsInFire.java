@@ -42,7 +42,8 @@ public class LabsInFire extends Event {
             return false;
         }
 
-        Laboratories labs = BuildingFactory.getLabs();
+        BuildingFactory factory = new BuildingFactory();
+        Laboratories labs = factory.getLabs();
         labs.remove(playerName, labs_position);
 
         return true;

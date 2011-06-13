@@ -21,12 +21,11 @@ public class ApplicationContextInitializer implements ServletContextListener {
             SpecializationsGenerator.initializeSpecializationsGenerator();
             ResearchDevelopment.initializeDevelopmentTree();
             ResearchTreeShowcase.initializeResearchTreeShowcase();
-            BuildingFactory.initializeBuildings();
             DeamonManager mgr = DeamonManager.getManager();
 
 
             System.out.println(" Starting new threads in CONTEXT. !!!!");
-            mgr.createLecturersPopulator();
+            //mgr.createLecturersPopulator();
             //mgr.createEventDeamon();
     }
 

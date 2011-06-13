@@ -25,5 +25,6 @@
     <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Playerresearch.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Events.hbm.xml"/>
+    <mapping resource="ConnectionDataBase/Extrastats.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

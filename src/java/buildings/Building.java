@@ -1,7 +1,5 @@
 package buildings;
 
-import ConnectionDataBase.Buildings;
-import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import utilities.BuildingInfo;

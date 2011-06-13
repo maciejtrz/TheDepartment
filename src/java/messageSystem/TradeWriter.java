@@ -7,6 +7,7 @@ package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.model.SelectItem;
 import resources.ResourcesType;
@@ -31,6 +32,18 @@ public class TradeWriter extends MessageWriter{
     TradeWriter(int messageType) {
         super(messageType);
         tradeOffer = new TradeOffer();
+    }
+
+    public Date getExpireDate() {
+        return getTradeOffer().getExpireDate();
+    }
+
+    public void setExpireDate(Date date) {
+        getTradeOffer().setExpireDate(date);
+    }
+
+    public void setExpireDate(long date) {
+        getTradeOffer().setExpireDate(date);
     }
 
     public void setSubject(String subject) {

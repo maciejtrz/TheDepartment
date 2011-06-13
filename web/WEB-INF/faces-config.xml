@@ -185,9 +185,9 @@
     </managed-bean>
     <managed-bean>
         <managed-bean-name>auctionMessageWriter</managed-bean-name>
-        <managed-bean-class>messageSystem.AuctionMessageWriter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>messageSystem.HighestAuctionMessageWriter</managed-bean-class>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>auctionMessageReader</managed-bean-name>
         <managed-bean-class>messageSystem.AuctionMessageReader</managed-bean-class>

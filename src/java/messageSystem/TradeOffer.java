@@ -9,6 +9,7 @@ import ConnectionDataBase.MessageSystemHelper;
 import resources.ResourcesType;
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
+import java.util.Date;
 
 /**
  *
@@ -51,6 +52,7 @@ public class TradeOffer extends Messagesystem {
     private int resourcesWantedType;
     private int amountWanted;
 
+    private Date expireDate;
 
     public TradeOffer() {
         resourcesOfferedType = 0;
@@ -59,6 +61,24 @@ public class TradeOffer extends Messagesystem {
         resourcesWantedType = 0;
         amountWanted = 0;
 
+        expireDate = new Date();
+
+    }
+
+    public String getExpireDateText() {
+        return expireDate.toString();
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date date) {
+        expireDate = date;
+    }
+
+    public void setExpireDate(long date) {
+        expireDate.setTime(date);
     }
 
     public String getTradeDescription() {
@@ -122,11 +142,11 @@ public class TradeOffer extends Messagesystem {
         setAmountOffered(getNumber(parsingPosition));
         setResourcesWantedType(getNumber(parsingPosition));
         setAmountWanted(getNumber(parsingPosition));
+        setExpireDate(getLongNumber(parsingPosition));
         setTradeDescription(getTradeDesrciptionText(parsingPosition));
     }
-
-    private int getNumber(ParsingPosition parsingPosition) {
-
+    
+    private String getNumberString(ParsingPosition parsingPosition) {
         StringBuilder builder = new StringBuilder();
 
         while(parsingPosition.isDigit()) {
@@ -134,7 +154,18 @@ public class TradeOffer extends Messagesystem {
         }
 
         parsingPosition.moveForward();
-        return Integer.parseInt(builder.toString());
+        
+        return builder.toString();
+    }
+
+    private long getLongNumber(ParsingPosition parsingPosition) {
+
+        return Long.parseLong(getNumberString(parsingPosition));
+    }
+
+    private int getNumber(ParsingPosition parsingPosition) {
+
+        return Integer.parseInt(getNumberString(parsingPosition));
     }
 
     private String getTradeDesrciptionText(ParsingPosition parsingPosition) {
@@ -150,6 +181,7 @@ public class TradeOffer extends Messagesystem {
     public String encode() {
         return getResourcesOfferedType() + "=" + getAmountOffered() + " " +
                 getResourcesWantedType() + "=" + getAmountWanted() + "\n" +
+                getExpireDate().getTime() + "\n" +
                 (getTradeDescription() == null || getTradeDescription().isEmpty()
                         ? "" : getTradeDescription());
     }

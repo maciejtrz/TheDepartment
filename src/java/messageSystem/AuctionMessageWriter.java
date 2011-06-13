@@ -5,21 +5,17 @@
 
 package messageSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.model.SelectItem;
-import resources.ResourcesType;
-
-
 /**
  *
  * @author root
  */
-public class AuctionMessageWriter extends MessageWriter {
+public class AuctionMessageWriter extends TradeWriter {
 
     /** Creates a new instance of AuctionMessageWriter */
     public AuctionMessageWriter() {
         super(MessageSingleton.AUCTION_OFFER);
     }
+
+    
 
 }

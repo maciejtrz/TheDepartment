@@ -297,6 +297,9 @@ and open the template in the editor.
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                  value="#{tradeMessageWriter.tradeDescription}"/>
 
+                <h:outputText value="Expire date: "/>
+                <p:calendar value="#{tradeMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+
                 <h:commandButton value="Make Trade Offer" actionListener="#{tradeMessageWriter.sendTrade}" />
             </h:form>
 
@@ -330,8 +333,12 @@ and open the template in the editor.
                         <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amounte wanted: ">
+                    <p:column headerText="Amount wanted: ">
                         <h:outputText value="#{tradeOffer.amountWanted}" />
+                    </p:column>
+
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{tradeOffer.expireDateText}" />
                     </p:column>
 
                     <p:column>

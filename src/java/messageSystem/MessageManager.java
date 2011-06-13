@@ -39,52 +39,14 @@ public abstract class MessageManager {
     /*List of users*/
     public List<Players> users;
 
-    /*Message sender */
-    private String sender;
-    private String receiver;
-
-    private String date;
-    private int id;
-
     public MessageManager(int messageType) {
         this.messageType = messageType;
         username = BasicUtils.getUserName();
-        sender = username;
+
         selectedMessage = new Integer(0);
+
         users = new ArrayList<Players>();
         selectedReceiver = 0;
-    }
-
-    public void setUniqueid(int id){
-        this.id = id;
-    }
-
-    public int getUniqueid() {
-        return id;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getReceiver() {
-        return receiver;
     }
 
     public int getMessageType() {
@@ -92,33 +54,33 @@ public abstract class MessageManager {
     }
 
     public List<Messagesystem> getMessages() {
+
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
-        return messageSystemHelper.getMessages(getSender(), getMessageType());
+        return messageSystemHelper.getMessages(getUsername(), getMessageType());
 
     }
 
     public void setMessages(List<Messagesystem> messages) {
+
         this.messages = messages;
+
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getSelectedReceiverId() {
+    public String getReceiverid() {
+
         return users.get(getSelectedReceiver()).getIdname();
+
     }
 
     public void sendMessage(String receiver, String subject, String text) {
 
         MessageSystemHelper messageHelper = new MessageSystemHelper();
-        messageHelper.createMessage(getSender(),receiver,subject,text, getMessageType());
+        messageHelper.createMessage(getUsername(), receiver, subject, text, getMessageType());
 
-    }
-
-    public void updateMessages() {
-
-        /* Reading messages from database and updating list */
     }
 
     public List<SelectItem> getMessagesSubjects() {
@@ -137,46 +99,49 @@ public abstract class MessageManager {
     }
 
     public void setSelectedMessage(Integer selectedMessage) {
+
         this.selectedMessage = selectedMessage;
+
     }
 
     public Integer getSelectedMessage() {
+
         return selectedMessage;
+
     }
 
     public String getChosenMessage() {
+
         String result = null;
         if (getMessages().size() > getSelectedMessage()) {
             result = getMessages().get(getSelectedMessage()).getDate();
         }
 
         return result;
+
     }
 
     public String getText() {
         String result = null;
 
-        System.out.println("Get text invoked: selected item is: " + getSelectedMessage());
-
         if (getMessages().size() > getSelectedMessage()) {
             result = getMessages().get(getSelectedMessage()).getMsg();
         }
         return result;
+
     }
 
     public String onFlowProcess(FlowEvent event) {
-        System.out.println("Old step: " + event.getOldStep());
-        System.out.println("New step: " + event.getNewStep());
         return event.getNewStep();
     }
 
-        public List<SelectItem> getReceivers() {
+    public List<SelectItem> getReceivers() {
+
         List<SelectItem> receiverList = new ArrayList<SelectItem>();
         users = new ArrayList<Players>();
         int i = 0;
 
         PlayerHelper ph = new PlayerHelper();
-
         Iterator<Players> iterator = ph.getPlayers().iterator();
 
         while (iterator.hasNext()) {
@@ -184,19 +149,22 @@ public abstract class MessageManager {
 
             receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
             users.add(player);
-            System.out.println(player.getIdname());
         }
 
         return receiverList;
+
     }
 
     public void setSelectedReceiver(int selectedReceiver) {
+
         this.selectedReceiver = selectedReceiver;
+
     }
 
     public int getSelectedReceiver() {
+
         return this.selectedReceiver;
+
     }
-
-
+    
 }

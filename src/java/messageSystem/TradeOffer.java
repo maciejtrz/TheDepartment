@@ -5,19 +5,41 @@
 
 package messageSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.model.SelectItem;
+import ConnectionDataBase.Messagesystem;
 
 /**
  *
  * @author kp1209
  */
-public class TradeOffer extends MessageManager {
+public class TradeOffer extends Messagesystem {
 
-    private static List<SelectItem> resources;
+    private class ParsingPosition {
 
-    private String subject;
+        private int position;
+        private char[] message;
+
+        ParsingPosition(String encodedMessage) {
+            message = encodedMessage.toCharArray();
+            position = 0;
+        }
+
+        public char getNextCharacter() {
+            return message[position++];
+        }
+
+        public boolean isDigit() {
+            return Character.isDigit(message[position]);
+        }
+
+        public void moveForward() {
+            position++;
+        }
+
+        public boolean isNotFinished() {
+            return position < message.length;
+        }
+    }
+
     private String tradeDescription;
 
     private int resourcesOfferedType;
@@ -28,32 +50,12 @@ public class TradeOffer extends MessageManager {
 
 
     public TradeOffer() {
-        super(MessageSingleton.TRADE_OFFER);
         resourcesOfferedType = 0;
         amountOffered = 0;
 
         resourcesWantedType = 0;
         amountWanted = 0;
 
-        if(resources == null) {
-            resources = new ArrayList<SelectItem>();
-            for(int i = 0;i < ResourcesType.getResourcesList().length;i++) {
-                resources.add(new SelectItem(new Integer(i),ResourcesType.getResourcesList()[i]));
-            }
-        }
-        
-    }
-
-    public List<SelectItem> getAvailableResources() {
-        return resources;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getTradeDescription() {
@@ -96,6 +98,14 @@ public class TradeOffer extends MessageManager {
         this.resourcesWantedType = resourcesWantedType;
     }
 
+    public String getResourcesOfferedName() {
+        return ResourcesType.getResourcesList()[getResourcesOfferedType()];
+    }
+
+    public String getResourcesWantedName() {
+        return ResourcesType.getResourcesList()[getResourcesWantedType()];
+    }
+
     /*
      * Message format:
      * resourcesOffer#=amount resourcesWanted#=amount
@@ -103,65 +113,41 @@ public class TradeOffer extends MessageManager {
      * Text... ...
      */
     public void parse(String encodedMessage) {
+        ParsingPosition parsingPosition = new ParsingPosition(encodedMessage);
 
-        char[] message = encodedMessage.toCharArray();
-
-        Integer value;
-        Integer nextPosition = 0;
-
-        System.out.println("Parsing..." + message);
-
-        setResourcesOfferedType(getNumber(nextPosition++,message));
-        System.out.println("Resources offered: "+ getResourcesOfferedType());
-        System.out.println("position: " + nextPosition + " char: " + message[nextPosition]);
-        nextPosition++;
-        setAmountOffered(getNumber(nextPosition++,message));
-        nextPosition++;
-
-        System.out.println("Amount offered: " + getAmountOffered());
-
-        setResourcesWantedType(getNumber(nextPosition++,message));
-        nextPosition++;
-        setAmountWanted(getNumber(nextPosition++,message));
-        nextPosition++;
-        setSubject(getOneLine(nextPosition++,message));
-        setTradeDescription(getTradeDesrciptionText(nextPosition++,message));
+        setResourcesOfferedType(getNumber(parsingPosition));
+        setAmountOffered(getNumber(parsingPosition));
+        setResourcesWantedType(getNumber(parsingPosition));
+        setAmountWanted(getNumber(parsingPosition));
+        setTradeDescription(getTradeDesrciptionText(parsingPosition));
     }
 
-    private int getNumber(Integer nextPosition, char[] encodedMessage) {
+    private int getNumber(ParsingPosition parsingPosition) {
 
         StringBuilder builder = new StringBuilder();
 
-        while(Character.isDigit(encodedMessage[nextPosition])) {
-            builder.append(encodedMessage[nextPosition++]);
+        while(parsingPosition.isDigit()) {
+            builder.append(parsingPosition.getNextCharacter());
         }
 
+        parsingPosition.moveForward();
         return Integer.parseInt(builder.toString());
     }
 
-    public String getOneLine(Integer nextPosition, char[] encodedMessage) {
-        StringBuilder builder = new StringBuilder();
-        while(encodedMessage[nextPosition] != '\n')
-            builder.append(encodedMessage[nextPosition++]);
-
-        return builder.toString();
-    }
-
-    public String getTradeDesrciptionText(Integer nextPosition, char[] message) {
+    private String getTradeDesrciptionText(ParsingPosition parsingPosition) {
         StringBuilder builder = new StringBuilder();
 
-        for( ; nextPosition < message.length; nextPosition++)
-            builder.append(message[nextPosition]);
+        while(parsingPosition.isNotFinished()) {
+            builder.append(parsingPosition.getNextCharacter());
+        }
 
         return builder.toString();
     }
 
     public String encode() {
         return getResourcesOfferedType() + "=" + getAmountOffered() + " " +
-                getResourcesWantedType() + "=" + getAmountWanted() + " " +
-                (getSubject() == null || getSubject().isEmpty()
-                        ? "" : getSubject()) + "\n" +
-                (getTradeDescription() == null || getSubject().isEmpty()
+                getResourcesWantedType() + "=" + getAmountWanted() + "\n" +
+                (getTradeDescription() == null || getTradeDescription().isEmpty()
                         ? "" : getTradeDescription());
     }
 

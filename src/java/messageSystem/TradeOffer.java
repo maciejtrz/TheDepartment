@@ -5,7 +5,10 @@
 
 package messageSystem;
 
+import ConnectionDataBase.MessageSystemHelper;
+import resources.ResourcesType;
 import ConnectionDataBase.Messagesystem;
+import Connections.UserManager;
 
 /**
  *
@@ -99,11 +102,11 @@ public class TradeOffer extends Messagesystem {
     }
 
     public String getResourcesOfferedName() {
-        return ResourcesType.getResourcesList()[getResourcesOfferedType()];
+        return ResourcesType.getResourcesList()[getResourcesOfferedType()].getResourcesName();
     }
 
     public String getResourcesWantedName() {
-        return ResourcesType.getResourcesList()[getResourcesWantedType()];
+        return ResourcesType.getResourcesList()[getResourcesWantedType()].getResourcesName();
     }
 
     /*
@@ -150,5 +153,28 @@ public class TradeOffer extends Messagesystem {
                 (getTradeDescription() == null || getTradeDescription().isEmpty()
                         ? "" : getTradeDescription());
     }
+
+    public void accept() {
+        System.out.println("Accepting...");
+        System.out.println("Sender: " + getSenderid());
+        System.out.println("Receiver: " + getReceiverid());
+
+        UserManager.makeTrade(this);
+
+        finishOffer();
+
+
+    }
+
+    public void decline() {
+        System.out.println("Declining...");
+        finishOffer();
+    }
+
+    private void finishOffer() {
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        messageSystemHelper.deleteMsg(getMsgnumber());
+    }
+
 
 }

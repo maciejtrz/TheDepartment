@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ *
+ * @author kp1209
+ */
+public class NoticeMessageReader extends MessageManager {
 
-public class TradeMessageReader extends MessageManager {
-    
-    public TradeMessageReader() {
-        super(MessageSingleton.TRADE_OFFER);
+     public NoticeMessageReader() {
+        super(MessageSingleton.NOTICE_BOARD_OFFER);
     }
 
     public List<TradeOffer> offeredTrades;
@@ -41,7 +44,7 @@ public class TradeMessageReader extends MessageManager {
 
         return offeredTrades;
     }
-   
+
 
     public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
         acceptedTradeOffer.accept();
@@ -52,6 +55,5 @@ public class TradeMessageReader extends MessageManager {
         declinedTradeOffer.decline();
         offeredTrades.remove(declinedTradeOffer);
     }
-
 
 }

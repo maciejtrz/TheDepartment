@@ -5,15 +5,18 @@
 
 package messageSystem;
 
-import resources.ResourcesType;
 import ConnectionDataBase.MessageSystemHelper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
+import resources.ResourcesType;
 
-
-public class TradeMessageWriter extends MessageManager{
-
+/**
+ *
+ * @author kp1209
+ */
+public class NoticeMessageWriter extends MessageManager {
+    
     private static List<SelectItem> resources;
     private TradeOffer tradeOffer;
 
@@ -25,10 +28,10 @@ public class TradeMessageWriter extends MessageManager{
             }
     }
 
-    /** Creates a new instance of TradeMessageWriter */
-    public TradeMessageWriter() {
-        super(MessageSingleton.TRADE_OFFER);
+    public NoticeMessageWriter() {
+        super(MessageSingleton.NOTICE_BOARD_OFFER);
         tradeOffer = new TradeOffer();
+        tradeOffer.setReceiverid(MessageSingleton.NOTICE_BOARD);
     }
 
     public void setSubject(String subject) {
@@ -84,15 +87,12 @@ public class TradeMessageWriter extends MessageManager{
     }
 
     /* reading offers and accepting/decling... */
-
-    public void sendTrade() {
+    public void sendNoticeOffer() {
 
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
         messageSystemHelper.createMessage(getUsername(),getReceiverid(),tradeOffer.getSubject(),
                 tradeOffer.encode(),getMessageType());
-        
+
     }
-
-
 
 }

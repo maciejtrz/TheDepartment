@@ -58,6 +58,7 @@ public class LotteryManager {
     private List<Event> onSatiDecrease;
     private List<Event> onStarIncrease;
     private List<Event> onStarDecrease;
+    private List<Event> onRestChanges;
 
 
     private LotteryManager() {
@@ -69,6 +70,7 @@ public class LotteryManager {
         onSatiDecrease = new ArrayList<Event>();
         onStarIncrease = new ArrayList<Event>();
         onStarDecrease = new ArrayList<Event>();
+        onRestChanges = new ArrayList<Event>();
         initializeLottery();
     }
 
@@ -79,11 +81,11 @@ public class LotteryManager {
         return mgr;
     }
 
+
     // Generates a winner of the lottery.
     public Event getWinner() {
         // Getting winner.
         Event output = getRandEvent();
-
 
         /* Decreasing probability of the event happening again. */
 
@@ -99,19 +101,27 @@ public class LotteryManager {
         if (output.getNumOfTickets() > 1) {
             Ticket t = output.getOneTicket();
             t.donate(lucky_event);
+
+            // Also increasing the probability of one of the onList group member.
+            Event on_list_event
+                    = getRandomEventFromList(output.getOnChangeList());
+            if (!on_list_event.equals(output)) {
+                // Donating its probability to some unlucky random event.
+                Event unlucky_event = getRandEvent();
+                while (unlucky_event.equals(on_list_event)) {
+                       unlucky_event = getRandEvent();
+                }
+                if (unlucky_event.getNumOfTickets() > 1) {
+                    t = unlucky_event.getOneTicket();
+                    t.donate(on_list_event);
+                }
+            }
         }
         
         return output;
     }
 
-    // Used in event dynamic probability changing.
-    public Event getRandEvent() {
-        Random rand = new Random();
-        int index = rand.nextInt(TICKETS_NUMBER);
-        Ticket t = lottery_pool[index];
-        return (t.getOwner());
-    }
-
+    
     // Obtains an event given its name in String. Used in order to get
     // rid of many getters etc.
     public Event getEvent(String event_name) {
@@ -127,104 +137,191 @@ public class LotteryManager {
         return null;
     }
 
+    // Used in event dynamic probability changing.
+    private Event getRandEvent() {
+        Random rand = new Random();
+        int index = rand.nextInt(TICKETS_NUMBER);
+        Ticket t = lottery_pool[index];
+        return (t.getOwner());
+    }
+
     // Initializes the lottery, assigning inital probabilities
-    // to all events. Everything is hardcoded. Note, number of tickers
+    // to all events. Everything is hardcoded. Note, number of tickets
     // assigned has to sum to TICKETS_NUMBER
     private void initializeLottery() {
 
+        /* Keep trace of the current index number. */
         int index = 0;
+        int probability = 6;
 
-        Event barNight = new BarNight();
-        // Giving barNight 20% chances.
-        int chances = 20;
-        giveTickets(barNight, chances, index);
-        event_list.add(barNight);
-        index += chances;
-
-        Event facebookBlocked = new FacebookBlocked();
-        event_list.add(facebookBlocked);
-
-        Event haskellConference = new HaskellConference();
-        event_list.add(haskellConference);
-
-        Event highRanking = new HighRanking();
-        event_list.add(highRanking);
-
-
-        Event labHacking = new LabHacking();
-        // Giving labHacking 10% chances.
-        chances = 10;
-        giveTickets(labHacking, chances, index);
-        index += chances;
-        event_list.add(labHacking);
-
-        
-        Event labsInFire = new LabsInFire();
-        // Giving labs 20% chances.
-        chances = 20;
-        giveTickets(labsInFire , chances , index);
-        event_list.add(labsInFire);
-        index += chances;
-        event_list.add(labsInFire);
-
-
-        Event lecturerPromotion = new LecturerPromotion();
-        event_list.add(lecturerPromotion);
-
+        /*  Events with initial probability 6% */
+        List<Event> prob_list = new ArrayList<Event>();
         Event malice = new Malice();
+        malice.setOnChangeList(onSatiDecrease);
         event_list.add(malice);
-
-
-        Event nobel = new NobelPrice();
-        // Giving nobel price 1% chances
-        chances = 1;
-        giveTickets(nobel, chances, index);
-        index += 1;
-        event_list.add(nobel);
-
-
-        Event outOfChicken = new OutOfChicken();
-        event_list.add(outOfChicken);
-
-
-        Event paperLeak = new PaperLeak();
-        // Giving paperLeak 19% chances
-        chances = 19;
-        giveTickets(paperLeak, chances, index);
-        index += 19;
-        event_list.add(paperLeak);
-
-
-        Event phdPromotion = new PhdPromotion();
-        // Giving phdPromotion 10% chances
-        chances = 10;
-        giveTickets(phdPromotion, chances, index);
-        index += chances;
-        event_list.add(phdPromotion);
-
+        prob_list.add(malice);
 
         Event pintosCw = new PintosCw();
-        // Giving pintos 20% chances.
-        chances = 20;
-        giveTickets(pintosCw, chances, index);
-        index += chances;
+        pintosCw.setOnChangeList(onSatiDecrease);
         event_list.add(pintosCw);
-
-        Event pubDemolished = new PubDemolished();
-        event_list.add(pubDemolished);
+        prob_list.add(pintosCw);
 
         Event tresco = new TrescoTragedy();
+        tresco.setOnChangeList(onStarIncrease);
         event_list.add(tresco);
+        prob_list.add(tresco);
+
+        Event girlsArrival = new GirlsArrival();
+        girlsArrival.setOnChangeList(onSatiIncrease);
+        event_list.add(girlsArrival);
+        prob_list.add(girlsArrival);
+
+        Event govGrant = new GovernmentGrant();
+        govGrant.setOnChangeList(onRestChanges);
+        event_list.add(govGrant);
+        prob_list.add(govGrant);
+
+        Event trescoMiracle = new TrescoMiracle();
+        trescoMiracle.setOnChangeList(onStarDecrease);
+        event_list.add(trescoMiracle);
+        prob_list.add(trescoMiracle);
+
+        Event paperLeak = new PaperLeak();
+        paperLeak.setOnChangeList(onSatiIncrease);
+        event_list.add(paperLeak);
+        prob_list.add(paperLeak);
+
+        Event phdPromotion = new PhdPromotion();
+        phdPromotion.setOnChangeList(onRestChanges);
+        event_list.add(phdPromotion);
+        prob_list.add(phdPromotion);
+
+        Event facebookBlocked = new FacebookBlocked();
+        facebookBlocked.setOnChangeList(onSatiDecrease);
+        event_list.add(facebookBlocked);
+        prob_list.add(facebookBlocked);
+
+        Event haskellConference = new HaskellConference();
+        haskellConference.setOnChangeList(onRestChanges);
+        event_list.add(haskellConference);
+        prob_list.add(haskellConference);
+
+        index = assignProbabilities(prob_list, probability , index);
+
+
+        /* Events with initial probability 5% */
+        prob_list = new ArrayList<Event>();
+        probability = 5;
+
+        Event labHacking = new LabHacking();
+        labHacking.setOnChangeList(onSatiDecrease);
+        event_list.add(labHacking);
+        prob_list.add(labHacking);
+
+        Event macPromotion = new MacChickenPromotion();
+        macPromotion.setOnChangeList(onStarDecrease);
+        event_list.add(macPromotion);
+        prob_list.add(macPromotion);
+
+        Event outOfChicken = new OutOfChicken();
+        outOfChicken.setOnChangeList(onStarIncrease);
+        event_list.add(outOfChicken);
+        prob_list.add(outOfChicken);
+
+        Event labsInFire = new LabsInFire();
+        labsInFire.setOnChangeList(onAlcoIncrease);
+        event_list.add(labsInFire);
+        prob_list.add(labsInFire);
+
+        Event lecturerPromotion = new LecturerPromotion();
+        lecturerPromotion.setOnChangeList(onRestChanges);
+        event_list.add(lecturerPromotion);
+        prob_list.add(lecturerPromotion);
 
         Event union = new UnionParty();
+        union.setOnChangeList(onAlcoDecrease);
         event_list.add(union);
+        prob_list.add(union);
+
+        index = assignProbabilities(prob_list, probability , index);
+
+
+        /* Evetns with initial probability 3% */
+        prob_list = new ArrayList<Event>();
+        probability = 3;
+
+        Event barNight = new BarNight();
+        barNight.setOnChangeList(onAlcoIncrease);
+        event_list.add(barNight);
+        prob_list.add(barNight);
+
+        Event privGrant = new PrivateCompanyGrant();
+        privGrant.setOnChangeList(onRestChanges);
+        event_list.add(privGrant);
+        prob_list.add(privGrant);
+
+        index = assignProbabilities(prob_list, probability , index);
+
+
+        /* Events with initial probability 2% */
+        prob_list = new ArrayList<Event>();
+        probability = 2;
+
+        Event pubDemolished = new PubDemolished();
+        pubDemolished.setOnChangeList(onAlcoDecrease);
+        event_list.add(pubDemolished);
+        prob_list.add(pubDemolished);
+
+        index = assignProbabilities(prob_list, probability , index);
+
+
+        /* Events with initial probability 1% */
+        prob_list = new ArrayList<Event>();
+        probability = 1;
+
+        Event highRanking = new HighRanking();
+        highRanking.setOnChangeList(onSatiIncrease);
+        event_list.add(highRanking);
+        prob_list.add(highRanking);
+
+        Event nobel = new NobelPrice();
+        nobel.setOnChangeList(onSatiIncrease);
+        event_list.add(nobel);
+        prob_list.add(nobel);
+
+        index = assignProbabilities(prob_list, probability , index);
+
+        
+        if (index == TICKETS_NUMBER) {
+            System.out.println("PROBABILITIES SUCCESSFULLY ASSIGNED!");
+        }
+        else {
+            System.out.println("INCORECT INDEX: " + index);
+        }
     }
 
     // Returns a random event from the given list.
-    private Event getRandomEvent(List<Event> input_list) {
+    private Event getRandomEventFromList(List<Event> input_list) {
         Random rand = new Random();
         int index = rand.nextInt(input_list.size());
         return input_list.get(index);
+    }
+
+    // Assigns objects from the input lists with a probability value specified
+    // by prob_value, also populating lottery_pool starting from input index.
+    // Returns the index value after the operation.
+    private int assignProbabilities(List<Event> events , int probability, int index) {
+        Iterator<Event> it = events.iterator();
+        while (it.hasNext()) {
+            if (index >= TICKETS_NUMBER) {
+                break;
+            }
+            Event e = it.next();
+            giveTickets(e, probability, index);
+            index += probability;
+        }
+        return index;
+        
     }
 
     // Creates n ticket for a given event. Also, asigns n places for that

@@ -2,6 +2,7 @@ package events;
 
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 
 public class MacChickenPromotion extends Event {
@@ -42,4 +43,10 @@ public class MacChickenPromotion extends Event {
         return ("MacChicken Promotion!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setMacChickenPromotion(playerName, getNumOfTickets());
+    }
 }

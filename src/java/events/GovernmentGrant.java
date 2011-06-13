@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import Connections.UserManager;
 import java.util.Random;
 
@@ -34,5 +35,10 @@ public class GovernmentGrant extends Event {
         return ("Government Research Grant Received!");
     }
 
-
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setGovernmentGrant(playerName, getNumOfTickets());
+    }
 }

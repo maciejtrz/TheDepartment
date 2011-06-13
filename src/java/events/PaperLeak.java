@@ -1,5 +1,7 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
+
 public class PaperLeak extends Event {
 
     @Override
@@ -29,4 +31,10 @@ public class PaperLeak extends Event {
         return ("Examination paper leak!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setPaperLeak(playerName, getNumOfTickets());
+    }
 }

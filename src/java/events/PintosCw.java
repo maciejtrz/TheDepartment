@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import Connections.UserManager;
 
 public class PintosCw extends Event {
@@ -31,5 +32,12 @@ public class PintosCw extends Event {
     @Override
     public String getName() {
         return ("Pintos course work released!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setPintosCw(playerName, getNumOfTickets());
     }
 }

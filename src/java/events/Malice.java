@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import Connections.UserManager;
 
 public class Malice extends Event {
@@ -32,6 +33,13 @@ public class Malice extends Event {
     @Override
     public String getName() {
         return ("Malice Course work released!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setMalice(playerName, getNumOfTickets());
     }
 
 }

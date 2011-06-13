@@ -6,6 +6,7 @@
 package events;
 
 import ConnectionDataBase.CapacityHelper;
+import ConnectionDataBase.EventsHelper;
 import utilities.LecturersManager;
 
 /**
@@ -52,5 +53,12 @@ public class HighRanking extends Event {
     @Override
     public String getName() {
         return ("High university ranking.");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setHighRanking(playerName, getNumOfTickets());
     }
 }

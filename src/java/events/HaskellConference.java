@@ -1,5 +1,6 @@
 package events;
 
+import ConnectionDataBase.EventsHelper;
 import utilities.LecturersManager;
 
 public class HaskellConference extends Event {
@@ -27,5 +28,12 @@ public class HaskellConference extends Event {
     @Override
     public String getName() {
         return ("Haskell Conference!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setHaskellConference(playerName, getNumOfTickets());
     }
 }

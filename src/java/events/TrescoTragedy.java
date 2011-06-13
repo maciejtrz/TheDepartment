@@ -2,6 +2,7 @@ package events;
 
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 
 public class TrescoTragedy extends Event {
@@ -42,6 +43,13 @@ public class TrescoTragedy extends Event {
     @Override
     public String getName() {
         return ("Tresco tragedy!");
+    }
+
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setTrescoTragedy(playerName, getNumOfTickets());
     }
 }
 

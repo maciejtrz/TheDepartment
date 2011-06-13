@@ -3,6 +3,7 @@ package events;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 import buildings.BuildingFactory;
 import buildings.DocPub;
@@ -70,4 +71,10 @@ public class PubDemolished extends Event {
         return ("Pub Demolished!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setPubDemolished(playerName, getNumOfTickets());
+    }
 }

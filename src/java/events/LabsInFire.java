@@ -63,4 +63,11 @@ public class LabsInFire extends Event {
         return ("Fire in the labs!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setLabsInFire(playerName, getNumOfTickets());
+    }
+
 }

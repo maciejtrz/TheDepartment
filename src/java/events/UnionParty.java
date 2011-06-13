@@ -2,6 +2,7 @@ package events;
 
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
+import ConnectionDataBase.EventsHelper;
 import buildings.Building;
 
 public class UnionParty extends Event {
@@ -41,5 +42,11 @@ public class UnionParty extends Event {
         return ("Union Party!");
     }
 
+    @Override
+    public void writeToDb(String playerName) {
+        EventsHelper eventHelper
+                = new EventsHelper();
+        eventHelper.setUnionParty(playerName, getNumOfTickets());
+    }
 
 }

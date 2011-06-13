@@ -1,5 +1,7 @@
 package events;
 
+import ConnectionDataBase.Events;
+import ConnectionDataBase.EventsHelper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -60,8 +62,10 @@ public class LotteryManager {
     private List<Event> onStarDecrease;
     private List<Event> onRestChanges;
 
+    private EventFactory factory;
 
     private LotteryManager() {
+        factory = new EventFactory();
         lottery_pool = new Ticket[TICKETS_NUMBER];
         event_list = new ArrayList<Event>();
         onAlcoIncrease = new ArrayList<Event>();
@@ -121,6 +125,140 @@ public class LotteryManager {
         return output;
     }
 
+    public void writeEventsToDB(String playerName) {
+        if (event_list != null) {
+            Iterator<Event> it = event_list.iterator();
+            while (it.hasNext()) {
+                Event next = it.next();
+                next.writeToDb(playerName);
+            }
+        }
+    }
+
+    public void readEventsFromDB(String playerName) {
+        EventsHelper events_helper = new EventsHelper();
+        Events rec = events_helper.getPlayerRecord(playerName);
+        Event e = null;
+
+        // Reading each event and assigning probability to it, given
+        // its probability from the database.
+
+        // Keeps track of the event_pool index.
+        int index = 0;
+
+        int level = rec.getBarnight();
+        e = factory.createBarNight();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getFacebookblocked();
+        e = factory.createFB();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getGirlsarrival();
+        e = factory.createGirls();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getGovernmentgrant();
+        e = factory.createGovGrant();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getHaskellconference();
+        e = factory.createHaskell();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getHighranking();
+        e = factory.createHighRanking();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getLabshacking();
+        e = factory.createLabHacking();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getLabsinfire();
+        e = factory.createLabInFire();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getLecturerpromotion();
+        e = factory.createLecProm();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getMacchickenpromotion();
+        e = factory.createMacChickenPromotion();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getMalice();
+        e = factory.createMalice();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getNobelprice();
+        e = factory.createNobelPrice();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getOutofchicken();
+        e = factory.createOutOfChicken();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getPhdpromotion();
+        e = factory.createPhdPromotion();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getPintoscw();
+        e = factory.createPintos();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getPaperleak();
+        e = factory.createLeak();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getPrivatecompanygrant();
+        e = factory.createPrivGrant();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getPubdemolished();
+        e = factory.createPubDemolished();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getTrescomiracle();
+        e = factory.createTrescoMiracle();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getTrescotragedy();
+        e = factory.createTrescoTragedy();
+        giveTickets(e, level, index);
+        index += level;
+
+        level = rec.getUnionparty();
+        e = factory.createUnionParty();
+        giveTickets(e, level, index);
+        index += level;
+
+        if (index == TICKETS_NUMBER) {
+            System.out.println("EVERNTS READ COLLECTLY!");
+        }
+
+        else {
+            System.out.println("EVENTS READ INCORRECTLY!");
+        }
+    }
     
     // Obtains an event given its name in String. Used in order to get
     // rid of many getters etc.
@@ -145,6 +283,7 @@ public class LotteryManager {
         return (t.getOwner());
     }
 
+
     // Initializes the lottery, assigning inital probabilities
     // to all events. Everything is hardcoded. Note, number of tickets
     // assigned has to sum to TICKETS_NUMBER
@@ -155,147 +294,100 @@ public class LotteryManager {
         int probability = 6;
 
         /*  Events with initial probability 6% */
+
         List<Event> prob_list = new ArrayList<Event>();
-        Event malice = new Malice();
-        malice.setOnChangeList(onSatiDecrease);
-        event_list.add(malice);
-        prob_list.add(malice);
 
-        Event pintosCw = new PintosCw();
-        pintosCw.setOnChangeList(onSatiDecrease);
-        event_list.add(pintosCw);
-        prob_list.add(pintosCw);
+        prob_list.add(factory.createMalice());
 
-        Event tresco = new TrescoTragedy();
-        tresco.setOnChangeList(onStarIncrease);
-        event_list.add(tresco);
-        prob_list.add(tresco);
+        prob_list.add(factory.createPintos());
 
-        Event girlsArrival = new GirlsArrival();
-        girlsArrival.setOnChangeList(onSatiIncrease);
-        event_list.add(girlsArrival);
-        prob_list.add(girlsArrival);
 
-        Event govGrant = new GovernmentGrant();
-        govGrant.setOnChangeList(onRestChanges);
-        event_list.add(govGrant);
-        prob_list.add(govGrant);
+        prob_list.add(factory.createTrescoTragedy());
 
-        Event trescoMiracle = new TrescoMiracle();
-        trescoMiracle.setOnChangeList(onStarDecrease);
-        event_list.add(trescoMiracle);
-        prob_list.add(trescoMiracle);
 
-        Event paperLeak = new PaperLeak();
-        paperLeak.setOnChangeList(onSatiIncrease);
-        event_list.add(paperLeak);
-        prob_list.add(paperLeak);
+        prob_list.add(factory.createGirls());
 
-        Event phdPromotion = new PhdPromotion();
-        phdPromotion.setOnChangeList(onRestChanges);
-        event_list.add(phdPromotion);
-        prob_list.add(phdPromotion);
 
-        Event facebookBlocked = new FacebookBlocked();
-        facebookBlocked.setOnChangeList(onSatiDecrease);
-        event_list.add(facebookBlocked);
-        prob_list.add(facebookBlocked);
+        prob_list.add(factory.createGovGrant());
 
-        Event haskellConference = new HaskellConference();
-        haskellConference.setOnChangeList(onRestChanges);
-        event_list.add(haskellConference);
-        prob_list.add(haskellConference);
 
-        index = assignProbabilities(prob_list, probability , index);
+        prob_list.add(factory.createTrescoMiracle());
+
+
+        prob_list.add(factory.createLeak());
+
+
+        prob_list.add(factory.createPhdPromotion());
+
+
+        prob_list.add(factory.createFB());
+
+
+        prob_list.add(factory.createHaskell());
+
+        index = assignProbabilities(prob_list, probability, index);
 
 
         /* Events with initial probability 5% */
         prob_list = new ArrayList<Event>();
         probability = 5;
 
-        Event labHacking = new LabHacking();
-        labHacking.setOnChangeList(onSatiDecrease);
-        event_list.add(labHacking);
-        prob_list.add(labHacking);
+        prob_list.add(factory.createLabHacking());
 
-        Event macPromotion = new MacChickenPromotion();
-        macPromotion.setOnChangeList(onStarDecrease);
-        event_list.add(macPromotion);
-        prob_list.add(macPromotion);
 
-        Event outOfChicken = new OutOfChicken();
-        outOfChicken.setOnChangeList(onStarIncrease);
-        event_list.add(outOfChicken);
-        prob_list.add(outOfChicken);
+        prob_list.add(factory.createMacChickenPromotion());
 
-        Event labsInFire = new LabsInFire();
-        labsInFire.setOnChangeList(onAlcoIncrease);
-        event_list.add(labsInFire);
-        prob_list.add(labsInFire);
 
-        Event lecturerPromotion = new LecturerPromotion();
-        lecturerPromotion.setOnChangeList(onRestChanges);
-        event_list.add(lecturerPromotion);
-        prob_list.add(lecturerPromotion);
+        prob_list.add(factory.createOutOfChicken());
 
-        Event union = new UnionParty();
-        union.setOnChangeList(onAlcoDecrease);
-        event_list.add(union);
-        prob_list.add(union);
 
-        index = assignProbabilities(prob_list, probability , index);
+        prob_list.add(factory.createLabInFire());
+
+
+        prob_list.add(factory.createLecProm());
+
+
+        prob_list.add(factory.createUnionParty());
+
+        index = assignProbabilities(prob_list, probability, index);
 
 
         /* Evetns with initial probability 3% */
         prob_list = new ArrayList<Event>();
         probability = 3;
 
-        Event barNight = new BarNight();
-        barNight.setOnChangeList(onAlcoIncrease);
-        event_list.add(barNight);
-        prob_list.add(barNight);
+        prob_list.add(factory.createBarNight());
 
-        Event privGrant = new PrivateCompanyGrant();
-        privGrant.setOnChangeList(onRestChanges);
-        event_list.add(privGrant);
-        prob_list.add(privGrant);
 
-        index = assignProbabilities(prob_list, probability , index);
+        prob_list.add(factory.createPrivGrant());
+
+        index = assignProbabilities(prob_list, probability, index);
 
 
         /* Events with initial probability 2% */
         prob_list = new ArrayList<Event>();
         probability = 2;
 
-        Event pubDemolished = new PubDemolished();
-        pubDemolished.setOnChangeList(onAlcoDecrease);
-        event_list.add(pubDemolished);
-        prob_list.add(pubDemolished);
+        prob_list.add(factory.createPubDemolished());
 
-        index = assignProbabilities(prob_list, probability , index);
+        index = assignProbabilities(prob_list, probability, index);
 
 
         /* Events with initial probability 1% */
         prob_list = new ArrayList<Event>();
         probability = 1;
 
-        Event highRanking = new HighRanking();
-        highRanking.setOnChangeList(onSatiIncrease);
-        event_list.add(highRanking);
-        prob_list.add(highRanking);
+        prob_list.add(factory.createHighRanking());
 
-        Event nobel = new NobelPrice();
-        nobel.setOnChangeList(onSatiIncrease);
-        event_list.add(nobel);
-        prob_list.add(nobel);
 
-        index = assignProbabilities(prob_list, probability , index);
+        prob_list.add(factory.createNobelPrice());
 
-        
+        index = assignProbabilities(prob_list, probability, index);
+
+
         if (index == TICKETS_NUMBER) {
             System.out.println("PROBABILITIES SUCCESSFULLY ASSIGNED!");
-        }
-        else {
+        } else {
             System.out.println("INCORECT INDEX: " + index);
         }
     }
@@ -335,5 +427,158 @@ public class LotteryManager {
             lottery_pool[index] = t;
         }
     }
+
+
+    private class EventFactory {
+
+        public BarNight createBarNight() {
+            BarNight barNight = new BarNight();
+            barNight.setOnChangeList(onAlcoIncrease);
+            event_list.add(barNight);
+            return barNight;
+        }
+
+        public FacebookBlocked createFB() {
+            FacebookBlocked facebookBlocked = new FacebookBlocked();
+            facebookBlocked.setOnChangeList(onSatiDecrease);
+            event_list.add(facebookBlocked);
+            return facebookBlocked;
+        }
+
+        public GirlsArrival createGirls() {
+            GirlsArrival girlsArrival = new GirlsArrival();
+            girlsArrival.setOnChangeList(onSatiIncrease);
+            event_list.add(girlsArrival);
+            return girlsArrival;
+        }
+
+        public GovernmentGrant createGovGrant() {
+            GovernmentGrant govGrant = new GovernmentGrant();
+            govGrant.setOnChangeList(onRestChanges);
+            event_list.add(govGrant);
+            return govGrant;
+        }
+
+        public HighRanking createHighRanking() {
+            HighRanking highRanking = new HighRanking();
+            highRanking.setOnChangeList(onSatiIncrease);
+            event_list.add(highRanking);
+            return highRanking;
+        }
+
+        public HaskellConference createHaskell() {
+            HaskellConference haskellConference = new HaskellConference();
+            haskellConference.setOnChangeList(onRestChanges);
+            event_list.add(haskellConference);
+            return haskellConference;
+        }
+
+        public LabHacking createLabHacking() {
+            LabHacking labHacking = new LabHacking();
+            labHacking.setOnChangeList(onSatiDecrease);
+            event_list.add(labHacking);
+            return labHacking;
+        }
+
+        public LabsInFire createLabInFire() {
+            LabsInFire labsInFire = new LabsInFire();
+            labsInFire.setOnChangeList(onAlcoIncrease);
+            event_list.add(labsInFire);
+            return labsInFire;
+        }
+
+        public LecturerPromotion createLecProm() {
+            LecturerPromotion lecturerPromotion = new LecturerPromotion();
+            lecturerPromotion.setOnChangeList(onRestChanges);
+            event_list.add(lecturerPromotion);
+            return lecturerPromotion;
+        }
+
+        public MacChickenPromotion createMacChickenPromotion() {
+            MacChickenPromotion macPromotion = new MacChickenPromotion();
+            macPromotion.setOnChangeList(onStarDecrease);
+            event_list.add(macPromotion);
+            return macPromotion;
+        }
+
+        public Malice createMalice() {
+
+            Malice malice = new Malice();
+            malice.setOnChangeList(onSatiDecrease);
+            event_list.add(malice);
+            return malice;
+        }
+
+        public NobelPrice createNobelPrice() {
+            NobelPrice nobel = new NobelPrice();
+            nobel.setOnChangeList(onSatiIncrease);
+            event_list.add(nobel);
+            return nobel;
+        }
+
+        public OutOfChicken createOutOfChicken() {
+            OutOfChicken outOfChicken = new OutOfChicken();
+            outOfChicken.setOnChangeList(onStarIncrease);
+            event_list.add(outOfChicken);
+            return outOfChicken;
+        }
+
+        public PaperLeak createLeak() {
+            PaperLeak paperLeak = new PaperLeak();
+            paperLeak.setOnChangeList(onSatiIncrease);
+            event_list.add(paperLeak);
+            return paperLeak;
+        }
+
+        public PintosCw createPintos() {
+            PintosCw pintos = new PintosCw();
+            pintos.setOnChangeList(onAlcoIncrease);
+            event_list.add(pintos);
+            return pintos;
+        }
+
+        public PhdPromotion createPhdPromotion() {
+            PhdPromotion phdPromotion = new PhdPromotion();
+            phdPromotion.setOnChangeList(onRestChanges);
+            event_list.add(phdPromotion);
+            return phdPromotion;
+        }
+
+        public PrivateCompanyGrant createPrivGrant() {
+            PrivateCompanyGrant privGrant = new PrivateCompanyGrant();
+            privGrant.setOnChangeList(onRestChanges);
+            event_list.add(privGrant);
+            return privGrant;
+        }
+
+        public PubDemolished createPubDemolished() {
+            PubDemolished pubDemolished = new PubDemolished();
+            pubDemolished.setOnChangeList(onAlcoDecrease);
+            event_list.add(pubDemolished);
+            return pubDemolished;
+        }
+
+        public TrescoMiracle createTrescoMiracle() {
+            TrescoMiracle trescoMiracle = new TrescoMiracle();
+            trescoMiracle.setOnChangeList(onStarDecrease);
+            event_list.add(trescoMiracle);
+            return trescoMiracle;
+        }
+
+        public TrescoTragedy createTrescoTragedy() {
+            TrescoTragedy tresco = new TrescoTragedy();
+            tresco.setOnChangeList(onStarIncrease);
+            event_list.add(tresco);
+            return tresco;
+        }
+
+        public UnionParty createUnionParty() {
+            UnionParty union = new UnionParty();
+            union.setOnChangeList(onAlcoDecrease);
+            event_list.add(union);
+            return union;
+        }
+    }
+
 
 }

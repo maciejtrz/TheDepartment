@@ -9,7 +9,7 @@ package messageSystem;
  *
  * @author kp1209
  */
-public class PlainMessageReader extends MessageManager {
+public class PlainMessageReader extends MessageWriter {
 
     public PlainMessageReader() {
         super(MessageSingleton.PLAIN_MESSAGE);

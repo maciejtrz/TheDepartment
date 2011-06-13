@@ -19,7 +19,7 @@ import org.primefaces.event.FlowEvent;
  *
  * @author kp1209
  */
-public abstract class MessageManager {
+public abstract class MessageWriter {
 
     /* Type of the message, for example, regular message or a trade offer */
     private final int messageType;
@@ -39,7 +39,7 @@ public abstract class MessageManager {
     /*List of users*/
     public List<Players> users;
 
-    public MessageManager(int messageType) {
+    public MessageWriter(int messageType) {
         this.messageType = messageType;
         username = BasicUtils.getUserName();
 
@@ -49,7 +49,7 @@ public abstract class MessageManager {
         selectedReceiver = 0;
     }
 
-    public MessageManager(String username, int messageType) {
+    public MessageWriter(String username, int messageType) {
         this.messageType = messageType;
         this.username = username;
 

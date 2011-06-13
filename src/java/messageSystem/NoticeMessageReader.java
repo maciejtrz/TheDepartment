@@ -15,7 +15,7 @@ import utilities.BasicUtils;
  *
  * @author kp1209
  */
-public class NoticeMessageReader extends MessageManager {
+public class NoticeMessageReader extends MessageWriter {
 
     private boolean checked;
 

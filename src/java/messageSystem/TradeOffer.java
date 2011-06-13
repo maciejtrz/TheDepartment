@@ -176,6 +176,6 @@ public class TradeOffer extends Messagesystem {
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
         messageSystemHelper.deleteMsg(getMsgnumber());
     }
-
+    
 
 }

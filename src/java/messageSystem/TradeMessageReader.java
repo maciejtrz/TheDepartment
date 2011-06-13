@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TradeMessageReader extends MessageManager {
+public class TradeMessageReader extends MessageWriter {
 
     private boolean checked;
 

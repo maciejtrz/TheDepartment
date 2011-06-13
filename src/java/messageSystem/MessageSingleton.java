@@ -15,6 +15,7 @@ public class MessageSingleton {
     public static final int PLAIN_MESSAGE = 0;
     public static final int TRADE_OFFER = 1;
     public static final int NOTICE_BOARD_OFFER = 2;
+    public static final int AUCTION_OFFER = 3;
 
 
     public static final String NOTICE_BOARD = "NoticeBoard";

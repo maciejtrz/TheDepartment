@@ -5,6 +5,7 @@
 package ConnectionDataBase;
 
 
+import Connections.UserManager;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
@@ -38,6 +39,8 @@ public class MessageSystemHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         session.save(msg);
         commitTransaction(session);
+
+        UserManager.notifyUserAboutMessage(ReceiverID);
 
     }
 

@@ -22,7 +22,7 @@ public class TradeMessageReader extends MessageManager {
 
     public List<TradeOffer> getOfferedTrades() {
 
-        if (!checked && UserManager.hasNewMessage(getUsername())) {
+        if (!checked || UserManager.hasNewMessage(getUsername())) {
             checked = true;
             offeredTrades = new ArrayList<TradeOffer>();
 

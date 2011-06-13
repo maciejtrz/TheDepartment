@@ -77,9 +77,7 @@ public class Message {
         MessageSystemHelper msghelp = new MessageSystemHelper();
         msghelp.createMessage(name, users.get(selectedReceiver).getIdname(), getSubject(),
                 getText(), MessageSingleton.PLAIN_MESSAGE);
-
-        UserManager.notifyUserAboutMessage(users.get(selectedReceiver).getIdname());
-
+       
         /*
         System.out.println("Here I am 2");
         System.out.println("Receiver id is:" + users.get(selectedReceiver).getIdname());

@@ -27,7 +27,7 @@ public class NoticeMessageReader extends MessageManager {
 
     public List<TradeOffer> getOfferedNoticeTrades() {
 
-        if (!checked && UserManager.hasNewMessage(getUsername())) {
+        if (!checked || UserManager.hasNewMessage(getUsername())) {
             checked = true;
             offeredNoticeTrades = new ArrayList<TradeOffer>();
 
@@ -36,7 +36,8 @@ public class NoticeMessageReader extends MessageManager {
 
             System.out.println("Adding new messages from DB...");
             System.out.println("Number of notice boards: " + encodedTrades.size());
-
+            System.out.println("Checked: " + checked);
+            System.out.println("new message: " + UserManager.hasNewMessage(getUsername()));
             while (iterator.hasNext()) {
                 Messagesystem message = iterator.next();
 

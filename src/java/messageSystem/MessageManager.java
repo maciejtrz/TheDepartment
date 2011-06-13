@@ -39,15 +39,52 @@ public abstract class MessageManager {
     /*List of users*/
     public List<Players> users;
 
+    /*Message sender */
+    private String sender;
+    private String receiver;
+
+    private String date;
+    private int id;
 
     public MessageManager(int messageType) {
         this.messageType = messageType;
         username = BasicUtils.getUserName();
+        sender = username;
         selectedMessage = new Integer(0);
-        MessageSystemHelper messageHelper = new MessageSystemHelper();
-        messages = messageHelper.getMessages(username,messageType);
         users = new ArrayList<Players>();
         selectedReceiver = 0;
+    }
+
+    public void setUniqueid(int id){
+        this.id = id;
+    }
+
+    public int getUniqueid() {
+        return id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReceiver() {
+        return receiver;
     }
 
     public int getMessageType() {
@@ -55,14 +92,16 @@ public abstract class MessageManager {
     }
 
     public List<Messagesystem> getMessages() {
-        return messages;
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        return messageSystemHelper.getMessages(getSender(), getMessageType());
+
     }
 
     public void setMessages(List<Messagesystem> messages) {
         this.messages = messages;
     }
 
-    public String getSender() {
+    public String getUsername() {
         return username;
     }
 
@@ -158,4 +197,6 @@ public abstract class MessageManager {
     public int getSelectedReceiver() {
         return this.selectedReceiver;
     }
+
+
 }

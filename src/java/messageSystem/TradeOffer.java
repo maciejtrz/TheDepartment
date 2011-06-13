@@ -41,6 +41,7 @@ public class TradeOffer extends MessageManager {
                 resources.add(new SelectItem(new Integer(i),ResourcesType.getResourcesList()[i]));
             }
         }
+        
     }
 
     public List<SelectItem> getAvailableResources() {
@@ -108,12 +109,21 @@ public class TradeOffer extends MessageManager {
         Integer value;
         Integer nextPosition = 0;
 
+        System.out.println("Parsing..." + message);
+
         setResourcesOfferedType(getNumber(nextPosition++,message));
+        System.out.println("Resources offered: "+ getResourcesOfferedType());
+        System.out.println("position: " + nextPosition + " char: " + message[nextPosition]);
+        nextPosition++;
         setAmountOffered(getNumber(nextPosition++,message));
+        nextPosition++;
+
+        System.out.println("Amount offered: " + getAmountOffered());
 
         setResourcesWantedType(getNumber(nextPosition++,message));
+        nextPosition++;
         setAmountWanted(getNumber(nextPosition++,message));
-
+        nextPosition++;
         setSubject(getOneLine(nextPosition++,message));
         setTradeDescription(getTradeDesrciptionText(nextPosition++,message));
     }

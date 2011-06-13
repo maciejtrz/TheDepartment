@@ -46,8 +46,6 @@ public class LotteryManager {
     public static final int LOWER_BOUND = 0;
     public static final int UPPER_BOUND = 100;
 
-
-    private static LotteryManager mgr = null;
     private static final int TICKETS_NUMBER = 100;
 
     private Ticket[] lottery_pool;
@@ -63,8 +61,10 @@ public class LotteryManager {
     private List<Event> onRestChanges;
 
     private EventFactory factory;
+    private String playerName;
 
-    private LotteryManager() {
+    public LotteryManager(String playerName) {
+        this.playerName = playerName;
         factory = new EventFactory();
         lottery_pool = new Ticket[TICKETS_NUMBER];
         event_list = new ArrayList<Event>();
@@ -75,14 +75,6 @@ public class LotteryManager {
         onStarIncrease = new ArrayList<Event>();
         onStarDecrease = new ArrayList<Event>();
         onRestChanges = new ArrayList<Event>();
-        initializeLottery();
-    }
-
-    public static LotteryManager getManager() {
-        if (mgr == null) {
-            mgr = new LotteryManager();
-        }
-        return mgr;
     }
 
 
@@ -125,7 +117,7 @@ public class LotteryManager {
         return output;
     }
 
-    public void writeEventsToDB(String playerName) {
+    public void writeEventsToDB() {
         if (event_list != null) {
             Iterator<Event> it = event_list.iterator();
             while (it.hasNext()) {
@@ -135,7 +127,7 @@ public class LotteryManager {
         }
     }
 
-    public void readEventsFromDB(String playerName) {
+    public void readEventsFromDB() {
         EventsHelper events_helper = new EventsHelper();
         Events rec = events_helper.getPlayerRecord(playerName);
         Event e = null;
@@ -287,7 +279,7 @@ public class LotteryManager {
     // Initializes the lottery, assigning inital probabilities
     // to all events. Everything is hardcoded. Note, number of tickets
     // assigned has to sum to TICKETS_NUMBER
-    private void initializeLottery() {
+    public void initializeLottery() {
 
         /* Keep trace of the current index number. */
         int index = 0;
@@ -296,59 +288,28 @@ public class LotteryManager {
         /*  Events with initial probability 6% */
 
         List<Event> prob_list = new ArrayList<Event>();
-
         prob_list.add(factory.createMalice());
-
         prob_list.add(factory.createPintos());
-
-
         prob_list.add(factory.createTrescoTragedy());
-
-
         prob_list.add(factory.createGirls());
-
-
         prob_list.add(factory.createGovGrant());
-
-
         prob_list.add(factory.createTrescoMiracle());
-
-
         prob_list.add(factory.createLeak());
-
-
         prob_list.add(factory.createPhdPromotion());
-
-
         prob_list.add(factory.createFB());
-
-
         prob_list.add(factory.createHaskell());
-
         index = assignProbabilities(prob_list, probability, index);
-
 
         /* Events with initial probability 5% */
         prob_list = new ArrayList<Event>();
         probability = 5;
 
         prob_list.add(factory.createLabHacking());
-
-
         prob_list.add(factory.createMacChickenPromotion());
-
-
         prob_list.add(factory.createOutOfChicken());
-
-
         prob_list.add(factory.createLabInFire());
-
-
         prob_list.add(factory.createLecProm());
-
-
         prob_list.add(factory.createUnionParty());
-
         index = assignProbabilities(prob_list, probability, index);
 
 
@@ -357,10 +318,7 @@ public class LotteryManager {
         probability = 3;
 
         prob_list.add(factory.createBarNight());
-
-
         prob_list.add(factory.createPrivGrant());
-
         index = assignProbabilities(prob_list, probability, index);
 
 
@@ -369,7 +327,6 @@ public class LotteryManager {
         probability = 2;
 
         prob_list.add(factory.createPubDemolished());
-
         index = assignProbabilities(prob_list, probability, index);
 
 
@@ -378,10 +335,7 @@ public class LotteryManager {
         probability = 1;
 
         prob_list.add(factory.createHighRanking());
-
-
         prob_list.add(factory.createNobelPrice());
-
         index = assignProbabilities(prob_list, probability, index);
 
 

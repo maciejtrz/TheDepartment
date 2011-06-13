@@ -45,6 +45,7 @@ public class AddBuildings {
         factory.getLabs().upgrade(playerName, 7);
 
 
+        /*
         LotteryManager mgr = LotteryManager.getManager();
         Event e = mgr.getEvent(LotteryManager.UNION_PARTY);
         if (e.invoke(playerName)) {

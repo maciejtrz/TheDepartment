@@ -37,7 +37,8 @@ public class PubDemolished extends Event {
             return false;
         }
 
-        DocPub pub = BuildingFactory.getPub();
+        BuildingFactory factory = new BuildingFactory();
+        DocPub pub = factory.getPub();
         pub.remove(playerName, pub_position);
 
         // Decreasing student satisfaction.

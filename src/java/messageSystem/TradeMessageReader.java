@@ -2,46 +2,49 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package messageSystem;
 
 import ConnectionDataBase.Messagesystem;
+import Connections.UserManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class TradeMessageReader extends MessageManager {
-    
+
+    private boolean checked;
+
     public TradeMessageReader() {
         super(MessageSingleton.TRADE_OFFER);
+        checked = false;
     }
-
     public List<TradeOffer> offeredTrades;
 
     public List<TradeOffer> getOfferedTrades() {
-        offeredTrades = new ArrayList<TradeOffer>();
 
-        List<Messagesystem> encodedTrades = getMessages();
-        Iterator<Messagesystem> iterator = encodedTrades.iterator();
+        if (!checked && UserManager.hasNewMessage(getUsername())) {
+            checked = true;
+            offeredTrades = new ArrayList<TradeOffer>();
 
-        while(iterator.hasNext()) {
-            Messagesystem message = iterator.next();
+            List<Messagesystem> encodedTrades = getMessages();
+            Iterator<Messagesystem> iterator = encodedTrades.iterator();
 
-            TradeOffer tradeOffer  = new TradeOffer();
+            while (iterator.hasNext()) {
+                Messagesystem message = iterator.next();
 
-            tradeOffer.parse(message.getMsg());
-            tradeOffer.setSenderid(message.getSenderid());
-            tradeOffer.setReceiverid(message.getReceiverid());
-            tradeOffer.setDate(message.getDate());
-            tradeOffer.setMsgnumber(message.getMsgnumber());
+                TradeOffer tradeOffer = new TradeOffer();
 
-            offeredTrades.add(tradeOffer);
+                tradeOffer.parse(message.getMsg());
+                tradeOffer.setSenderid(message.getSenderid());
+                tradeOffer.setReceiverid(message.getReceiverid());
+                tradeOffer.setDate(message.getDate());
+                tradeOffer.setMsgnumber(message.getMsgnumber());
+
+                offeredTrades.add(tradeOffer);
+            }
         }
-
         return offeredTrades;
     }
-   
 
     public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
         acceptedTradeOffer.accept();
@@ -52,6 +55,4 @@ public class TradeMessageReader extends MessageManager {
         declinedTradeOffer.decline();
         offeredTrades.remove(declinedTradeOffer);
     }
-
-
 }

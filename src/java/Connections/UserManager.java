@@ -299,5 +299,16 @@ public class UserManager {
         }
     }
 
+    public static boolean hasNewMessage(String username) {
+        boolean result = false;
+
+        if(isUserMonitored(username)) {
+            Auth auth = getUser(username);
+            result = auth.getHasNewMessage();
+        }
+
+        return result;
+    }
+
 
 }

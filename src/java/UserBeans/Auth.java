@@ -143,11 +143,11 @@ public class Auth {
         setHasNewMessage(true);
     }
 
-    private synchronized void setHasNewMessage(boolean value) {
+    public synchronized void setHasNewMessage(boolean value) {
         hasNewMessage = value;
     }
 
-    private boolean getHasNewMessage() {
+    public boolean getHasNewMessage() {
         return hasNewMessage;
     }
 

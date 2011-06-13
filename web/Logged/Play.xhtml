@@ -126,7 +126,7 @@ and open the template in the editor.
 
         <h:form>
             <p:growl id="growl" showDetail="true" sticky="true"  />
-            <p:poll interval="1" update="growl" listener="#{auth.hasNewMessage}"></p:poll>
+            <p:poll interval="20" update="growl" listener="#{auth.hasNewMessage}"></p:poll>
         </h:form>
 
         <h:form id="tbar">
@@ -347,7 +347,7 @@ and open the template in the editor.
                     </p:column>
 
                 </p:dataTable>
-                <p:poll interval="5" update="offeredTrades" />
+                <p:poll interval="30" update="offeredTrades" />
             </h:form>
 
 
@@ -389,7 +389,7 @@ and open the template in the editor.
 
                 </p:dataTable>
 
-                <p:poll interval="5" update="noticeBoard" />
+                <p:poll interval="30" update="noticeBoard" />
             </h:form>
 
             <a onclick="noticeboard.hide()"> CLICK THIS TO HIDE </a>

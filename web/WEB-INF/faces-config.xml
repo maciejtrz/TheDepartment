@@ -199,6 +199,26 @@
         <managed-bean-class>messageSystem.Message</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>higheswtPriceAuction</managed-bean-name>
+        <managed-bean-class>messageSystem.HigheswtPriceAuction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>highestPriceAuction</managed-bean-name>
+        <managed-bean-class>messageSystem.HighestPriceAuction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>blindAuction</managed-bean-name>
+        <managed-bean-class>messageSystem.BlindAuction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>vikreyAction</managed-bean-name>
+        <managed-bean-class>messageSystem.VikreyAction</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
 
 

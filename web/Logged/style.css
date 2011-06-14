@@ -1,5 +1,3 @@
-
-
 body { 
 background:url('bg.jpg');
 background-position:center top;
@@ -29,7 +27,7 @@ left: 40px;
 }
 
 #lmenu {
-width: 100px;
+width: 200px;
 }
 
 

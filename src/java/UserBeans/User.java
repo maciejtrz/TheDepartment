@@ -1,20 +1,14 @@
 package UserBeans;
 
-
-import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import ConnectionDataBase.ResearchHelper;
 import Connections.AuthorizationSingleton;
-import Connections.ConnectionSingleton;
 import java.io.IOException;
-import java.sql.Statement;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
-public class User {
+
+public class User implements Serializable {
 
     /** Creates a new instance of UserControl */
     public User() {

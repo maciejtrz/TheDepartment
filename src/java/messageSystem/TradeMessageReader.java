@@ -6,11 +6,12 @@ package messageSystem;
 
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TradeMessageReader extends MessageWriter {
+public class TradeMessageReader extends MessageWriter implements Serializable  {
 
     private boolean checked;
 

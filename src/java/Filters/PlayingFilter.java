@@ -8,7 +8,6 @@ package Filters;
 import ConnectionDataBase.DepartmentinfoHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
-import UserBeans.Auth;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

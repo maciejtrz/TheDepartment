@@ -6,16 +6,14 @@
 package UserBeans;
 
 import buildings.*;
-import events.Event;
-import events.LotteryManager;
-import utilities.BuildingInfo;
+import java.io.Serializable;
 
 
 /**
  *
  * @author root
  */
-public class AddBuildings {
+public class AddBuildings implements Serializable {
 
     /** Creates a new instance of AddBuildings */
     public AddBuildings() {

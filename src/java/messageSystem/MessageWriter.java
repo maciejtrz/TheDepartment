@@ -8,6 +8,7 @@ import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,7 @@ import org.primefaces.event.FlowEvent;
  *
  * @author kp1209
  */
-public abstract class MessageWriter {
+public abstract class MessageWriter implements Serializable {
 
     /* Type of the message, for example, regular message or a trade offer */
     private final int messageType;

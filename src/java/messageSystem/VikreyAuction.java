@@ -5,12 +5,14 @@
 
 package messageSystem;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author root
  */
-public class VikreyAuction extends Auction {
+public class VikreyAuction extends Auction implements Serializable {
 
     /** Creates a new instance of VikreyAction */
     public VikreyAuction() {

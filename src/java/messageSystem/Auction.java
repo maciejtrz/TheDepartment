@@ -5,6 +5,7 @@
 
 package messageSystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,7 @@ import utilities.BasicUtils;
  *
  * @author kp1209
  */
-public class Auction extends TradeOffer {
+public class Auction extends TradeOffer implements Serializable  {
 
     private int highestOfferedPrice;
     private String winner;

@@ -1,11 +1,12 @@
 package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
 
-public class AuctionMessageWriter extends TradeWriter {
+public class AuctionMessageWriter extends TradeWriter implements Serializable {
 
     private Auction auction;
     private Integer selectedAuctionType;

@@ -5,11 +5,13 @@
 
 package messageSystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author kp1209
  */
-public class PlainMessageReader extends MessageWriter {
+public class PlainMessageReader extends MessageWriter implements Serializable  {
 
     public PlainMessageReader() {
         super(MessageSingleton.PLAIN_MESSAGE);

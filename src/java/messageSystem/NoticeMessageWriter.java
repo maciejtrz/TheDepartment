@@ -5,13 +5,14 @@
 
 package messageSystem;
 
-import ConnectionDataBase.MessageSystemHelper;
+import java.io.Serializable;
+
 
 /**
  *
  * @author kp1209
  */
-public class NoticeMessageWriter extends TradeWriter {
+public class NoticeMessageWriter extends TradeWriter implements Serializable  {
     
     
 

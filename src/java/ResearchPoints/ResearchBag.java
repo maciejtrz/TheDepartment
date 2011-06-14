@@ -3,6 +3,7 @@ package ResearchPoints;
 import ConnectionDataBase.Research;
 import ConnectionDataBase.ResearchHelper;
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import specializationsGenerator.SpecializationsGenerator;
 
-public class ResearchBag {
+public class ResearchBag implements Serializable {
 
     private List<Research> ongoingResearches = new ArrayList<Research>();
     private List<Integer> availableResearch;

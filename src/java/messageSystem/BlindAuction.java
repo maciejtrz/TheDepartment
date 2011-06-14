@@ -1,6 +1,8 @@
 package messageSystem;
 
-public class BlindAuction extends Auction {
+import java.io.Serializable;
+
+public class BlindAuction extends Auction implements Serializable {
 
     private static final String typeName = "Blind Auction";
 

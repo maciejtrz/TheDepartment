@@ -6,6 +6,7 @@ package messageSystem;
 
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import utilities.BasicUtils;
  *
  * @author kp1209
  */
-public class NoticeMessageReader extends MessageWriter {
+public class NoticeMessageReader extends MessageWriter implements Serializable  {
 
     private boolean checked;
 

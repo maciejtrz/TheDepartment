@@ -4,13 +4,14 @@ import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.model.SelectItem;
 
 
-public class Message extends Messagesystem {
+public class Message extends Messagesystem implements Serializable  {
     
         /*Selected reicever*/
     private int selectedReceiver;

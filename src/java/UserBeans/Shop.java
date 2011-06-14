@@ -8,6 +8,7 @@ import ConnectionDataBase.Capacity;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import Connections.ConnectionSingleton;
+import java.io.Serializable;
 import java.sql.SQLException;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pk2109
  */
-public class Shop {
+public class Shop implements Serializable {
 
     public String playerName;
     public String students;

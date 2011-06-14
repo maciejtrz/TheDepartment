@@ -6,6 +6,7 @@
 package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import resources.ResourcesType;
  *
  * @author root
  */
-public class TradeWriter extends MessageWriter{
+public class TradeWriter extends MessageWriter implements Serializable {
 
     private static final List<SelectItem> resources;
     private TradeOffer tradeOffer;

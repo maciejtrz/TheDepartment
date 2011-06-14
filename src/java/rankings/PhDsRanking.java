@@ -6,13 +6,14 @@
 package rankings;
 
 import ConnectionDataBase.Playerresources;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author pk2109
  */
-public class PhDsRanking extends AbstractRanking {
+public class PhDsRanking extends AbstractRanking implements Serializable  {
 
     public PhDsRanking() {
         super();

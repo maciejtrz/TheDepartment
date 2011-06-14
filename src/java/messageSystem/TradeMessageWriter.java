@@ -5,7 +5,9 @@
 
 package messageSystem;
 
-public class TradeMessageWriter extends TradeWriter {
+import java.io.Serializable;
+
+public class TradeMessageWriter extends TradeWriter implements Serializable {
 
     /** Creates a new instance of TradeMessageWriter */
     public TradeMessageWriter() {

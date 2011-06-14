@@ -9,13 +9,14 @@ import ConnectionDataBase.MessageSystemHelper;
 import resources.ResourcesType;
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author kp1209
  */
-public class TradeOffer extends Messagesystem {
+public class TradeOffer extends Messagesystem implements Serializable {
 
     protected class ParsingPosition {
 

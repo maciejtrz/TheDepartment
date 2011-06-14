@@ -7,12 +7,13 @@ package messageSystem;
 
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class AuctionMessageReader extends MessageWriter {
+public class AuctionMessageReader extends MessageWriter implements Serializable  {
 
     private boolean checked;
     private List<Auction> auctionOffers = new ArrayList<Auction>();

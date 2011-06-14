@@ -4,9 +4,10 @@ import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import ConnectionDataBase.ResearchHelper;
 import Connections.EncodingSingleton;
+import java.io.Serializable;
 
 
-public class AddUser {
+public class AddUser implements Serializable  {
 
     /** Creates a new instance of AddUser */
     public AddUser() {

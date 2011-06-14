@@ -4,12 +4,13 @@ import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
+import java.io.Serializable;
 import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-public class Auth {
+public class Auth implements Serializable {
 
     /** Creates a new instance of Auth */
     public Auth() {

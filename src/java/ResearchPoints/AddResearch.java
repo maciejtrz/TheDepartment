@@ -8,6 +8,7 @@ import ConnectionDataBase.LecturersHelper;
 import ConnectionDataBase.Research;
 import Connections.ConnectionSingleton;
 import UserBeans.Auth;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,7 +27,7 @@ import utilities.LecturersManager;
  *
  * @author karol
  */
-public class AddResearch {
+public class AddResearch implements Serializable {
 
     /* The title of the research */
     private String name;

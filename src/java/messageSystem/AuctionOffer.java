@@ -1,9 +1,10 @@
 package messageSystem;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class AuctionOffer implements Comparable {
+public class AuctionOffer implements Comparable, Serializable {
 
     private String bidder;
     private Date offerDate;

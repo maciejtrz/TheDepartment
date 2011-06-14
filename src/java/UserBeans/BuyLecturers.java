@@ -1,12 +1,13 @@
 package UserBeans;
 
+import java.io.Serializable;
 import java.util.List;
 import utilities.Lecturer;
 import utilities.LecturerBenefits;
 import utilities.LecturersManager;
 
 
-public class BuyLecturers {
+public class BuyLecturers implements Serializable  {
 
     private Lecturer selected_lecturer;
     private List<Lecturer> lecturers;

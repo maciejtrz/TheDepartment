@@ -14,6 +14,7 @@ import ConnectionDataBase.EventsHelper;
 import ConnectionDataBase.ExtrastatsHelper;
 import Connections.ConnectionSingleton;
 import events.LotteryManager;
+import java.io.Serializable;
 import java.sql.SQLException;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author karol
  */
-public class Department {
+public class Department implements Serializable {
 
     private String username;
     private String name;

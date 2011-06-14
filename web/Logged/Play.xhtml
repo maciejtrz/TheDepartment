@@ -192,6 +192,10 @@ and open the template in the editor.
                     <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
                 </p:submenu>
 
+                <p:submenu label="Rankings">
+                    <p:menuitem value="Wealth" onclick="wealth.show()"
+                </p:submenu>
+
                 <p:submenu label="User">
                     <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
                 </p:submenu>
@@ -610,6 +614,12 @@ and open the template in the editor.
 
 
         </p:dialog>
+
+                <p:dialog header="Buy Professor" widgetVar="wealth" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+                </p:dialog>
 
 
 

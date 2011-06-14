@@ -568,17 +568,25 @@ and open the template in the editor.
         </p:dialog>
 
 
-        <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="500" width="700"
+        <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="600" width="800"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <h:form>
-                <h:outputText value="Type lecturers name" />
-                <p:inputText value="#{lec.lecturer}" />
-                <br/>
-                <p:commandButton value="Submit" action="#{lec.buy}"/>
-                <br/>
+            <p:carousel value="#{buyLecturers.lecturers}" var="naukowiec"
+                        rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong">
+                <h:panelGrid columns="2" style="width:100% ; height:100%">
 
-            </h:form>
+                    <p:graphicImage value="/images/pic2.jpeg"/>
+
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputText value="Name: #{naukowiec.name}" />
+                        <h:outputText value="Price: #{naukowiec.price}" />
+                        <p:dataList value="#{naukowiec.specializations}" var="benefit" itemType="disc">
+                            {benefit.field}, {benefit.boost}
+                        </p:dataList>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+            </p:carousel>
 
         </p:dialog>
 

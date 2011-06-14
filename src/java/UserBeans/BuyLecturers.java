@@ -44,8 +44,5 @@ public class BuyLecturers {
         mgr.purchaseLecturer(selected_lecturer.getName());
     }
 
-    public void testEl(int test) {
-        System.out.println(test);
-    }
 
 }

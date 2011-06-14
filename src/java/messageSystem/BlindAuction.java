@@ -1,17 +1,16 @@
 package messageSystem;
 
-import java.util.HashSet;
-import java.util.Set;
-import utilities.BasicUtils;
+public class BlindAuction extends Auction {
 
-public class BlindAuction extends AuctionMessageWriter {
+    private static final String typeName = "Blind Auction";
 
-    private Set<String> bidders = new HashSet<String>();
-
+    public BlindAuction() {
+        super(AuctionFactory.BLIND_AUCTION,true, false);
+    }
 
     @Override
-    public void setHighestOfferedPrice(String price) {
-        bidders.add(BasicUtils.getUserName());
-        super.setHighestOfferedPrice(price);
+    public String getTypeName() {
+       return typeName;
     }
+
 }

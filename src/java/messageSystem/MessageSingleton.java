@@ -19,6 +19,7 @@ public class MessageSingleton {
 
 
     public static final String NOTICE_BOARD = "NoticeBoard";
+    public static final String AUCTION_BOARD = "AuctionBoard";
 
 
     private MessageSingleton() {

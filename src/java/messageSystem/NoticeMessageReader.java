@@ -34,10 +34,6 @@ public class NoticeMessageReader extends MessageWriter {
             List<Messagesystem> encodedTrades = getMessages();
             Iterator<Messagesystem> iterator = encodedTrades.iterator();
 
-            System.out.println("Adding new messages from DB...");
-            System.out.println("Number of notice boards: " + encodedTrades.size());
-            System.out.println("Checked: " + checked);
-            System.out.println("new message: " + UserManager.hasNewMessage(getUsername()));
             while (iterator.hasNext()) {
                 Messagesystem message = iterator.next();
 

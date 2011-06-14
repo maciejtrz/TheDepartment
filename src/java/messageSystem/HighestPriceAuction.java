@@ -1,30 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package messageSystem;
 
-import java.util.HashSet;
-import java.util.Set;
-import utilities.BasicUtils;
 
+public class HighestPriceAuction extends Auction {
 
-/**
- *
- * @author root
- */
-public class HighestPriceAuction extends AuctionMessageWriter{
+    private static final String typeName = "Highest Price Auction";
 
-    private Set<String> bidders = new HashSet<String>();
-
-
-    @Override
-    public void setHighestOfferedPrice(String price) {
-        bidders.add(BasicUtils.getUserName());
-        super.setHighestOfferedPrice(price);
+    public HighestPriceAuction() {
+        super(AuctionFactory.HIGHEST_PRICE_AUCTION,true, true);
     }
 
-
-
+    @Override
+    public String getTypeName() {
+       return typeName;
+    }
 }

@@ -64,16 +64,12 @@ public abstract class MessageWriter {
     }
 
     public List<Messagesystem> getMessages() {
-
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
         return messageSystemHelper.getMessages(getUsername(), getMessageType());
-
     }
 
     public void setMessages(List<Messagesystem> messages) {
-
         this.messages = messages;
-
     }
 
     public String getUsername() {
@@ -81,9 +77,7 @@ public abstract class MessageWriter {
     }
 
     public String getReceiverid() {
-
         return users.get(getSelectedReceiver()).getIdname();
-
     }
 
     public void sendMessage(String receiver, String subject, String text) {

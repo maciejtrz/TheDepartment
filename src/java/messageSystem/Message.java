@@ -58,5 +58,5 @@ public class Message extends Messagesystem {
         msghelp.createMessage(getSenderid(), users.get(selectedReceiver).getIdname(), getSubject(),
                 getMsg(), MessageSingleton.PLAIN_MESSAGE);
 
-    }
+        }
 }

@@ -1,48 +1,61 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package messageSystem;
 
-import utilities.BasicUtils;
+import ConnectionDataBase.MessageSystemHelper;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.model.SelectItem;
 
-/**
- *
- * @author root
- */
-public abstract class AuctionMessageWriter extends TradeWriter {
+public class AuctionMessageWriter extends TradeWriter {
 
-    private int highestOfferedPrice;
-    private String winner;
+    private Auction auction;
+    private Integer selectedAuctionType;
+    private static List<SelectItem> availableAuctionTypes;
+    private static AuctionFactory auctionFactory;
 
-    /** Creates a new instance of AuctionMessageWriter */
-    public AuctionMessageWriter() {
-        super(MessageSingleton.AUCTION_OFFER);
-        highestOfferedPrice = 0;
-    }
-
-        public void setHighestOfferedPrice(String price) {
-        setHighestOfferedPrice(Integer.parseInt(price));
-    }
-
-    public void setHighestOfferedPrice(int price) {
-        if(getHighestOfferedPrice() < price) {
-            highestOfferedPrice = price;
-            winner = BasicUtils.getUserName();
+    static {
+        availableAuctionTypes = new ArrayList<SelectItem>();
+        auctionFactory = new AuctionFactory();
+        for(int i = 0; i < auctionFactory.getSize(); i++) {
+            availableAuctionTypes.add(new SelectItem(new Integer(i),auctionFactory.getAuctionName(i)));
         }
     }
 
-    public int getHighestOfferedPrice() {
-        return highestOfferedPrice;
+    public AuctionMessageWriter() {
+        super(MessageSingleton.AUCTION_OFFER);
+
+        selectedAuctionType = 0;
     }
 
-    public String getWinner() {
-        return winner;
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public List<SelectItem> getAvailableAuctionTypes() {
+        return availableAuctionTypes;
+    }
+
+    public void setSelectedAuctionType(int selectedType) {
+        this.selectedAuctionType = selectedType;
+        setAuction(auctionFactory.getInstance(selectedType));
+    }
+
+    public int getSelectedAuctionType() {
+
+        return selectedAuctionType;
+    }
+
+
+    public void sendAuction() {
+        getAuction().setTradeOffer(getTradeOffer());
+
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        messageSystemHelper.createMessage(getUsername(),MessageSingleton.AUCTION_BOARD,getSubject(),
+                getAuction().encode(),getMessageType());
+
     }
 
 }

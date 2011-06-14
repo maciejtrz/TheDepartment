@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class TradeOffer extends Messagesystem {
 
-    private class ParsingPosition {
+    protected class ParsingPosition {
 
         private int position;
         private char[] message;
@@ -146,7 +146,7 @@ public class TradeOffer extends Messagesystem {
         setTradeDescription(getTradeDesrciptionText(parsingPosition));
     }
     
-    private String getNumberString(ParsingPosition parsingPosition) {
+    protected String getNumberString(ParsingPosition parsingPosition) {
         StringBuilder builder = new StringBuilder();
 
         while(parsingPosition.isDigit()) {
@@ -158,17 +158,17 @@ public class TradeOffer extends Messagesystem {
         return builder.toString();
     }
 
-    private long getLongNumber(ParsingPosition parsingPosition) {
+    protected long getLongNumber(ParsingPosition parsingPosition) {
 
         return Long.parseLong(getNumberString(parsingPosition));
     }
 
-    private int getNumber(ParsingPosition parsingPosition) {
+    protected int getNumber(ParsingPosition parsingPosition) {
 
         return Integer.parseInt(getNumberString(parsingPosition));
     }
 
-    private String getTradeDesrciptionText(ParsingPosition parsingPosition) {
+    protected String getTradeDesrciptionText(ParsingPosition parsingPosition) {
         StringBuilder builder = new StringBuilder();
 
         while(parsingPosition.isNotFinished()) {

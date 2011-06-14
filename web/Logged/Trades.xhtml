@@ -182,5 +182,95 @@
             </h:form>
             <a onclick="addnoticeoffer.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
+
+
+<p:dialog header="Auction table" widgetVar="auctiontable" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <h:form>
+
+                <p:dataTable id="auctionBoard" var="auction" value="#{auctionMessageReader.auctionOffers}" >
+                    <p:column headerText="Auction sender">
+                        <h:outputText value="#{auction.senderid}" />
+                    </p:column>
+
+                    <p:column headerText="Auction subject: ">
+                        <h:outputText value="#{auction.subject}" />
+                    </p:column>
+                    
+                    <p:column headerText="Resource offered: ">
+                        <h:outputText value="#{auction.resourcesOfferedName}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount offered: " >
+                        <h:outputText value="#{auction.amountOffered}"/>
+                    </p:column>
+
+                    <p:column headerText="Resources wanted: ">
+                        <h:outputText value="#{auction.resourcesWantedName}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:poll interval="30" update="noticeBoard" />
+            </h:form>
+
+
+            <a onclick="auctiontable.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+        <p:dialog header="Add auction" widgetVar="addauction" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+
+            <h:form>
+                <h:outputText value="Type of auction:" />
+                <h:selectOneMenu value="#{auctionMessageWriter.selectedAuctionType}">
+                    <f:selectItems value="#{auctionMessageWriter.availableAuctionTypes}"/>
+                </h:selectOneMenu>
+
+                <br/>
+
+                <h:outputText value="Auction subject: "/>
+                <h:inputText value="#{auctionMessageWriter.subject}" />
+
+                <br/>
+
+                <h:outputText value="Offered resources:" />
+                <h:selectOneMenu value="#{auctionMessageWriter.resourcesOfferedType}">
+                    <f:selectItems value="#{auctionMessageWriter.availableResources}"/>
+                </h:selectOneMenu>
+
+                <br/>
+
+                <h:outputText value="Offered amount: "/>
+                <p:inputText id="offeredAmount" value="#{auctionMessageWriter.amountOffered}" />
+                <p:slider for="offeredAmount"/>
+
+                <br/>
+
+                <h:outputText value="Wanted resources:" />
+                <h:selectOneMenu value="#{auctionMessageWriter.resourcesWantedType}">
+                    <f:selectItems value="#{auctionMessageWriter.availableResources}"/>
+                </h:selectOneMenu>
+
+                <br/>
+
+                <h:outputText value="Auction descriptions: "/>
+                <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
+                                 value="#{auctionMessageWriter.tradeDescription}"/>
+
+                <br/>
+
+                <h:outputText value="Expire date: "/>
+                <p:calendar value="#{auctionMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+
+                <h:commandButton value="Submit Auction" actionListener="#{auctionMessageWriter.sendAuction}" />
+
+            </h:form>
+
+            <a onclick="addauction.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
     </ui:component>
 </html>

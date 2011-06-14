@@ -12,6 +12,10 @@ public class TradeMessageWriter extends TradeWriter {
         super(MessageSingleton.TRADE_OFFER);
     }
 
+    public TradeMessageWriter(int messageType) {
+        super(messageType);
+    }
+
     /* reading offers and accepting/decling... */
 
 }

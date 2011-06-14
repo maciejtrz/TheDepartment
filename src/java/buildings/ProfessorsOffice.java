@@ -6,6 +6,7 @@ import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 public class ProfessorsOffice extends Building {
@@ -50,10 +51,7 @@ public class ProfessorsOffice extends Building {
                 Building.CODE_PROF_OFFICE_1);
 
         /* Updating players money. */
-        PlayerresourcesHelper player_record
-                = new PlayerresourcesHelper();
-        int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }
@@ -130,8 +128,6 @@ public class ProfessorsOffice extends Building {
                 = new BuildingsHelper();
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();
-        PlayerresourcesHelper resourcesHelper
-                = new PlayerresourcesHelper();
 
 
         /* Checking whether the building is eligible for an upgrade. */
@@ -149,7 +145,7 @@ public class ProfessorsOffice extends Building {
 
         // Checking whether the player has sufficient cash.
         int upgrade_cost = cur_level * upgrade_base_cost;
-        int cash = resourcesHelper.getMoney(playerName);
+        int cash = UserManager.getMoney(playerName);
         if (cash < upgrade_cost) {
             return false;
         }
@@ -163,7 +159,7 @@ public class ProfessorsOffice extends Building {
             // Upgrading to the room lvl_1
             buildingHelper.updatePorfessorsOffice(playerName, MEDIUM_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_PROF_OFFICE_2);
-            resourcesHelper.updateMoney(playerName, cash - cost);
+            UserManager.removeMoney(playerName, cost);
         }
         else {
             if (!occupant.equals(CODE_PROF_OFFICE_2)) {
@@ -172,7 +168,7 @@ public class ProfessorsOffice extends Building {
             // Upgrading to the room lvl_2
             buildingHelper.updatePorfessorsOffice(playerName, ADVANCED_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_PROF_OFFICE_3);
-            resourcesHelper.updateMoney(playerName, cash - cost);
+            UserManager.removeMoney(playerName, cost);
         }
 
         return true;

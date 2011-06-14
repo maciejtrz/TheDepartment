@@ -19,7 +19,7 @@ import java.util.List;
 public class BuildingsUtils {
 
 
-    public static List<Building> getAvailableBuildings(String playerName) {
+    public List<Building> getAvailableBuildings(String playerName) {
         List<Building> buildings = new ArrayList<Building>();
 
         BuildingFactory factory = new BuildingFactory();
@@ -66,7 +66,7 @@ public class BuildingsUtils {
 
 
 
-    public static boolean isLabBuilt(String playerName) {
+    public boolean isLabBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -78,7 +78,7 @@ public class BuildingsUtils {
     }
 
 
-    public static boolean isBrainBuilt(String playerName) {
+    public boolean isBrainBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -90,7 +90,7 @@ public class BuildingsUtils {
 
     }
 
-    public static boolean isDocPubBuilt(String playerName) {
+    public boolean isDocPubBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -102,7 +102,7 @@ public class BuildingsUtils {
 
     }
 
-    public static boolean isLecturerRoomBuilt(String playerName) {
+    public boolean isLecturerRoomBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -113,7 +113,7 @@ public class BuildingsUtils {
 
     }
 
-    public static boolean isMacChickenBuilt(String playerName) {
+    public boolean isMacChickenBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -126,7 +126,7 @@ public class BuildingsUtils {
     }
 
 
-    public static boolean isPhdOfficeBuilt(String playerName) {
+    public boolean isPhdOfficeBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -138,7 +138,7 @@ public class BuildingsUtils {
 
     }
     
-    public static boolean isProfessorsOfficeBuilt(String playerName) {
+    public boolean isProfessorsOfficeBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -149,7 +149,7 @@ public class BuildingsUtils {
     }
 
 
-    public static boolean isStudentUnionBuilt(String playerName) {
+    public boolean isStudentUnionBuilt(String playerName) {
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);
         if (building_record == null) {
@@ -161,7 +161,7 @@ public class BuildingsUtils {
     }
 
 
-    public static boolean isTrescoBuilt(String playerName) {
+    public boolean isTrescoBuilt(String playerName) {
 
         BuildingsHelper helper = new BuildingsHelper();
         Buildings building_record = helper.getBuildings(playerName);

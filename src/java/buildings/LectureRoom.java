@@ -5,6 +5,7 @@ import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 public class LectureRoom extends Building {
@@ -51,10 +52,7 @@ public class LectureRoom extends Building {
                 Building.CODE_LECTURER_ROOM_1);
 
         /* Updating players money. */
-        PlayerresourcesHelper player_record
-                = new PlayerresourcesHelper();
-        int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }

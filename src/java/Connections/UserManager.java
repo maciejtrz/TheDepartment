@@ -118,6 +118,11 @@ public class UserManager {
 
     }
 
+    static synchronized public int getMoney(String userName) {
+        Playerresources resources = getResources(userName);
+        return resources.getMoney();
+    }
+
     static synchronized public boolean removeMoney(String username, int money) {
 
             boolean result = false;

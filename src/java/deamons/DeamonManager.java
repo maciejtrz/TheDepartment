@@ -18,6 +18,10 @@ public class DeamonManager {
     private static volatile boolean event_deamon_started = false;
     private static Thread event_deamon = null;
 
+    /* Stats thread's control variables. */
+    private static volatile boolean stats_deamon_started = false;
+    private static Thread stats_deamon = null;
+
     private DeamonManager() {
 
     }
@@ -46,6 +50,14 @@ public class DeamonManager {
                     ("MANAGER is starting new Event deamon thread.");
             event_deamon = new EventDeamon();
             event_deamon.start();
+        }
+    }
+
+    public synchronized void createStatsDeamon() {
+        if (!stats_deamon_started && stats_deamon == null) {
+            stats_deamon_started = true;
+            stats_deamon = new StatsDeamon();
+            stats_deamon.start();
         }
     }
 

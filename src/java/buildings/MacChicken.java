@@ -4,6 +4,7 @@ import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 public class MacChicken extends Building {
@@ -52,10 +53,7 @@ public class MacChicken extends Building {
                 Building.CODE_MAC_CHICKEN_1);
 
         /* Updating players money. */
-        PlayerresourcesHelper player_record
-                = new PlayerresourcesHelper();
-        int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }

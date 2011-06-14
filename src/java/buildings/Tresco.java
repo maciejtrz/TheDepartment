@@ -5,6 +5,7 @@ import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 public class Tresco extends Building {
@@ -49,10 +50,7 @@ public class Tresco extends Building {
                 Building.CODE_TRESCO);
 
         /* Updating players money. */
-        PlayerresourcesHelper player_record
-                = new PlayerresourcesHelper();
-        int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }

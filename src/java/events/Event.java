@@ -48,17 +48,17 @@ public abstract class Event {
         return tickets.size();
     }
 
-    protected int getIncreasedValue(int level, int update_value) {
+    public int getIncreasedValue(int level, int update_value) {
         return (level < (LotteryManager.UPPER_BOUND - update_value)) ?
                (level + update_value) : LotteryManager.UPPER_BOUND;
     }
 
-    protected int getDecreasedValue(int level, int update_value) {
+    public int getDecreasedValue(int level, int update_value) {
         return (level > (LotteryManager.LOWER_BOUND + update_value)) ?
                (level - update_value) : LotteryManager.LOWER_BOUND;
     }
 
-    protected boolean increaseSatisfaction (String playerName , int value) {
+    public boolean increaseSatisfaction (String playerName , int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();
@@ -78,7 +78,7 @@ public abstract class Event {
         return true;
     }
 
-    protected boolean decreaseSatisfaction (String playerName, int value) {
+    public boolean decreaseSatisfaction (String playerName, int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();
@@ -98,7 +98,7 @@ public abstract class Event {
         return true;
     }
 
-    protected boolean increaseAlcoholizm (String playerName, int value) {
+    public boolean increaseAlcoholizm (String playerName, int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();
@@ -118,7 +118,7 @@ public abstract class Event {
         return true;
     }
 
-    protected boolean decreaseAlcoholizm (String playerName, int value) {
+    public boolean decreaseAlcoholizm (String playerName, int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();
@@ -138,7 +138,7 @@ public abstract class Event {
         return true;
     }
 
-    protected boolean increaseStarvation (String playerName, int value) {
+    public boolean increaseStarvation (String playerName, int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();
@@ -158,7 +158,7 @@ public abstract class Event {
         return true;
     }
 
-    protected boolean decreaseStarvation (String playerName, int value) {
+    public boolean decreaseStarvation (String playerName, int value) {
 
         ExtrastatsHelper statsHelper
                 = new ExtrastatsHelper();

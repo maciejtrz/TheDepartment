@@ -5,6 +5,7 @@ import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 public class Laboratories  extends Building {
@@ -51,10 +52,7 @@ public class Laboratories  extends Building {
                 Building.CODE_LABS);
 
         /* Updating players money. */
-        PlayerresourcesHelper player_record
-                = new PlayerresourcesHelper();
-        int money = player_record.getMoney(playerName);
-        player_record.updateMoney(playerName, money - cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }
@@ -129,8 +127,6 @@ public class Laboratories  extends Building {
                 = new BuildingsHelper();
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();
-        PlayerresourcesHelper resources
-                = new PlayerresourcesHelper();
 
 
         /* Checking whether the building is eligible for an upgrade. */
@@ -148,21 +144,21 @@ public class Laboratories  extends Building {
 
         // Checking whether the player has sufficient cash.
         int upgrade_cost = cur_level * upgrade_base_cost;
-        int cash = resources.getMoney(playerName);
+        int cash = UserManager.getMoney(playerName);
         if (cash < upgrade_cost) {
             return false;
         }
 
         // Checking whether the input position is correct.
         String occupant = posHelper.getAtPosition(playerName, position);
-        if (!occupant.equals(this.CODE_LABS)) {
+        if (!occupant.equals(CODE_LABS)) {
             return false;
         }
 
         // Upgrading to the superlabs
         buildingHelper.updateLabolatories(playerName, MEDIUM_LEVEL);
         posHelper.updateBuildingPosition(playerName, position, CODE_SUPERLABS);
-        resources.updateMoney(playerName, cash - upgrade_cost);
+        UserManager.removeMoney(playerName, cost);
 
         return true;
     }

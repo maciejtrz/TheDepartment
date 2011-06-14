@@ -16,7 +16,13 @@ import java.util.Date;
  *
  * @author kp1209
  */
-public class TradeOffer extends Messagesystem implements Serializable {
+public class TradeOffer extends Messagesystem implements Serializable, Comparable {
+
+    public int compareTo(Object o) {
+        TradeOffer tradeOffer = (TradeOffer) o;
+
+        return getExpireDate().compareTo(tradeOffer.getExpireDate());
+    }
 
     protected class ParsingPosition {
 

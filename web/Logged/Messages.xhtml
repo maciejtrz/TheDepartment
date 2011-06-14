@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:component>
+
+           <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <h:outputText value="To: " />
+                <h:selectOneMenu value="#{message.selectedReceiver}">
+                    <f:selectItems value="#{message.receivers}"/>
+                </h:selectOneMenu>
+
+                <br></br>
+                <h:outputText value="Subject:"/>
+                <h:inputText value="#{message.subject}"/>
+                <br></br>
+
+
+                <h:inputTextarea style="width:300px;height:100px;" value="#{message.msg}"/>
+                <br></br>
+
+                <h:commandButton value="Send" action="#{message.send}"/>
+            </h:form>
+
+            <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+        <p:dialog header="Message inbox" widgetVar="readmsg" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <p:wizard widgetVar="wizzard"  flowListener="#{plainMessageReader.onFlowProcess}">
+
+                    <p:tab id="subject" title="MessageSubject">
+
+                        <p:panel header="Message subject">
+
+                            <h:outputText value="Choose message subject: " />
+                            <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
+                                <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab title="MessageText" id="text">
+                        <p:panel header="Message data" >
+                            <h:outputText value="Message: "/>
+                            <br/>
+                            <h:outputText value="#{plainMessageReader.text}" />
+
+                        </p:panel>
+                    </p:tab>
+
+
+                </p:wizard>
+            </h:form>
+
+            <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+    </ui:component>
+</html>

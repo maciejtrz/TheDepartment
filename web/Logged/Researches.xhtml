@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:component>
+
+        <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <p>Now, you must specify what research you would like to perform.</p>
+
+            <h:form>
+
+                <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
+
+                    <p:tab id="researchSubject" title="Research Subject" >
+                        <p:panel header="ResarchSubject">
+                            <h:outputText value="Choose research subject: " />
+                            <h:selectOneMenu value="#{addResearch.subject}" >
+                                <f:selectItems value="#{addResearch.subjects}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="researchLecturers" title="Lecturers for Research" >
+                        <p:panel header="Lecturers for Research">
+                            <h:outputText value="Choose lecturers: "/>
+                            <h:selectManyListbox value="#{addResearch.lecturers}">
+                                <f:selectItems value="#{addResearch.lecturerList}"/>
+                            </h:selectManyListbox>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="availableResearches" title="Available Researches" >
+                        <p:panel header="Available Researches">
+                            <h:outputText value="Choose research: "/>
+                            <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                                <f:selectItems value="#{addResearch.availableResearches}"/>
+                            </h:selectOneMenu>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="moneyAmount" title="Specify money grant for research" >
+                        <p:panel header="Specify money grant for research">
+                            <h:outputText value="Input money min: "/>
+                            <h:outputText value="#{addResearch.minimumMoney}" />
+                            <h:outputText value=" max: " />
+                            <h:outputText value="#{addResearch.maximumMoney}"/>
+                            <h:inputText value="#{addResearch.moneyAmount}" />
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirmation" title="Research Confirmation" >
+                        <p:panel header="Research Confirmation">
+
+                            <h:panelGrid columns="2" border="1" >
+
+                                <h:outputText value="Name of Research: "/>
+                                <h:outputText value="#{addResearch.researchName}" />
+
+                                <h:outputText value="Money: "/>
+                                <h:outputText value="#{addResearch.moneyAmount}" />
+
+                                <h:outputText value="Subject: "/>
+                                <h:outputText value="#{addResearch.subjectName}" />
+
+                                <h:commandButton actionListener="#{addResearch.startResearch}" value="Add Research"/>
+                                <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
+
+                            </h:panelGrid>
+
+
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+            </h:form>
+
+            <h3>Available researches: </h3>
+
+            <h:form>
+                <p:tree value="#{addResearch.root}" var="node">
+                    <p:treeNode>
+                        <h:outputText value="#{node}"/>
+                    </p:treeNode>
+                </p:tree>
+
+            </h:form>
+
+        </p:dialog>
+
+
+
+        <p:dialog header="Manage researches" widgetVar="resmag" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+                <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}">
+
+                    <p:column headerText="Research Title">
+                        <h:outputText value="#{research.name}" />
+                    </p:column>
+
+                    <p:column headerText="Progress Bar">
+                        <p:progressBar widgetVar="pbAjax" ajax="true" value="#{research.researchTime}" />
+                    </p:column>
+
+                    <p:column headerText="Control button">
+                        <p:commandButton value="#{research.state}" >
+                            <f:setPropertyActionListener value="#{research}" target="#{researchBag.selectedResearch}" />
+
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:poll interval="10" update="ongoingResearches" />
+            </h:form>
+
+            <h3>Finished Researches</h3>
+
+            <h:form>
+                <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
+                    <p:treeNode>
+                        <h:outputText value="#{node}"/>
+                    </p:treeNode>
+                </p:tree>
+                <p:poll interval="10" update="finishedResearches" />
+            </h:form>
+
+
+        </p:dialog>
+
+    </ui:component>
+</html>

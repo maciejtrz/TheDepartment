@@ -21,7 +21,7 @@ public class SubjectHelper extends AbstractHelper {
        Session session = createNewSessionAndTransaction();
         Query q = (Query) session.createQuery("from Subject");
         List<Subject> list = q.list();
-
+        session.close();
         return list;
     }
     

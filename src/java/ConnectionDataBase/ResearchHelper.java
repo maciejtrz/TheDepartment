@@ -38,6 +38,8 @@ public class ResearchHelper extends AbstractHelper {
         while(iterator.hasNext())
             idAvailableResearch.add(iterator.next().getId().getResearchid());
 
+        session.close();
+
         return idAvailableResearch;
         
     }

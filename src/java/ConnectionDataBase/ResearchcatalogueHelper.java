@@ -19,7 +19,9 @@ public class ResearchcatalogueHelper extends AbstractHelper {
 
         Session session = createNewSessionAndTransaction();
         Query q = (Query) session.createQuery("from Researchcatalogue");
-        return (List<Researchcatalogue>) q.list();
+        List<Researchcatalogue> ret =  q.list();
+        session.close();
+        return ret;
 
     }
 

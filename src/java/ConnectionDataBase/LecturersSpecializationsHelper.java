@@ -13,7 +13,9 @@ public class LecturersSpecializationsHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Lecturersspecializations  where "
                 + "LecturerName = '" + lecturerName + "'" );
-        return (List<Lecturersspecializations>)q.list();
+        List<Lecturersspecializations> ret = q.list();
+        session.close();
+        return ret;
     }
 
     public void removeSpecializationsRecords (String lecturerName) {

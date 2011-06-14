@@ -21,6 +21,8 @@ public class PlayerHelper extends AbstractHelper {
         Query q = session.createQuery("from Players");
         list = (List<Players>) q.list();
 
+        session.close();
+        
         return list;
 
     }
@@ -32,6 +34,8 @@ public class PlayerHelper extends AbstractHelper {
         Query q = session.createQuery("from Players where idname='"
                 + idname + "'");
         player = (Players) q.uniqueResult();
+
+        session.close();
 
         return player;
     }

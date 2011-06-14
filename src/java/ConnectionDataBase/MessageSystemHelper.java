@@ -72,7 +72,10 @@ public class MessageSystemHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Messagesystem");
         System.out.print("NEXT MSG NUMBER = "  + q.list().size() + " +1 " );
-        return (q.list().size());
+
+       int ret = (q.list().size());
+       session.close();
+        return ret ;
     }
 
     public List<Messagesystem> getMessages(String receiver, int messageType) {
@@ -80,8 +83,9 @@ public class MessageSystemHelper extends AbstractHelper {
         Query q = session.createQuery("from Messagesystem where ReceiverId = '" + receiver + "'"
                 + "and type=" + messageType);
 
-        return q.list();
+        List<Messagesystem> ret = q.list();
+        session.close();
+        return ret;
     }
 
-    /* HUJ */
 }

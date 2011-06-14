@@ -13,7 +13,7 @@ public class ResearchdependenciesHelper extends AbstractHelper {
 
         List<Researchdependencies> list = q.list();
 
-        
+        session.close();
         return list;
     }    
 

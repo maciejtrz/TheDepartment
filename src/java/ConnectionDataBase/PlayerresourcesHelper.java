@@ -27,7 +27,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Playerresources where idname='"
                 + idname + "'");
-        return (Playerresources) q.uniqueResult();
+        Playerresources ret = (Playerresources) q.uniqueResult();
+        session.close();
+        return ret;
     }
 
     public int getMoney(String idname) {
@@ -41,6 +43,8 @@ public class PlayerresourcesHelper extends AbstractHelper {
         if (resources != null) {
             money = resources.getMoney();
         }
+
+        session.close();
         return money;
     }
 
@@ -56,6 +60,8 @@ public class PlayerresourcesHelper extends AbstractHelper {
         if (resources != null) {
             points = resources.getResearchpoints();
         }
+
+        session.close();
 
         return points;
     }
@@ -137,6 +143,8 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         Query q = (Query) session.createQuery("from Playerresources order by "
                 + resource + " DESC");
-        return q.list();
+        output = q.list();
+        session.close();
+        return output;
     }
 }

@@ -39,7 +39,7 @@ public class AuctionMessageReader extends MessageWriter {
 
                 auction.parse(message.getMsg());
                 auction.setSenderid(message.getSenderid());
-                auction.setDate(message.getDate());
+                auction.setCreationtime(message.getCreationtime());
                 auction.setMsgnumber(message.getMsgnumber());
                 auction.setSubject(message.getSubject());
 

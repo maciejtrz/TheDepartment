@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 12-Jun-2011 20:48:40 by Hibernate Tools 3.2.1.GA
+// Generated 14-Jun-2011 16:43:10 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -12,7 +12,7 @@ public class Messagesystem  implements java.io.Serializable {
      private int msgnumber;
      private String senderid;
      private String receiverid;
-     private String date;
+     private long creationtime;
      private String subject;
      private String msg;
      private boolean read;
@@ -22,19 +22,19 @@ public class Messagesystem  implements java.io.Serializable {
     }
 
 	
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, boolean read, int type) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, long creationtime, boolean read, int type) {
         this.msgnumber = msgnumber;
         this.senderid = senderid;
         this.receiverid = receiverid;
-        this.date = date;
+        this.creationtime = creationtime;
         this.read = read;
         this.type = type;
     }
-    public Messagesystem(int msgnumber, String senderid, String receiverid, String date, String subject, String msg, boolean read, int type) {
+    public Messagesystem(int msgnumber, String senderid, String receiverid, long creationtime, String subject, String msg, boolean read, int type) {
        this.msgnumber = msgnumber;
        this.senderid = senderid;
        this.receiverid = receiverid;
-       this.date = date;
+       this.creationtime = creationtime;
        this.subject = subject;
        this.msg = msg;
        this.read = read;
@@ -62,12 +62,12 @@ public class Messagesystem  implements java.io.Serializable {
     public void setReceiverid(String receiverid) {
         this.receiverid = receiverid;
     }
-    public String getDate() {
-        return this.date;
+    public long getCreationtime() {
+        return this.creationtime;
     }
     
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreationtime(long creationtime) {
+        this.creationtime = creationtime;
     }
     public String getSubject() {
         return this.subject;

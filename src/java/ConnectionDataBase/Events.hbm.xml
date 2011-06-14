@@ -1,75 +1,74 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 13-Jun-2011 00:05:39 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ConnectionDataBase.Events" table="events" schema="public">
-        <id name="idname" type="string">
-            <column name="idname" />
-            <generator class="assigned" />
-        </id>
-        <property name="barnight" type="int">
-            <column name="barnight" not-null="true" />
-        </property>
-        <property name="facebookblocked" type="int">
-            <column name="facebookblocked" not-null="true" />
-        </property>
-        <property name="girlsarrival" type="int">
-            <column name="girlsarrival" not-null="true" />
-        </property>
-        <property name="governmentgrant" type="int">
-            <column name="governmentgrant" not-null="true" />
-        </property>
-        <property name="haskellconference" type="int">
-            <column name="haskellconference" not-null="true" />
-        </property>
-        <property name="highranking" type="int">
-            <column name="highranking" not-null="true" />
-        </property>
-        <property name="labshacking" type="int">
-            <column name="labshacking" not-null="true" />
-        </property>
-        <property name="labsinfire" type="int">
-            <column name="labsinfire" not-null="true" />
-        </property>
-        <property name="lecturerpromotion" type="int">
-            <column name="lecturerpromotion" not-null="true" />
-        </property>
-        <property name="macchickenpromotion" type="int">
-            <column name="macchickenpromotion" not-null="true" />
-        </property>
-        <property name="malice" type="int">
-            <column name="malice" not-null="true" />
-        </property>
-        <property name="nobelprice" type="int">
-            <column name="nobelprice" not-null="true" />
-        </property>
-        <property name="outofchicken" type="int">
-            <column name="outofchicken" not-null="true" />
-        </property>
-        <property name="paperleak" type="int">
-            <column name="paperleak" not-null="true" />
-        </property>
-        <property name="phdpromotion" type="int">
-            <column name="phdpromotion" not-null="true" />
-        </property>
-        <property name="pintoscw" type="int">
-            <column name="pintoscw" not-null="true" />
-        </property>
-        <property name="privatecompanygrant" type="int">
-            <column name="privatecompanygrant" not-null="true" />
-        </property>
-        <property name="pubdemolished" type="int">
-            <column name="pubdemolished" not-null="true" />
-        </property>
-        <property name="trescomiracle" type="int">
-            <column name="trescomiracle" not-null="true" />
-        </property>
-        <property name="trescotragedy" type="int">
-            <column name="trescotragedy" not-null="true" />
-        </property>
-        <property name="unionparty" type="int">
-            <column name="unionparty" not-null="true" />
-        </property>
-    </class>
+  <class name="ConnectionDataBase.Events" schema="public" table="events">
+    <id name="idname" type="string">
+      <column name="idname"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="barnight" type="int">
+      <column name="barnight" not-null="true"/>
+    </property>
+    <property name="facebookblocked" type="int">
+      <column name="facebookblocked" not-null="true"/>
+    </property>
+    <property name="girlsarrival" type="int">
+      <column name="girlsarrival" not-null="true"/>
+    </property>
+    <property name="governmentgrant" type="int">
+      <column name="governmentgrant" not-null="true"/>
+    </property>
+    <property name="haskellconference" type="int">
+      <column name="haskellconference" not-null="true"/>
+    </property>
+    <property name="highranking" type="int">
+      <column name="highranking" not-null="true"/>
+    </property>
+    <property name="labshacking" type="int">
+      <column name="labshacking" not-null="true"/>
+    </property>
+    <property name="labsinfire" type="int">
+      <column name="labsinfire" not-null="true"/>
+    </property>
+    <property name="lecturerpromotion" type="int">
+      <column name="lecturerpromotion" not-null="true"/>
+    </property>
+    <property name="macchickenpromotion" type="int">
+      <column name="macchickenpromotion" not-null="true"/>
+    </property>
+    <property name="malice" type="int">
+      <column name="malice" not-null="true"/>
+    </property>
+    <property name="nobelprice" type="int">
+      <column name="nobelprice" not-null="true"/>
+    </property>
+    <property name="outofchicken" type="int">
+      <column name="outofchicken" not-null="true"/>
+    </property>
+    <property name="paperleak" type="int">
+      <column name="paperleak" not-null="true"/>
+    </property>
+    <property name="phdpromotion" type="int">
+      <column name="phdpromotion" not-null="true"/>
+    </property>
+    <property name="pintoscw" type="int">
+      <column name="pintoscw" not-null="true"/>
+    </property>
+    <property name="privatecompanygrant" type="int">
+      <column name="privatecompanygrant" not-null="true"/>
+    </property>
+    <property name="pubdemolished" type="int">
+      <column name="pubdemolished" not-null="true"/>
+    </property>
+    <property name="trescomiracle" type="int">
+      <column name="trescomiracle" not-null="true"/>
+    </property>
+    <property name="trescotragedy" type="int">
+      <column name="trescotragedy" not-null="true"/>
+    </property>
+    <property name="unionparty" type="int">
+      <column name="unionparty" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

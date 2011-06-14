@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 12-Jun-2011 20:48:40 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14-Jun-2011 16:43:14 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="ConnectionDataBase.Messagesystem" table="messagesystem" schema="public">
         <id name="msgnumber" type="int">
             <column name="msgnumber" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <property name="senderid" type="string">
             <column name="senderid" not-null="true" />
@@ -14,8 +14,8 @@
         <property name="receiverid" type="string">
             <column name="receiverid" not-null="true" />
         </property>
-        <property name="date" type="string">
-            <column name="date" not-null="true" />
+        <property name="creationtime" type="long">
+            <column name="creationtime" not-null="true" />
         </property>
         <property name="subject" type="string">
             <column name="subject" />

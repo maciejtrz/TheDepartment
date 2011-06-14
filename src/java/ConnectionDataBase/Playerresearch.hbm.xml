@@ -1,16 +1,15 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 09-Jun-2011 17:14:20 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ConnectionDataBase.Playerresearch" table="playerresearch" schema="public">
-        <composite-id name="id" class="ConnectionDataBase.PlayerresearchId">
-            <key-property name="idname" type="string">
-                <column name="idname" />
-            </key-property>
-            <key-property name="researchid" type="int">
-                <column name="researchid" />
-            </key-property>
-        </composite-id>
-    </class>
+  <class name="ConnectionDataBase.Playerresearch" schema="public" table="playerresearch">
+    <composite-id class="ConnectionDataBase.PlayerresearchId" name="id">
+      <key-property name="idname" type="string">
+        <column name="idname"/>
+      </key-property>
+      <key-property name="researchid" type="int">
+        <column name="researchid"/>
+      </key-property>
+    </composite-id>
+  </class>
 </hibernate-mapping>

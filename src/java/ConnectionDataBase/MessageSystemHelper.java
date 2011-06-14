@@ -27,8 +27,7 @@ public class MessageSystemHelper extends AbstractHelper {
         msg.setReceiverid(ReceiverID);
 
         Date date = new Date();
-        String time = (date.getHours() + date.getMinutes() + "|" + date.getDate() + "|" + date.getMonth() + "|" + date.getYear());
-        msg.setDate(time);
+        msg.setCreationtime(date.getTime());
 
         msg.setSubject(subject);
         msg.setMsg(text);

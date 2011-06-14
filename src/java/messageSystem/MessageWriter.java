@@ -118,7 +118,7 @@ public abstract class MessageWriter {
 
         String result = null;
         if (getMessages().size() > getSelectedMessage()) {
-            result = getMessages().get(getSelectedMessage()).getDate();
+            result = getMessages().get(getSelectedMessage()).getMsg();
         }
 
         return result;

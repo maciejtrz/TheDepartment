@@ -37,7 +37,7 @@ public class TradeMessageReader extends MessageWriter {
                 tradeOffer.parse(message.getMsg());
                 tradeOffer.setSenderid(message.getSenderid());
                 tradeOffer.setReceiverid(message.getReceiverid());
-                tradeOffer.setDate(message.getDate());
+                tradeOffer.setCreationtime(message.getCreationtime());
                 tradeOffer.setMsgnumber(message.getMsgnumber());
 
                 offeredTrades.add(tradeOffer);

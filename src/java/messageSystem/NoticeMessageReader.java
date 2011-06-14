@@ -41,7 +41,7 @@ public class NoticeMessageReader extends MessageWriter {
 
                 tradeOffer.parse(message.getMsg());
                 tradeOffer.setSenderid(message.getSenderid());
-                tradeOffer.setDate(message.getDate());
+                tradeOffer.setCreationtime(message.getCreationtime());
                 tradeOffer.setMsgnumber(message.getMsgnumber());
 
                 offeredNoticeTrades.add(tradeOffer);

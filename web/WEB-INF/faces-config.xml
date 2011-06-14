@@ -241,8 +241,13 @@
         <managed-bean-class>messageSystem.AuctionMessageReader</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>mapPositionBean</managed-bean-name>
+        <managed-bean-class>utilities.MapPositionBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
+
 
 
 

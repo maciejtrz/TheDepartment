@@ -1,5 +1,7 @@
 package ConnectionDataBase;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -128,5 +130,13 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         session.saveOrUpdate(resources);
         commitTransaction(session);
+    }
+
+    public List<Playerresources> getRanking(String resource){
+        List<Playerresources> output = new ArrayList<Playerresources>();
+        Session session = createNewSessionAndTransaction();
+        Query q = (Query) session.createQuery("from Playerresources sorted by "
+                + resource);
+        return q.list();
     }
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Connections;
 
@@ -20,10 +16,7 @@ import messageSystem.TradeOffer;
 import resources.Resource;
 import resources.ResourcesType;
 
-/**
- *
- * @author kp1209
- */
+
 public class UserManager {
 
     /* Set of all user currently having sessions */
@@ -41,6 +34,7 @@ public class UserManager {
     /* Singleton */
     private UserManager() {
     }
+
 
     static private boolean isUserMonitored(String username) {
         return sessionMap.containsKey(username);

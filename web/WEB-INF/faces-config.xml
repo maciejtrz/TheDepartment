@@ -98,6 +98,12 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>shop</managed-bean-name>
+        <managed-bean-class>rankings.MoneyrRanking</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>

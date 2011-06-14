@@ -99,8 +99,8 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>shop</managed-bean-name>
-        <managed-bean-class>rankings.MoneyrRanking</managed-bean-class>
+        <managed-bean-name>rankings</managed-bean-name>
+        <managed-bean-class>rankings.MoneyRanking</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 

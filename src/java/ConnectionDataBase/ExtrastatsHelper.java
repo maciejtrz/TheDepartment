@@ -24,9 +24,9 @@ public class ExtrastatsHelper extends AbstractHelper {
         Extrastats stats_record = (Extrastats)q.uniqueResult();
 
         if (stats_record != null) {
-            session.delete(stats_record);
-            commitTransaction(session);
+            session.delete(stats_record);  
         }
+        commitTransaction(session);
     }
 
     public void updateSatisfaction (String idname, int satisfacation) {
@@ -37,9 +37,9 @@ public class ExtrastatsHelper extends AbstractHelper {
 
         if (stats_record != null) {
             stats_record.setSatisfaction(satisfacation);
-            commitTransaction(session);
-
         }
+
+        commitTransaction(session);
     }
 
     public void updateStarvation (String idname, int starvation) {
@@ -50,9 +50,9 @@ public class ExtrastatsHelper extends AbstractHelper {
 
         if (stats_record != null) {
             stats_record.setStarvation(starvation);
-            commitTransaction(session);
-
         }
+
+        commitTransaction(session);
     }
 
     public void updateAlcoholizm (String idname, int alcoholizm) {
@@ -63,9 +63,9 @@ public class ExtrastatsHelper extends AbstractHelper {
 
         if (stats_record != null) {
             stats_record.setAlcoholizm(alcoholizm);
-            commitTransaction(session);
-
         }
+
+        commitTransaction(session);
     }
 
     public Extrastats getPlayerStatsRecrod(String idname) {
@@ -73,6 +73,8 @@ public class ExtrastatsHelper extends AbstractHelper {
         Query q = session.createQuery("from Extrastats where idname='"
                 + idname + "'");
         Extrastats stats_record = (Extrastats)q.uniqueResult();
+
+        commitTransaction(session);
         return stats_record;
     }
 

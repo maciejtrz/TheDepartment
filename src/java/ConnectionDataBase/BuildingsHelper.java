@@ -42,15 +42,20 @@ public class BuildingsHelper extends AbstractHelper {
         Buildings building_record = (Buildings) q.uniqueResult();
         if (building_record != null) {
             session.delete(building_record);
-            commitTransaction(session);
         }
+
+        commitTransaction(session);
      }
 
     public Buildings getBuildings(String idname) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Buildings where idname='"
                 + idname + "'");
-        return (Buildings) q.uniqueResult();
+
+        Buildings buildings = (Buildings) q.uniqueResult();
+        session.close();
+
+        return buildings;
     }
 
     public void updateBrain(String idname, int newValue) {
@@ -59,9 +64,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setBrain(newValue);
-            commitTransaction(session);
+            buildings.setBrain(newValue);            
         }
+
+        commitTransaction(session);
     }
 
     public void updatePorfessorsOffice(String idname, int newValue) {
@@ -70,9 +76,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setProfessorsoffice(newValue);
-            commitTransaction(session);
+            buildings.setProfessorsoffice(newValue);            
         }
+
+        commitTransaction(session);
     }
     
 
@@ -82,9 +89,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setDocpub(newValue);
-            commitTransaction(session);
+            buildings.setDocpub(newValue);        
         }
+
+        commitTransaction(session);
     }
 
     public void updateLabolatories(String idname, int newValue) {
@@ -93,9 +101,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setLabolatories(newValue);
-            commitTransaction(session);
+            buildings.setLabolatories(newValue);  
         }
+
+        commitTransaction(session);
     }
 
     public void updateLectureRoom(String idname, int newValue) {
@@ -104,9 +113,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setLectureroom(newValue);
-            commitTransaction(session);
+            buildings.setLectureroom(newValue);    
         }
+
+        commitTransaction(session);
     }
 
     public void updateMacChicken(String idname, int newValue) {
@@ -115,9 +125,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setMacchicken(newValue);
-            commitTransaction(session);
+            buildings.setMacchicken(newValue);    
         }
+
+        commitTransaction(session);
     }
 
     public void updatePhDsOffice(String idname, int newValue) {
@@ -126,9 +137,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setPhdsoffice(newValue);
-            commitTransaction(session);
+            buildings.setPhdsoffice(newValue); 
         }
+
+        commitTransaction(session);
     }
 
     public void updateStudentUnion(String idname, int newValue) {
@@ -137,9 +149,10 @@ public class BuildingsHelper extends AbstractHelper {
                 + idname + "'");
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
-            buildings.setStudentunion(newValue);
-            commitTransaction(session);
+            buildings.setStudentunion(newValue);   
         }
+
+        commitTransaction(session);
     }
 
     public void updateTresco(String idname, int newValue) {
@@ -149,7 +162,8 @@ public class BuildingsHelper extends AbstractHelper {
         Buildings buildings = (Buildings) q.uniqueResult();
         if (buildings != null) {
             buildings.setTresco(newValue);
-            commitTransaction(session);
         }
+
+        commitTransaction(session);
     }
 }

@@ -35,16 +35,20 @@ public class CapacityHelper extends AbstractHelper {
                 + idname + "'");
         Capacity capacity = (Capacity) q.uniqueResult();
         if (capacity !=null) {
-            session.delete(capacity);
-            commitTransaction(session);
+            session.delete(capacity);  
         }
+
+        commitTransaction(session);
     }
 
     public Capacity getCapacity(String idname) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Capacity where idname='"
                 + idname + "'");
-        return (Capacity) q.uniqueResult();
+
+        Capacity capacity = (Capacity) q.uniqueResult();
+        session.close();
+        return capacity;
     }
 
     /* The following methods increase capacities by update values. */
@@ -56,9 +60,10 @@ public class CapacityHelper extends AbstractHelper {
         if (capacity != null) {
             int student_cap = capacity.getStudentscapacity();
             capacity.setStudentscapacity(student_cap + updateValue);
-            session.update(capacity);
-            commitTransaction(session);
+            session.update(capacity);  
         }
+
+        commitTransaction(session);
     }
 
     public void updatePhDsCapacity(String idname, int updateValue) {
@@ -70,8 +75,9 @@ public class CapacityHelper extends AbstractHelper {
             int phd_cap = capacity.getPhdscapacity();
             capacity.setPhdscapacity(phd_cap + updateValue);
             session.update(capacity);
-            commitTransaction(session);
         }
+
+        commitTransaction(session);
     }
 
     public void updateProfessorsCapacity(String idname, int updateValue) {
@@ -83,7 +89,7 @@ public class CapacityHelper extends AbstractHelper {
             int prof_cap = capacity.getProfessorscapacity();
             capacity.setProfessorscapacity(prof_cap + updateValue);
             session.update(capacity);
-            commitTransaction(session);
         }
+        commitTransaction(session);
     }
 }

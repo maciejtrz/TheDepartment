@@ -19,6 +19,8 @@ public class LecturersAvailableHelper extends AbstractHelper {
                  + " idname = '" + idname + "'" );
         output_list = (List<Lecturersavailable>)q.list();
 
+        session.close();
+
         return output_list;
     }
 
@@ -51,8 +53,9 @@ public class LecturersAvailableHelper extends AbstractHelper {
         Lecturersavailable lecturer_record = (Lecturersavailable) q.uniqueResult();
         if (lecturer_record != null) {
             session.delete(lecturer_record);
-            commitTransaction(session);
         }
+
+        commitTransaction(session);
     }
 
 }

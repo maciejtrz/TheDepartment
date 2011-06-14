@@ -16,6 +16,8 @@ public class LecturersHelper extends AbstractHelper {
         Query q = session.createQuery("from Lecturers where "
                 + "LecturerName = '" + lecturerName + "'" );
         Lecturers lecturer_info = (Lecturers)q.uniqueResult();
+
+        session.close();
         return lecturer_info;
     }
 

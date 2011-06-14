@@ -176,7 +176,7 @@
                 <br/>
                 <h:outputText value="Trade description (arguments?)"/>
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
-                                 value="#{tradeMessageWriter.tradeDescription}"/>
+                                 value="#{noticeMessageWriter.tradeDescription}"/>
 
                 <h:commandButton value="Make Trade Offer" actionListener="#{noticeMessageWriter.sendNoticeOffer}" />
             </h:form>
@@ -211,6 +211,16 @@
                         <h:outputText value="#{auction.resourcesWantedName}"/>
                     </p:column>
 
+                    <p:column headerText="Action: ">
+
+                        <h:outputText value="Your offer: "/>
+                        <h:inputText value="#{auction.offer}" />
+                        <br/>
+
+                        <h:commandButton value="Bid" >
+                            <f:setPropertyActionListener value="#{auction}" target="#{auctionMessageReader.sendOffer}" />
+                        </h:commandButton>
+                    </p:column>
                 </p:dataTable>
 
                 <p:poll interval="30" update="noticeBoard" />

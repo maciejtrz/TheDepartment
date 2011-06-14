@@ -28,6 +28,7 @@ public class Auction extends TradeOffer implements Serializable  {
     boolean canBidMoreThanOnce;
 
     private int auctionType;
+    private int offer;
 
     /** Creates a new instance of AuctionMessageWriter */
     public Auction(int auctionType, boolean keepHistory, boolean canBidMoreThanOnce) {
@@ -48,6 +49,14 @@ public class Auction extends TradeOffer implements Serializable  {
     }
 
     public Auction() {
+    }
+
+    public int getOffer() {
+        return offer;
+    }
+
+    public void setOffer(int offer) {
+        this.offer = offer;
     }
 
     public String getTypeName() {
@@ -140,7 +149,7 @@ public class Auction extends TradeOffer implements Serializable  {
 
     }
 
-    void setTradeOffer(TradeOffer tradeOffer) {
+    public void setTradeOffer(TradeOffer tradeOffer) {
 
         setSubject(tradeOffer.getSubject());
         setReceiverid(tradeOffer.getReceiverid());
@@ -151,6 +160,5 @@ public class Auction extends TradeOffer implements Serializable  {
         setResourcesWantedType(tradeOffer.getResourcesWantedType());
         
     }
-
 
 }

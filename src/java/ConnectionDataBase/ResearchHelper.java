@@ -2,6 +2,7 @@ package ConnectionDataBase;
 
 import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeNode;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import specializationsGenerator.SpecializationsGenerator;
 
-public class ResearchHelper extends AbstractHelper {
+public class ResearchHelper extends AbstractHelper implements Serializable{
     
     public void createResearch(String IdName, Integer researchNumber, int researchPoints) {
         

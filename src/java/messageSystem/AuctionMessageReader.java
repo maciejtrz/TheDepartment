@@ -58,4 +58,11 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
         return offersHistory;
     }
 
+    public void setSendOffer(Auction offer) {
+
+        System.out.println("Auction title: " + offer.getSubject());
+        System.out.println("Bid offer: " + offer.getOffer());
+
+    }
+
 }

@@ -4,16 +4,13 @@
    <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
-        <context-param>
-            <param-name>primefaces.THEME</param-name>
-            <param-value>vader</param-value>
-        </context-param>
     </context-param>
 
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>redmond</param-value>
     </context-param>
+
     <filter>
         <filter-name>loggedFilter</filter-name>
         <filter-class>Filters.LoggedFilter</filter-class>
@@ -26,6 +23,7 @@
         <filter-name>departmentFilter</filter-name>
         <filter-class>Filters.PlayingFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>loggedFilter</filter-name>
         <url-pattern>/faces/Logged/*</url-pattern>
@@ -50,12 +48,14 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+
     <listener>
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>
     <listener>
         <listener-class>Connections.ApplicationContextInitializer</listener-class>
     </listener>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -65,12 +65,15 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
+
     <welcome-file-list>
         <welcome-file>faces/Unlogged/index.xhtml</welcome-file>
     </welcome-file-list>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>securedapp</web-resource-name>
@@ -81,4 +84,4 @@
         </user-data-constraint>
     </security-constraint>
 
-       1. </web-app>
+  </web-app>

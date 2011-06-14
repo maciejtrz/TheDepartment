@@ -135,8 +135,8 @@ public class PlayerresourcesHelper extends AbstractHelper {
     public List<Playerresources> getRanking(String resource){
         List<Playerresources> output = new ArrayList<Playerresources>();
         Session session = createNewSessionAndTransaction();
-        Query q = (Query) session.createQuery("from Playerresources sorted by "
-                + resource);
+        Query q = (Query) session.createQuery("from Playerresources order by "
+                + resource + " DESC");
         return q.list();
     }
 }

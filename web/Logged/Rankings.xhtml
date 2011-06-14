@@ -7,11 +7,109 @@
     <ui:component>
 
 
-       <p:dialog header="Wealth ranking" widgetVar="wealth" modal="true" height="500" width="700"
+        <p:dialog header="Rankings" widgetVar="ranking" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
+            <h:form>
 
-                   HUJ<br/>
+                <p:commandButton value="Wealth" onclick="wealth.show()"/>
+                <p:commandButton value="Reaserch Points" onclick="rp.show()"/>
+                <p:commandButton value="Students" onclick="studentnum.show()"/>
+                <p:commandButton value="PhDs" onclick="phdsnum.show()"/>
+
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="PhDs number ranking" widgetVar="phdsnum" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <p:dataTable id="phdsRanking" var="rowInput" value="#{phdsranking.list}">
+
+                    <p:column headerText="Position">
+                        <h:outputText value="#{phdsranking.playerPosition}" />
+                    </p:column>
+
+                    <p:column headerText="Player ID ">
+                        <h:outputText value="#{rowInput.idname}"/>
+                    </p:column>
+
+                    <p:column headerText="PhDs number: " >
+                        <h:outputText value="#{rowInput.phdsnumber}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:dialog>
+
+        <p:dialog header="Student number ranking" widgetVar="studentnum" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <p:dataTable id="student" var="rowInput" value="#{studentsranking.list}">
+
+                    <p:column headerText="Position">
+                        <h:outputText value="#{studentsranking.playerPosition}" />
+                    </p:column>
+
+                    <p:column headerText="Player ID ">
+                        <h:outputText value="#{rowInput.idname}"/>
+                    </p:column>
+
+                    <p:column headerText="Students population: " >
+                        <h:outputText value="#{rowInput.undergraduatesnumber}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:dialog>
+
+
+        <p:dialog header="Research points ranking" widgetVar="rp" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <p:dataTable id="moneyRanking" var="rowInput" value="#{researchranking.list}">
+
+                    <p:column headerText="Position">
+                        <h:outputText value="#{researchranking.playerPosition}" />
+                    </p:column>
+
+                    <p:column headerText="Player ID ">
+                        <h:outputText value="#{rowInput.idname}"/>
+                    </p:column>
+
+                    <p:column headerText="Research Points produced " >
+                        <h:outputText value="#{rowInput.researchpoints}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:dialog>
+
+        <p:dialog header="Wealth ranking" widgetVar="wealth" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+            <h:form>
+
+                <p:dataTable id="moneyRanking" var="rowInput" value="#{moneyranking.list}">
+
+                    <p:column headerText="Position">
+                        <h:outputText value="#{moneyranking.playerPosition}" />
+                    </p:column>
+
+                    <p:column headerText="Player ID ">
+                        <h:outputText value="#{rowInput.idname}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount offered: " >
+                        <h:outputText value="#{rowInput.money}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
 
         </p:dialog>
 

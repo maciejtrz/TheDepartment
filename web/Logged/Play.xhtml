@@ -87,13 +87,10 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu label="Department">
+                    <p:menuitem value="Rankings" onclick="ranking.show()"/>
                     <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
                     <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
                     <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
-                </p:submenu>
-
-                <p:submenu label="Rankings">
-                    <p:menuitem value="wealth" onclick="wealth.show()"/>
                 </p:submenu>
 
                 <p:submenu label="User">

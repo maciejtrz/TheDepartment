@@ -30,18 +30,20 @@ public abstract class AbstractRanking {
     }
 
     public int getPlayerPosition(){
-        return this.playerPosition;
+        int pos = this.playerPosition;
+        this.playerPosition++;
+        return pos ;
     }
 
-    public List<Playerresources> getList(){
-        return this.list;
-    };
+    public abstract List<Playerresources> getList();
 
     public void setList(List<Playerresources> l){
         this.list=l;
     }
 
-    public abstract void produceRanking();
+
+
+    public abstract List<Playerresources> produceRanking();
 
 
 }

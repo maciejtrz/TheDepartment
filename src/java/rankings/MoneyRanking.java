@@ -5,6 +5,9 @@
 
 package rankings;
 
+import ConnectionDataBase.Playerresources;
+import java.util.List;
+
 /**
  *
  * @author pk2109
@@ -16,8 +19,20 @@ public class MoneyRanking extends AbstractRanking {
     }
 
     @Override
-    public void produceRanking() {
+    public List<Playerresources> produceRanking() {
+        setPlayerPosition(1);
         setList(helper.getRanking("money"));
+        return helper.getRanking("money");
     }
+
+    @Override
+    public List<Playerresources> getList() {
+        setPlayerPosition(1);
+        setList(helper.getRanking("money"));
+        return helper.getRanking("money");
+    }
+    
+
+    
 
 }

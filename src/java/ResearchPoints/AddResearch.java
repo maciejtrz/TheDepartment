@@ -220,7 +220,7 @@ public class AddResearch {
 
             // Checking whether a given lecturer is has a given research as
             // its attribtues
-            ArrayList<LecturerBenefits> benefits = lecturer.getSpecializations();
+            List<LecturerBenefits> benefits = lecturer.getSpecializations();
             String research_area = getSubjectList()[subject];
             Iterator<LecturerBenefits> it = benefits.iterator();
             while (it.hasNext()) {

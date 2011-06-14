@@ -58,7 +58,7 @@ public class LecturersManager {
             String name = newLecturer.getName();
             int price = newLecturer.getPrice();
             boolean usable = newLecturer.getUsable();
-            ArrayList<LecturerBenefits> specializations
+            List<LecturerBenefits> specializations
                     = newLecturer.getSpecializations();
 
             // Updating the databases.
@@ -95,7 +95,7 @@ public class LecturersManager {
             String name = newLecturer.getName();
             int price = newLecturer.getPrice();
             boolean usable = newLecturer.getUsable();
-            ArrayList<LecturerBenefits> specializations
+            List<LecturerBenefits> specializations
                     = newLecturer.getSpecializations();
 
             // Updating the databases.

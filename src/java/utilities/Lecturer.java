@@ -1,7 +1,7 @@
 package utilities;
 
 import java.util.ArrayList;
-import utilities.LecturerBenefits;
+import java.util.List;
 
 
 /* A helper class used to carry and read information. Has no significant uses.*/
@@ -33,7 +33,7 @@ public class Lecturer {
         return usable;
     }
 
-    public ArrayList<LecturerBenefits> getSpecializations(){
+    public List<LecturerBenefits> getSpecializations(){
         return specializations;
     }
 

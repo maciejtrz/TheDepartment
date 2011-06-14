@@ -16,7 +16,7 @@ import utilities.BasicUtils;
  *
  * @author kp1209
  */
-public class Auction extends TradeOffer implements Serializable  {
+public class Auction extends TradeOffer implements Serializable {
 
     private int highestOfferedPrice;
     private String winner;
@@ -49,6 +49,10 @@ public class Auction extends TradeOffer implements Serializable  {
     }
 
     public Auction() {
+    }
+
+    public int getWinningOffer() {
+        return 0;
     }
 
     public int getOffer() {
@@ -159,6 +163,13 @@ public class Auction extends TradeOffer implements Serializable  {
         setResourcesOfferedType(tradeOffer.getResourcesOfferedType());
         setResourcesWantedType(tradeOffer.getResourcesWantedType());
         
+    }
+
+    void finishAuction() {
+        setReceiverid(getWinner());
+        setAmountWanted(getWinningOffer());
+
+        accept();
     }
 
 }

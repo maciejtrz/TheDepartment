@@ -17,7 +17,7 @@ public class VikreyAuction extends Auction {
         super(AuctionFactory.VIKREY_AUCTION,true,true);
     }
 
-    private static final String typeName = "Highest Price Auction";
+    private static final String typeName = "Vikrey";
 
     @Override
     public String getTypeName() {

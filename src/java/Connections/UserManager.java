@@ -316,5 +316,9 @@ public class UserManager {
         return result;
     }
 
+    public static void setBuildingPosition(String username, int position) {
+        getUser(username).setBuildingPosition(position);
+    }
+
 
 }

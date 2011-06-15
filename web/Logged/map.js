@@ -17,6 +17,18 @@ function getNumber(poly) {
   return poly.getAttribute("no");
 }
 
+
+
+// AJAX function
+function queryServer(position)
+{
+
+   $.post("/TheDepartment/Logged/BuildingQuery", {"posotion": position}, function(data){
+   no = data;
+   })
+   return no;
+}
+
 function over(poly) {
   // change cursor to pointer
   document.body.style.cursor="url('first.cur'),pointer"

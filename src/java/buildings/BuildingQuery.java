@@ -5,6 +5,8 @@
 
 package buildings;
 
+import ConnectionDataBase.BuildingsPositionHelper;
+import Connections.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -27,10 +29,26 @@ public class BuildingQuery extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         try {
-            
+            String input_position = request.getParameter("position");
+            Integer position = Integer.parseInt(input_position);
+            BuildingsPositionHelper helper
+                    = new BuildingsPositionHelper();
+            String userName = utilities.BasicUtils.getUserName();
+            String output = helper.getAtPosition(userName, position);
+            if (output == null) {
+                out.print("nop");
+                UserManager.setBuildingPosition(userName, position);
+                System.out.println("Returning nop");
+            }
+            else {
+                out.print(output);
+                UserManager.setBuildingPosition(userName, position);
+                System.out.println("Returning " + output);
+            }
+
         } finally { 
             out.close();
         }

@@ -2,11 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package messageSystem;
 
+import ConnectionDataBase.Auctionhistory;
+import ConnectionDataBase.AuctionhistoryHelper;
+import ConnectionDataBase.AuctionhistoryId;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,15 +23,13 @@ public class Auction extends TradeOffer implements Serializable {
 
     private int highestOfferedPrice;
     private String winner;
-
-    private List<AuctionOffer> auctionOffersHistory;
+    private List<Auctionhistory> auctionOffersHistory;
     private boolean keepHistory;
-
     private Set<String> bidders;
     boolean canBidMoreThanOnce;
-
     private int auctionType;
     private int offer;
+    private AuctionhistoryHelper auctionHistoryHelper;
 
     /** Creates a new instance of AuctionMessageWriter */
     public Auction(int auctionType, boolean keepHistory, boolean canBidMoreThanOnce) {
@@ -36,19 +37,27 @@ public class Auction extends TradeOffer implements Serializable {
         this.auctionType = auctionType;
         highestOfferedPrice = 0;
         this.keepHistory = keepHistory;
-        if(keepHistory) {
-            auctionOffersHistory = new ArrayList<AuctionOffer>();
-        }
+
+        auctionHistoryHelper = new AuctionhistoryHelper();
+        auctionOffersHistory = new ArrayList<Auctionhistory>();
 
         this.canBidMoreThanOnce = canBidMoreThanOnce;
 
-        if(!canBidMoreThanOnce) {
-            bidders = new HashSet<String>();
-        }
+        bidders = new HashSet<String>();
 
     }
 
     public Auction() {
+        auctionType = 0;
+        highestOfferedPrice = 0;
+        keepHistory = true;
+        canBidMoreThanOnce = true;
+
+        auctionHistoryHelper = new AuctionhistoryHelper();
+        auctionOffersHistory = new ArrayList<Auctionhistory>();
+
+        bidders = new HashSet<String>();
+
     }
 
     public int getWinningOffer() {
@@ -91,28 +100,33 @@ public class Auction extends TradeOffer implements Serializable {
         return setHighestOfferedPrice(Integer.parseInt(price));
     }
 
-    public boolean setHighestOfferedPrice(int price) {       
-        if(!canBidMoreThanOnce() && hasAlreadyBidded(BasicUtils.getUserName())) {
+    public boolean setHighestOfferedPrice(int price) {
+
+        if(winner != null && winner.equals(BasicUtils.getUserName())) {
+            return false;
+        }
+        
+        if (!canBidMoreThanOnce() && hasAlreadyBidded(BasicUtils.getUserName())) {
             return false;
         }
 
-        if(getHighestOfferedPrice() < price) {
-            highestOfferedPrice = price;
-            winner = BasicUtils.getUserName();
+        highestOfferedPrice = price;
+        winner = BasicUtils.getUserName();
 
-            if(keepHistory()) {
-                getAuctionOffersHistory().add(new AuctionOffer(getWinner(), getHighestOfferedPrice()));
-            }
+        Auctionhistory auctionHistory = new Auctionhistory(
+                new AuctionhistoryId(getMsgnumber(),winner,price),(new Date()).getTime());
+       
+        auctionHistoryHelper.addAuctionOffer(auctionHistory);
 
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
-    public int getHighestOfferedPrice() {
-
+    public int highestOffer() {
         return highestOfferedPrice;
+    }
+
+    public String getHighestOfferedPrice() {
+        return highestOfferedPrice + "";
     }
 
     public String getWinner() {
@@ -123,34 +137,36 @@ public class Auction extends TradeOffer implements Serializable {
         this.winner = winner;
     }
 
-    public List<AuctionOffer> getAuctionOffersHistory() {
+    public List<Auctionhistory> getAuctionOffersHistory() {
         return auctionOffersHistory;
     }
-
 
     @Override
     public String encode() {
 
-        return getAuctionType() + " " +
-               getResourcesOfferedType() + "=" + getAmountOffered() + " " +
-               getResourcesWantedType() + " " +
-               getExpireDate().getTime() + "\n" +
-              (getTradeDescription() == null || getTradeDescription().isEmpty()
-                        ? "" : getTradeDescription());
-        
+        return getAuctionType() + " "
+                + getResourcesOfferedType() + "=" + getAmountOffered() + " "
+                + getResourcesWantedType() + " "
+                + getExpireDate().getTime() + "\n"
+                + (getTradeDescription() == null || getTradeDescription().isEmpty()
+                ? "" : getTradeDescription());
+
     }
 
-    @Override
-    public void parse(String encodedMessage) {
+    public Auction parseAuction(String encodedMessage) {
         ParsingPosition parsingPosition = new ParsingPosition(encodedMessage);
+        int type = getNumber(parsingPosition);
 
-        setAuctionType(getNumber(parsingPosition));
-        setResourcesOfferedType(getNumber(parsingPosition));
-        setAmountOffered(getNumber(parsingPosition));
-        setResourcesWantedType(getNumber(parsingPosition));
-        setExpireDate(getLongNumber(parsingPosition));
-     // setTradeDescription(getTradeDesrciptionText(parsingPosition));
+        Auction auction = AuctionFactory.getInstance(type);
 
+        auction.setAuctionType(type);
+        auction.setResourcesOfferedType(getNumber(parsingPosition));
+        auction.setAmountOffered(getNumber(parsingPosition));
+        auction.setResourcesWantedType(getNumber(parsingPosition));
+        auction.setExpireDate(getLongNumber(parsingPosition));
+        // setTradeDescription(getTradeDesrciptionText(parsingPosition));
+
+        return auction;
     }
 
     public void setTradeOffer(TradeOffer tradeOffer) {
@@ -163,14 +179,19 @@ public class Auction extends TradeOffer implements Serializable {
         setResourcesOfferedType(tradeOffer.getResourcesOfferedType());
         setResourcesWantedType(tradeOffer.getResourcesWantedType());
         setExpireDate(tradeOffer.getExpireDate());
-        
+
     }
 
     void finishAuction() {
         setReceiverid(getWinner());
         setAmountWanted(getWinningOffer());
 
+        auctionHistoryHelper.deleteOffers(getMsgnumber());
+
         accept();
     }
 
+    void setHighestPrice(int highestAuctionOffer) {
+        this.highestOfferedPrice = highestAuctionOffer;
+    }
 }

@@ -39,6 +39,7 @@ public class NoticeMonitor {
            tradeOffer.setSenderid(noticeOffer.getSenderid());
            tradeOffer.setSubject(noticeOffer.getSubject());
            tradeOffer.setCreationtime(noticeOffer.getCreationtime());
+           tradeOffer.setMsgnumber(noticeOffer.getMsgnumber());
 
            currentNotices.add(tradeOffer);
            listNotices.add(tradeOffer);
@@ -58,8 +59,12 @@ public class NoticeMonitor {
         currentNotices.add(noticeOffer);
         listNotices.add(noticeOffer);
 
-        messageSystemHelper.createMessage(noticeOffer.getSenderid(), MessageSingleton.NOTICE_BOARD,
-                noticeOffer.getSubject(),noticeOffer.encode(), MessageSingleton.NOTICE_BOARD_OFFER);
+        int msgNumber = messageSystemHelper.createMessage(noticeOffer.getSenderid(),
+                MessageSingleton.NOTICE_BOARD,
+                noticeOffer.getSubject(),noticeOffer.encode(), 
+                MessageSingleton.NOTICE_BOARD_OFFER);
+
+        noticeOffer.setMsgnumber(msgNumber);
     }
 
     public synchronized void update() {

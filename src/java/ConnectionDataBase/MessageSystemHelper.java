@@ -19,7 +19,7 @@ import org.hibernate.Session;
  */
 public class MessageSystemHelper extends AbstractHelper {
 
-    public void createMessage(String SenderID, String ReceiverID, String subject, String text, int messageType) {
+    public int createMessage(String SenderID, String ReceiverID, String subject, String text, int messageType) {
 
         Messagesystem msg = new Messagesystem();
 
@@ -40,6 +40,8 @@ public class MessageSystemHelper extends AbstractHelper {
         commitTransaction(session);
 
         UserManager.notifyUserAboutMessage(ReceiverID);
+
+        return msg.getMsgnumber();
 
     }
 

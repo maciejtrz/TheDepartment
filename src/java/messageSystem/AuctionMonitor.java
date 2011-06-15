@@ -4,6 +4,7 @@
  */
 package messageSystem;
 
+import ConnectionDataBase.AuctionhistoryHelper;
 import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import java.util.ArrayList;
@@ -37,15 +38,21 @@ public class AuctionMonitor {
             Messagesystem auctionOffer = iterator.next();
 
             Auction auction = new Auction();
-            auction.parse(auctionOffer.getMsg());
+            auction = auction.parseAuction(auctionOffer.getMsg());
+            
             auction.setMsgnumber(auctionOffer.getMsgnumber());
 
             if (auction.getExpireDate().compareTo(currentDate) <= 0) {
                 auctionsToRemove.add(auction);
             } else {
+                auction.setMsgnumber(auctionOffer.getMsgnumber());
                 auction.setSenderid(auctionOffer.getSenderid());
                 auction.setSubject(auctionOffer.getSubject());
                 auction.setCreationtime(auctionOffer.getCreationtime());
+                
+                AuctionhistoryHelper auctionhistoryHelper = new AuctionhistoryHelper();
+                auction.setHighestPrice(auctionhistoryHelper.
+                        getHighestAuctionOffer(auction.getMsgnumber()));
 
                 currentAuctions.add(auction);
                 listAuction.add(auction);
@@ -57,7 +64,7 @@ public class AuctionMonitor {
             Auction auction = auctionIterator.next();
             messageSystemHelper.deleteMsg(auction.getMsgnumber());
 
-            //auction.finishAuction();
+            auction.finishAuction();
         }
     }
 
@@ -65,8 +72,11 @@ public class AuctionMonitor {
         currentAuctions.add(auction);
         listAuction.add(auction);
 
-        messageSystemHelper.createMessage(auction.getSenderid(), MessageSingleton.AUCTION_BOARD, auction.getSubject(),
+        int msgNumber = messageSystemHelper.createMessage(auction.getSenderid(),
+                MessageSingleton.AUCTION_BOARD, auction.getSubject(),
                 auction.encode(), MessageSingleton.AUCTION_OFFER);
+
+        auction.setMsgnumber(msgNumber);
     }
 
     public synchronized void update() {

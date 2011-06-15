@@ -1,5 +1,6 @@
 package messageSystem;
 
+import ConnectionDataBase.Auctionhistory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
           return OffersSuperviser.getAuctionMonitor().getAuctionList();
     }
 
-    public List<AuctionOffer> getOffersHistory(Auction auction) {
-        List<AuctionOffer> offersHistory = new ArrayList<AuctionOffer>();
+    public List<Auctionhistory> getOffersHistory(Auction auction) {
+        List<Auctionhistory> offersHistory = new ArrayList<Auctionhistory>();
 
         return offersHistory;
     }

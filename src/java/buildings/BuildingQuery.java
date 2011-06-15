@@ -33,7 +33,7 @@ public class BuildingQuery extends HttpServlet {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         try {
-            System.out.println("I was called here.");
+
             String input_position = request.getParameter("position");
             Integer position = Integer.parseInt(input_position);
             BuildingsPositionHelper helper
@@ -41,7 +41,10 @@ public class BuildingQuery extends HttpServlet {
             
             String userName 
                = request.getSession().getAttribute(ConnectionSingleton.idname).toString();
-            System.out.println("The user name is! " + userName);
+
+            BuildingFactory factory = new BuildingFactory();
+            factory.getMacChicken().remove(userName, 5);
+            factory.getTresco().remove(userName, 4);
             String output = helper.getAtPosition(userName, position);
             if ( output == null) {
                 out.print("nop");
@@ -50,7 +53,6 @@ public class BuildingQuery extends HttpServlet {
             else {
                 out.print(output);
             }
-            System.out.println("Returning: " + output);
             UserManager.setBuildingPosition(userName, position);
 
         } finally { 

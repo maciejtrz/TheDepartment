@@ -30,7 +30,7 @@ public abstract class Building {
     public static final String CODE_LABS = "lb1";
     public static final String CODE_SUPERLABS = "sb1";
     public static final String CODE_BRAIN = "br1";
-    public static final String CODE_BOB = "bs1";
+    public static final String CODE_BOB = "qt1";
     public static final String CODE_UNION = "su1";
 
     /* Initial values. */

@@ -206,11 +206,11 @@
             <h:form>
 
                 <h:outputText value="Choose building: "/>
-                <h:selectManyListbox value="#{buildingbean.selectedNumber}">
+                <h:selectOneListbox value="#{buildingbean.selectedBuilding}">
                     <f:selectItems value="#{buildingbean.playersBuildings}"/>
-                </h:selectManyListbox>
+                </h:selectOneListbox>
 
-                <p:commandButton value="Submit" action="#{buildingbean.submit}"/>
+                <p:commandButton value="Submit" action="#{buildingbean.selectedBuilding.build}"/>
             </h:form>
 
         </p:dialog>

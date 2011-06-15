@@ -24,39 +24,39 @@ public class BuildingsUtils {
 
         BuildingFactory factory = new BuildingFactory();
 
-        if (isLabBuilt(playerName)) {
+        if (!isLabBuilt(playerName)) {
             buildings.add(factory.getLabs());
         }
 
-        if (isBrainBuilt(playerName)) {
+        if (!isBrainBuilt(playerName)) {
             buildings.add(factory.getBrain());
         }
 
-        if (isDocPubBuilt(playerName)) {
+        if (!isDocPubBuilt(playerName)) {
             buildings.add(factory.getPub());
         }
 
-        if (isLecturerRoomBuilt(playerName)) {
+        if (!isLecturerRoomBuilt(playerName)) {
             buildings.add(factory.getLecturerRoom());
         }
 
-        if (isMacChickenBuilt(playerName)) {
+        if (!isMacChickenBuilt(playerName)) {
             buildings.add(factory.getMacChicken());
         }
 
-        if (isPhdOfficeBuilt(playerName)) {
+        if (!isPhdOfficeBuilt(playerName)) {
             buildings.add(factory.getPdhOffice());
         }
 
-        if (isProfessorsOfficeBuilt(playerName)) {
+        if (!isProfessorsOfficeBuilt(playerName)) {
             buildings.add(factory.getProfOffice());
         }
 
-        if (isStudentUnionBuilt(playerName)) {
+        if (!isStudentUnionBuilt(playerName)) {
             buildings.add(factory.getStudentUnion());
         }
 
-        if (isTrescoBuilt(playerName)) {
+        if (!isTrescoBuilt(playerName)) {
             buildings.add(factory.getTresco());
         }
 

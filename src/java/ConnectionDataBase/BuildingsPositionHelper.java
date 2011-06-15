@@ -4,6 +4,7 @@
  */
 package ConnectionDataBase;
 
+import buildings.Building;
 import java.util.Random;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,8 +22,8 @@ public class BuildingsPositionHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         Buildingsposition buildingspos = new Buildingsposition(idname);
         //Random rand = new Random();
-        buildingspos.setPos(1, "bm1");
-        buildingspos.setPos(2, "bs1");
+        buildingspos.setPos(1, Building.CODE_BLACK_MARKET);
+        buildingspos.setPos(2, Building.CODE_BOB);
         session.save(buildingspos);
         commitTransaction(session);
     }

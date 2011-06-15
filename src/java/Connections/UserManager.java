@@ -320,5 +320,9 @@ public class UserManager {
         getUser(username).setBuildingPosition(position);
     }
 
+    public static int getBuilidngPosition(String username) {
+        return getUser(username).getBuildingPosition();
+    }
+
 
 }

@@ -1,13 +1,3 @@
-function results(form) {
-  build("p"+form.place.value, form.btype.value);
-}
-
-// form value manipulation
-function changeSite(poly) {
-  no=getNumber(poly);
-  document.getElementById("place").value=no;
-}
-
 function build(site, building) {
   document.getElementById(site).src="img/" + building + ".png";
 }

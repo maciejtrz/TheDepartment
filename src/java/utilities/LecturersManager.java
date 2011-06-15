@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import namesGenerator.NamesGenerator;
+import nameGenerator.NamesGenerator;
 import specializationsGenerator.SpecializationsGenerator;
 
 

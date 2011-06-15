@@ -199,22 +199,10 @@
 
         </p:dialog>
 
-        <p:dialog header="This is Madness!" widgetVar="sparta" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
 
-                -Madness?
-                <br></br>
-                <a href="http://www.youtube.com/watch?v=rvYZRskNV3w">
-                    THIS IS SPARTA!
-                </a>
-
-            </p:panel>
-
-        </p:dialog>
-
-        <p:dialog header="Building Shop" widgetVar="subtest" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+        <p:dialog header="Building Site" widgetVar="nop" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false"
+                  onHide="refreshAll()">
             <h:form>
 
                 <h:outputText value="Choose building: "/>

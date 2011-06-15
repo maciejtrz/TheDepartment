@@ -21,19 +21,27 @@ function getNumber(poly) {
 function queryServer(position,fn)
 {
   $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
-      fn(position,data);
+      fn(position, data);
   });
 }
 
-function refreshAll () {
+function refreshAll() {
   for (i=1;i<=16;i++) {
   queryServer(i, refresh);
   }
-
 }
 
-function refresh (position, building) {
-  alert("at position " + position + " building is " + building);
+function refresh(position, building) {
+  build ("p"+position, building);
+}
+
+function clickSite(poly) {
+  no=getNumber(poly);
+  queryServer(no,dialog);
+}
+
+function dialog(position, building) {
+  eval(building + ".show()");
 }
 
 function over(poly) {

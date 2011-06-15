@@ -17,14 +17,23 @@ function getNumber(poly) {
   return poly.getAttribute("no");
 }
 
-
-
 // AJAX function
-function queryServer(position,func)
+function queryServer(position,fn)
 {
-   $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
-       func(data);
-   });
+  $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
+      fn(position,data);
+  });
+}
+
+function refreshAll () {
+  for (i=1;i<=16;i++) {
+  queryServer(i, refresh);
+  }
+
+}
+
+function refresh (position, building) {
+  alert("at position " + position + " building is " + building);
 }
 
 function over(poly) {

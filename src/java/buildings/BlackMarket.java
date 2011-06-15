@@ -34,5 +34,17 @@ public class BlackMarket extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Black Market");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BLACK_MARKET);
+    }
+
+
+
 
 }

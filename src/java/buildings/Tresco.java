@@ -122,4 +122,14 @@ public class Tresco extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Tresco");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_TRESCO);
+    }
 }

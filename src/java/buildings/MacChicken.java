@@ -129,4 +129,15 @@ public class MacChicken extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("MacChicken");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_MAC_CHICKEN_1);
+    }
+
 }

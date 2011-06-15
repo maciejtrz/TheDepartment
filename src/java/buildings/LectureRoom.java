@@ -175,5 +175,16 @@ public class LectureRoom extends Building {
         return true;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Lecturer Room");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LEVELS
+        return (this.CODE_LECTURER_ROOM_1);
+    }
+
 
 }

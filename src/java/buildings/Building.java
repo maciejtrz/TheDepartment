@@ -67,6 +67,10 @@ public abstract class Building {
     /* Informs whether a given player is allowed to build anything on
        a free position. */
 
+    public abstract String getInfo();
+
+    public abstract String getPicture();
+
 
     protected boolean checkMoneyAndPosition (String playerName, int position) {
         BuildingsPositionHelper posHelper
@@ -127,6 +131,5 @@ public abstract class Building {
         return (occupant != null && occupant.equals(buildingAcronym));
 
     }
-
 
 }

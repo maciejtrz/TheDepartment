@@ -173,4 +173,15 @@ public class ProfessorsOffice extends Building {
 
         return true;
     }
+
+    @Override
+    public String getInfo() {
+        return ("ProfessorsOffice");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_PROF_OFFICE_1);
+    }
 }

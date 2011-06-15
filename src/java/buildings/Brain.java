@@ -134,4 +134,13 @@ public class Brain extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("BrAiN");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BRAIN);
+    }
 }

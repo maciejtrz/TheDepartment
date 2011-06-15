@@ -118,4 +118,14 @@ public class StudentUnion extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Student Union");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_UNION);
+    }
+
 }

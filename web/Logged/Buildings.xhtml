@@ -204,15 +204,27 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false"
                   onHide="refreshAll()">
             <h:form>
+            <p:carousel value="#{buildingbean.playersBuildings}" var="building"
+                        rows="1" itemStyle="height:400px;width:600px;" effect="easeInStrong">
+                <p:column>
+                <h:panelGrid columns="2" style="width:100% ; height:100%">
 
-                <h:outputText value="Choose building: "/>
-                <h:selectOneListbox value="#{buildingbean.selectedBuilding}">
-                    <f:selectItems value="#{buildingbean.playersBuildings}"/>
-                </h:selectOneListbox>
+                    <p:graphicImage value="/Logged/img/#{building.picture}.png"/>
 
-                <p:commandButton value="Submit" action="#{buildingbean.selectedBuilding.build}"/>
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputText value="Name: #{building.info}" />
+                        <h:outputText value="Price: #{building.cost}" />
+                        <h:commandButton action="#{buildingbean.submit}" value="Submit">
+                            <f:setPropertyActionListener target="#{buildingbean.doSelect}"
+                                                         value="abrakadabra" />
+                        </h:commandButton>
+                    </h:panelGrid>
+
+
+                </h:panelGrid>
+                </p:column>
+            </p:carousel>
             </h:form>
-
         </p:dialog>
 
 

@@ -180,5 +180,15 @@ public class PhdOffice extends Building {
     }
 
 
+    @Override
+    public String getInfo() {
+        return ("PhDOffice");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_PHD_OFFICE_1);
+    }
 
 }

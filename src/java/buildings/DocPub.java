@@ -146,4 +146,14 @@ public class DocPub extends Building {
     public boolean upgrade(String playerName, int position) {
         return false;
     }
+
+    @Override
+    public String getInfo() {
+        return ("DocPub");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_DOCPUB);
+    }
 }

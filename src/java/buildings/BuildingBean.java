@@ -6,7 +6,10 @@
 package buildings;
 
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.List;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import utilities.BasicUtils;
 import utilities.BuildingsUtils;
 
@@ -15,44 +18,46 @@ import utilities.BuildingsUtils;
  *
  * @author pk2109
  */
-public class BuildingBean {
+public class BuildingBean implements Serializable {
 
 
     private Building selectedBuilding;
-    private List<Building> playersBuildings;
-    private BuildingsUtils bs;
-
+    private DataModel playersBuildings;
 
     /** Creates a new instance of buildingBean */
     public BuildingBean() {
-        this.bs = new BuildingsUtils();
+        BuildingsUtils utils = new BuildingsUtils();
+        String playerName = utilities.BasicUtils.getUserName();
+        playersBuildings
+                = new ListDataModel(utils.getAvailableBuildings(playerName));
 
     }
 
-    public List<Building> getPlayersBuildings(){
+    public DataModel getPlayersBuildings(){
 
-        setPlayersBuildings(bs.getAvailableBuildings(BasicUtils.getUserName()));
-        return this.playersBuildings;
+        return playersBuildings;
     }
 
-    public void setPlayersBuildings(List<Building> l){
-        this.playersBuildings=l;
-    }
-
-    public Building getSelectedBuilding(){
-        return this.selectedBuilding;
-    }
-
-    public void setSelectedBuilding(Building building){
-        this.selectedBuilding = building;
+    public void doSelect(String s) {
+        System.out.println(s);
+        selectedBuilding = (Building)playersBuildings.getRowData();
+        System.out.println(selectedBuilding.getInfo());
     }
 
     public void submit(){
+        if (selectedBuilding == null) {
+            System.out.println("Its null :(");
+        }
+        else
+            System.out.println("Submit called for selected building"
+                    + selectedBuilding.getInfo());
         String playerName = utilities.BasicUtils.getUserName();
         int position = UserManager.getBuilidngPosition(playerName);
-        selectedBuilding.build(playerName, position);
+        //selectedBuilding.build(playerName, position);
         
     }
+
+    
 
 
 }

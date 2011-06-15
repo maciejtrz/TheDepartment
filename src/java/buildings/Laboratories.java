@@ -176,4 +176,15 @@ public class Laboratories  extends Building {
         return cur_level * upgrade_base_cost;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Labs");
+    }
+
+    @Override
+    public String getPicture() {
+        //TODO Change code on superlabs!
+        return (this.CODE_LABS);
+    }
+
 }

@@ -31,4 +31,14 @@ public class BobTheBuilder extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Queens tower");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BOB);
+    }
+
 }

@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import utilities.BasicUtils;
@@ -183,15 +184,28 @@ public class Auction extends TradeOffer implements Serializable {
     }
 
     void finishAuction() {
-        setReceiverid(getWinner());
-        setAmountWanted(getWinningOffer());
 
-        auctionHistoryHelper.deleteOffers(getMsgnumber());
+            Iterator<Auctionhistory> iterator =
+                    auctionHistoryHelper.getAuctionOffers(getMsgnumber()).iterator();
 
-        accept();
+            boolean auctionExecuted = false;
+
+            while(iterator.hasNext() && !auctionExecuted) {
+                Auctionhistory auctionOffer = iterator.next();
+
+                setReceiverid(auctionOffer.getId().getBidder());
+                setAmountWanted(auctionOffer.getId().getOffer());
+
+                auctionExecuted = accept();
+            }
+
+
+            auctionHistoryHelper.deleteOffers(getMsgnumber());
+
+        
     }
 
-    void setHighestPrice(int highestAuctionOffer) {
+    public void setHighestPrice(int highestAuctionOffer) {
         this.highestOfferedPrice = highestAuctionOffer;
     }
 }

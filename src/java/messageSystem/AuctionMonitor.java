@@ -24,6 +24,7 @@ public class AuctionMonitor {
     private PriorityQueue<Auction> currentAuctions = new PriorityQueue<Auction>();
     private List<Auction> listAuction = new ArrayList<Auction>();
     private MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+    private AuctionhistoryHelper auctionHistoryHelper = new AuctionhistoryHelper();
 
     public AuctionMonitor() {
         List<Messagesystem> auctionsDb =
@@ -39,21 +40,18 @@ public class AuctionMonitor {
 
             Auction auction = new Auction();
             auction = auction.parseAuction(auctionOffer.getMsg());
-            
+
             auction.setMsgnumber(auctionOffer.getMsgnumber());
+            auction.setSenderid(auctionOffer.getSenderid());
+            auction.setSubject(auctionOffer.getSubject());
+            auction.setCreationtime(auctionOffer.getCreationtime());
+
+            AuctionhistoryHelper auctionhistoryHelper = new AuctionhistoryHelper();
+            auctionhistoryHelper.getHighestAuctionOffer(auction.getMsgnumber(),auction);
 
             if (auction.getExpireDate().compareTo(currentDate) <= 0) {
                 auctionsToRemove.add(auction);
             } else {
-                auction.setMsgnumber(auctionOffer.getMsgnumber());
-                auction.setSenderid(auctionOffer.getSenderid());
-                auction.setSubject(auctionOffer.getSubject());
-                auction.setCreationtime(auctionOffer.getCreationtime());
-                
-                AuctionhistoryHelper auctionhistoryHelper = new AuctionhistoryHelper();
-                auction.setHighestPrice(auctionhistoryHelper.
-                        getHighestAuctionOffer(auction.getMsgnumber()));
-
                 currentAuctions.add(auction);
                 listAuction.add(auction);
             }
@@ -62,7 +60,9 @@ public class AuctionMonitor {
         Iterator<Auction> auctionIterator = auctionsToRemove.iterator();
         while (iterator.hasNext()) {
             Auction auction = auctionIterator.next();
+
             messageSystemHelper.deleteMsg(auction.getMsgnumber());
+            auctionHistoryHelper.deleteOffers(auction.getMsgnumber());
 
             auction.finishAuction();
         }
@@ -90,7 +90,7 @@ public class AuctionMonitor {
 
                 messageSystemHelper.deleteMsg(auction.getMsgnumber());
 
-                //auction.finishAuction();
+                auction.finishAuction();
             } else {
                 return;
             }

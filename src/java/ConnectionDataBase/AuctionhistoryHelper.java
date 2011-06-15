@@ -8,6 +8,7 @@ package ConnectionDataBase;
 
 import java.util.Iterator;
 import java.util.List;
+import messageSystem.Auction;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -23,13 +24,11 @@ public class AuctionhistoryHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
-    public int getHighestAuctionOffer(int auctionNumber) {
+    public int getHighestAuctionOffer(int auctionNumber, Auction auction) {
         Session session = createNewSessionAndTransaction();
 
         String query = "from Auctionhistory where "
                 + "auctionId = " + auctionNumber + " order by offer desc";
-
-        System.out.println("Query for db: " + query);
 
         Query q = session.createQuery(query);
 
@@ -44,7 +43,10 @@ public class AuctionhistoryHelper extends AbstractHelper {
             result = 0;
         else {
             result = auctionHistoryOffer.get(0).getId().getOffer();
+            auction.setWinner(auctionHistoryOffer.get(0).getId().getBidder());
         }
+        auction.setHighestPrice(result);
+        
         return result;
     }
 
@@ -52,7 +54,7 @@ public class AuctionhistoryHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
 
         Query q = session.createQuery("from Auctionhistory where "
-                + "auctionId = " + auctionNumber + " ORDER BY offer");
+                + "auctionId = " + auctionNumber);
 
         Iterator<Auctionhistory> iterator = q.list().iterator();
         while(iterator.hasNext()) {
@@ -61,6 +63,21 @@ public class AuctionhistoryHelper extends AbstractHelper {
         }
 
         commitTransaction(session);
+    }
+
+    public List<Auctionhistory> getAuctionOffers(int auctionNumber) {
+        Session session = createNewSessionAndTransaction();
+
+        String query = "from Auctionhistory where "
+                + "auctionId = " + auctionNumber + " order by offer desc";
+
+        Query q = session.createQuery(query);
+
+
+        List<Auctionhistory> list = q.list();
+        session.close();
+
+        return list;
     }
 
 }

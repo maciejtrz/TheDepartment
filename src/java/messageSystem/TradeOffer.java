@@ -197,6 +197,8 @@ public class TradeOffer extends Messagesystem implements Serializable, Comparabl
         System.out.println("Accepting...");
         System.out.println("Sender: " + getSenderid());
         System.out.println("Receiver: " + getReceiverid());
+        System.out.println("Wanted " + getResourcesWantedName() + " amount " + getAmountWanted());
+        System.out.println("Offered " + getResourcesOfferedName() + " amount " + getAmountOffered());
 
         boolean result = UserManager.makeTrade(this);
 

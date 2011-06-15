@@ -20,8 +20,13 @@ import resources.ResourcesType;
 public class UserManager {
 
     /* Set of all user currently having sessions */
-    private static Map<String,Auth> sessionMap = new HashMap<String,Auth>();
-    private static Map<String,ResearchBag> sessionResearchBag = new HashMap<String,ResearchBag>();
+    private static Map<String,Auth> sessionMap;
+    private static Map<String,ResearchBag> sessionResearchBag;
+
+    static {
+       sessionMap = new HashMap<String,Auth>();
+       sessionResearchBag = new HashMap<String,ResearchBag>();
+    }
 
     public static boolean containsResearchBag(String username) {
         return sessionResearchBag.containsKey(username);
@@ -317,7 +322,8 @@ public class UserManager {
     }
 
     public static void setBuildingPosition(String username, int position) {
-        getUser(username).setBuildingPosition(position);
+        if(username != null && isUserMonitored(username))
+            getUser(username).setBuildingPosition(position);
     }
 
     public static int getBuilidngPosition(String username) {

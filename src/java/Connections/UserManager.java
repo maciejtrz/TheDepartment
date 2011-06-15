@@ -90,7 +90,9 @@ public class UserManager {
     static public void removeResearchBag(String username) {
         System.out.println("Is user monitored: " + isUserMonitored(username));
        // System.out.println("Are all researches finished: " + )
-        if(!isUserMonitored(username) && getResearchBag(username).getResearches().isEmpty()) {
+
+        if(!isUserMonitored(username) && getResearchBag(username) != null 
+               && getResearchBag(username).getResearches().isEmpty() ) {
 
             ResearchBag researchBag = getResearchBag(username);
             ResearchHelper researchHelper = new ResearchHelper();

@@ -15,11 +15,17 @@ and open the template in the editor.
         <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
         <script type="text/javascript" src="map.js"></script>
+        <script type="text/javascript" src="jquery-1-6-1.js"></script>
         <p:resources/>
     </h:head>
 
+
     <body>
 
+     <script type="text/javascript">
+
+        $.post("TheDepartment/MyServlet", {"hej": "jaksiemasz"}, function(data){})
+    </script>
         <ui:include src="Map.xhtml"/>
 
         <h:form>

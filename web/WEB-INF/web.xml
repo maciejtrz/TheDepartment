@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
-   <context-param>
+    <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>redmond</param-value>
     </context-param>
-    
     <filter>
         <filter-name>loggedFilter</filter-name>
         <filter-class>Filters.LoggedFilter</filter-class>
     </filter>
-
     <filter>
         <filter-name>unloggedFilter</filter-name>
         <filter-class>Filters.UnloggedFilter</filter-class>
     </filter>
-
     <filter>
         <filter-name>departmentFilter</filter-name>
         <filter-class>Filters.PlayingFilter</filter-class>
     </filter>
-    
     <filter-mapping>
         <filter-name>loggedFilter</filter-name>
         <url-pattern>/faces/Logged/*</url-pattern>
@@ -34,7 +28,6 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-
     <filter-mapping>
         <filter-name>unloggedFilter</filter-name>
         <url-pattern>/faces/Unlogged/*</url-pattern>
@@ -43,7 +36,6 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-
     <filter-mapping>
         <filter-name>departmentFilter</filter-name>
         <url-pattern>/faces/Logged/*</url-pattern>
@@ -52,34 +44,43 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
     <listener>
         <listener-class>Connections.SessionCleaner</listener-class>
     </listener>
-
     <listener>
         <listener-class>Connections.ApplicationContextInitializer</listener-class>
     </listener>
-    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
+    <servlet>
+        <servlet-name>QueryBuilding</servlet-name>
+        <servlet-class>QueryBuilding</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuildingQuery</servlet-name>
+        <servlet-class>buildings.BuildingQuery</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>QueryBuilding</servlet-name>
+        <url-pattern>/QueryBuilding</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuildingQuery</servlet-name>
+        <url-pattern>/Logged/BuildingQuery</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>faces/Unlogged/index.xhtml</welcome-file>
     </welcome-file-list>
-    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>securedapp</web-resource-name>
@@ -89,5 +90,4 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-
-  </web-app>
+</web-app>

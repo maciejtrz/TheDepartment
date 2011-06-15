@@ -78,8 +78,6 @@ public class AuctionMonitor {
                 currentAuctions.remove(auction);
                 listAuction.remove(auction);
 
-                System.out.println("Removing auction...");
-
                 messageSystemHelper.deleteMsg(auction.getMsgnumber());
 
                 //auction.finishAuction();

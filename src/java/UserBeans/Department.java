@@ -12,6 +12,7 @@ import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.DepartmentinfoHelper;
 import ConnectionDataBase.EventsHelper;
 import ConnectionDataBase.ExtrastatsHelper;
+import ConnectionDataBase.LecturersOwnedHelper;
 import Connections.ConnectionSingleton;
 import events.LotteryManager;
 import java.io.Serializable;
@@ -63,14 +64,18 @@ public class Department implements Serializable {
                 = new BuildingsPositionHelper();
         positionHelper.deleteBuildingsPosition(username);
 
-        // 
 
-        // Deleting lecturers info.
+        // Deleting lecturers onwed info.
+        LecturersOwnedHelper ownedHelper
+                = new LecturersOwnedHelper();
+        ownedHelper.deleteLecturer(username);
+
+        // Deleting research
         // TODO
 
-
-        // Deleting students info.
-        // TODO
+        // Deleting events.
+        EventsHelper eventHelper = new EventsHelper();
+        eventHelper.deleteEvents(username);
 
         // Deleting extra stats
         ExtrastatsHelper extrasHelper

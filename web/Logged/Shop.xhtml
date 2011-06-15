@@ -17,15 +17,17 @@
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="Name: #{naukowiec.name}" />
                         <h:outputText value="Price: #{naukowiec.price}" />
-                        <p:dataList value="#{naukowiec.specializations}" var="benefit" itemType="disc">
-                            {benefit.field}, {benefit.boost}
-                        </p:dataList>
+                        <h:outputText value="" />
+                        <h:outputText value="Buy me!:" />
+                        <p:graphicImage width="40" height="40" value="/images/big-tick.jpg"/>
                     </h:panelGrid>
+
 
                 </h:panelGrid>
             </p:carousel>
 
         </p:dialog>
+
 
         <p:dialog header="Buy PhDs" widgetVar="buyphd" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >

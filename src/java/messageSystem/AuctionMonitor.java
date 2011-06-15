@@ -9,6 +9,7 @@ import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -26,7 +27,21 @@ public class AuctionMonitor {
         List<Messagesystem> auctionsDb =
                 messageSystemHelper.getMessages(MessageSingleton.AUCTION_BOARD, MessageSingleton.AUCTION_OFFER);
 
-     //   Iterator<Messagesystem>
+       Iterator<Messagesystem> iterator = auctionsDb.iterator();
+
+       while(iterator.hasNext()) {
+           Messagesystem auctionOffer = iterator.next();
+
+           Auction auction = new Auction();
+           auction.parse(auctionOffer.getMsg());
+           auction.setSenderid(auctionOffer.getSenderid());
+           auction.setSubject(auctionOffer.getSubject());
+           auction.setCreationtime(auctionOffer.getCreationtime());
+
+           currentAuctions.add(auction);
+           listAuction.add(auction);
+
+       }
     }
 
     public synchronized void addAuction(Auction auction) {
@@ -35,7 +50,6 @@ public class AuctionMonitor {
 
         messageSystemHelper.createMessage(auction.getSenderid(),MessageSingleton.AUCTION_BOARD,auction.getSubject(),
             auction.encode(),MessageSingleton.AUCTION_OFFER);
-
     }
 
     public synchronized void update() {
@@ -46,9 +60,10 @@ public class AuctionMonitor {
             if(auction.getExpireDate().compareTo(currentDate) >= 0) {
                 currentAuctions.poll();
                 listAuction.remove(auction);
-                auction.finishAuction();
+
+                //auction.finishAuction();
             } else {
-                break;
+                return;
             }
         }
     }
@@ -58,11 +73,8 @@ public class AuctionMonitor {
     }
 
     public boolean placeOffer(Auction auction, int offer) {
-        auction.setOffer(offer);
+        auction.setHighestOfferedPrice(offer);
         return true;
     }
-
-
-
 
 }

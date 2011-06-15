@@ -269,6 +269,11 @@ public class UserManager {
         Playerresources senResources = getResources(tradeOffer.getSenderid());
         Playerresources recResources = getResources(tradeOffer.getReceiverid());
 
+        System.out.println("Sender: " + tradeOffer.getSenderid());
+        System.out.println("Receiver: " + tradeOffer.getReceiverid());
+        System.out.println("senRersources null: " + (senResources == null));
+        System.out.println("recRersources null: " + (recResources == null));
+
         Resource resourceOffered = ResourcesType.getResourcesElement(tradeOffer.getResourcesOfferedType());
         Resource resourceWanted = ResourcesType.getResourcesElement(tradeOffer.getResourcesWantedType());
 

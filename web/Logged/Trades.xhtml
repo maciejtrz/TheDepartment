@@ -151,7 +151,6 @@
 
             <h:form>
 
-
                 <br/>
                 <h:outputText value="Title of the trade: "/>
                 <h:inputText value="#{noticeMessageWriter.subject}" />
@@ -209,6 +208,10 @@
 
                     <p:column headerText="Resources wanted: ">
                         <h:outputText value="#{auction.resourcesWantedName}"/>
+                    </p:column>
+
+                    <p:column headerText="Highest offer: ">
+                        <h:outputText value="#{auction.highestOfferedPrice}"/>
                     </p:column>
 
                     <p:column headerText="Action: ">

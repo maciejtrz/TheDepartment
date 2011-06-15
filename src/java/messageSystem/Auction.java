@@ -91,8 +91,7 @@ public class Auction extends TradeOffer implements Serializable {
         return setHighestOfferedPrice(Integer.parseInt(price));
     }
 
-    public boolean setHighestOfferedPrice(int price) {
-
+    public boolean setHighestOfferedPrice(int price) {       
         if(!canBidMoreThanOnce() && hasAlreadyBidded(BasicUtils.getUserName())) {
             return false;
         }
@@ -112,6 +111,7 @@ public class Auction extends TradeOffer implements Serializable {
     }
 
     public int getHighestOfferedPrice() {
+
         return highestOfferedPrice;
     }
 

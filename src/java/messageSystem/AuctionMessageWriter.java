@@ -1,10 +1,10 @@
 package messageSystem;
 
-import ConnectionDataBase.MessageSystemHelper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
+import utilities.BasicUtils;
 
 public class AuctionMessageWriter extends TradeWriter implements Serializable {
 
@@ -24,6 +24,8 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
     public AuctionMessageWriter() {
         super(MessageSingleton.AUCTION_OFFER);
 
+        auction = new Auction();
+        getAuction().setSenderid(BasicUtils.getUserName());
         selectedAuctionType = 0;
     }
 
@@ -52,9 +54,9 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
 
     public void sendAuction() {
         getAuction().setTradeOffer(getTradeOffer());
-
-        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
-
+        getAuction().setSenderid(BasicUtils.getUserName());
+        
+        OffersSuperviser.getAuctionMonitor().addAuction(getAuction());
     }
 
 }

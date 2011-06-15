@@ -97,6 +97,10 @@ and open the template in the editor.
                     <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
                 </p:submenu>
 
+                <p:submenu label="TEST">
+                    <p:menuitem value="BUILDINGS" onclick="test.show()"/>
+                </p:submenu>
+
             </p:menu>
         </h:form>
 
@@ -107,6 +111,7 @@ and open the template in the editor.
         <ui:include src="Researches.xhtml"/>
         <ui:include src="Shop.xhtml"/>
         <ui:include src="Rankings.xhtml"/>
+        <ui:include src="dieBauten.xhtml"/>
 
     </body>
 </html>

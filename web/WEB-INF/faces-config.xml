@@ -246,7 +246,13 @@
         <managed-bean-class>utilities.MapPositionBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>buildingbean</managed-bean-name>
+        <managed-bean-class>buildings.buildingBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
+
 
 
 

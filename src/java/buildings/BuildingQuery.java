@@ -6,6 +6,7 @@
 package buildings;
 
 import ConnectionDataBase.BuildingsPositionHelper;
+import Connections.ConnectionSingleton;
 import Connections.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +39,9 @@ public class BuildingQuery extends HttpServlet {
             BuildingsPositionHelper helper
                     = new BuildingsPositionHelper();
             
-            String userName = utilities.BasicUtils.getUserName();
+            String userName 
+               = request.getSession().getAttribute(ConnectionSingleton.idname).toString();
+            System.out.println("The user name is! " + userName);
             String output = helper.getAtPosition(userName, position);
             if ( output == null) {
                 out.print("nop");

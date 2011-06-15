@@ -27,6 +27,7 @@ public class AuctionSuperviser implements Runnable{
 
     public void run() {
         while(true) {
+
             try {
                 Thread.sleep(SLEEPING_INTERVAL);
             } catch (InterruptedException ex) {
@@ -34,6 +35,7 @@ public class AuctionSuperviser implements Runnable{
             } finally {
                 getAuctionMonitor().update();
             }
+            
         }
 
     }

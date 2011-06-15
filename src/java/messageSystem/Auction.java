@@ -149,7 +149,7 @@ public class Auction extends TradeOffer implements Serializable {
         setAmountOffered(getNumber(parsingPosition));
         setResourcesWantedType(getNumber(parsingPosition));
         setExpireDate(getLongNumber(parsingPosition));
-        setTradeDescription(getTradeDesrciptionText(parsingPosition));
+     // setTradeDescription(getTradeDesrciptionText(parsingPosition));
 
     }
 

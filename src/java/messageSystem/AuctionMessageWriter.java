@@ -54,8 +54,6 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
         getAuction().setTradeOffer(getTradeOffer());
 
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
-        messageSystemHelper.createMessage(getUsername(),MessageSingleton.AUCTION_BOARD,getSubject(),
-                getAuction().encode(),getMessageType());
 
     }
 

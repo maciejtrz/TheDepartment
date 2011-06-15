@@ -34,7 +34,6 @@ public class ResearchDevelopment {
         Iterator<Researchcatalogue> iterator = list.iterator();
         while(iterator.hasNext()) {
             Researchcatalogue rc = iterator.next();
-            System.out.println("Title: " + rc.getResearchname() + " position: " + (rc.getResearchid()));
             researchNodes[rc.getResearchid()] =
                     new ResearchTreeNode(rc);
         }
@@ -50,8 +49,7 @@ public class ResearchDevelopment {
 
             if(dependencies.isEmpty()) {
                 /* Initially available researches */
-                System.out.println("Adding research at subject: " + getSubject(researchcatalogue) +
-                        " at position: " + researchcatalogue.getSubjectid());
+
                 
                 researchTree.getResearchTreeNode(researchcatalogue.getSubjectid()).
                         addResearchTreeNode(researchNodes[researchcatalogue.getResearchid()]);
@@ -64,8 +62,6 @@ public class ResearchDevelopment {
                 while(iter.hasNext()) {
                     ResearchdependenciesId dependencyId = iter.next().getId();
 
-                    System.out.println(researchcatalogue.getResearchid() + " depends on " +
-                            dependencyId.getChildresearchid());
                     
                     researchNodes[dependencyId.getParentresearchid()].
                             addResearchTreeNode(researchNodes[dependencyId.getChildresearchid()]);

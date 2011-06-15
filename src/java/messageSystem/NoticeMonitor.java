@@ -90,8 +90,6 @@ public class NoticeMonitor {
 
     public boolean acceptNoticeOffer(TradeOffer noticeOffer) {
 
-        System.out.println("Accepting notce offer...");
-
         if(!currentNotices.contains(noticeOffer))
             return false;
         

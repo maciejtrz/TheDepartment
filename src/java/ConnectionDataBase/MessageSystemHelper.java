@@ -68,17 +68,6 @@ public class MessageSystemHelper extends AbstractHelper {
         }
     }
 
-    public int getMsgNum(){
-
-        /* select count(*) from Messa; */
-        Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Messagesystem");
-        System.out.print("NEXT MSG NUMBER = "  + q.list().size() + " +1 " );
-
-       int ret = (q.list().size());
-       session.close();
-        return ret ;
-    }
 
     public List<Messagesystem> getMessages(String receiver, int messageType) {
         Session session = createNewSessionAndTransaction();

@@ -13,11 +13,9 @@
     Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
 
     researchBag.initialize(new String(auth.getUsername()));
-    System.out.println("Name in research bag: " + researchBag.getUserid());
     
     session.setAttribute(ConnectionSingleton.researchBag, researchBag);
     UserManager.addResearchBag(researchBag);
 
-    System.out.println("Creating research bag bean...");
     AuthorizationSingleton.goToWelcomePage(response);
 %>

@@ -29,9 +29,6 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
 
     public void setSendOffer(Auction auction) {
 
-        System.out.println("Auction title: " + auction.getSubject());
-        System.out.println("Bid offer: " + auction.getOffer());
-
         OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer());
 
     }

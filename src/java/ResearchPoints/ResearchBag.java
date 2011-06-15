@@ -23,8 +23,6 @@ public class ResearchBag implements Serializable {
     }
 
     public void initialize(String username) {
-
-        System.out.println("Initialization research bag for: " + username);
         researchHelper = new ResearchHelper();
 
         this.username = username;
@@ -56,7 +54,6 @@ public class ResearchBag implements Serializable {
     }
 
     public void setSelectedResearch(Research selectedResearch) {
-        System.out.println(selectedResearch.getName() + " was selected. ");
 
         selectedResearch.changeState();
     }
@@ -100,9 +97,6 @@ public class ResearchBag implements Serializable {
 
         while (iterator.hasNext()) {
             ResearchTreeNode treeNode = iterator.next();
-            System.out.println("Considering research with id: "
-                    + treeNode.getResearchInstance().getResearchid());
-
             if (!availableResearch.contains(treeNode.getResearchInstance().getResearchid())) {
                 DefaultTreeNode nextParentNode =
                         new DefaultTreeNode(treeNode.getResearchInstance().getResearchname(),

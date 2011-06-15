@@ -36,6 +36,28 @@ public class UserManager {
         return sessionResearchBag.get(username);
     }
 
+    public static void saveToDatabase() {
+
+        Iterator<String> iterator = sessionMap.keySet().iterator();
+        while(iterator.hasNext()) {
+            Auth auth = sessionMap.get(iterator.next());
+            saveToDatabase(auth.getResources());
+        }
+
+        iterator = sessionMap.keySet().iterator();
+        while(iterator.hasNext()) {
+            ResearchBag researchBag = sessionResearchBag.get(iterator.next());
+
+            ResearchHelper researchHelper = new ResearchHelper();
+            researchHelper.deleteAllResearches(researchBag.getUserid());
+
+            if (!researchBag.getAvailableResearch().isEmpty()) {
+                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
+           }
+        }
+
+    }
+
     /* Singleton */
     private UserManager() {
     }

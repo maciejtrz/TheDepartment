@@ -4,9 +4,11 @@ import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 
 public class NoticeMonitor {
@@ -19,6 +21,9 @@ public class NoticeMonitor {
         List<Messagesystem> noticesDb =
                 messageSystemHelper.getMessages(MessageSingleton.NOTICE_BOARD, MessageSingleton.NOTICE_BOARD_OFFER);
 
+        Set<TradeOffer> noticesToRemove = new HashSet<TradeOffer>();
+        Date currentDate = new Date();
+
         Iterator<Messagesystem> iterator = noticesDb.iterator();
 
        while(iterator.hasNext()) {
@@ -26,14 +31,27 @@ public class NoticeMonitor {
 
            TradeOffer tradeOffer = new TradeOffer();
            tradeOffer.parse(noticeOffer.getMsg());
+           tradeOffer.setMsgnumber(noticeOffer.getMsgnumber());
+
+           if(tradeOffer.getExpireDate().compareTo(currentDate) <= 0) {
+                noticesToRemove.add(tradeOffer);
+           } else {
            tradeOffer.setSenderid(noticeOffer.getSenderid());
            tradeOffer.setSubject(noticeOffer.getSubject());
            tradeOffer.setCreationtime(noticeOffer.getCreationtime());
 
            currentNotices.add(tradeOffer);
            listNotices.add(tradeOffer);
-
+           }
        }
+
+       Iterator<TradeOffer> noticeIterator = noticesToRemove.iterator();
+
+        while (iterator.hasNext()) {
+            TradeOffer noticeOffer = noticeIterator.next();
+            messageSystemHelper.deleteMsg(noticeOffer.getMsgnumber());
+        }
+       
     }
 
     public synchronized void addNoticeOffer(TradeOffer noticeOffer) {
@@ -48,11 +66,13 @@ public class NoticeMonitor {
         Date currentDate = new Date();
 
         while(!currentNotices.isEmpty()) {
+            
             TradeOffer noticeOffer = currentNotices.peek();
-            if(noticeOffer.getExpireDate().compareTo(currentDate) >= 0) {
+            if(noticeOffer.getExpireDate().compareTo(currentDate) <= 0) {
                 currentNotices.poll();
-                currentNotices.remove(noticeOffer);
-                noticeOffer.accept();
+                listNotices.remove(noticeOffer);
+
+                messageSystemHelper.deleteMsg(noticeOffer.getMsgnumber());
             } else {
                 return;
             }

@@ -162,6 +162,7 @@ public class Auction extends TradeOffer implements Serializable {
         setAmountWanted(tradeOffer.getAmountWanted());
         setResourcesOfferedType(tradeOffer.getResourcesOfferedType());
         setResourcesWantedType(tradeOffer.getResourcesWantedType());
+        setExpireDate(tradeOffer.getExpireDate());
         
     }
 

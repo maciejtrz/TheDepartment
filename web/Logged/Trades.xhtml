@@ -132,6 +132,10 @@
                         <h:outputText value="#{tradeOffer.amountWanted}" />
                     </p:column>
 
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{tradeOffer.expireDateText}" />
+                    </p:column>
+
                     <p:column headerText="Action: ">
                         <h:commandButton value="Answer" >
                             <f:setPropertyActionListener value="#{tradeOffer}" target="#{noticeMessageReader.answerTradeOffer}" />
@@ -177,6 +181,9 @@
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                  value="#{noticeMessageWriter.tradeDescription}"/>
 
+                <h:outputText value="Expire date: "/>
+                <p:calendar value="#{noticeMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+
                 <h:commandButton value="Make Trade Offer" actionListener="#{noticeMessageWriter.sendNoticeOffer}" />
             </h:form>
             <a onclick="addnoticeoffer.hide()"> CLICK THIS TO HIDE </a>
@@ -214,6 +221,10 @@
                         <h:outputText value="#{auction.highestOfferedPrice}"/>
                     </p:column>
 
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{auction.expireDateText}" />
+                    </p:column>
+
                     <p:column headerText="Action: ">
 
                         <h:outputText value="Your offer: "/>
@@ -226,7 +237,7 @@
                     </p:column>
                 </p:dataTable>
 
-                <p:poll interval="30" update="noticeBoard" />
+                <p:poll interval="30" update="auctionBoard" />
             </h:form>
 
 
@@ -280,6 +291,8 @@
                 <p:calendar value="#{auctionMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
 
                 <h:commandButton value="Submit Auction" actionListener="#{auctionMessageWriter.sendAuction}" />
+
+
 
             </h:form>
 

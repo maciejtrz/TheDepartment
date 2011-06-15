@@ -22,19 +22,21 @@ public class OffersSuperviser implements Runnable{
         return noticeMonitor;
     }
 
-    public static void initializeOffersSupervise() {
-        noticeMonitor = new NoticeMonitor();
-        auctionMonitor = new AuctionMonitor();
-        
+    public static void initializeOffersSupervise() {       
         Thread thread = new Thread(new OffersSuperviser());
         thread.start();
     }
 
     public void run() {
+
+        noticeMonitor = new NoticeMonitor();
+        auctionMonitor = new AuctionMonitor();
+
         while(true) {
 
             try {
                 Thread.sleep(SLEEPING_INTERVAL);
+                System.out.println("Auction monitor null: " + (getAuctionMonitor() == null));
                 getAuctionMonitor().update();
                 getNoticeMonitor().update();
             } catch (InterruptedException ex) {

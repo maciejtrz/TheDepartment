@@ -15,6 +15,17 @@ public class EventsHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
+    public void deleteEvents(String idname) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Events where idname='"
+                + idname + "'");
+        Events event_record = (Events)q.uniqueResult();
+        if (event_record != null) {
+            session.delete(event_record);
+        }
+        commitTransaction(session);
+    }
+
     public Events getPlayerRecord(String idname) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Events where idname='"

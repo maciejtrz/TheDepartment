@@ -36,18 +36,12 @@ public class BuildingQuery extends HttpServlet {
             Integer position = Integer.parseInt(input_position);
             BuildingsPositionHelper helper
                     = new BuildingsPositionHelper();
+            
             String userName = utilities.BasicUtils.getUserName();
             String output = helper.getAtPosition(userName, position);
-            if (output == null) {
-                out.print("nop");
-                UserManager.setBuildingPosition(userName, position);
-                System.out.println("Returning nop");
-            }
-            else {
-                out.print(output);
-                UserManager.setBuildingPosition(userName, position);
-                System.out.println("Returning " + output);
-            }
+
+            UserManager.setBuildingPosition(userName, position);
+            out.print( (output == null ? "nop" : output));
 
         } finally { 
             out.close();

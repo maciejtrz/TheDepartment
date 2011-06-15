@@ -20,13 +20,11 @@ function getNumber(poly) {
 
 
 // AJAX function
-function queryServer(position)
+function queryServer(position,func)
 {
-
-   $.post("/TheDepartment/Logged/BuildingQuery", {"posotion": position}, function(data){
-   no = data;
-   })
-   return no;
+   $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
+       func(data);
+   });
 }
 
 function over(poly) {

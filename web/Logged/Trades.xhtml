@@ -98,7 +98,7 @@
                     </p:column>
 
                 </p:dataTable>
-                <p:poll interval="30" update="offeredTrades" />
+                <p:poll interval="10" update="offeredTrades" />
             </h:form>
 
 
@@ -132,6 +132,10 @@
                         <h:outputText value="#{tradeOffer.amountWanted}" />
                     </p:column>
 
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{tradeOffer.expireDateText}" />
+                    </p:column>
+
                     <p:column headerText="Action: ">
                         <h:commandButton value="Answer" >
                             <f:setPropertyActionListener value="#{tradeOffer}" target="#{noticeMessageReader.answerTradeOffer}" />
@@ -150,7 +154,6 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <h:form>
-
 
                 <br/>
                 <h:outputText value="Title of the trade: "/>
@@ -177,6 +180,9 @@
                 <h:outputText value="Trade description (arguments?)"/>
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                  value="#{noticeMessageWriter.tradeDescription}"/>
+
+                <h:outputText value="Expire date: "/>
+                <p:calendar value="#{noticeMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
 
                 <h:commandButton value="Make Trade Offer" actionListener="#{noticeMessageWriter.sendNoticeOffer}" />
             </h:form>
@@ -211,6 +217,14 @@
                         <h:outputText value="#{auction.resourcesWantedName}"/>
                     </p:column>
 
+                    <p:column headerText="Highest offer: ">
+                        <h:outputText value="#{auction.highestOfferedPrice}"/>
+                    </p:column>
+
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{auction.expireDateText}" />
+                    </p:column>
+
                     <p:column headerText="Action: ">
 
                         <h:outputText value="Your offer: "/>
@@ -223,7 +237,7 @@
                     </p:column>
                 </p:dataTable>
 
-                <p:poll interval="30" update="noticeBoard" />
+                <p:poll interval="30" update="auctionBoard" />
             </h:form>
 
 
@@ -277,6 +291,8 @@
                 <p:calendar value="#{auctionMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
 
                 <h:commandButton value="Submit Auction" actionListener="#{auctionMessageWriter.sendAuction}" />
+
+
 
             </h:form>
 

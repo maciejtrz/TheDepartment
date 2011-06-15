@@ -3,10 +3,10 @@ package Connections;
 
 import ResearchPoints.ResearchDevelopment;
 import ResearchPoints.ResearchTreeShowcase;
-import buildings.BuildingFactory;
 import deamons.DeamonManager;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import messageSystem.OffersSuperviser;
 import specializationsGenerator.SpecializationsGenerator;
 
 public class ApplicationContextInitializer implements ServletContextListener {
@@ -21,6 +21,8 @@ public class ApplicationContextInitializer implements ServletContextListener {
             SpecializationsGenerator.initializeSpecializationsGenerator();
             ResearchDevelopment.initializeDevelopmentTree();
             ResearchTreeShowcase.initializeResearchTreeShowcase();
+            OffersSuperviser.initializeOffersSupervise();
+
             DeamonManager mgr = DeamonManager.getManager();
 
 
@@ -32,6 +34,8 @@ public class ApplicationContextInitializer implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         
     }
+
+
 
 
 }

@@ -4,24 +4,46 @@
  */
 package messageSystem;
 
+import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.Messagesystem;
 import Connections.UserManager;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 
-public class TradeMessageReader extends MessageWriter implements Serializable  {
+public class TradeMessageReader extends MessageWriter implements Serializable {
 
     private boolean checked;
+    private List<TradeOffer> offeredTrades = new ArrayList<TradeOffer>();
+    private PriorityQueue<TradeOffer> expirationTimeList = new PriorityQueue<TradeOffer>();
+    MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
 
     public TradeMessageReader() {
         super(MessageSingleton.TRADE_OFFER);
         checked = false;
     }
-    public List<TradeOffer> offeredTrades;
 
     public List<TradeOffer> getOfferedTrades() {
+
+        if (checked) {
+            Date currentDate = new Date();
+
+            while (!expirationTimeList.isEmpty()) {
+                TradeOffer tradeOffer = expirationTimeList.peek();
+                if (tradeOffer.getExpireDate().compareTo(currentDate) <= 0) {
+                    expirationTimeList.poll();
+                    offeredTrades.remove(tradeOffer);
+
+                    messageSystemHelper.deleteMsg(tradeOffer.getMsgnumber());
+                } else {
+                    break;
+                }
+
+            }
+        }
 
         if (!checked || UserManager.hasNewMessage(getUsername())) {
             checked = true;
@@ -30,18 +52,27 @@ public class TradeMessageReader extends MessageWriter implements Serializable  {
             List<Messagesystem> encodedTrades = getMessages();
             Iterator<Messagesystem> iterator = encodedTrades.iterator();
 
+            Date currentDate = new Date();
+
             while (iterator.hasNext()) {
                 Messagesystem message = iterator.next();
 
                 TradeOffer tradeOffer = new TradeOffer();
 
                 tradeOffer.parse(message.getMsg());
-                tradeOffer.setSenderid(message.getSenderid());
-                tradeOffer.setReceiverid(message.getReceiverid());
-                tradeOffer.setCreationtime(message.getCreationtime());
-                tradeOffer.setMsgnumber(message.getMsgnumber());
 
-                offeredTrades.add(tradeOffer);
+                if (tradeOffer.getExpireDate().compareTo(currentDate) > 0) {
+
+                    tradeOffer.setSenderid(message.getSenderid());
+                    tradeOffer.setReceiverid(message.getReceiverid());
+                    tradeOffer.setCreationtime(message.getCreationtime());
+                    tradeOffer.setMsgnumber(message.getMsgnumber());
+
+                    offeredTrades.add(tradeOffer);
+                    expirationTimeList.offer(tradeOffer);
+                } else {
+                    messageSystemHelper.deleteMsg(tradeOffer.getMsgnumber());
+                }
             }
         }
         return offeredTrades;

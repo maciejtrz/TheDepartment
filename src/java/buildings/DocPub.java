@@ -149,7 +149,13 @@ public class DocPub extends Building {
 
     @Override
     public String getInfo() {
-        return ("DocPub");
+        return ("You probably think that DoC students do not have life, " +
+                "so why building DocPub? Well, they once had life and may very " +
+                "well want to come back to social existence. More importantly, " +
+                "your students took taste in  Tresco-Basic “blinding”vodka. " +
+                "DocPub reduces the negative effect  Tresco-Basic “blinding”vodka " +
+                "have on your students. It also makes your students happier, " +
+                "increasing their satisfaction.");
     }
 
     @Override

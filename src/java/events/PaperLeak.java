@@ -17,7 +17,9 @@ public class PaperLeak extends Event {
 
     @Override
     public String getInfo() {
-        return("Examination paper leak");
+        return("The examination papers leak occurred and the lecturers are " +
+                "unaware of the fact. The satisfaction of your students " +
+                "boosts up rapidly.  ");
     }
 
     @Override

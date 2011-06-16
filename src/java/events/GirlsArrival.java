@@ -21,7 +21,12 @@ public class GirlsArrival extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Wooooha! Some unknown college from a place you never heard about" +
+                " asked to exchange students with your department. As you value " +
+                "the “quality” of your undergrads, you were about to decline the " +
+                "offer. However, then you noticed that the offered students are all " +
+                "females! Your remaining students were very excited about their " +
+                "arrival. As a result their satisfaction drastically increases.";
     }
 
     @Override

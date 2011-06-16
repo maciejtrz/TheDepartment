@@ -31,7 +31,7 @@ public class BarNight extends Event {
                 "the DOCSOC Bar Night event. As a result, " +
                 "everyone got drunk and went crazy. Fortunately for you, " +
                 "the union pub is still standing, but the level of alcoholism " +
-                "of the students has drastically increased. On the other hand, " +
+                "of the students has drastically increases. On the other hand, " +
                 "student satisfaction also increases. Oddly enough, although " +
                 "Ph.D. students do not generally have life, a few of them " +
                 "managed to join as well." ;

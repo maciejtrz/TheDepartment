@@ -32,7 +32,9 @@ public class TrescoMiracle extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("A miracle happened! The amount of reduced food has drastically " +
+                "increased. The starvation level of your students decreases " +
+                "considerably.");
     }
 
     @Override

@@ -22,7 +22,9 @@ public class GovernmentGrant extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Congrats! Thanks to your excellence in research (and probably " +
+                "the fact that your distant cousin works in the Ministry of " +
+                "Education) you received a government grant. ";
     }
 
     @Override

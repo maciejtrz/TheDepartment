@@ -41,7 +41,7 @@ public class FacebookBlocked extends Event {
     @Override
     public String getInfo() {
         return ("Surprise! Your Computer Support Group decided to block access " +
-                "to facebook on all computers in your labs. As a result, " +
+                "to Facebook on all computers in your labs. As a result, " +
                 "the overall population of available students and PhDs " +
                 "increases (but they prefer to work at home, for some " +
                 "unknown reasons). Unfortunately, their satisfaction suffers " +

@@ -177,7 +177,9 @@ public class LectureRoom extends Building {
 
     @Override
     public String getInfo() {
-        return ("Lecturer Room");
+        return ("Lecture room increases the population (the capacity) of " +
+                "your students. Not that any one cares whether students have " +
+                "any space or convenience during lectures. ");
     }
 
     @Override

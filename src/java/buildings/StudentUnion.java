@@ -120,7 +120,7 @@ public class StudentUnion extends Building {
 
     @Override
     public String getInfo() {
-        return ("Student Union");
+        return ("Useless. Required to build DocPub. Otherwise really useless.");
     }
 
     @Override

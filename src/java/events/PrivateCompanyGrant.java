@@ -21,7 +21,9 @@ public class PrivateCompanyGrant extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("A private investor decided to give you a research grant. " +
+                "The gullible fellow thinks that you can produce some useful " +
+                "research for him! Anyway, your wealth increases.");
     }
 
     @Override

@@ -36,7 +36,11 @@ public class BlackMarket extends Building {
 
     @Override
     public String getInfo() {
-        return ("Black Market");
+        return ("Hey cheater! Welcome to Black Market. Here you can trade " +
+                "whatever you want with whoever you want. There is no police, " +
+                "there are not regulations! For legal trade please refer to the " +
+                "official “auctions” system. Here, you are free to choose any " +
+                "amount of any resource you would like and trade them.");
     }
 
     @Override

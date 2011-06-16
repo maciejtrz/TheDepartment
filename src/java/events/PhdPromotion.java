@@ -24,7 +24,9 @@ public class PhdPromotion extends Event {
 
     @Override
     public String getInfo() {
-        return("Phd promotion");
+        return("Some of your undergrads decided to do a Ph.D. in your " +
+                "department. Obviously, the number of your undergrads " +
+                "decreases and the number of Ph.D. increases.");
     }
 
     @Override

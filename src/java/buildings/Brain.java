@@ -136,7 +136,11 @@ public class Brain extends Building {
 
     @Override
     public String getInfo() {
-        return ("BrAiN");
+        return ("Careful! You are inside the Brain of your university. " +
+                "The best description of Brain was once given by a famous " +
+                "4chan poet and is as follows: “And here is where magic" +
+                " happens”. No, not that sort of magic. Anyway, Brain gives " +
+                "you a dramatic boost in the efficiency of your research.");
     }
 
     @Override

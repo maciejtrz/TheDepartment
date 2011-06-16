@@ -17,7 +17,13 @@ public class HaskellConference extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "You should be proud of your department! It was appointed as " +
+                "the next organizer of the Haskell Global Conference. " +
+                "All of your lecturers, even those unrelated to functional " +
+                "programming, became very excited about the event. Sadly, " +
+                "your undergrads and Ph.D. do not care. The title of this year's " +
+                "conference is \"Zygohistomorphic prepromorphisms and its practial" +
+                " uses in Hello Haskell applications\". ";
     }
 
     @Override

@@ -131,7 +131,12 @@ public class MacChicken extends Building {
 
     @Override
     public String getInfo() {
-        return ("MacChicken");
+        return ("MacChicken is the most famous fast food restaurant " +
+                "in the world. Despite its continuous attempt to produce " +
+                "chickens with more than two legs, MacChicken still remains " +
+                "one of the largest chicken supplier in the world. Possessing " +
+                "MacChicken has a considerable effect on the starvation of " +
+                "your students.");
     }
 
     @Override

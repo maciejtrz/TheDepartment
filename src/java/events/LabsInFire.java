@@ -46,12 +46,21 @@ public class LabsInFire extends Event {
         Laboratories labs = factory.getLabs();
         labs.remove(playerName, labs_position);
 
+        // Increasing students alcoholism.
+        increaseAlcoholizm(playerName, LotteryManager.HIGH);
+
         return true;
     }
 
     @Override
     public String getInfo() {
-        return "LabsInFire";
+        return "Very bad news! Some drunk students have set your laboratories " +
+                "in fire. Your labs are still standing, but it is very likely " +
+                "that they will have to be rebuilt soon. You would think that " +
+                "the event would cause students to be generally more happy. " +
+                "On the contrary, as labs became unusable, some of your " +
+                "students lost their purpose in life. Consequently, the level " +
+                "of alcoholism of your students increases.";
     }
 
     @Override

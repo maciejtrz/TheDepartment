@@ -29,7 +29,8 @@ public class UnionParty extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("Union Party?!? Nothing happened... Only a slight decrease " +
+                "in your students' satisfaction level.");
     }
 
     @Override

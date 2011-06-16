@@ -214,7 +214,7 @@
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="Name: #{building.info}" />
                         <h:outputText value="Price: #{building.cost}" />
-                        <h:commandButton action="#{buildingbean.submit}" value="Submit">
+                        <h:commandButton  value="Submit">
                             <f:setPropertyActionListener target="#{buildingbean.doSelect}"
                                                          value="#{building}" />
                         </h:commandButton>

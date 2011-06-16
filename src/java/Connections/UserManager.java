@@ -331,6 +331,8 @@ public class UserManager {
             getUser(username).setBuildingPosition(position);
         }
 
+    }
+
     public static int getBuilidngPosition(String username) {
         Auth auth = getUser(username);
         if (auth != null) {

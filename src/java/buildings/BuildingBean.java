@@ -38,11 +38,7 @@ public class BuildingBean implements Serializable {
         return playersBuildings;
     }
 
-    public void doSelect(Building s) {
-        /*System.out.println(s);
-        selectedBuilding = (Building)playersBuildings.getRowData();
-        System.out.println(selectedBuilding.getInfo()); */
-        System.out.println("Some building was selecged!");
+    public void setDoSelect(Building s) {
         System.out.println(s.getInfo());
     }
 

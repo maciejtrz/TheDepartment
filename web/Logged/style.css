@@ -26,6 +26,31 @@ left: 40px;
 }
 
 
+.rep
+{
+background-image: url("ico/rep_ico.png") !important;
+width: 16px; height: 16px;
+}
+
+.stu
+{
+background-image: url("ico/stu_ico.png") !important;
+width: 16px; height: 16px;
+}
+
+.phd
+{
+background-image: url("ico/phd_ico.png") !important;
+width: 16px; height: 16px;
+}
+
+.mon
+{
+background-image: url("ico/mon_ico.png") !important;
+width: 16px; height: 16px;
+}
+
+
 /*
 horizontal distance: 233px
 vertical distance: 141px

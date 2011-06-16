@@ -37,16 +37,20 @@ and open the template in the editor.
                     <p:commandButton disabled="true" value="Username" />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.username}"  /> <h:outputText value="" /> <!-- SEPARATOR -->
 
-                    <p:commandButton disabled="true" value="Points" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <p:commandButton image="rep"/>
+                    <p:commandButton  disabled="true" value="Points"/>  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.researchPoints}"/>  <h:outputText value="" /> <!-- SEPARATOR -->
 
+                    <p:commandButton image="mon"/>
                     <p:commandButton disabled="true" value="Money" />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.money}" />  <h:outputText value="" /> <!-- SEPARATOR -->
 
+                    <p:commandButton image="stu"/>
                     <p:commandButton disabled="true" value="Students" />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.undergraduatesnumber}"/> <h:outputText value="" /> <!-- SEPARATOR -->
 
-                    <p:commandButton disabled="true" value="PhDs"  />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <p:commandButton image="phd"/>
+                    <p:commandButton  disabled="true" value="PhDs"  />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.phdsnumber}"/> <h:outputText value="" /> <!-- SEPARATOR -->
 
                 </p:toolbarGroup>

@@ -1,16 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <title>The Department</title>
+            <link rel="stylesheet" href="/TheDepartment/images/Envision.css" type="text/css"/>
+            <link rel="shortcut icon" href="../ac.png"/>
+        </h:head>
+        <body>
 
-    <ui:component>
+
+        <div id="wrap">
+	<div onclick="location.href='/TheDepartment/faces/Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
+		<h1 id="logo-text">The Department</h1>
+		<h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
+	<div id="header-links">
+	<p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a></p>
+
+	</div>
+</div>
+
+<div id="menu">
+	<ul>
+
+		<li><a href="/TheDepartment/faces/Unlogged/index.xhtml">Log in</a></li>
+                <li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
+                <li class="last"><a href="/TheDepartment/faces/Unlogged/Rankings.xhtml">Rankings</a></li>
+	</ul>
+</div>
+
+<div id="content-wrap">
+	<div id="sidebar">
 
 
-        <p:dialog header="Rankings" widgetVar="ranking" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
+	</div>
+	<div id="main">
 
-            <h:form>
+             <h:form>
 
                 <p:tabView>
                     <p:tab title="Reaserch Points">
@@ -97,8 +130,20 @@
                 </p:tabView>
 
             </h:form>
-        </p:dialog>
 
 
-    </ui:component>
-</html>
+	</div>
+
+</div>
+
+	<div id="footer">
+	<p> &copy; 2011 <strong>piotr.kraus09
+maciej.trzcinski09
+karol.pyniak09
+krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.styleshout.com" target="_blank">
+    CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a>  | <a href="about:blank">Foot</a> </p>
+	</div>
+</div>
+
+        </body>
+    </html>

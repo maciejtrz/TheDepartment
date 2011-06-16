@@ -40,28 +40,31 @@ and open the template in the editor.
 	<div id="sidebar">
 
 
-                 <h:form>
-                   
-                    <h:panelGrid columns="1">
-                    <h:outputText value="Username"/>
-                    <h:inputText id="username"
-                                 value="#{auth.username}"/>
+                                     <h:form id="loginpanel">
+                        <h:panelGrid columns="1" id="loginGrid">
+                            <h:outputText value="Username"/>
+                            <h:inputText id="username"
+                                         value="#{auth.username}"/>
+                            <p:message for="username" />
 
-                    <h:outputText value="Password"/>
-                    <h:inputSecret id="password"
-                                   value="#{auth.password}" />
-                    </h:panelGrid>
+                            <h:outputText value="Password"/>
+                            <h:inputSecret id="password"
+                                           value="#{auth.password}" />
+                            <p:message for="password" />
 
-                     <h:panelGrid columns="2">
-                    <h:outputText value="Remember me" />
-                    <h:selectBooleanCheckbox value="#{auth.remember}"  />
+                            <h:outputText value="Remember me" />
+                            <h:selectBooleanCheckbox value="#{auth.remember}"  />
 
-                    <p:commandButton action="#{auth.validate}"
-                                     value = "Log in"/>
+                            <p:commandButton action="#{auth.validate}"
+                                             value = "Log in"
+                                             update="loginGrid,errorInfo"
+                                             id="submit"/>
+                        </h:panelGrid>
+                        <h:panelGrid id="errorInfo">
+                        <p:message for="submit"/>
+                        </h:panelGrid>
 
-                    </h:panelGrid>
-                       
-                </h:form>
+                    </h:form>
 
 	</div>
 	<div id="main">

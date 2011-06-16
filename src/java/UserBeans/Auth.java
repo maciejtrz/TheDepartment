@@ -6,7 +6,9 @@ import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Iterator;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -84,23 +86,66 @@ public class Auth implements Serializable {
         return "go";
     }
 
+    private UIComponent findComponent(UIComponent parent, String id) {
+        if(id.equals(parent.getId())) {
+                return parent;
+        }
+        Iterator<UIComponent> kids = parent.getFacetsAndChildren();
+        while(kids.hasNext()) {
+                UIComponent kid = kids.next();
+                UIComponent found = findComponent(kid, id);
+                if(found != null) {
+                        return found;
+                }
+        }
+        return null;
+    }
+
+
     public String validate() throws SQLException {
         username = username.trim();
         password = password.trim();
 
-        String result;
+        String result = null;
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
-        if (username != null && username.length() != 0 && AuthorizationSingleton.test(username, password, session)) {
-            updateResearchPoints();
-            result = "success";
-        } else {
-            result = "failure";
+        boolean error = false;
+
+        if(username == null || username.length() == 0) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                findComponent(facesContext.getViewRoot(),"username").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "Login is required!"));
+
+            error = true;
         }
 
-        logging = true;
+        if(password == null || password.length() == 0) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                findComponent(facesContext.getViewRoot(),"password").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Password error", "Password is required!"));
+
+            error = true;
+
+        }
+
+        if (username != null && username.length() != 0 && AuthorizationSingleton.test(username, password, session)) {
+
+            updateResearchPoints();
+            result = "success";
+            logging = true;
+
+        } else if(!error) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    findComponent(facesContext.getViewRoot(),"submit").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "Login or password incorrent!"));
+
+
+        }
 
         return result;
     }

@@ -21,9 +21,14 @@ public class BuildingsPositionHelper extends AbstractHelper {
 
         Session session = createNewSessionAndTransaction();
         Buildingsposition buildingspos = new Buildingsposition(idname);
-        //Random rand = new Random();
-        buildingspos.setPos(1, Building.CODE_BLACK_MARKET);
-        buildingspos.setPos(2, Building.CODE_BOB);
+        Random rand = new Random();
+        int bm_position = rand.nextInt(16) + 1;
+        int qt_position = rand.nextInt(16) + 1;
+        while (bm_position == qt_position) {
+            qt_position = rand.nextInt(16) + 1;
+        }
+        buildingspos.setPos(bm_position, Building.CODE_BLACK_MARKET);
+        buildingspos.setPos(qt_position, Building.CODE_BOB);
         session.save(buildingspos);
         commitTransaction(session);
     }

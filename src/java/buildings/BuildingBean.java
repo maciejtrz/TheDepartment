@@ -40,22 +40,11 @@ public class BuildingBean implements Serializable {
 
     public void setDoSelect(Building s) {
         System.out.println(s.getInfo());
-    }
-
-    public void submit(){
-        if (selectedBuilding == null) {
-            System.out.println("Its null :(");
-        }
-        else
-            System.out.println("Submit called for selected building"
-                    + selectedBuilding.getInfo());
         String playerName = utilities.BasicUtils.getUserName();
+        System.out.println("For player " + playerName);
         int position = UserManager.getBuilidngPosition(playerName);
-        //selectedBuilding.build(playerName, position);
-        
+        System.out.println("At position: " + position);
+        s.build(playerName, position);
     }
-
-    
-
 
 }

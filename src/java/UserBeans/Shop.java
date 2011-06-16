@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
 public class Shop implements Serializable {
 
     public String playerName;
-    public String students;
-    public String phds;
+    public int students;
+    public int phds;
     private Playerresources resources;
     private CapacityHelper capacityhelper;
     private String name;
@@ -45,19 +45,19 @@ public class Shop implements Serializable {
         return playerName;
     }
 
-    public String getPhds() {
+    public int getPhds() {
         return phds;
     }
 
-    public String getStudents() {
+    public int getStudents() {
         return students;
     }
 
-    public void setStudents(String s) {
+    public void setStudents(int s) {
         this.students = s;
     }
 
-    public void setPhds(String p) {
+    public void setPhds(int p) {
         this.phds = p;
     }
 
@@ -65,13 +65,12 @@ public class Shop implements Serializable {
 
         Capacity capacity = capacityhelper.getCapacity(name);
 
-        int phdsNum = Integer.parseInt(phds);
 
-        if ((phdsNum + resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
+        if ((getPhds()+ resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
             System.out.println("Not enough space for new Phds");
             return ("failure");
         }
-        int phdsCost = phdsNum * 20;
+        int phdsCost = getPhds()* 20;
 
 
         if (resources.getMoney() < phdsCost) {
@@ -80,7 +79,7 @@ public class Shop implements Serializable {
         }
 
         resources.setMoney(resources.getMoney() - phdsCost);
-        resources.setPhdsnumber(resources.getPhdsnumber() + phdsNum);
+        resources.setPhdsnumber(resources.getPhdsnumber() + getPhds());
 
         return "success";
     }
@@ -90,14 +89,13 @@ public class Shop implements Serializable {
 
         Capacity capacity = capacityhelper.getCapacity(name);
 
-        int studentsNum = Integer.parseInt(students);
 
-        if ((studentsNum + resources.getUndergraduatesnumber()) > capacity.getStudentscapacity()) {
+        if ((getStudents() + resources.getUndergraduatesnumber()) > capacity.getStudentscapacity()) {
             System.out.println("Not enough space for studetns");
             return ("failure");
         }
 
-        int studentCost = studentsNum * 5;
+        int studentCost = getStudents() * 5;
 
         if (resources.getMoney() < studentCost) {
             System.out.println("Not enought money");
@@ -105,13 +103,34 @@ public class Shop implements Serializable {
         }
 
         resources.setMoney(resources.getMoney() - studentCost);
-        resources.setUndergraduatesnumber(resources.getUndergraduatesnumber() + studentsNum);
+        resources.setUndergraduatesnumber(resources.getUndergraduatesnumber() + getStudents());
 
+        students = 0;
         return "success";
 
     }
 
     //aux methods
+
+    public String getStudentCapacity(){
+
+        Capacity capacity = capacityhelper.getCapacity(name);
+
+        Integer cap = capacity.getStudentscapacity();
+        return cap.toString();
+
+    }
+
+    public String getPhdsCapacity(){
+
+        Capacity capacity = capacityhelper.getCapacity(name);
+
+        Integer cap = capacity.getPhdscapacity();
+        return cap.toString();
+
+    }
+
+
     public String getBalance() throws SQLException {
 
 

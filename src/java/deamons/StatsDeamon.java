@@ -16,8 +16,8 @@ import utilities.LecturersManager;
 
 public class StatsDeamon extends Thread {
 
-    
-    // Value specifying how much a given statistic increases/decreases 
+
+    // Value specifying how much a given statistic increases/decreases
     // in a given unit of time (SLEEP_TIME in minutes).
     private static final int UPDATE_VALUE = 5;
 
@@ -162,4 +162,3 @@ public class StatsDeamon extends Thread {
         UserManager.removeMoney(playerName, decrease_value);
     }
 }
-

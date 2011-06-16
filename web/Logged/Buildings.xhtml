@@ -216,7 +216,7 @@
                         <h:outputText value="Price: #{building.cost}" />
                         <h:commandButton action="#{buildingbean.submit}" value="Submit">
                             <f:setPropertyActionListener target="#{buildingbean.doSelect}"
-                                                         value="abrakadabra" />
+                                                         value="#{building}" />
                         </h:commandButton>
                     </h:panelGrid>
 

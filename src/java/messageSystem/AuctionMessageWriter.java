@@ -10,14 +10,12 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
 
     private Auction auction;
     private Integer selectedAuctionType;
-    private static List<SelectItem> availableAuctionTypes;
-    private static AuctionFactory auctionFactory;
+    private final static List<SelectItem> availableAuctionTypes;
 
     static {
         availableAuctionTypes = new ArrayList<SelectItem>();
-        auctionFactory = new AuctionFactory();
-        for(int i = 0; i < auctionFactory.getSize(); i++) {
-            availableAuctionTypes.add(new SelectItem(new Integer(i),auctionFactory.getAuctionName(i)));
+        for(int i = 0; i < AuctionFactory.getSize(); i++) {
+            availableAuctionTypes.add(new SelectItem(new Integer(i),AuctionFactory.getAuctionName(i)));
         }
     }
 
@@ -25,7 +23,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
         super(MessageSingleton.AUCTION_OFFER);
 
         auction = new Auction();
-        getAuction().setSenderid(BasicUtils.getUserName());
+        auction.setSenderid(BasicUtils.getUserName());
         selectedAuctionType = 0;
     }
 
@@ -43,7 +41,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
 
     public void setSelectedAuctionType(int selectedType) {
         this.selectedAuctionType = selectedType;
-        setAuction(auctionFactory.getInstance(selectedType));
+        setAuction(AuctionFactory.getInstance(selectedType));
     }
 
     public int getSelectedAuctionType() {

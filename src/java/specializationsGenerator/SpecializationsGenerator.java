@@ -23,9 +23,6 @@ public class SpecializationsGenerator {
         while(iterator.hasNext()) {
             Subject subject = iterator.next();
             subjectList[subject.getSubjectid()] = subject.getSubjectname();
-
-            System.out.println("Adding " + subject.getSubjectname()
-                    + " at position: " + subject.getSubjectid());
         }
     }
 

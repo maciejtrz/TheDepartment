@@ -141,7 +141,7 @@ public class Auth implements Serializable {
 
         PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
         resources = playerResources.getResources(username);
-        System.out.println("The name is: " + resources);
+
 
     }
 

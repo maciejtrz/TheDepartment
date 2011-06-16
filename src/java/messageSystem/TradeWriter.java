@@ -105,8 +105,6 @@ public class TradeWriter extends MessageWriter implements Serializable {
 
     public void sendTrade() {
 
-        System.out.println("Sending trade...");
-
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
         messageSystemHelper.createMessage(getUsername(),getReceiverid(),getSubject(),
                 getTradeOffer().encode(),getMessageType());

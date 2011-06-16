@@ -150,9 +150,6 @@ public class AddResearch implements Serializable {
             Lecturer lec = iterator.next();
             List<LecturerBenefits> list = lec.getSpecializations();
 
-            System.out.println("Lecturer's name is: " + lec.getName());
-            System.out.println("Current lecturer's spec is: " + lecturerBenefits.getField());
-            
             if (lec.getUsable() && list.contains(lecturerBenefits) ) {
 
                 lecturers.add(new SelectItem(new Integer(i++), lec.getName()));
@@ -208,10 +205,9 @@ public class AddResearch implements Serializable {
         int boost_value = 0;
         for (int i = 0; i < chosenLecturers.size(); i++) {
             String lecturerName = chosenLecturers.get(i);
-            System.out.println(lecturerName);
+
             Lecturer lecturer = mgr.lookUpLecturer(lecturerName, owned_lecturers);
-            System.out.println("-----------------------------------------");
-            System.out.println("LECTURERS OBJECT: " + lecturer.getName());
+
 
             /* Making the researcher unusable. */
             helper.setUsable(lecturerName, false);

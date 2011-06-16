@@ -4,11 +4,7 @@
  */
 package messageSystem;
 
-import ConnectionDataBase.Messagesystem;
-import Connections.UserManager;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import utilities.BasicUtils;
 
@@ -26,7 +22,6 @@ public class NoticeMessageReader extends MessageWriter implements Serializable  
     }
 
     public void setAnswerTradeOffer(TradeOffer answeredTradeOffer) {
-        System.out.println("Answering trade offer...");
         answeredTradeOffer.setReceiverid(BasicUtils.getUserName());
         OffersSuperviser.getNoticeMonitor().acceptNoticeOffer(answeredTradeOffer);
     }

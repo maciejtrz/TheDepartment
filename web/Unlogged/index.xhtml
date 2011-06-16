@@ -4,11 +4,10 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.prime.com.tr/ui">
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <title>The Department</title>
@@ -23,15 +22,17 @@ and open the template in the editor.
 		<h1 id="logo-text">The Department</h1>
 		<h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
 	<div id="header-links">
-	<p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a>  | <a href="about:blank">Link</a> | <a href="about:blank">Link</a></p>
+	<p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a></p>
 
 	</div>
 </div>
 
 <div id="menu">
 	<ul>
-		<li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
-                <li class="last"><a onclick="ranking.show()">Rankings</a></li>
+
+		<li><a href="/TheDepartment/faces/Unlogged/index.xhtml">Log in</a></li>
+                <li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
+                <li class="last"><a href="/TheDepartment/faces/Unlogged/Rankings.xhtml">Rankings</a></li>
 	</ul>
 </div>
 
@@ -63,10 +64,11 @@ and open the template in the editor.
                 </h:form>
 
 	</div>
-	<div id="main"> <a name="TemplateInfo"></a>
+	<div id="main">
 
             <img src="/TheDepartment/images/sal.jpg"/>
 
+            
 	</div>
 
 </div>
@@ -80,7 +82,5 @@ krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.stylesh
 	</div>
 </div>
 
-
-                    <ui:include src="Rankings.xhtml"/>
         </body>
     </html>

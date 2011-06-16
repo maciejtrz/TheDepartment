@@ -20,7 +20,12 @@ public class PintosCw extends Event {
 
     @Override
     public String getInfo() {
-        return "PintosCw";
+        return "The newspapers calls it  “a disaster”, “a personal tragedy of " +
+                "many” , “a catastrophe”. The pintos course work has been " +
+                "released. All of your students lose whatever remained of " +
+                "their life. The population of students and Ph.D. decreases. " +
+                "Their satisfaction also decreases. Obviously, their alcoholism " +
+                "increases though. ";
     }
 
 

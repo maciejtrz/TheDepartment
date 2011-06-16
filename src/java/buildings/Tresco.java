@@ -124,7 +124,13 @@ public class Tresco extends Building {
 
     @Override
     public String getInfo() {
-        return ("Tresco");
+        return ("Tresco is a famous, world-class reduced food supplier. " +
+                "You can buy there anything, from ten-days, freshly reduced " +
+                "bread to a very cheap Tresco-Basic “blinding”vodka. " +
+                "Unfortunately, this fabulous brand is recently plagued by " +
+                "so called “organic food”. Possessing Tresco allows you to " +
+                "build MacChicken. It also has a positive effect on the " +
+                "starvation level of your students. ");
     }
 
     @Override

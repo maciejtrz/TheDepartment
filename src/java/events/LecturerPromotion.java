@@ -26,7 +26,9 @@ public class LecturerPromotion extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("Congratulations! One of your Ph.D. students  just became a " +
+                "lecturer and a fully qualified researcher. Actually, " +
+                "he now prefers to be called “professor”.  Poor guy.   ");
     }
 
     @Override

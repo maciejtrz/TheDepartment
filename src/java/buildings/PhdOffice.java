@@ -182,7 +182,9 @@ public class PhdOffice extends Building {
 
     @Override
     public String getInfo() {
-        return ("PhDOffice");
+        return ("Ph.D. Office increases the population of your Ph.D. students. " +
+                "Possessing convenient and cosy offices without any access " +
+                "to the sun light allows you to recruit more of those batmans");
     }
 
     @Override

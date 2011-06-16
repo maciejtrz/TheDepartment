@@ -31,7 +31,11 @@ public class TrescoTragedy extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("Real tragedy! The amount of cheap food was extremely reduced " +
+                "in your local Tresco, due to the increase in the number of " +
+                "millionaires visiting to buy their pseudo organic food. " +
+                "The starvation of students increases. Oh well, it is high " +
+                "time for your students to destroy some Ferrari.  ");
     }
 
 

@@ -176,7 +176,10 @@ public class ProfessorsOffice extends Building {
 
     @Override
     public String getInfo() {
-        return ("ProfessorsOffice");
+        return ("Professors are the main source of your research power. " +
+                "This building allows you to recruit more professors for " +
+                "the benefit of your research and for the peril of " +
+                "your students.");
     }
 
     @Override

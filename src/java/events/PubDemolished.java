@@ -59,7 +59,12 @@ public class PubDemolished extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("Unfortunately, there was a “linux lovers” party yesterday at " +
+                "your pub. Unfortunately, some windows scums also came along. " +
+                "Unfortunately, both groups went crazy last night. As a result, " +
+                "your pub caught the so called “blue screen state”. It will " +
+                "have to be rebuilt as soon as it is taken apart due to the " +
+                "damage being too severe. ");
     }
 
     @Override

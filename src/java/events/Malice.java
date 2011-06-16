@@ -22,7 +22,13 @@ public class Malice extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("A disaster. Malice course work was release yesterday. You now " +
+                "see you undergraduates students outside the labs only on very " +
+                "special occasions. Even then, they spend most of their time " +
+                "crying quietly in some corner. The population of your students " +
+                "decreases. Also the population of Ph.D. decreases, as they are " +
+                "busy marking the damned thing (or rather pretending that they " +
+                "are marking).");
     }
 
     @Override

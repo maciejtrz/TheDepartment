@@ -30,7 +30,9 @@ public class MacChickenPromotion extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Lucky you. Your local MacChicken managed to produce a chicken " +
+                "with more than two legs. The food there became even cheaper, " +
+                "so the starvation level of you students decreases.";
     }
 
     @Override

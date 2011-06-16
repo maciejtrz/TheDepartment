@@ -33,7 +33,10 @@ public class BobTheBuilder extends Building {
 
     @Override
     public String getInfo() {
-        return ("Queens tower");
+        return ("This is the Queen's Tower building, the only remnant of the " +
+                "once great and beautiful Imperial Institute. Sadly, the " +
+                "institute had to be destroyed to “make place” for modern " +
+                "Imperial College London. Don't jump!. ");
     }
 
     @Override

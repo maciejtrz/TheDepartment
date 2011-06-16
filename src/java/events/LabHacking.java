@@ -28,7 +28,10 @@ public class LabHacking extends Event {
 
     @Override
     public String getInfo() {
-        return ("Labs hacked!");
+        return ("Bad news! Your labs have been hacked by some anonymous group of" +
+                " students. All of your student's personal information MAY have" +
+                " been leaked. Consequently, the satisfaction of your students " +
+                "considerably decreases.");
     }
 
     @Override

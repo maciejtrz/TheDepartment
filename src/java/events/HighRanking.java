@@ -42,7 +42,11 @@ public class HighRanking extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Good job. Some funny newspaper places your department in top " +
+                "ten computing departments in the country! All of you lecturers " +
+                "receive a +1 boost to their specializations. Unfortunately, " +
+                "your students do not believe in rankings any more. After all, " +
+                "they already have been tricked once...";
     }
 
     @Override

@@ -178,7 +178,11 @@ public class Laboratories  extends Building {
 
     @Override
     public String getInfo() {
-        return ("Labs");
+        return ("Laboratories are necessary for your students to do any useful " +
+                "work and use Facebook. " +
+                "With labs the performance of your students will slightly increase.  " +
+                "Labs also decreases the alcoholism of your students, as " +
+                "they do not have time to drink any more (which is sad)." );
     }
 
     @Override

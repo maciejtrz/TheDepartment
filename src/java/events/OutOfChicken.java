@@ -30,7 +30,10 @@ public class OutOfChicken extends Event {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ("Even in spite of a huge effort to increases the number of legs " +
+                "a single chicken can have, your MacChicken has managed to run " +
+                "out of legs. As a result, the starvation of your students " +
+                "increases.");
     }
 
     @Override

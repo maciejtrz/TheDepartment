@@ -232,7 +232,15 @@
         <managed-bean-class>buildings.BuildingBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
+    <navigation-rule>
+        <from-view-id>/Logged/Trades.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{tradeMessageWriter.sendTrade}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Play.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
 
 

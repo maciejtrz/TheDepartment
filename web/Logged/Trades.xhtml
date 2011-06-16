@@ -11,11 +11,16 @@
 
 
             <h:form>
+
+                <h:panelGrid columns="1" id="PrivateTradeWriter" >
                 <h:outputText value="To: " />
+
                 <h:selectOneMenu value="#{tradeMessageWriter.selectedReceiver}">
                     <f:selectItems value="#{tradeMessageWriter.receivers}"/>
                 </h:selectOneMenu>
 
+                <p:message for="PrivateTradeWriter" />
+               
                 <br/>
                 <h:outputText value="Title of the trade: "/>
                 <h:inputText value="#{tradeMessageWriter.subject}" />
@@ -28,6 +33,7 @@
                 <h:outputText value="Offered amount: "/>
                 <p:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" />
                 <p:slider for="offeredAmount"/>
+                <p:message for="offeredAmount" />
                 <br/>
                 <h:outputText value="Wanted resources:" />
                 <h:selectOneMenu value="#{tradeMessageWriter.resourcesWantedType}">
@@ -37,15 +43,26 @@
                 <h:outputText value="Wanted amount: "/>
                 <p:inputText id="wantedAmount" value="#{tradeMessageWriter.amountWanted}" />
                 <p:slider for="wantedAmount"/>
+                <p:message for="wantedAmount" />
                 <br/>
                 <h:outputText value="Trade description (arguments?)"/>
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                  value="#{tradeMessageWriter.tradeDescription}"/>
 
                 <h:outputText value="Expire date: "/>
-                <p:calendar value="#{tradeMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+                <p:calendar value="#{tradeMessageWriter.expireDate}"
+                            pattern="MM/dd/yyyy HH:mm"
+                            id="expireTradeOfferDate"/>
+                <p:message for="expireTradeOfferDate" />
 
-                <h:commandButton value="Make Trade Offer" actionListener="#{tradeMessageWriter.sendTrade}" />
+                <p:commandButton value="Make Trade Offer"
+                                 action="#{tradeMessageWriter.sendTrade}"
+                                 update="PrivateTradeWriter"
+                                 id="sendTradeOffer"/>
+
+                <p:message for="sendTradeOffer" />
+
+                </h:panelGrid>
             </h:form>
 
            

@@ -85,9 +85,11 @@ public class ResearchHelper extends AbstractHelper implements Serializable{
         Iterator<Research> iterator = q.list().iterator();
 
         while(iterator.hasNext()) {
+            Session sessionDelete = createNewSessionAndTransaction();
             Research research = iterator.next();
-            session = createNewSessionAndTransaction();
-            session.delete(research);
+            sessionDelete = createNewSessionAndTransaction();
+            sessionDelete.delete(research);
+            commitTransaction(sessionDelete);
             
         }
         commitTransaction(session);

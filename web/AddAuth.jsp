@@ -13,6 +13,5 @@
     auth.updateResearchPoints();
     session.setAttribute(ConnectionSingleton.Auth, auth);
 
-    System.out.println("Creating auth bean... username: " + auth.getUsername());
     AuthorizationSingleton.goToWelcomePage(response);
 %>

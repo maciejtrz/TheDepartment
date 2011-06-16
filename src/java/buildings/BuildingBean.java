@@ -5,6 +5,7 @@
 
 package buildings;
 
+import Connections.UserManager;
 import java.util.List;
 import utilities.BasicUtils;
 import utilities.BuildingsUtils;
@@ -14,16 +15,16 @@ import utilities.BuildingsUtils;
  *
  * @author pk2109
  */
-public class buildingBean {
+public class BuildingBean {
 
 
-    public int selectedNumber;
-    public List<Building> playersBuildings;
+    private Building selectedBuilding;
+    private List<Building> playersBuildings;
     private BuildingsUtils bs;
 
 
     /** Creates a new instance of buildingBean */
-    public buildingBean() {
+    public BuildingBean() {
         this.bs = new BuildingsUtils();
 
     }
@@ -38,16 +39,19 @@ public class buildingBean {
         this.playersBuildings=l;
     }
 
-    public int getSelectedNumber(){
-        return this.selectedNumber;
+    public Building getSelectedBuilding(){
+        return this.selectedBuilding;
     }
 
-    public void setSelectedNumber(int num){
-        this.selectedNumber=num;
+    public void setSelectedBuilding(Building building){
+        this.selectedBuilding = building;
     }
 
     public void submit(){
-        System.out.println("Submiting building query");
+        String playerName = utilities.BasicUtils.getUserName();
+        int position = UserManager.getBuilidngPosition(playerName);
+        selectedBuilding.build(playerName, position);
+        
     }
 
 

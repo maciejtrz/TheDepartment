@@ -194,9 +194,6 @@ public class TradeOffer extends Messagesystem implements Serializable, Comparabl
     }
 
     public boolean accept() {
-        System.out.println("Accepting...");
-        System.out.println("Sender: " + getSenderid());
-        System.out.println("Receiver: " + getReceiverid());
 
         boolean result = UserManager.makeTrade(this);
 
@@ -207,7 +204,6 @@ public class TradeOffer extends Messagesystem implements Serializable, Comparabl
     }
 
     public void decline() {
-        System.out.println("Declining...");
         finishOffer();
     }
 

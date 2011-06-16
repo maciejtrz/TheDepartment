@@ -13,7 +13,6 @@ public class Unlog implements Serializable {
 
     public String logoff() throws IOException {
 
-        System.out.println("Logging off...");
         AuthorizationSingleton.logoff();
 
         return "success";

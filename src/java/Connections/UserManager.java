@@ -20,8 +20,13 @@ import resources.ResourcesType;
 public class UserManager {
 
     /* Set of all user currently having sessions */
-    private static Map<String,Auth> sessionMap = new HashMap<String,Auth>();
-    private static Map<String,ResearchBag> sessionResearchBag = new HashMap<String,ResearchBag>();
+    private static Map<String,Auth> sessionMap;
+    private static Map<String,ResearchBag> sessionResearchBag;
+
+    static {
+       sessionMap = new HashMap<String,Auth>();
+       sessionResearchBag = new HashMap<String,ResearchBag>();
+    }
 
     public static boolean containsResearchBag(String username) {
         return sessionResearchBag.containsKey(username);
@@ -29,6 +34,28 @@ public class UserManager {
 
     public static ResearchBag getResearchBag(String username) {
         return sessionResearchBag.get(username);
+    }
+
+    public static void saveToDatabase() {
+
+        Iterator<String> iterator = sessionMap.keySet().iterator();
+        while(iterator.hasNext()) {
+            Auth auth = sessionMap.get(iterator.next());
+            saveToDatabase(auth.getResources());
+        }
+
+        iterator = sessionMap.keySet().iterator();
+        while(iterator.hasNext()) {
+            ResearchBag researchBag = sessionResearchBag.get(iterator.next());
+
+            ResearchHelper researchHelper = new ResearchHelper();
+            researchHelper.deleteAllResearches(researchBag.getUserid());
+
+            if (!researchBag.getAvailableResearch().isEmpty()) {
+                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
+           }
+        }
+
     }
 
     /* Singleton */
@@ -88,8 +115,7 @@ public class UserManager {
     }
 
     static public void removeResearchBag(String username) {
-        System.out.println("Is user monitored: " + isUserMonitored(username));
-       // System.out.println("Are all researches finished: " + )
+
 
         if(!isUserMonitored(username) && getResearchBag(username) != null 
                && getResearchBag(username).getResearches().isEmpty() ) {
@@ -100,7 +126,6 @@ public class UserManager {
             researchHelper.deleteAllResearches(researchBag.getUserid());
 
 
-            System.out.println("Writing researches to DB...");
             
             if (!researchBag.getAvailableResearch().isEmpty()) {
 
@@ -213,9 +238,6 @@ public class UserManager {
 
                 researchHelper.addResearch(researchInstance);
             }
-
-            System.out.println("Removing researchId: " + research.getId().getResearchid() +
-                    " at user id: " + research.getId().getIdname());
             
             researchHelper.deleteResearch(research);
     }
@@ -224,9 +246,6 @@ public class UserManager {
         
             ResearchBag researchBag = getResearchBag(research.getUserId());
             researchBag.getResearches().remove(research);
-
-            System.out.println("user mananger - userId: " + research.getUserId());
-            System.out.println("Size of researchs: " + researchBag.getResearches().size());
 
             Integer researchId = research.getId().getResearchid();
             ResearchTreeNode researchTreeNode =
@@ -246,19 +265,12 @@ public class UserManager {
     }
 
     static synchronized public void addResearch(Research research) {
-        System.out.println("Adding research points...");
         addResearchPoints(research.getUserId(),research.getResearchpoints());
 
         if(containsResearchBag(research.getUserId())) {
-            
-            System.out.println("Adding info about research to main memory");
             addResearchFromMemory(research);
-
         } else {
-
-            System.out.println("Adding info about research to DB");
             addResearchFromDB(research);
-
         }
 
            removeResearchBag(research.getUserId());
@@ -270,11 +282,6 @@ public class UserManager {
 
         Playerresources senResources = getResources(tradeOffer.getSenderid());
         Playerresources recResources = getResources(tradeOffer.getReceiverid());
-
-        System.out.println("Sender: " + tradeOffer.getSenderid());
-        System.out.println("Receiver: " + tradeOffer.getReceiverid());
-        System.out.println("senRersources null: " + (senResources == null));
-        System.out.println("recRersources null: " + (recResources == null));
 
         Resource resourceOffered = ResourcesType.getResourcesElement(tradeOffer.getResourcesOfferedType());
         Resource resourceWanted = ResourcesType.getResourcesElement(tradeOffer.getResourcesWantedType());
@@ -314,6 +321,15 @@ public class UserManager {
         }
 
         return result;
+    }
+
+    public static void setBuildingPosition(String username, int position) {
+        if(username != null && isUserMonitored(username))
+            getUser(username).setBuildingPosition(position);
+    }
+
+    public static int getBuilidngPosition(String username) {
+        return getUser(username).getBuildingPosition();
     }
 
 

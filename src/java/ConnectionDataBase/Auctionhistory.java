@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 14-Jun-2011 16:43:10 by Hibernate Tools 3.2.1.GA
+// Generated 15-Jun-2011 22:43:29 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -9,41 +9,23 @@ package ConnectionDataBase;
 public class Auctionhistory  implements java.io.Serializable {
 
 
-     private int auctionid;
-     private String bidder;
-     private int offer;
+     private AuctionhistoryId id;
      private long offertime;
 
     public Auctionhistory() {
     }
 
-    public Auctionhistory(int auctionid, String bidder, int offer, long offertime) {
-       this.auctionid = auctionid;
-       this.bidder = bidder;
-       this.offer = offer;
+    public Auctionhistory(AuctionhistoryId id, long offertime) {
+       this.id = id;
        this.offertime = offertime;
     }
    
-    public int getAuctionid() {
-        return this.auctionid;
+    public AuctionhistoryId getId() {
+        return this.id;
     }
     
-    public void setAuctionid(int auctionid) {
-        this.auctionid = auctionid;
-    }
-    public String getBidder() {
-        return this.bidder;
-    }
-    
-    public void setBidder(String bidder) {
-        this.bidder = bidder;
-    }
-    public int getOffer() {
-        return this.offer;
-    }
-    
-    public void setOffer(int offer) {
-        this.offer = offer;
+    public void setId(AuctionhistoryId id) {
+        this.id = id;
     }
     public long getOffertime() {
         return this.offertime;

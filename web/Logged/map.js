@@ -1,13 +1,3 @@
-function results(form) {
-  build("p"+form.place.value, form.btype.value);
-}
-
-// form value manipulation
-function changeSite(poly) {
-  no=getNumber(poly);
-  document.getElementById("place").value=no;
-}
-
 function build(site, building) {
   document.getElementById(site).src="img/" + building + ".png";
 }
@@ -15,6 +5,33 @@ function build(site, building) {
 // get area number from area object
 function getNumber(poly) {
   return poly.getAttribute("no");
+}
+
+// AJAX function
+function queryServer(position,fn)
+{
+  $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
+      fn(position, data);
+  });
+}
+
+function refreshAll() {
+  for (i=1;i<=16;i++) {
+  queryServer(i, refresh);
+  }
+}
+
+function refresh(position, building) {
+  build ("p"+position, building);
+}
+
+function clickSite(poly) {
+  no=getNumber(poly);
+  queryServer(no,dialog);
+}
+
+function dialog(position, building) {
+  eval(building + ".show()");
 }
 
 function over(poly) {

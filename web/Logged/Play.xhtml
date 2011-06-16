@@ -15,11 +15,14 @@ and open the template in the editor.
         <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
         <script type="text/javascript" src="map.js"></script>
+        <script type="text/javascript" src="jquery-1-6-1.js"></script>
         <p:resources/>
     </h:head>
 
+
     <body>
 
+        
         <ui:include src="Map.xhtml"/>
 
         <h:form>
@@ -60,7 +63,7 @@ and open the template in the editor.
 
         <h:form id="lform">
 
-            <p:menu id="lmenu" style="width: 200px">
+            <p:menu id="lmenu" style="width: 230px">
                 <p:submenu label="Messages">
                     <p:menuitem value="New" onclick="newmsg.show();"  />
                     <p:menuitem value="Inbox" onclick="readmsg.show();"   />
@@ -97,10 +100,6 @@ and open the template in the editor.
                     <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
                 </p:submenu>
 
-                <p:submenu label="TEST">
-                    <p:menuitem value="BUILDINGS" onclick="test.show()"/>
-                </p:submenu>
-
             </p:menu>
         </h:form>
 
@@ -111,7 +110,7 @@ and open the template in the editor.
         <ui:include src="Researches.xhtml"/>
         <ui:include src="Shop.xhtml"/>
         <ui:include src="Rankings.xhtml"/>
-        <ui:include src="dieBauten.xhtml"/>
+        <ui:include src="Buildings.xhtml"/>
 
     </body>
 </html>

@@ -14,8 +14,6 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
     public void sessionCreated(HttpSessionEvent se) {
 
-        System.out.println("Session creation...");
-
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
@@ -38,12 +36,10 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
             ResearchBag researchBag = (ResearchBag) event.getValue();
 
-            System.out.println("Removing research bag of: " + researchBag.getUserid());
             UserManager.removeResearchBag(researchBag.getUserid());
 
         } else if (event.getName().equals(ConnectionSingleton.Auth)) {
 
-            System.out.println("Removing auth in session listener");
             Auth auth = (Auth) event.getValue();
 
             UserManager.removeUser(auth.getUsername());

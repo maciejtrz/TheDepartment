@@ -15,4 +15,9 @@ public class BlindAuction extends Auction implements Serializable {
        return typeName;
     }
 
+    @Override
+    public String getHighestOfferedPrice() {
+        return "Blind Auction";
+    }
+
 }

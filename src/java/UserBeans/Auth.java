@@ -23,8 +23,17 @@ public class Auth implements Serializable {
     private Boolean remember;
     private boolean hasNewMessage;
     private Playerresources resources;
+    private int buildingPosition;
 
     public boolean logging;
+
+    public void setBuildingPosition(int buildingPosition) {
+         this.buildingPosition = buildingPosition;
+    }
+
+    public int getBuildingPosition() {
+        return buildingPosition;
+    }
 
     public String getPassword() {
         return password;
@@ -132,7 +141,7 @@ public class Auth implements Serializable {
 
         PlayerresourcesHelper playerResources = new PlayerresourcesHelper();
         resources = playerResources.getResources(username);
-        System.out.println("The name is: " + resources);
+
 
     }
 

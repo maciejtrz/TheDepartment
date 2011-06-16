@@ -44,7 +44,6 @@ public class Message extends Messagesystem implements Serializable  {
 
             receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
             users.add(player);
-            System.out.println(player.getIdname());
         }
 
         return receiverList;
@@ -52,8 +51,6 @@ public class Message extends Messagesystem implements Serializable  {
 
 
         public void send() {
-
-        System.out.println("Send method invoked");
 
         MessageSystemHelper msghelp = new MessageSystemHelper();
         msghelp.createMessage(getSenderid(), users.get(selectedReceiver).getIdname(), getSubject(),

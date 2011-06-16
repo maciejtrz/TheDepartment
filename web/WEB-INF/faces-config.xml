@@ -32,20 +32,20 @@
     <managed-bean>
         <managed-bean-name>auth</managed-bean-name>
         <managed-bean-class>UserBeans.Auth</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>UserBeans.User</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>addUser</managed-bean-name>
         <managed-bean-class>UserBeans.AddUser</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
 
 
@@ -89,8 +89,8 @@
     <managed-bean>
         <managed-bean-name>shop</managed-bean-name>
         <managed-bean-class>UserBeans.Shop</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>ranking</managed-bean-name>
@@ -108,13 +108,13 @@
     <managed-bean>
         <managed-bean-name>buyLecturers</managed-bean-name>
         <managed-bean-class>UserBeans.BuyLecturers</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>addBuildings</managed-bean-name>
         <managed-bean-class>UserBeans.AddBuildings</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <navigation-rule>
 
@@ -140,7 +140,7 @@
             <to-view-id>/Logged/Welcome.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        
+
     </navigation-rule>
 
     <navigation-rule>
@@ -182,12 +182,12 @@
         <managed-bean-class>messageSystem.NoticeMessageReader</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    
+
     <managed-bean>
         <managed-bean-name>department</managed-bean-name>
         <managed-bean-class>UserBeans.Department</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>message</managed-bean-name>
@@ -234,6 +234,7 @@
     </managed-bean>
 
 </faces-config>
+
 
 
 

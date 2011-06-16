@@ -88,8 +88,9 @@ public class ResearchHelper extends AbstractHelper implements Serializable{
             Research research = iterator.next();
             session = createNewSessionAndTransaction();
             session.delete(research);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
 
     }
 

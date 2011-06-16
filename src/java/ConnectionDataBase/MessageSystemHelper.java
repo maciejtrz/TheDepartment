@@ -64,8 +64,9 @@ public class MessageSystemHelper extends AbstractHelper {
 
         if (msg != null) {
             session.saveOrUpdate(msg);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
 

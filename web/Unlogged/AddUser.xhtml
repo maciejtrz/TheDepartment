@@ -47,28 +47,38 @@ and open the template in the editor.
 
  <h:form>
                 <p:panel>
-                <h:panelGrid id="lpg" columns="2" >
+                <h:panelGrid id="addUserPanel" columns="2" >
                       
                     <h:outputText value="Username: "/>
                     <p:inputText id="username"
                                  value="#{addUser.id}"/>
+                    <p:message for="username"/>
 
                     <h:outputText value="Password: "/>
-                    <p:password value="#{addUser.password}" minLength="5" />
+                    <p:password value="#{addUser.password}" minLength="5"
+                                id="password"/>
+                    <p:message for="password"/>
 
                     <h:outputText value="Confirm password: "/>
                     <p:password feedback="false" minLength="5" id="password2"
                                    value="#{addUser.password2}" />
+                    <p:message for="password2" />
 
                     <h:outputText value="E-mail: "/>
-                    <p:inputText id="email"
+                    <p:inputText   id="email"
                                    value="#{addUser.email}" />
-
+                    <p:message for="email" />
 
                     <p:commandButton action="#{addUser.insert}"
-                                     value = "Add User"/>
-  
+                                     value = "Add User"
+                                     update="submitUser,errorInfo"
+                                     id="addUserPanel"/>
                 </h:panelGrid>
+
+                    <h:panelGrid id="errorInfo">
+                        <p:message for="addUserPanel"/>
+                        </h:panelGrid>
+
                 </p:panel>
 
             </h:form>

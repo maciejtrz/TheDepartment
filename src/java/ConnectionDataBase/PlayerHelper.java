@@ -49,8 +49,9 @@ public class PlayerHelper extends AbstractHelper {
         if (player != null) {
             player.setLoggedin(logged);
             session.saveOrUpdate(player);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
 
     }
 
@@ -69,8 +70,13 @@ public class PlayerHelper extends AbstractHelper {
 
         if(player != null) {
             session.delete(player);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
+    }
+
+    public boolean existsPlayer(String username) {
+        return getPlayer(username) != null;
     }
 
 

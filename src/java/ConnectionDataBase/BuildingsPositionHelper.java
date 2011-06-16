@@ -48,8 +48,9 @@ public class BuildingsPositionHelper extends AbstractHelper {
         Buildingsposition bp = (Buildingsposition) q.uniqueResult();
         if (bp !=null) {
             session.delete(bp);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     // Used to overide the given position with give building code.
@@ -61,8 +62,9 @@ public class BuildingsPositionHelper extends AbstractHelper {
         Buildingsposition bp = (Buildingsposition) q.uniqueResult();
         if (bp != null) {
             bp.setPos(newValue, building);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     // Returns the acronym of building that occupies given position.
@@ -75,6 +77,7 @@ public class BuildingsPositionHelper extends AbstractHelper {
         if (bp != null) {
             output = bp.getPos(position);
         }
+        commitTransaction(session);
         return output;
     }
 
@@ -89,6 +92,7 @@ public class BuildingsPositionHelper extends AbstractHelper {
             String result = bp.getPos(position);
             return (result == null);
         }
+        commitTransaction(session);
         return false;
 
     }
@@ -113,6 +117,7 @@ public class BuildingsPositionHelper extends AbstractHelper {
                 }
             }
         }
+        commitTransaction(session);
         return output;
     }
 

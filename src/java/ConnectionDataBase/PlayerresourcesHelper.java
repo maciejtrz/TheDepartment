@@ -73,8 +73,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setMoney(newValue);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     public void deleteResources(String idname) {
@@ -85,8 +86,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resources = (Playerresources) q.uniqueResult();
         if (resources != null) {
             session.delete(resources);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
 
     }
 
@@ -99,8 +101,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resources = (Playerresources) q.uniqueResult();
         if (resources != null) {
             resources.setResearchpoints(resources.getResearchpoints() + researchpoints);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     public void saveOrUpdate(Playerresources resources) {
@@ -117,8 +120,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setPhdsnumber(phds);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     public void updateUndergraduatesnumber(String idname, int students) {
@@ -128,8 +132,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Playerresources resource = (Playerresources) q.uniqueResult();
         if (resource != null) {
             resource.setUndergraduatesnumber(students);
-            commitTransaction(session);
+            
         }
+        commitTransaction(session);
     }
 
     public void updateResources(Playerresources resources) {

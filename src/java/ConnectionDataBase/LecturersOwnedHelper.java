@@ -14,6 +14,7 @@ public class LecturersOwnedHelper extends AbstractHelper {
         Query q = session.createQuery("from Lecturersowned where"
                  + " idname = '" + idname + "'" );
         output_list = (List<Lecturersowned>)q.list();
+        commitTransaction(session);
 
         return output_list;
     }
@@ -33,7 +34,8 @@ public class LecturersOwnedHelper extends AbstractHelper {
         Lecturersowned  lecturer_record = (Lecturersowned ) q.uniqueResult();
         if (lecturer_record != null) {
             session.delete(lecturer_record);
-            super.commitTransaction(session);
+            
         }
+        super.commitTransaction(session);
     }
 }

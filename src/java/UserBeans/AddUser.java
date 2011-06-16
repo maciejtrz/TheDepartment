@@ -5,6 +5,9 @@ import ConnectionDataBase.PlayerresourcesHelper;
 import ConnectionDataBase.ResearchHelper;
 import Connections.EncodingSingleton;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import utilities.BasicUtils;
 
 
 public class AddUser implements Serializable  {
@@ -51,13 +54,68 @@ public class AddUser implements Serializable  {
     }
 
     public String insert() {
+        boolean error = false;
+
         try {
             username = username.trim();
             password = password.trim();
             password2 = password2.trim();
             email=email.trim();
 
-            if ( validatePassword() && validateEmail() ) {
+
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+
+            PlayerHelper playerHelper = new PlayerHelper();
+
+            if(username.length() == 0) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"username").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "Login is required!"));
+
+                error = true;
+            }else if(!playerHelper.existsPlayer(username)) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"username").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "There is already user name " + username + "!"));
+
+                error = true;
+            }
+
+            if(password.length() == 0) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"password").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Password error", "Password is required!"));
+
+                error = true;
+            }
+
+            if(password2.length() == 0) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"password2").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Repeated password error", "Repeated password is required!"));
+
+                error = true;
+            }
+
+            if(email.length() == 0) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"email").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Email error", "Email is required!"));
+
+                error = true;
+            }
+
+            if(email.length() != 0 && !validateEmail()) {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"email").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Email error type", "Incorrect email!"));
+
+                error = true;
+            }
+
+            if(!error) {
+            if (validatePassword()) {
 
                 String encodedPassword = EncodingSingleton.encodePassword(password);
                 PlayerHelper player = new PlayerHelper();
@@ -70,12 +128,23 @@ public class AddUser implements Serializable  {
                 researchHelper.initializedResearchTree(username);
 
             }
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"addUserPanel").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Passwords do nat match", "Passwords do not match!"));
+
+                error = true;
+            }
 
         } catch (Exception e) {
             System.out.println(e.toString());
         }
 
-        return "success";
+        String result = null;
+        if(!error)
+            result = "success";
+
+        return result;
     }
 
 

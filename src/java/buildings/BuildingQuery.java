@@ -43,6 +43,7 @@ public class BuildingQuery extends HttpServlet {
                = request.getSession().getAttribute(ConnectionSingleton.idname).toString();
 
             String output = helper.getAtPosition(userName, position);
+            System.out.println("AT " + position + " WE HAVE: " + output);
             if ( output == null) {
                 out.print("nop");
             }

@@ -202,7 +202,7 @@
 
         <p:dialog header="Building Site" widgetVar="nop" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false"
-                  onHide="refreshAll()">
+                  onCloseUpdate="refreshAll()" onHide="refreshAll()">
             <h:form>
             <p:carousel value="#{buildingbean.playersBuildings}" var="building"
                         rows="1" itemStyle="height:400px;width:600px;" effect="easeInStrong">
@@ -226,9 +226,6 @@
             </p:carousel>
             </h:form>
         </p:dialog>
-
-
-
 
     </ui:component>
 </html>

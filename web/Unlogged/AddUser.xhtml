@@ -47,7 +47,7 @@ and open the template in the editor.
 
  <h:form>
                 <p:panel>
-                <h:panelGrid id="addUserPanel" columns="2" >
+                <h:panelGrid id="addUserPanel" columns="3" >
                       
                     <h:outputText value="Username: "/>
                     <p:inputText id="username"
@@ -71,7 +71,7 @@ and open the template in the editor.
 
                     <p:commandButton action="#{addUser.insert}"
                                      value = "Add User"
-                                     update="submitUser,errorInfo"
+                                     update="addUserPanel,errorInfo"
                                      id="addUserButton"/>
                 </h:panelGrid>
 

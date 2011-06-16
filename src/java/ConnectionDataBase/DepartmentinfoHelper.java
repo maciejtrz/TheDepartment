@@ -56,4 +56,16 @@ public class DepartmentinfoHelper extends AbstractHelper {
 
     }
 
+    public boolean departmentExists(String name) {
+        Session session = createNewSessionAndTransaction();
+
+        Query q = session.createQuery("from Departmentinfo where name='"
+                + name + "'");
+        boolean existsDepartment = !q.list().isEmpty();
+
+        commitTransaction(session);
+
+        return existsDepartment;
+    }
+
 }

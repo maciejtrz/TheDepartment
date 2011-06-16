@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import utilities.BasicUtils;
 
 public class Auth implements Serializable {
 
@@ -86,22 +87,6 @@ public class Auth implements Serializable {
         return "go";
     }
 
-    private UIComponent findComponent(UIComponent parent, String id) {
-        if(id.equals(parent.getId())) {
-                return parent;
-        }
-        Iterator<UIComponent> kids = parent.getFacetsAndChildren();
-        while(kids.hasNext()) {
-                UIComponent kid = kids.next();
-                UIComponent found = findComponent(kid, id);
-                if(found != null) {
-                        return found;
-                }
-        }
-        return null;
-    }
-
-
     public String validate() throws SQLException {
         username = username.trim();
         password = password.trim();
@@ -116,7 +101,7 @@ public class Auth implements Serializable {
         if(username == null || username.length() == 0) {
 
             FacesContext.getCurrentInstance().addMessage(
-                findComponent(facesContext.getViewRoot(),"username").getClientId(facesContext),
+                BasicUtils.findComponent(facesContext.getViewRoot(),"username").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "Login is required!"));
 
             error = true;
@@ -125,7 +110,7 @@ public class Auth implements Serializable {
         if(password == null || password.length() == 0) {
 
             FacesContext.getCurrentInstance().addMessage(
-                findComponent(facesContext.getViewRoot(),"password").getClientId(facesContext),
+                BasicUtils.findComponent(facesContext.getViewRoot(),"password").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,"Password error", "Password is required!"));
 
             error = true;
@@ -141,7 +126,7 @@ public class Auth implements Serializable {
         } else if(!error) {
 
             FacesContext.getCurrentInstance().addMessage(
-                    findComponent(facesContext.getViewRoot(),"submit").getClientId(facesContext),
+                    BasicUtils.findComponent(facesContext.getViewRoot(),"submit").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login error", "Login or password incorrent!"));
 
 

@@ -17,8 +17,10 @@ import Connections.ConnectionSingleton;
 import events.LotteryManager;
 import java.io.Serializable;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import utilities.BasicUtils;
 
 
 
@@ -96,18 +98,34 @@ public class Department implements Serializable {
 
     public String addDepartment() throws SQLException {
 
-        if(getName() == null || getName().trim().length() == 0)
-            return "failure";
-
-        setName(getName().trim());
-
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+        if(getName() == null || getName().trim().length() == 0) {
+            FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"departmentName").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"Department Error", "Department Name is required!"));
+
+            return null;
+        }
+            
+        setName(getName().trim());
+
+        
         String playerName = session.getAttribute(ConnectionSingleton.idname).toString();
 
         /* Populating DepartmentInfo table. */
         DepartmentinfoHelper departmentInfo = new DepartmentinfoHelper();
+
+        if(departmentInfo.departmentExists(getName())) {
+            FacesContext.getCurrentInstance().addMessage(
+                BasicUtils.findComponent(facesContext.getViewRoot(),"departmentName").getClientId(facesContext),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,"departmentInfo",
+                "Departmanet named " + getName() +" already exists!"));
+
+            return null;
+        }
+
         departmentInfo.createDepartment(playerName,getName());
 
         BuildingsHelper buildinghelper = new BuildingsHelper();

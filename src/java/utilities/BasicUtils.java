@@ -1,6 +1,8 @@
 package utilities;
 
 import Connections.ConnectionSingleton;
+import java.util.Iterator;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -24,5 +26,20 @@ public class BasicUtils {
 
         return userName;
 
+    }
+
+    public static UIComponent findComponent(UIComponent parent, String id) {
+        if(id.equals(parent.getId())) {
+                return parent;
+        }
+        Iterator<UIComponent> kids = parent.getFacetsAndChildren();
+        while(kids.hasNext()) {
+                UIComponent kid = kids.next();
+                UIComponent found = findComponent(kid, id);
+                if(found != null) {
+                        return found;
+                }
+        }
+        return null;
     }
 }

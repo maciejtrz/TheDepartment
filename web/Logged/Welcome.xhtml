@@ -29,12 +29,19 @@ and open the template in the editor.
             <h:form>
                 
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:panelGrid>
+                        <h:panelGrid id="departmentGrid">
                         <h:outputText value="Enter department name" /> <br/>
-                        <p:inputText value="#{department.name}" /> <br/>
-                        <p:commandButton value="Create Department" action="#{department.addDepartment}"/>
+                        <p:inputText value="#{department.name}" id="departmentName"/> <br/>
+                        <p:message for="departmentName" />
                         </h:panelGrid>
+                        <p:commandButton value="Create Department" 
+                                         action="#{department.addDepartment}"
+                                         id="departmentInfo"
+                                         update="departmentGrid, errorInfo"/>
                     </h:panelGroup>
+                <h:panelGrid id="errorInfo">
+                    <p:message for="departmentInfo"/>
+                </h:panelGrid>
                 
             </h:form>
 

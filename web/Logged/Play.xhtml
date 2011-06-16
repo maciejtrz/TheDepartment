@@ -90,7 +90,6 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu label="Department">
-                    <p:menuitem value="Rankings" onclick="ranking.show()"/>
                     <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
                     <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
                     <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
@@ -104,12 +103,10 @@ and open the template in the editor.
         </h:form>
 
 
-
         <ui:include src="Messages.xhtml"/>
         <ui:include src="Trades.xhtml"/>
         <ui:include src="Researches.xhtml"/>
         <ui:include src="Shop.xhtml"/>
-        <ui:include src="Rankings.xhtml"/>
         <ui:include src="Buildings.xhtml"/>
 
     </body>

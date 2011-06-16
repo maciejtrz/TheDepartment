@@ -16,10 +16,10 @@
                     <p:tab title="Reaserch Points">
                         <h:form>
 
-                            <p:dataTable id="moneyRanking" var="rowInput" value="#{researchranking.list}">
+                            <p:dataTable id="researchRanking" var="rowInput" value="#{ranking.research}">
 
                                 <p:column headerText="Position">
-                                    <h:outputText value="#{researchranking.playerPosition}" />
+                                    <h:outputText value="#{ranking.researchpos}" />
                                 </p:column>
 
                                 <p:column headerText="Player ID ">
@@ -36,10 +36,10 @@
                     <p:tab title="Wealth">
                         <h:form>
 
-                            <p:dataTable id="moneyRanking" var="rowInput" value="#{moneyranking.list}">
+                            <p:dataTable id="moneyRanking" var="rowInput" value="#{ranking.money}">
 
                                 <p:column headerText="Position">
-                                    <h:outputText value="#{moneyranking.playerPosition}" />
+                                    <h:outputText value="#{ranking.monetpos}" />
                                 </p:column>
 
                                 <p:column headerText="Player ID ">
@@ -55,10 +55,10 @@
                     <p:tab title="Students">
                         <h:form>
 
-                            <p:dataTable id="student" var="rowInput" value="#{studentsranking.list}">
+                            <p:dataTable id="student" var="rowInput" value="#{ranking.students}">
 
                                 <p:column headerText="Position">
-                                    <h:outputText value="#{studentsranking.playerPosition}" />
+                                    <h:outputText value="#{ranking.studentpos}" />
                                 </p:column>
 
                                 <p:column headerText="Player ID ">
@@ -76,10 +76,10 @@
                     <p:tab title="PhDs">
                         <h:form>
 
-                            <p:dataTable id="phdsRanking" var="rowInput" value="#{phdsranking.list}">
+                            <p:dataTable id="phdsRanking" var="rowInput" value="#{ranking.phds}">
 
                                 <p:column headerText="Position">
-                                    <h:outputText value="#{phdsranking.playerPosition}" />
+                                    <h:outputText value="#{ranking.phdspos}" />
                                 </p:column>
 
                                 <p:column headerText="Player ID ">

@@ -42,10 +42,8 @@ public class BuildingQuery extends HttpServlet {
             String userName 
                = request.getSession().getAttribute(ConnectionSingleton.idname).toString();
 
-            BuildingFactory factory = new BuildingFactory();
-            factory.getMacChicken().remove(userName, 5);
-            factory.getTresco().remove(userName, 4);
             String output = helper.getAtPosition(userName, position);
+            System.out.println("AT " + position + " WE HAVE: " + output);
             if ( output == null) {
                 out.print("nop");
             }

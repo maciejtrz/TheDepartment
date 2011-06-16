@@ -94,13 +94,13 @@ public class LectureRoom extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -173,6 +173,17 @@ public class LectureRoom extends Building {
         }
 
         return true;
+    }
+
+    @Override
+    public String getInfo() {
+        return ("Lecturer Room");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LEVELS
+        return (this.CODE_LECTURER_ROOM_1);
     }
 
 

@@ -312,6 +312,7 @@ public class UserManager {
         }
     }
 
+
     public static boolean hasNewMessage(String username) {
         boolean result = false;
 
@@ -323,13 +324,23 @@ public class UserManager {
         return result;
     }
 
+
     public static void setBuildingPosition(String username, int position) {
-        if(username != null && isUserMonitored(username))
+        Auth auth = getUser(username);
+        if (auth != null) {
             getUser(username).setBuildingPosition(position);
+        }
+
     }
 
     public static int getBuilidngPosition(String username) {
-        return getUser(username).getBuildingPosition();
+        Auth auth = getUser(username);
+        if (auth != null) {
+            return getUser(username).getBuildingPosition();
+        }
+        else {
+            return 0;
+        }
     }
 
 

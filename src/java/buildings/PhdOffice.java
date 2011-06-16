@@ -97,13 +97,13 @@ public class PhdOffice extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -180,5 +180,15 @@ public class PhdOffice extends Building {
     }
 
 
+    @Override
+    public String getInfo() {
+        return ("PhDOffice");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_PHD_OFFICE_1);
+    }
 
 }

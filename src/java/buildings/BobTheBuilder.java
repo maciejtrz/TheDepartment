@@ -21,7 +21,7 @@ public class BobTheBuilder extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
         /* Not supported*/
         return new BuildingInfo(false, "Already built!");
     }
@@ -29,6 +29,16 @@ public class BobTheBuilder extends Building {
     @Override
     public boolean upgrade(String playerName, int position) {
         return false;
+    }
+
+    @Override
+    public String getInfo() {
+        return ("Queens tower");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BOB);
     }
 
 }

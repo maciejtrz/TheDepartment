@@ -6,8 +6,8 @@
 package buildings;
 
 import Connections.UserManager;
+import java.io.Serializable;
 import java.util.List;
-import utilities.BasicUtils;
 import utilities.BuildingsUtils;
 
 
@@ -15,44 +15,33 @@ import utilities.BuildingsUtils;
  *
  * @author pk2109
  */
-public class BuildingBean {
+public class BuildingBean implements Serializable {
 
 
-    private Building selectedBuilding;
     private List<Building> playersBuildings;
-    private BuildingsUtils bs;
-
+    private BuildingsUtils utils;
 
     /** Creates a new instance of buildingBean */
     public BuildingBean() {
-        this.bs = new BuildingsUtils();
+        utils = new BuildingsUtils();
+        String playerName = utilities.BasicUtils.getUserName();
+        playersBuildings= utils.getAvailableBuildings(playerName);
 
     }
 
     public List<Building> getPlayersBuildings(){
 
-        setPlayersBuildings(bs.getAvailableBuildings(BasicUtils.getUserName()));
-        return this.playersBuildings;
+        return playersBuildings;
     }
 
-    public void setPlayersBuildings(List<Building> l){
-        this.playersBuildings=l;
-    }
-
-    public Building getSelectedBuilding(){
-        return this.selectedBuilding;
-    }
-
-    public void setSelectedBuilding(Building building){
-        this.selectedBuilding = building;
-    }
-
-    public void submit(){
+    public void setDoSelect(Building s) {
+        System.out.println("Selected building: " + s.getInfo());
         String playerName = utilities.BasicUtils.getUserName();
+        System.out.println("For player " + playerName);
         int position = UserManager.getBuilidngPosition(playerName);
-        selectedBuilding.build(playerName, position);
-        
+        System.out.println("At position: " + position);
+        s.build(playerName, position);
+        playersBuildings = utils.getAvailableBuildings(playerName);
     }
-
 
 }

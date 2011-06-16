@@ -88,12 +88,12 @@ public class StudentUnion extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -116,6 +116,16 @@ public class StudentUnion extends Building {
     @Override
     public boolean upgrade(String playerName, int position) {
         return false;
+    }
+
+    @Override
+    public String getInfo() {
+        return ("Student Union");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_UNION);
     }
 
 }

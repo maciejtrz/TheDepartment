@@ -97,14 +97,14 @@ public class Brain extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
 
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -134,4 +134,13 @@ public class Brain extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("BrAiN");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BRAIN);
+    }
 }

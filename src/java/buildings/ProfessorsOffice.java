@@ -94,13 +94,13 @@ public class ProfessorsOffice extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -172,5 +172,16 @@ public class ProfessorsOffice extends Building {
         }
 
         return true;
+    }
+
+    @Override
+    public String getInfo() {
+        return ("ProfessorsOffice");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_PROF_OFFICE_1);
     }
 }

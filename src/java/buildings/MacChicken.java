@@ -93,13 +93,13 @@ public class MacChicken extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
 
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo result = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo result = checkMoney(playerName);
         if (!result.getResult()) {
             return result;
         }
@@ -127,6 +127,17 @@ public class MacChicken extends Building {
     @Override
     public boolean upgrade(String playerName, int position) {
         return false;
+    }
+
+    @Override
+    public String getInfo() {
+        return ("MacChicken");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_MAC_CHICKEN_1);
     }
 
 }

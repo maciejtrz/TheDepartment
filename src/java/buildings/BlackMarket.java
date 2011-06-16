@@ -24,7 +24,7 @@ public class BlackMarket extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
         /* Not supported*/
         return new BuildingInfo(false, "Already built!");
     }
@@ -33,6 +33,18 @@ public class BlackMarket extends Building {
     public boolean upgrade(String playerName, int position) {
         return false;
     }
+
+    @Override
+    public String getInfo() {
+        return ("Black Market");
+    }
+
+    @Override
+    public String getPicture() {
+        return (this.CODE_BLACK_MARKET);
+    }
+
+
 
 
 }

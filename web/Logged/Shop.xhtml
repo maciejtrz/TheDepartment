@@ -9,7 +9,9 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <p:carousel value="#{buyLecturers.lecturers}" var="naukowiec"
-                        rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong">
+                        rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong"
+                        >
+                <p:column>
                 <h:panelGrid columns="2" style="width:100% ; height:100%">
 
                     <p:graphicImage value="/images/pic2.jpeg"/>
@@ -24,6 +26,7 @@
 
 
                 </h:panelGrid>
+                </p:column>
             </p:carousel>
 
         </p:dialog>

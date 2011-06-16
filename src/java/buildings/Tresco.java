@@ -92,12 +92,12 @@ public class Tresco extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
         BuildingsHelper buildingsHelper
                 = new BuildingsHelper();
 
         // Checking money and position.
-        BuildingInfo info = checkMoneyAndPositionInfo(playerName, position);
+        BuildingInfo info = checkMoney(playerName);
         if (!info.getResult()) {
             return info;
         }
@@ -122,4 +122,14 @@ public class Tresco extends Building {
         return false;
     }
 
+    @Override
+    public String getInfo() {
+        return ("Tresco");
+    }
+
+    @Override
+    public String getPicture() {
+        // TODO CHANGE CODE ON LVLS
+        return (this.CODE_TRESCO);
+    }
 }

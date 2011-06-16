@@ -14,6 +14,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
+            <link rel="shortcut icon" href="../ac.png"/>
         <script type="text/javascript" src="map.js"></script>
         <script type="text/javascript" src="jquery-1-6-1.js"></script>
         <p:resources/>
@@ -52,7 +53,7 @@ and open the template in the editor.
 
                 <p:toolbarGroup align="right">
 
-                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{unlog.logoff}" value="Log out" />
+                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{user.logoff}" value="Log out" />
                 </p:toolbarGroup>
 
             </p:toolbar>
@@ -92,7 +93,7 @@ and open the template in the editor.
                 <p:submenu label="Department">
                     <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
                     <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
-                    <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
+                    <p:menuitem value="Log out" action="#{user.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
                 </p:submenu>
 
                 <p:submenu label="User">
@@ -101,6 +102,7 @@ and open the template in the editor.
 
             </p:menu>
         </h:form>
+
 
 
         <ui:include src="Messages.xhtml"/>

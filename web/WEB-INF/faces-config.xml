@@ -139,15 +139,17 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
-
     <navigation-rule>
-        <from-view-id>/Logged/Play.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{unlog.logoff}</from-action>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+    </navigation-rule>
 
+
+    <navigation-rule>
+        <from-view-id>/Logged/Play.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{user.deleteMe}</from-action>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>

@@ -22,6 +22,10 @@ public class DeamonManager {
     private static volatile boolean stats_deamon_started = false;
     private static Thread stats_deamon = null;
 
+    /* Ranking thread's control variables. */
+    private static volatile boolean ranking_deamon_started = false;
+    private static Thread ranking_deamon = null;
+
     private DeamonManager() {
 
     }
@@ -58,6 +62,15 @@ public class DeamonManager {
             stats_deamon_started = true;
             stats_deamon = new StatsDeamon();
             stats_deamon.start();
+        }
+    }
+
+    public synchronized void createRankingDeamon() {
+        if (!ranking_deamon_started && ranking_deamon == null) {
+            ranking_deamon_started = true;
+            ranking_deamon = new Thread(new RankingDeamon());
+            ranking_deamon.start();
+
         }
     }
 

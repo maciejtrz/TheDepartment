@@ -93,28 +93,11 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>moneyranking</managed-bean-name>
-        <managed-bean-class>rankings.MoneyRanking</managed-bean-class>
+        <managed-bean-name>ranking</managed-bean-name>
+        <managed-bean-class>rankings.Rankings</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
-     <managed-bean>
-        <managed-bean-name>researchranking</managed-bean-name>
-        <managed-bean-class>rankings.ResearchPointsRanking</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
-     <managed-bean>
-        <managed-bean-name>studentsranking</managed-bean-name>
-        <managed-bean-class>rankings.StudentsRanking</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>phdsranking</managed-bean-name>
-        <managed-bean-class>rankings.PhDsRanking</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
 
 
     <managed-bean>

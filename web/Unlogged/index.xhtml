@@ -7,7 +7,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <title>The Department</title>
@@ -30,7 +31,7 @@ and open the template in the editor.
 <div id="menu">
 	<ul>
 		<li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
-		<li class="last"><a href="about:blank">More...</a></li>
+                <li class="last"><a onclick="ranking.show()">Rankings</a></li>
 	</ul>
 </div>
 
@@ -79,5 +80,7 @@ krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.stylesh
 	</div>
 </div>
 
+
+                    <ui:include src="Rankings.xhtml"/>
         </body>
     </html>

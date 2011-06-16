@@ -53,7 +53,7 @@ and open the template in the editor.
 
                 <p:toolbarGroup align="right">
 
-                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{unlog.logoff}" value="Log out" />
+                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{user.logoff}" value="Log out" />
                 </p:toolbarGroup>
 
             </p:toolbar>
@@ -94,7 +94,7 @@ and open the template in the editor.
                     <p:menuitem value="Rankings" onclick="ranking.show()"/>
                     <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
                     <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
-                    <p:menuitem value="Log out" action="#{unlog.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
+                    <p:menuitem value="Log out" action="#{user.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
                 </p:submenu>
 
                 <p:submenu label="User">

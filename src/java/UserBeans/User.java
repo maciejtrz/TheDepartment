@@ -37,10 +37,11 @@ public class User implements Serializable {
 
         return "success";
     }
-
-    private void logoff() throws IOException {
+    
+    public String logoff() throws IOException {
 
         AuthorizationSingleton.logoff();
-
+        return "success";
     }
+
 }

@@ -36,12 +36,6 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>unlog</managed-bean-name>
-        <managed-bean-class>UserBeans.Unlog</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>UserBeans.User</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
@@ -140,11 +134,13 @@
     </managed-bean>
 
     <navigation-rule>
+
         <navigation-case>
-            <from-action>#{unlog.logoff}</from-action>
+            <from-action>#{user.logoff}</from-action>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+
     </navigation-rule>
 
 
@@ -165,8 +161,8 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Logged/Welcome.xhtml</from-view-id>
 
+        <from-view-id>/Logged/Welcome.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{department.addDepartment}</from-action>
             <from-outcome>success</from-outcome>
@@ -251,8 +247,9 @@
     <managed-bean>
         <managed-bean-name>buildingbean</managed-bean-name>
         <managed-bean-class>buildings.BuildingBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 </faces-config>
 
 

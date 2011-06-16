@@ -14,7 +14,6 @@ public class Unlog implements Serializable {
     public String logoff() throws IOException {
 
         AuthorizationSingleton.logoff();
-
         return "success";
     }
 

@@ -9,6 +9,7 @@ import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import buildings.Building;
 import buildings.BuildingFactory;
+import buildings.Laboratories;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,40 +25,50 @@ public class BuildingsUtils {
 
         BuildingFactory factory = new BuildingFactory();
 
-        if (!isLabBuilt(playerName)) {
-            buildings.add(factory.getLabs());
+        Building building = factory.getLabs();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isBrainBuilt(playerName)) {
-            buildings.add(factory.getBrain());
+        building = factory.getBrain();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isDocPubBuilt(playerName)) {
-            buildings.add(factory.getPub());
+
+        building = factory.getLecturerRoom();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isLecturerRoomBuilt(playerName)) {
-            buildings.add(factory.getLecturerRoom());
+        building = factory.getMacChicken();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isMacChickenBuilt(playerName)) {
-            buildings.add(factory.getMacChicken());
+        building = factory.getPdhOffice();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isPhdOfficeBuilt(playerName)) {
-            buildings.add(factory.getPdhOffice());
+        building = factory.getProfOffice();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isProfessorsOfficeBuilt(playerName)) {
-            buildings.add(factory.getProfOffice());
+        building = factory.getPub();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isStudentUnionBuilt(playerName)) {
-            buildings.add(factory.getStudentUnion());
+        building = factory.getStudentUnion();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
-        if (!isTrescoBuilt(playerName)) {
-            buildings.add(factory.getTresco());
+        building = factory.getTresco();
+        if (building.isAllowedToBuild(playerName).getResult()) {
+            buildings.add(building);
         }
 
         return buildings;

@@ -21,7 +21,7 @@ public class BobTheBuilder extends Building {
     }
 
     @Override
-    public BuildingInfo isAllowedToBuild(String playerName, int position) {
+    public BuildingInfo isAllowedToBuild(String playerName) {
         /* Not supported*/
         return new BuildingInfo(false, "Already built!");
     }

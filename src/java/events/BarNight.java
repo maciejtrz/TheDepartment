@@ -27,14 +27,14 @@ public class BarNight extends Event {
 
     @Override
     public String getInfo() {
-        return "Poor manager. Your undergraduate studetns decided to" +
-                " organazie the DOCSOC Bar Night event. As a result, everyone" +
-                " got drunk and went crazy. Fortunately for you," +
-                " the union pub is still standing, but the level of" +
-                " alcoholizm of the students has drastically increased. On the" +
-                " other hand, student satisfaction also increases. Oddly enough," +
-                " although PhD students do not generally have life, a few of" +
-                " them managed to join as well." ;
+        return  "Poor manager. Your undergraduate students decided to organize " +
+                "the DOCSOC Bar Night event. As a result, " +
+                "everyone got drunk and went crazy. Fortunately for you, " +
+                "the union pub is still standing, but the level of alcoholism " +
+                "of the students has drastically increased. On the other hand, " +
+                "student satisfaction also increases. Oddly enough, although " +
+                "Ph.D. students do not generally have life, a few of them " +
+                "managed to join as well." ;
     }
 
     @Override

@@ -2,6 +2,7 @@ package buildings;
 
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
+import Connections.UserManager;
 import utilities.BuildingInfo;
 
 
@@ -63,7 +64,7 @@ public abstract class Building {
     public abstract boolean upgrade(String playerName , int position);
     /* Upgrades the building by one level. */
 
-    public abstract BuildingInfo isAllowedToBuild(String playerName, int position);
+    public abstract BuildingInfo isAllowedToBuild(String playerName);
     /* Informs whether a given player is allowed to build anything on
        a free position. */
 
@@ -94,32 +95,14 @@ public abstract class Building {
         return true;
     }
 
-
-    protected BuildingInfo checkMoneyAndPositionInfo(String playerName,
-            int position) {
-
-        BuildingsPositionHelper posHelper
-                = new BuildingsPositionHelper();
-
-        PlayerresourcesHelper resourcesHelper
-                = new PlayerresourcesHelper();
-
-        // Checking money.
-        int cash = resourcesHelper.getMoney(playerName);
-        if (cash < cost) {
-            // Cannot build that building.
-            return new BuildingInfo(false, "Not enough money!");
-        }
-
-        // Checking occupations.
-        boolean isUnoccupied = posHelper.isAllowedToBuild(playerName, position);
-        if (!isUnoccupied) {
-            return new BuildingInfo(false, "The possition is already occupied");
+    protected BuildingInfo checkMoney(String playerName) {
+        int money =  UserManager.getMoney(playerName);
+        if (money < cost) {
+            return new BuildingInfo(false, "Not enough money");
         }
 
         return new BuildingInfo(true, "Build me!");
     }
-
 
     // Checks whether a given building occupies a given position.
     protected boolean canPositionBeDestoryed(String playerName, int position,

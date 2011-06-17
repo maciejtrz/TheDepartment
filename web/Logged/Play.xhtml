@@ -14,7 +14,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
-            <link rel="shortcut icon" href="../ac.png"/>
+        <link rel="shortcut icon" href="../ac.png"/>
         <script type="text/javascript" src="map.js"></script>
         <script type="text/javascript" src="jquery-1-6-1.js"></script>
         <p:resources/>
@@ -65,23 +65,28 @@ and open the template in the editor.
             <p:poll interval="10" update="tbar"/>
         </h:form>
 
+        <p:notificationBar position="bottom" effect="slide" widgetVar="bm1" styleClass="bottom"> <div align="center">
+                <h:outputText value="Welcome to the black market!" style="color:#FFF;font-size:36px;" /> <br/> <br/>
+                <h:commandButton value="Make Private Offer" onclick="newtrade.show();"/>
+                <h:commandButton value="View Received Offers" onclick="viewtrade.show();"/>
+                <h:commandButton value="View Sent Offers" onclick="viewyourtrade.show();"/>
+                <h:commandButton value="Exit" onclick="bm1.hide();"/></div>
+        </p:notificationBar>
+
 
         <h:form id="lform">
-
             <p:menu id="lmenu" style="width: 230px">
                 <p:submenu label="Messages">
                     <p:menuitem value="New" onclick="newmsg.show();"  />
                     <p:menuitem value="Inbox" onclick="readmsg.show();"   />
                 </p:submenu>
 
+                
                 <p:submenu label="Trading">
-                    <p:menuitem value="Make Private Offer" onclick="newtrade.show();"/>
-                    <p:menuitem value="View Received Offers" onclick="viewtrade.show();"/>
-                    <p:menuitem value="View Sent Offers" onclick="viewyourtrade.show();"/>
-                    <p:menuitem value="Add Noticeboard Offer" onclick="addnoticeoffer.show();" />
+                    <p:menuitem value="Add Offer" onclick="addnoticeoffer.show();" />
                     <p:menuitem value="Noticeboard" onclick="noticeboard.show();" />
                     <p:menuitem value="Add Auction" onclick="addauction.show();" />
-                    <p:menuitem value="Auction Table" onclick="auctiontable.show();" />
+                    <p:menuitem value="View Auctions" onclick="auctiontable.show();" />
                 </p:submenu>
 
                 <p:submenu label="Reasearches">

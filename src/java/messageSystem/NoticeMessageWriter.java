@@ -92,8 +92,6 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
                     "Reasources wanted and offered cannot be of the same type"));
 
-            System.out.println("Resources are the same...");
-
             error = false;
         }
 

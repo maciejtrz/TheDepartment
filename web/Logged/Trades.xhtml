@@ -284,6 +284,8 @@
 
 
             <h:form>
+
+                <h:panelGrid id="newAuctionOffer">
                 <h:outputText value="Type of auction:" />
                 <h:selectOneMenu value="#{auctionMessageWriter.selectedAuctionType}">
                     <f:selectItems value="#{auctionMessageWriter.availableAuctionTypes}"/>
@@ -301,12 +303,13 @@
                     <f:selectItems value="#{auctionMessageWriter.availableResources}"/>
                 </h:selectOneMenu>
 
+
                 <br/>
 
                 <h:outputText value="Offered amount: "/>
-                <p:inputText id="offeredAmount" value="#{auctionMessageWriter.amountOffered}" />
-                <p:slider for="offeredAmount"/>
-
+                <p:inputText id="offeredAuctionAmount" value="#{auctionMessageWriter.amountOffered}" />
+                <p:slider for="offeredAuctionAmount"/>
+                <p:message for="offeredAuctionAmount" />
                 <br/>
 
                 <h:outputText value="Wanted resources:" />
@@ -323,10 +326,19 @@
                 <br/>
 
                 <h:outputText value="Expire date: "/>
-                <p:calendar value="#{auctionMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+                <p:calendar value="#{auctionMessageWriter.expireDate}"
+                            pattern="MM/dd/yyyy HH:mm"
+                            id="expireAuctionOfferDate"/>
+                <p:message for="expireAuctionOfferDate"/>
 
-                <h:commandButton value="Submit Auction" actionListener="#{auctionMessageWriter.sendAuction}" />
+                <p:commandButton value="Submit Auction"
+                                 id="sendAuctionOfferTrade"
+                                 action="#{auctionMessageWriter.sendAuction}"
+                                 update="newAuctionOffer" />
+                <p:message for="sendAuctionOfferTrade" />
 
+
+                </h:panelGrid>
 
 
             </h:form>

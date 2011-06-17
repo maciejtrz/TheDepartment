@@ -148,11 +148,13 @@
 
                                     <p:commandButton value="Accept"
                                          id="acceptButton"
-                                         update="offeredTrades">
+                                         update="offeredTrades"
+                                         onclick="privateTradeDetails.close()">
                                     <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
                                     </p:commandButton>
 
-                                    <p:commandButton value="Decline" >
+                                    <p:commandButton value="Decline"
+                                                     onclick="privateTradeDetails.close()">
                                     <f:setPropertyActionListener
                                         value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
                                     </p:commandButton>

@@ -90,17 +90,12 @@ and open the template in the editor.
 
                 <p:submenu label="Buy">
                     <p:menuitem value="Professor" onclick="buypro.show();"  />
-                    <p:menuitem value="Students/PhDs" onclick="buystu.show();"  />
+                    <p:menuitem value="Students &amp; PhDs" onclick="buystu.show();"  />
                 </p:submenu>
 
-                <p:submenu label="Department">
-                    <p:menuitem value="Change name" actionListener="#{buttonBean.save}"/>
-                    <p:menuitem value="Delete" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
-                    <p:menuitem value="Log out" action="#{user.logoff}" icon="ui-icon ui-icon-arrowrefresh-1-w" />
-                </p:submenu>
-
-                <p:submenu label="User">
-                    <p:menuitem value="Delete" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
+                <p:submenu label="Delete" >
+                    <p:menuitem value="Department" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
+                    <p:menuitem value="User" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
                 </p:submenu>
 
             </p:menu>

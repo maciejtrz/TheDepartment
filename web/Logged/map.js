@@ -42,7 +42,7 @@ function over(poly) {
   src=img.getAttribute("src");
   if (src=="img/nop.png") {
     img.src="img/sha.png";
-  }
+  }z
 
 }
 

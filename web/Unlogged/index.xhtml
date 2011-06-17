@@ -41,8 +41,8 @@ and open the template in the editor.
 
 
                                      <h:form id="loginpanel">
-                        <h:panelGrid columns="1" id="loginGrid">
-                            <h:outputText value="Username"/>
+                                         <h:panelGrid id="loginGrid" border="0">
+                            <h:outputText value="Username"/> 
                             <h:inputText id="username"
                                          value="#{auth.username}"/>
                             <p:message for="username" />
@@ -52,8 +52,8 @@ and open the template in the editor.
                                            value="#{auth.password}" />
                             <p:message for="password" />
 
-                            <h:outputText value="Remember me" />
-                            <h:selectBooleanCheckbox value="#{auth.remember}"  />
+                            <h:panelGroup><h:outputText value="Remember me" /> &nbsp; &nbsp;
+                                <h:selectBooleanCheckbox value="#{auth.remember}"  /></h:panelGroup>
                             
                             <p:commandButton action="#{auth.validate}"
                                              value = "Log in"

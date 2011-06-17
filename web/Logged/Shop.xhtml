@@ -43,16 +43,18 @@
                     </h:column>
                     <h:column>
                         <div align="center">
+                            <h2>
+                            <h:outputLabel for="students" value="Student(5 &#208;/10units):" />
+                            </h2>
                             You currently have <h:outputText value="#{shop.studentNumber}"/> student(s).
                             <br/>
                             Your current maximum capacity is <h:outputText value="#{shop.studentCapacity}" />
                             <br/>
-                             <h:outputLabel for="students" value="Student(£5/10units):" />
                              <p:spinner id="spinnerStudent"
                                value="#{shop.students}" stepFactor="10" min="0"  />
                             <br/>
                             <br/>
-                             <p:commandButton  id="submitStudent" value="Submit" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
+                             <p:commandButton  id="submitStudent" value="Buy!" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
                         </div>
                     </h:column>
                 </h:panelGrid>
@@ -66,17 +68,19 @@
                     </h:column>
                     <h:column>
                         <div align="center">
+                            <h2>
+                            <h:outputLabel for="phds" value="PhD(20 &#208;/unit):" />
+                            </h2>
                             You currently have <h:outputText value="#{shop.phdsNumber}"/> student(s).
                             <br/>
                             Your current maximum capacity is <h:outputText value="#{shop.phdsCapacity}" />
                             <br/>
                             <br/>
-                            <h:outputLabel for="phds" value="PhD(£20/unit):" />
                             <p:spinner id="spinnerPhds"
                                value="#{shop.phds}" stepFactor="1" min="0" />
                             <br/>
                             <br/>
-                             <p:commandButton id="submitPhd" value="Submit" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
+                             <p:commandButton id="submitPhd" value="Buy!" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
                         </div>
                     </h:column>
                 </h:panelGrid>

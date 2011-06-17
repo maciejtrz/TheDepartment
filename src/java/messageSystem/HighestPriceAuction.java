@@ -16,13 +16,4 @@ public class HighestPriceAuction extends Auction implements Serializable {
        return typeName;
     }
 
-    @Override
-    public boolean setHighestOfferedPrice(int price) {
-        boolean result = false;
-        if(highestOffer() < price) {
-            super.setHighestOfferedPrice(price);
-        }
-
-        return result;
-    }
 }

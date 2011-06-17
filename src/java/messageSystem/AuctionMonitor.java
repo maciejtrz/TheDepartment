@@ -101,7 +101,7 @@ public class AuctionMonitor {
         return listAuction;
     }
 
-    public boolean placeOffer(Auction auction, int offer) {
-        return auction.setHighestOfferedPrice(offer);
+    public synchronized boolean placeOffer(Auction auction, int offer) {
+        return auction.setHighestOffer(offer);
     }
 }

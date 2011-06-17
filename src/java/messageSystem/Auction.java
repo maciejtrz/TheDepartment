@@ -29,7 +29,7 @@ public class Auction extends TradeOffer implements Serializable {
     private List<Auctionhistory> auctionOffersHistory;
     private boolean keepHistory;
     private Set<String> bidders;
-    boolean canBidMoreThanOnce;
+    private boolean canBidMoreThanOnce;
     private int auctionType;
     private int offer;
     private AuctionhistoryHelper auctionHistoryHelper;
@@ -47,7 +47,6 @@ public class Auction extends TradeOffer implements Serializable {
         this.canBidMoreThanOnce = canBidMoreThanOnce;
 
         bidders = new HashSet<String>();
-
     }
 
     public Auction() {
@@ -60,7 +59,6 @@ public class Auction extends TradeOffer implements Serializable {
         auctionOffersHistory = new ArrayList<Auctionhistory>();
 
         bidders = new HashSet<String>();
-
     }
 
     public int getWinningOffer() {
@@ -100,22 +98,46 @@ public class Auction extends TradeOffer implements Serializable {
     }
 
     public boolean setHighestOfferedPrice(String price) {
-        return setHighestOfferedPrice(Integer.parseInt(price));
+        return setHighestOffer(Integer.parseInt(price));
     }
 
-    public boolean setHighestOfferedPrice(int price) {
+    public boolean setHighestOffer(int price) {
 
-        if (winner != null && winner.equals(BasicUtils.getUserName())) {
-            return false;
-        }
-
-        if (!canBidMoreThanOnce() && hasAlreadyBidded(BasicUtils.getUserName())) {
-            return false;
-        }
+        String bidder = BasicUtils.getUserName();
 
         boolean result = false;
 
-        if(winner.equals(getSenderid())) {
+        System.out.println("Winner: " + getSenderid());
+        System.out.println("Sender: " + bidder);
+
+        if (winner != null && winner.equals(bidder)) {
+
+            String errorMessage = null;
+
+            if (!getTypeName().equals(AuctionFactory.getAuctionName(AuctionFactory.BLIND_AUCTION))) {
+
+                errorMessage = "Your offer is the highest one so far!";
+
+            } else {
+
+                errorMessage = "Unsuccessful bid";
+
+            }
+            
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+
+                FacesContext.getCurrentInstance().addMessage(
+                        BasicUtils.findComponent(facesContext.getViewRoot(),
+                        "bidOfferGrid").getClientId(facesContext),
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
+                        errorMessage));
+            
+
+
+            return false;
+        }
+
+        if (bidder.equals(getSenderid())) {
 
             FacesContext facesContext = FacesContext.getCurrentInstance();
 
@@ -125,10 +147,10 @@ public class Auction extends TradeOffer implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
                     "You cannot bid your own auction!"));
 
-            return true;
+            return false;
         }
 
-        if (highestOfferedPrice < price ) {
+        if (highestOfferedPrice < price) {
 
             highestOfferedPrice = price;
             winner = BasicUtils.getUserName();
@@ -139,6 +161,27 @@ public class Auction extends TradeOffer implements Serializable {
             auctionHistoryHelper.addAuctionOffer(auctionHistory);
 
             result = true;
+        } else {
+            
+            String errorMessage;
+
+            if (!getTypeName().equals(AuctionFactory.getAuctionName(AuctionFactory.BLIND_AUCTION))) {
+
+                errorMessage = "Your offer is too low!";
+
+            } else {
+
+                errorMessage = "Unsuccessful bid";
+
+            }
+
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+
+                FacesContext.getCurrentInstance().addMessage(
+                        BasicUtils.findComponent(facesContext.getViewRoot(),
+                        "bidOfferGrid").getClientId(facesContext),
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
+                        errorMessage));
         }
 
         return result;
@@ -167,12 +210,14 @@ public class Auction extends TradeOffer implements Serializable {
     @Override
     public String encode() {
 
-        return getAuctionType() + " "
+        String query = getAuctionType() + " "
                 + getResourcesOfferedType() + "=" + getAmountOffered() + " "
                 + getResourcesWantedType() + " "
                 + getExpireDate().getTime() + "\n"
                 + (getTradeDescription() == null || getTradeDescription().isEmpty()
                 ? "" : getTradeDescription());
+
+        return query;
 
     }
 
@@ -187,7 +232,7 @@ public class Auction extends TradeOffer implements Serializable {
         auction.setAmountOffered(getNumber(parsingPosition));
         auction.setResourcesWantedType(getNumber(parsingPosition));
         auction.setExpireDate(getLongNumber(parsingPosition));
-        // setTradeDescription(getTradeDesrciptionText(parsingPosition));
+        auction.setTradeDescription(getTradeDesrciptionText(parsingPosition));
 
         return auction;
     }
@@ -202,6 +247,7 @@ public class Auction extends TradeOffer implements Serializable {
         setResourcesOfferedType(tradeOffer.getResourcesOfferedType());
         setResourcesWantedType(tradeOffer.getResourcesWantedType());
         setExpireDate(tradeOffer.getExpireDate());
+        setTradeDescription(tradeOffer.getTradeDescription());
 
     }
 

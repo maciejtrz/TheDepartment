@@ -8,6 +8,8 @@ package buildings;
 import Connections.UserManager;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import utilities.BuildingsUtils;
 
 
@@ -17,35 +19,38 @@ import utilities.BuildingsUtils;
  */
 public class BuildingBean implements Serializable {
 
-
-    private List<Building> playersBuildings;
     private BuildingsUtils utils;
+    private String playerName;
+    private DataModel<Building> modelList;
 
     /** Creates a new instance of buildingBean */
     public BuildingBean() {
+        System.out.println(" Building Bean created. ");
         utils = new BuildingsUtils();
-        String playerName = utilities.BasicUtils.getUserName();
-        playersBuildings= utils.getAvailableBuildings(playerName);
-
+        playerName = utilities.BasicUtils.getUserName();
+        modelList = new ListDataModel(utils.getAvailableBuildings(playerName));
     }
 
-    public List<Building> getPlayersBuildings(){
+    public DataModel<Building> getPlayersBuildings(){
 
-        return playersBuildings;
+        modelList.setWrappedData(utils.getAvailableBuildings(playerName));
+        return modelList;
+    }
+
+    public void buy() {
+        Building building = (Building)modelList.getRowData();
+        System.out.println("I WAS CALLED!");
+        System.out.println(building.getInfo());
+        int position = UserManager.getBuilidngPosition(playerName);
+        building.build(playerName, position);
+        modelList.setWrappedData(utils.getAvailableBuildings(playerName));
     }
 
     public void setDoSelect(Building s) {
-
-        String playerName = utilities.BasicUtils.getUserName();
-
+        System.out.println("I WAS CALLED KURWA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         int position = UserManager.getBuilidngPosition(playerName);
-
         s.build(playerName, position);
-        playersBuildings = utils.getAvailableBuildings(playerName);
     }
 
-    public boolean getAfford() {
-        return false;
-    }
 
 }

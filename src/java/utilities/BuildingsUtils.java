@@ -19,7 +19,83 @@ import java.util.List;
  */
 public class BuildingsUtils {
 
+    /* Returns all buildings. */
+    public List<Building> getBuildings(String playerName) {
+        List<Building> buildings = new ArrayList<Building>();
+        BuildingFactory factory = new BuildingFactory();
 
+        buildings.add(factory.getBrain());
+        buildings.add(factory.getLabs());
+        buildings.add(factory.getLecturerRoom());
+        buildings.add(factory.getMacChicken());
+        buildings.add(factory.getPdhOffice());
+        buildings.add(factory.getProfOffice());
+        buildings.add(factory.getPub());
+        buildings.add(factory.getStudentUnion());
+        buildings.add(factory.getTresco());
+        
+        return buildings;
+    }
+
+    public List<Building> getNotBuiltBuildings(String playerName) {
+
+        List<Building> buildings = new ArrayList<Building>();
+
+        BuildingFactory factory = new BuildingFactory();
+
+        Building building = factory.getLabs();
+        if (!isLabBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getBrain();
+        if (!isBrainBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+
+        building = factory.getLecturerRoom();
+        if (!isLecturerRoomBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getMacChicken();
+        if (!isMacChickenBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getPdhOffice();
+        if (!isPhdOfficeBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getProfOffice();
+        if (!isProfessorsOfficeBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getPub();
+        if (!isDocPubBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getStudentUnion();
+        if (!isStudentUnionBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        building = factory.getTresco();
+        if (!isTrescoBuilt(playerName)) {
+            buildings.add(building);
+        }
+
+        return buildings;
+
+
+    }
+
+
+    /* Returns all available buildings. */
     public List<Building> getAvailableBuildings(String playerName) {
         List<Building> buildings = new ArrayList<Building>();
 

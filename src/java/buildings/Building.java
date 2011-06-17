@@ -95,6 +95,18 @@ public abstract class Building {
         return true;
     }
 
+    /* Used in BuildingBean! */
+    public boolean getAffordable() {
+        String playerName = utilities.BasicUtils.getUserName();
+        int money =  UserManager.getMoney(playerName);
+        if (money < cost) {
+            return false;
+        }
+
+        return true;
+    }
+
+    
     protected BuildingInfo checkMoney(String playerName) {
         int money =  UserManager.getMoney(playerName);
         if (money < cost) {

@@ -14,6 +14,7 @@ import ConnectionDataBase.EventsHelper;
 import ConnectionDataBase.ExtrastatsHelper;
 import ConnectionDataBase.LecturersOwnedHelper;
 import Connections.ConnectionSingleton;
+import buildings.BuildingBean;
 import events.LotteryManager;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -152,6 +153,14 @@ public class Department implements Serializable {
         LotteryManager mgr = new LotteryManager(playerName);
         mgr.initializeLottery();
         mgr.writeEventsToDB();
+
+        /* Populating building Bean*/
+        BuildingBean buildingBean = (BuildingBean) session
+                .getAttribute(Connections.ConnectionSingleton.buildingBean);
+        if (buildingBean != null) {
+            buildingBean.initializeBuildingList();
+        }
+
 
         return "success";
     }

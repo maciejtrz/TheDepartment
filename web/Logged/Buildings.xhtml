@@ -192,12 +192,12 @@
         <p:dialog header="Building Site" widgetVar="nop" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
 
-             
+
 
             <div align="center">
             <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
             <h:form>
-            <p:carousel id="buildingsCar" widgetVar="nop" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
+                <p:carousel widgetVar="nop" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
                         style="position: relative; top:50px; " rows="1" effect="easeInStrong">
                 <p:column>
                 <h:panelGrid columns="2" style="width:100% ; height:100%">
@@ -206,10 +206,14 @@
 
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="#{building.info}" />
-                        <h:outputText value="Price: #{building.cost}" />
-                        <p:commandButton   value="Build" update="#{buildingbean.playersBuildings}" ajax="false" action="#{buildingbean.buy}" >
+                        <h:outputText value="Price: #{building.cost} &#208;" />
+                        <p:commandButton value="Build" ajax="false">
+                            <f:setPropertyActionListener target="#{buildingbean.doSelect}"
+                                                         value="#{building}" />
                         </p:commandButton>
                     </h:panelGrid>
+
+
                 </h:panelGrid>
                 </p:column>
             </p:carousel>

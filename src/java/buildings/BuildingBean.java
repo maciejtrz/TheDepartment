@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package buildings;
 
 import Connections.UserManager;
@@ -14,42 +9,36 @@ import utilities.BuildingsUtils;
 
 
 /**
- *
- * @author pk2109
- */
+*
+* @author pk2109
+*/
 public class BuildingBean implements Serializable {
 
     private BuildingsUtils utils;
     private String playerName;
-    private DataModel<Building> modelList;
+    private List<Building> buildingList;
 
     /** Creates a new instance of buildingBean */
     public BuildingBean() {
-        System.out.println(" Building Bean created. ");
         utils = new BuildingsUtils();
         playerName = utilities.BasicUtils.getUserName();
-        modelList = new ListDataModel(utils.getAvailableBuildings(playerName));
+        buildingList = utils.getAvailableBuildings(playerName);
     }
 
-    public DataModel<Building> getPlayersBuildings(){
+    public List<Building> getPlayersBuildings(){
 
-        modelList.setWrappedData(utils.getAvailableBuildings(playerName));
-        return modelList;
+        return buildingList;
     }
 
-    public void buy() {
-        Building building = (Building)modelList.getRowData();
-        System.out.println("I WAS CALLED!");
-        System.out.println(building.getInfo());
-        int position = UserManager.getBuilidngPosition(playerName);
-        building.build(playerName, position);
-        modelList.setWrappedData(utils.getAvailableBuildings(playerName));
-    }
 
     public void setDoSelect(Building s) {
-        System.out.println("I WAS CALLED KURWA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         int position = UserManager.getBuilidngPosition(playerName);
         s.build(playerName, position);
+        buildingList = utils.getAvailableBuildings(playerName);
+    }
+
+    public void initializeBuildingList() {
+        buildingList = utils.getAvailableBuildings(playerName);
     }
 
 

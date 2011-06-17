@@ -51,6 +51,7 @@ public class ConnectionSingleton {
     public static final String researchBag = "researchBag";
     public static final String tradeMessageReader = "tradeMessageReader";
     public static final String tradeMessageWriter = "tradeMessageWriter";
+    public static final String buildingBean = "buildingbean";
 
     public static final String gameName = "/TheDepartment";
     public static final String AddDepartment = "Welcome.xhtml";

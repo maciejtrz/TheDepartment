@@ -60,8 +60,8 @@ public class DeamonManager {
     public synchronized void createStatsDeamon() {
         if (!stats_deamon_started && stats_deamon == null) {
             stats_deamon_started = true;
-            stats_deamon = new StatsDeamon();
-            stats_deamon.start();
+            //stats_deamon = new StatsDeamon();
+            //stats_deamon.start();
         }
     }
 

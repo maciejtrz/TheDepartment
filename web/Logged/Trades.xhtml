@@ -141,7 +141,7 @@
                                     <h:outputText value="#{tradeOffer.amountWanted}" />
 
                                     <h:outputText value="Description: "/>
-                                    <h:outputText value="#{tradeOffer.msg}" />
+                                    <h:outputText value="#{tradeOffer.tradeDescription}" />
 
                                     <h:outputText value="Expire date: " />
                                     <h:outputText value="#{tradeOffer.expireDate}" />
@@ -158,6 +158,8 @@
                                     <f:setPropertyActionListener
                                         value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
                                     </p:commandButton>
+
+                                    <p:commandButton value="Close" onclick="privateTradeDetails.hide()" />
 
                                </h:panelGrid>
                             </h:form>
@@ -213,6 +215,53 @@
                         <h:commandButton value="Answer" >
                             <f:setPropertyActionListener value="#{tradeOffer}" target="#{noticeMessageReader.answerTradeOffer}" />
                         </h:commandButton>
+
+                        <p:commandButton value="Show Details"
+                                         onclick="noticeOfferDetails.show()" />
+                        <p:dialog header="Notice Offer Details"
+                                  widgetVar="noticeOfferDetails"
+                                  resizable="false"
+                                  closeOnEscape="true">
+                            <h:form>
+                                <h:panelGrid columns="2">
+
+                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="#{tradeOffer.senderid}" />
+
+                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="#{tradeOffer.subject}" />
+
+                                    <h:outputText value="Resources offered: " />
+                                    <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+
+                                    <h:outputText value="Amount offered: " />
+                                    <h:outputText value="#{tradeOffer.amountOffered}" />
+
+                                    <h:outputText value="Resources wanted: " />
+                                    <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+
+                                    <h:outputText value="Amount wanted: " />
+                                    <h:outputText value="#{tradeOffer.amountWanted}" />
+
+                                    <h:outputText value="Description: "/>
+                                    <h:outputText value="#{tradeOffer.tradeDescription}" />
+
+                                    <h:outputText value="Expire date: " />
+                                    <h:outputText value="#{tradeOffer.expireDate}" />
+
+                                    <h:commandButton value="Answer"
+                                                     onclick="noticeOfferDetails.hide()">
+                                        <f:setPropertyActionListener
+                                            value="#{tradeOffer}"
+                                            target="#{noticeMessageReader.answerTradeOffer}" />
+                                    </h:commandButton>
+
+                                    <p:commandButton value="Close" onclick="noticeOfferDetails.hide()" />
+
+                               </h:panelGrid>
+                            </h:form>
+                        </p:dialog>
+
                     </p:column>
 
                 </p:dataTable>
@@ -317,9 +366,61 @@
                         <h:inputText value="#{auction.offer}" />
                         <br/>
 
-                        <h:commandButton value="Bid" >
+                        <h:panelGrid id="bidOfferGrid" >
+                        <p:commandButton value="Bid" update="bidOfferGrid">
                             <f:setPropertyActionListener value="#{auction}" target="#{auctionMessageReader.sendOffer}" />
-                        </h:commandButton>
+                        </p:commandButton>
+                        <p:message for="bidOfferGrid" />
+                        </h:panelGrid>
+
+                        <p:commandButton value="Show Details"
+                                         onclick="auctionOfferDetails.show()" />
+                        
+                        <p:dialog header="Auction Offer Details"
+                                  widgetVar="auctionOfferDetails"
+                                  resizable="false"
+                                  closeOnEscape="true">
+                            <h:form>
+                                <h:panelGrid columns="2">
+
+                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="#{auction.senderid}" />
+
+                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="#{auction.subject}" />
+
+                                    <h:outputText value="Resources offered: " />
+                                    <h:outputText value="#{auction.resourcesOfferedName}"/>
+
+                                    <h:outputText value="Amount offered: " />
+                                    <h:outputText value="#{auction.amountOffered}" />
+
+                                    <h:outputText value="Resources wanted: " />
+                                    <h:outputText value="#{auction.resourcesWantedName}"/>
+
+                                    <h:outputText value="Description: "/>
+                                    <h:outputText value="#{auction.tradeDescription}" />
+
+                                    <h:outputText value="Expire date: " />
+                                    <h:outputText value="#{auction.expireDate}" />
+
+                                    <h:outputText value="Your offer: "/>
+                                    <h:inputText value="#{auction.offer}" />
+
+                                    <p:commandButton value="Bid"
+                                                     onclick="auctionOfferDetails.hide()"
+                                                     update="bidOfferGrid" >
+                                        <f:setPropertyActionListener
+                                            value="#{auction}"
+                                            target="#{auctionMessageReader.sendOffer}" />
+                                    </p:commandButton>
+                        
+                                    <p:commandButton value="Close" onclick="auctionOfferDetails.hide()" />
+
+                               </h:panelGrid>
+                            </h:form>
+                        </p:dialog>
+
                     </p:column>
                 </p:dataTable>
 

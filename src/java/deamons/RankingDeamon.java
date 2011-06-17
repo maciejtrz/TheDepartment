@@ -32,7 +32,7 @@ public class RankingDeamon implements Runnable {
     StudentsRankingSingleton.produceRanking();
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(15*60*1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(RankingDeamon.class.getName()).log(Level.SEVERE, null, ex);
         }

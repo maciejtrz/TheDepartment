@@ -40,7 +40,11 @@ public class User implements Serializable {
     
     public String logoff() throws IOException {
 
+        System.out.println("Logging out...");
+
         AuthorizationSingleton.logoff();
+
+        System.out.println("Logged out");
         return "success";
     }
 

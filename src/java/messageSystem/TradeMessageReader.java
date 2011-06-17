@@ -70,7 +70,8 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
                     tradeOffer.setReceiverid(message.getReceiverid());
                     tradeOffer.setCreationtime(message.getCreationtime());
                     tradeOffer.setMsgnumber(message.getMsgnumber());
-
+                    tradeOffer.setSubject(message.getSubject());
+                    
                     offeredTrades.add(tradeOffer);
                     expirationTimeList.offer(tradeOffer);
                 } else {

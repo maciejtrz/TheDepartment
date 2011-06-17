@@ -145,7 +145,19 @@
 
                                     <h:outputText value="Expire date: " />
                                     <h:outputText value="#{tradeOffer.expireDate}" />
-                                </h:panelGrid>
+
+                                    <p:commandButton value="Accept"
+                                         id="acceptButton"
+                                         update="offeredTrades">
+                                    <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
+                                    </p:commandButton>
+
+                                    <p:commandButton value="Decline" >
+                                    <f:setPropertyActionListener
+                                        value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
+                                    </p:commandButton>
+
+                               </h:panelGrid>
                             </h:form>
                         </p:dialog>
 

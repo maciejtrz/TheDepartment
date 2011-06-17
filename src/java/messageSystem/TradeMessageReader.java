@@ -170,11 +170,15 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
         declinedTradeOffer.decline();
         offeredTrades.remove(declinedTradeOffer);
         expirationTimeList.remove(declinedTradeOffer);
+
+        UserManager.notifyAboutSendingMessage(declinedTradeOffer.getSenderid());
     }
     
     public void setDeleteTradeOffer(TradeOffer declinedTradeOffer) {
         declinedTradeOffer.decline();
         yourOfferedTrades.remove(declinedTradeOffer);
         yourExpirationTimeList.remove(declinedTradeOffer);
+
+        UserManager.notifyUserAboutMessage(declinedTradeOffer.getReceiverid());
     }
 }

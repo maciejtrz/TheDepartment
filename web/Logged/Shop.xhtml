@@ -12,22 +12,35 @@
             <p:carousel value="#{buyLecturers.lecturers}" var="naukowiec"
                         rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong"
                         >
-                <p:column>
+     <h:form>
                     <h:panelGrid columns="2" style="width:100% ; height:100%">
 
-                        <p:graphicImage value="/images/pic2.jpeg"/>
-
-                        <h:panelGrid columns="1" cellpadding="5">
+                     <h:column>
+                        <img src="ico/pro.png"/>
+                    </h:column>
+                        <h:column>
+                        <h:panelGrid cellpadding="5">
                             <h:outputText value="Name: #{naukowiec.name}" />
                             <h:outputText value="Price: #{naukowiec.price}" />
-                            <h:outputText value="" />
-                            <h:outputText value="Buy me!:" />
-                            <p:graphicImage width="40" height="40" value="/images/big-tick.jpg"/>
+                       
+                   
+                                <p:dataTable var="list" value="#{naukowiec.specializations}" >
+                                    <p:column headerText="Specialisation"  >
+                                    <h:outputText value="#{list.field}"/>
+                                </p:column>
+                                    <p:column headerText="Boost">
+                                    <h:outputText value="#{list.boost}"/>
+                                </p:column>
+                                </p:dataTable>
+                            <p:commandButton id="submitProf" style="width:150px" update="errorInfoProf" value="Buy!" action="#{buyLecturers.buy}"/>
                         </h:panelGrid>
-
-
+                            </h:column>
                     </h:panelGrid>
-                </p:column>
+
+                        <h:panelGrid id="errorInfoProf">
+                        <p:message for="submitProf"/>
+                        </h:panelGrid>
+          </h:form>
             </p:carousel>
 
         </p:dialog>

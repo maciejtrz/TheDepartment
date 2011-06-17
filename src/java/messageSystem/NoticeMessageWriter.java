@@ -28,9 +28,24 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
         String result = null;
         if(validate()) {
             OffersSuperviser.getNoticeMonitor().addNoticeOffer(getTradeOffer());
-            result = "success";
-        }
 
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "sendNoticeOfferTrade").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
+                    "You sent a notice offer " + getAmountOffered() + ""
+                    + " of " + getResourceName(getResourcesOfferedType()) +
+                    getAmountWanted() + " of " +
+                    getResourceName(getResourcesWantedType()) +
+                    "\n" + "Trade Subject: " + getSubject() + "\n" +
+                    "Tade Description: \n" + getTradeDescription()));
+
+             getTradeOffer().cleanTradeOffer();
+
+            result = "success";
+        } 
         return result;
     }
 

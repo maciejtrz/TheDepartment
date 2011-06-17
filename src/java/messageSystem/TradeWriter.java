@@ -194,14 +194,7 @@ public class TradeWriter extends MessageWriter implements Serializable {
                     "\n" + "Trade Subject: " + getSubject() + "\n" +
                     "Tade Description: \n" + getTradeDescription()));
 
-            setAmountOffered(0);
-            setAmountWanted(0);
-            setExpireDate(new Date());
-            setResourcesOfferedType(0);
-            setResourcesWantedType(0);
-            setSubject("");
-            setTradeDescription("");
-            setSelectedReceiver(0);
+            getTradeOffer().cleanTradeOffer();
 
             result = "success";
         }

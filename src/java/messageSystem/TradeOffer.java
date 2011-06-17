@@ -211,6 +211,17 @@ public class TradeOffer extends Messagesystem implements Serializable, Comparabl
         MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
         messageSystemHelper.deleteMsg(getMsgnumber());
     }
+
+    public void cleanTradeOffer() {
+        setAmountOffered(0);
+            setAmountWanted(0);
+            setExpireDate(new Date());
+            setResourcesOfferedType(0);
+            setResourcesWantedType(0);
+            setSubject("");
+            setTradeDescription("");
+            setReceiverid("");
+    }
     
 
 }

@@ -36,9 +36,11 @@ public class OffersSuperviser implements Runnable{
 
             try {
                 Thread.sleep(SLEEPING_INTERVAL);
-                if(getAuctionMonitor() != null)
-                    getAuctionMonitor().update();
-                getNoticeMonitor().update();
+                if(auctionMonitor != null)
+                    auctionMonitor.update();
+                
+                if(noticeMonitor != null)
+                    noticeMonitor.update();
             } catch (InterruptedException ex) {
                
             } finally {

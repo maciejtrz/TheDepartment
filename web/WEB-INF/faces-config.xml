@@ -240,6 +240,22 @@
             <to-view-id>/Logged/Play.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+
+        <navigation-case>
+            <from-action>#{noticeMessageWriter.sendNoticeOffer}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Play.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{auctionMessageWriter.sendAuction}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Logged/Play.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        
     </navigation-rule>
 </faces-config>
 

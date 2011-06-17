@@ -2,7 +2,10 @@ package messageSystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import utilities.BasicUtils;
 
@@ -50,11 +53,77 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
     }
 
 
-    public void sendAuction() {
+    public String sendAuction() {
         getAuction().setTradeOffer(getTradeOffer());
         getAuction().setSenderid(BasicUtils.getUserName());
+
+        String result = null;
+
+        if(validate()) {
+            OffersSuperviser.getAuctionMonitor().addAuction(getAuction());
+            
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "sendAuctionOfferTrade").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
+                    "You sent an auction " + getAmountOffered() + ""
+                    + " of " + getResourceName(getResourcesOfferedType()) +
+                    " and you want to get " +
+                    getResourceName(getResourcesWantedType()) +
+                    "\n" + "Trade Subject: " + getSubject() + "\n" +
+                    "Tade Description: \n" + getTradeDescription()));
+
+             getTradeOffer().cleanTradeOffer();
+
+            result = "success";
+        }
+
+        return result;
         
-        OffersSuperviser.getAuctionMonitor().addAuction(getAuction());
+    }
+
+    public boolean validate() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        boolean error = true;
+
+        if (getExpireDate().before(new Date())) {
+            System.out.println("Adding new message for expire date...");
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "expireAuctionOfferDate").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expire date error",
+                    "Expire date of trade offer cannot be earlier than the current time!"));
+
+            error = false;
+        }
+
+        if(getAmountOffered() <= 0) {
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "offeredAuctionAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
+                    "Offered amount must be greater than 0"));
+
+            error = false;
+        }
+
+        if(getResourcesOfferedType() == getResourcesWantedType()) {
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "sendAuctionOfferTrade").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
+                    "Reasources wanted and offered cannot be of the same type"));
+
+            error = false;
+        }
+
+
+
+
+        return error;
     }
 
 }

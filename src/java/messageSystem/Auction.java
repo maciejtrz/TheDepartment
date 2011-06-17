@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import utilities.BasicUtils;
 
 /**
@@ -103,23 +105,43 @@ public class Auction extends TradeOffer implements Serializable {
 
     public boolean setHighestOfferedPrice(int price) {
 
-        if(winner != null && winner.equals(BasicUtils.getUserName())) {
+        if (winner != null && winner.equals(BasicUtils.getUserName())) {
             return false;
         }
-        
+
         if (!canBidMoreThanOnce() && hasAlreadyBidded(BasicUtils.getUserName())) {
             return false;
         }
 
-        highestOfferedPrice = price;
-        winner = BasicUtils.getUserName();
+        boolean result = false;
 
-        Auctionhistory auctionHistory = new Auctionhistory(
-                new AuctionhistoryId(getMsgnumber(),winner,price),(new Date()).getTime());
-       
-        auctionHistoryHelper.addAuctionOffer(auctionHistory);
+        if(winner.equals(getSenderid())) {
 
-        return true;
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "bidOfferGrid").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
+                    "You cannot bid your own auction!"));
+
+            return true;
+        }
+
+        if (highestOfferedPrice < price ) {
+
+            highestOfferedPrice = price;
+            winner = BasicUtils.getUserName();
+
+            Auctionhistory auctionHistory = new Auctionhistory(
+                    new AuctionhistoryId(getMsgnumber(), winner, price), (new Date()).getTime());
+
+            auctionHistoryHelper.addAuctionOffer(auctionHistory);
+
+            result = true;
+        }
+
+        return result;
     }
 
     public int highestOffer() {
@@ -185,24 +207,24 @@ public class Auction extends TradeOffer implements Serializable {
 
     void finishAuction() {
 
-            Iterator<Auctionhistory> iterator =
-                    auctionHistoryHelper.getAuctionOffers(getMsgnumber()).iterator();
+        Iterator<Auctionhistory> iterator =
+                auctionHistoryHelper.getAuctionOffers(getMsgnumber()).iterator();
 
-            boolean auctionExecuted = false;
+        boolean auctionExecuted = false;
 
-            while(iterator.hasNext() && !auctionExecuted) {
-                Auctionhistory auctionOffer = iterator.next();
+        while (iterator.hasNext() && !auctionExecuted) {
+            Auctionhistory auctionOffer = iterator.next();
 
-                setReceiverid(auctionOffer.getId().getBidder());
-                setAmountWanted(auctionOffer.getId().getOffer());
+            setReceiverid(auctionOffer.getId().getBidder());
+            setAmountWanted(auctionOffer.getId().getOffer());
 
-                auctionExecuted = accept();
-            }
+            auctionExecuted = accept();
+        }
 
 
-            auctionHistoryHelper.deleteOffers(getMsgnumber());
+        auctionHistoryHelper.deleteOffers(getMsgnumber());
 
-        
+
     }
 
     public void setHighestPrice(int highestAuctionOffer) {

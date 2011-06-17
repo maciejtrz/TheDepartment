@@ -4,6 +4,9 @@ import ConnectionDataBase.Auctionhistory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import utilities.BasicUtils;
 
 
 public class AuctionMessageReader extends MessageWriter implements Serializable  {
@@ -29,7 +32,23 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
 
     public void setSendOffer(Auction auction) {
 
-        OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        if(OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer())) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "bidOfferGrid").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
+                    "Successful bid, amount: " + auction.getOffer()));
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "bidOfferGrid").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
+                    "Unsuccessful bid, amount: " + auction.getOffer()));
+        }
 
     }
 

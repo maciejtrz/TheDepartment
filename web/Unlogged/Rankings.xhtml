@@ -1,101 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-
-    <ui:component>
-        <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="600" width="800"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-
-            <p:carousel value="#{buyLecturers.lecturers}" var="naukowiec"
-                        rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong"
-                        >
-                <p:column>
-                    <h:panelGrid columns="2" style="width:100% ; height:100%">
-
-                        <p:graphicImage value="/images/pic2.jpeg"/>
-
-                        <h:panelGrid columns="1" cellpadding="5">
-                            <h:outputText value="Name: #{naukowiec.name}" />
-                            <h:outputText value="Price: #{naukowiec.price}" />
-                            <h:outputText value="" />
-                            <h:outputText value="Buy me!:" />
-                            <p:graphicImage width="40" height="40" value="/images/big-tick.jpg"/>
-                        </h:panelGrid>
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>The Department</title>
+        <link rel="stylesheet" href="/TheDepartment/images/Envision.css" type="text/css"/>
+        <link rel="shortcut icon" href="../ac.png"/>
+    </h:head>
+    <body>
 
 
-                    </h:panelGrid>
-                </p:column>
-            </p:carousel>
+        <div id="wrap">
+            <div onclick="location.href='/TheDepartment/faces/Unlogged/index.xhtml';" style="cursor:pointer;" id="header">
+                <h1 id="logo-text">The Department</h1>
+                <h2 id="slogan">Run your own Department of Computing at Imperial!</h2>
+                <div id="header-links">
+                    <p> <a href="/TheDepartment/faces/Unlogged/index.xhtml">Home</a></p>
 
-        </p:dialog>
+                </div>
+            </div>
+
+            <div id="menu">
+                <ul>
+
+                    <li><a href="/TheDepartment/faces/Unlogged/index.xhtml">Log in</a></li>
+                    <li><a href="/TheDepartment/faces/Unlogged/AddUser.xhtml">Register</a></li>
+                    <li class="last"><a href="/TheDepartment/faces/Unlogged/Rankings.xhtml">Rankings</a></li>
+                </ul>
+            </div>
+
+            <div id="content-wrap">
+                <div id="sidebar">
 
 
-        <p:dialog header="Buy PhDs" widgetVar="buyphd" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                </div>
+                <div id="main">
 
-            <h:form>
-                <img src="ico/phd.png"/>
+                    <h:form>
 
-                <h:outputText value="PhD (£20/unit):" />
-                <p:inputText value="#{shop.phds}" />
-                <br/>
-                <p:commandButton value="Submit" action="#{shop.submitphds}"/>
+                        <p:tabView event="mouseover">
+                            <p:tab title="Reaserch Points">
+                                <h:form>
 
-            </h:form>
+                                    <p:dataTable id="moneyRanking" var="rowInput" value="#{ranking.research}">
 
-        </p:dialog>
+                                        <p:column headerText="Position">
+                                            <h:outputText value="#{ranking.researchpos}" />
+                                        </p:column>
 
-        <p:dialog header="Buy Students" widgetVar="buystu" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                                        <p:column headerText="Player ID ">
+                                            <h:outputText value="#{rowInput.idname}"/>
+                                        </p:column>
 
-            <h:form>
+                                        <p:column headerText="Research Points produced " >
+                                            <h:outputText value="#{rowInput.researchpoints}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:tab>
 
-                <table align="center">
-                    <tr>
-                        <td>
-                            <img src="ico/stu.png"/>
-                        </td>
-                        <td>
-                            Capacity
-                            <br/>
-                            <br/>
-                    <h:outputLabel for="students" value="Student(£5/10units):" />
-                    <p:spinner id="spinnerStudent"
-                               value="#{shop.students}" stepFactor="10" min="0" />
+                            <p:tab title="Wealth">
+                                <h:form>
 
-                    <br/>
-                    <br/>
-                    <div align="center">
-                        <p:commandButton  value="Submit" action="#{shop.submitstudents}" style="width:150px" />
-                    </div>
-                    <br/>
-                    </td>
-                    </tr>
+                                    <p:dataTable id="moneyRanking" var="rowInput" value="#{ranking.money}">
 
-                    <tr>
-                        <td>
-                            <img src="ico/phd.png"/>
-                        </td>
-                        <td>
-                            Capacity
-                            <br/>
-                            <br/>
-                    <h:outputLabel for="phds" value="PhD(£20/unit):" />
-                    <p:spinner id="spinnerPhds"
-                               value="#{shop.phds}" stepFactor="1" min="0" />
-                    <br/>
-                    <br/>
-                    <div align="center">
-                        <p:commandButton value="Submit" action="#{shop.submitphds}" style="width:150px"/>
-                    </div>
-                    </td>
-                    </tr>
-                </table>
-            </h:form>
+                                        <p:column headerText="Position">
+                                            <h:outputText value="#{ranking.monetpos}" />
+                                        </p:column>
 
-        </p:dialog>
-    </ui:component>
+                                        <p:column headerText="Player ID ">
+                                            <h:outputText value="#{rowInput.idname}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Money" >
+                                            <h:outputText value="#{rowInput.money}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:tab>
+                            <p:tab title="Students">
+                                <h:form>
+
+                                    <p:dataTable id="student" var="rowInput" value="#{ranking.students}">
+
+                                        <p:column headerText="Position">
+                                            <h:outputText value="#{ranking.studentpos}" />
+                                        </p:column>
+
+                                        <p:column headerText="Player ID ">
+                                            <h:outputText value="#{rowInput.idname}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Students population: " >
+                                            <h:outputText value="#{rowInput.undergraduatesnumber}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+
+                            </p:tab>
+
+                            <p:tab title="PhDs">
+                                <h:form>
+
+                                    <p:dataTable id="phdsRanking" var="rowInput" value="#{ranking.phds}">
+
+                                        <p:column headerText="Position">
+                                            <h:outputText value="#{ranking.phdspos}" />
+                                        </p:column>
+
+                                        <p:column headerText="Player ID ">
+                                            <h:outputText value="#{rowInput.idname}"/>
+                                        </p:column>
+
+                                        <p:column headerText="PhDs number: " >
+                                            <h:outputText value="#{rowInput.phdsnumber}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:tab>
+
+
+                        </p:tabView>
+
+                    </h:form>
+
+
+                </div>
+
+            </div>
+
+            <div id="footer">
+                <p> &copy; 2011 <strong>piotr.kraus09
+                        maciej.trzcinski09
+                        karol.pyniak09
+                        krzysztof.huszcza09 </strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.styleshout.com" target="_blank">
+                        CSS </a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html" target="_blank">JSF</a>  | <a href="http://www.primefaces.org/" target="_blank">PrimeFaces</a>  | <a href="http://www.corel.com/" >CorelDRAW</a> </p>
+            </div>
+       </div>
+    </body>
 </html>

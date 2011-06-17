@@ -34,7 +34,7 @@ and open the template in the editor.
         <h:form id="tbar">
             <p:toolbar>
                 <p:toolbarGroup  align="left">
-                    <p:commandButton disabled="true" value="Username" />  <h:outputText value="" /> <!-- SEPARATOR -->
+                    <p:commandButton disabled="true" value="User" />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.username}"  /> <h:outputText value="" /> <!-- SEPARATOR -->
 
                     <p:commandButton image="rep"/>
@@ -75,12 +75,12 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu label="Trading">
-                    <p:menuitem value="Make Offer" onclick="newtrade.show();"/>
-                    <p:menuitem value="View offers" onclick="viewtrade.show();"/>
-                    <p:menuitem value="Notice board" onclick="noticeboard.show();" />
-                    <p:menuitem value="Add notice-board offer" onclick="addnoticeoffer.show();" />
-                    <p:menuitem value="Auction Table" onclick="auctiontable.show();" />
+                    <p:menuitem value="Make Private Offer" onclick="newtrade.show();"/>
+                    <p:menuitem value="View Your Offers" onclick="viewtrade.show();"/>
+                    <p:menuitem value="Add Noticeboard Offer" onclick="addnoticeoffer.show();" />
+                    <p:menuitem value="Noticeboard" onclick="noticeboard.show();" />
                     <p:menuitem value="Add Auction" onclick="addauction.show();" />
+                    <p:menuitem value="Auction Table" onclick="auctiontable.show();" />
                 </p:submenu>
 
                 <p:submenu label="Reasearches">

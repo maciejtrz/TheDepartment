@@ -102,7 +102,6 @@ public class AuctionMonitor {
     }
 
     public boolean placeOffer(Auction auction, int offer) {
-        auction.setHighestOfferedPrice(offer);
-        return true;
+        return auction.setHighestOfferedPrice(offer);
     }
 }

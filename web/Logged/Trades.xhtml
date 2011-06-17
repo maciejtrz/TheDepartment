@@ -175,9 +175,9 @@
         <p:dialog header="Add notice-board offer" widgetVar="addnoticeoffer" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <h:form>
+            <h:form >
 
-                <br/>
+                <h:panelGrid id="newNoticeOfferGrid">
                 <h:outputText value="Title of the trade: "/>
                 <h:inputText value="#{noticeMessageWriter.subject}" />
                 <br/>
@@ -187,8 +187,9 @@
                 </h:selectOneMenu>
 
                 <h:outputText value="Offered amount: "/>
-                <p:inputText id="offeredAmount" value="#{noticeMessageWriter.amountOffered}" />
-                <p:slider for="offeredAmount"/>
+                <p:inputText id="offeredNoticeOfferAmount" value="#{noticeMessageWriter.amountOffered}" />
+                <p:slider for="offeredNoticeOfferAmount"/>
+                <p:message for="offeredNoticeOfferAmount" />
                 <br/>
                 <h:outputText value="Wanted resources:" />
                 <h:selectOneMenu value="#{noticeMessageWriter.resourcesWantedType}">
@@ -196,17 +197,28 @@
                 </h:selectOneMenu>
 
                 <h:outputText value="Wanted amount: "/>
-                <p:inputText id="wantedAmount" value="#{noticeMessageWriter.amountWanted}" />
-                <p:slider for="wantedAmount"/>
+                <p:inputText id="wantedNoticeOfferAmount" value="#{noticeMessageWriter.amountWanted}" />
+                <p:slider for="wantedNoticeOfferAmount"/>
+                <p:message for="wantedNoticeOfferAmount"/>
                 <br/>
                 <h:outputText value="Trade description (arguments?)"/>
                 <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                  value="#{noticeMessageWriter.tradeDescription}"/>
 
                 <h:outputText value="Expire date: "/>
-                <p:calendar value="#{noticeMessageWriter.expireDate}" pattern="MM/dd/yyyy HH:mm" />
+                <p:calendar value="#{noticeMessageWriter.expireDate}"
+                            pattern="MM/dd/yyyy HH:mm"
+                            id="expireNoticeOfferDate"/>
+                <p:message for="expireNoticeOfferDate"/>
+                </h:panelGrid>
 
-                <h:commandButton value="Make Trade Offer" actionListener="#{noticeMessageWriter.sendNoticeOffer}" />
+                <p:commandButton value="Make Trade Offer"
+                                 id="sendNoticeOfferTrade"
+                                 action="#{noticeMessageWriter.sendNoticeOffer}"
+                                 update="newNoticeOfferGrid,expireNoticeOfferDate"
+                                 />
+                <p:message for="sendNoticeOfferTrade" />
+                
             </h:form>
             <a onclick="addnoticeoffer.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>

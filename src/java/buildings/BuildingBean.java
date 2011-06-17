@@ -44,4 +44,8 @@ public class BuildingBean implements Serializable {
         playersBuildings = utils.getAvailableBuildings(playerName);
     }
 
+    public boolean getAfford() {
+        return false;
+    }
+
 }

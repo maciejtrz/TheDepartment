@@ -152,8 +152,10 @@ public abstract class MessageWriter implements Serializable {
         while (iterator.hasNext()) {
             Players player = iterator.next();
 
-            receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
-            users.add(player);
+            if(!player.getIdname().equals(getUsername())) {
+                receiverList.add(new SelectItem(new Integer(i++), player.getIdname()));
+                users.add(player);
+            }
         }
 
         return receiverList;

@@ -104,13 +104,18 @@
                     </p:column>
 
                     <p:column>
-                        <h:commandButton value="Accept" >
+                        <p:commandButton value="Accept"
+                                         id="acceptButton"
+                                         update="offeredTrades">
                             <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
-                        </h:commandButton>
+                        </p:commandButton>
+                        
+                        <p:message for="acceptButton" />
 
-                        <h:commandButton value="Decline" >
-                            <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
-                        </h:commandButton>
+                        <p:commandButton value="Decline" >
+                            <f:setPropertyActionListener
+                                value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
+                        </p:commandButton>
 
                     </p:column>
 

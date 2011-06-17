@@ -165,6 +165,16 @@ public class TradeWriter extends MessageWriter implements Serializable {
             error = true;
         }
 
+        if(getResourcesOfferedType() == getResourcesWantedType()) {
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "sendTradeOffer").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
+                    "Reasources wanted and offered cannot be of the same type"));
+
+            error = true;
+        }
+
         String result = null;
 
         if (!error) {

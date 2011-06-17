@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import utilities.BasicUtils;
 
 public class TradeMessageReader extends MessageWriter implements Serializable {
 
@@ -79,8 +82,23 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     }
 
     public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
-        acceptedTradeOffer.accept();
-        offeredTrades.remove(acceptedTradeOffer);
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+       
+        if(!acceptedTradeOffer.accept()) {
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "acceptButton").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Accept conditions",
+                    "You cannot accept this offer: you must own more than " +
+                    acceptedTradeOffer.getAmountWanted() + " of " + 
+                    acceptedTradeOffer.getResourcesWantedName()));
+
+        } else {
+            offeredTrades.remove(acceptedTradeOffer);
+        }
+        
     }
 
     public void setDeclineTradeOffer(TradeOffer declinedTradeOffer) {

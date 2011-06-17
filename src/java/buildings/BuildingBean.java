@@ -35,11 +35,11 @@ public class BuildingBean implements Serializable {
     }
 
     public void setDoSelect(Building s) {
-        System.out.println("Selected building: " + s.getInfo());
+
         String playerName = utilities.BasicUtils.getUserName();
-        System.out.println("For player " + playerName);
+
         int position = UserManager.getBuilidngPosition(playerName);
-        System.out.println("At position: " + position);
+
         s.build(playerName, position);
         playersBuildings = utils.getAvailableBuildings(playerName);
     }

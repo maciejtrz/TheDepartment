@@ -25,12 +25,12 @@ public class RankingDeamon implements Runnable {
 
     public void run(){
         while(true){
-    System.out.println("I'm producing important stuff");
+
     MoneyRankingSingleton.produceRanking();
     ResearchPointsRankingSingleton.produceRanking();
     PhDsRankingSingleton.produceRanking();
     StudentsRankingSingleton.produceRanking();
-    System.out.println("Still alive...");
+
         try {
             Thread.sleep(10000);
         } catch (InterruptedException ex) {

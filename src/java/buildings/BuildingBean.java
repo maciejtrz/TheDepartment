@@ -25,8 +25,7 @@ public class BuildingBean implements Serializable {
     public BuildingBean() {
         utils = new BuildingsUtils();
         String playerName = utilities.BasicUtils.getUserName();
-        playersBuildings= utils.getAvailableBuildings(playerName);
-
+        playersBuildings= utils.getNotBuiltBuildings(playerName);
     }
 
     public List<Building> getPlayersBuildings(){
@@ -41,7 +40,7 @@ public class BuildingBean implements Serializable {
         int position = UserManager.getBuilidngPosition(playerName);
 
         s.build(playerName, position);
-        playersBuildings = utils.getAvailableBuildings(playerName);
+        playersBuildings = utils.getNotBuiltBuildings(playerName);
     }
 
     public boolean getAfford() {

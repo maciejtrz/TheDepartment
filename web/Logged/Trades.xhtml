@@ -260,10 +260,11 @@
                     </p:column>
 
                     <p:column>
-                        <h:commandButton value="Decline" >
+                        <p:commandButton value="Decline"
+                                         update="yourOfferedTrades">
                             <f:setPropertyActionListener
                                 value="#{tradeOffer}" target="#{tradeMessageReader.deleteTradeOffer}" />
-                        </h:commandButton>
+                        </p:commandButton>
                     </p:column>
 
                     <p:column>

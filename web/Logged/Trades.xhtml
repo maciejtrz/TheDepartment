@@ -364,6 +364,7 @@
 
                         <h:outputText value="Your offer: "/>
                         <h:inputText value="#{auction.offer}" />
+
                         <br/>
 
                         <h:panelGrid id="bidOfferGrid" >
@@ -375,7 +376,7 @@
 
                         <p:commandButton value="Show Details"
                                          onclick="auctionOfferDetails.show()" />
-                        
+
                         <p:dialog header="Auction Offer Details"
                                   widgetVar="auctionOfferDetails"
                                   resizable="false"
@@ -404,17 +405,6 @@
                                     <h:outputText value="Expire date: " />
                                     <h:outputText value="#{auction.expireDate}" />
 
-                                    <h:outputText value="Your offer: "/>
-                                    <h:inputText value="#{auction.offer}" />
-
-                                    <p:commandButton value="Bid"
-                                                     onclick="auctionOfferDetails.hide()"
-                                                     update="bidOfferGrid" >
-                                        <f:setPropertyActionListener
-                                            value="#{auction}"
-                                            target="#{auctionMessageReader.sendOffer}" />
-                                    </p:commandButton>
-                        
                                     <p:commandButton value="Close" onclick="auctionOfferDetails.hide()" />
 
                                </h:panelGrid>

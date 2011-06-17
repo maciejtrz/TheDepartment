@@ -73,6 +73,11 @@ public class Auction extends TradeOffer implements Serializable {
         this.offer = offer;
     }
 
+    public void setOffer(String offer) {
+        System.out.println("The offer is: " + offer);
+        this.offer = Integer.parseInt(offer);
+    }
+
     public String getTypeName() {
         return "null";
     }
@@ -105,6 +110,8 @@ public class Auction extends TradeOffer implements Serializable {
 
         String bidder = BasicUtils.getUserName();
 
+        price = getOffer();
+
         boolean result = false;
 
         System.out.println("Winner: " + getSenderid());
@@ -136,6 +143,8 @@ public class Auction extends TradeOffer implements Serializable {
 
             return false;
         }
+
+        System.out.println("Offered price is " + price);
 
         if (bidder.equals(getSenderid())) {
 
@@ -182,6 +191,8 @@ public class Auction extends TradeOffer implements Serializable {
                         "bidOfferGrid").getClientId(facesContext),
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
                         errorMessage));
+
+                result = false;
         }
 
         return result;

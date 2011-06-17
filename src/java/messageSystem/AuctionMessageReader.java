@@ -33,7 +33,7 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        if (OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer())) {
+        if (OffersSuperviser.getAuctionMonitor().placeOffer(auction,auction.getOffer())) {
 
             FacesContext.getCurrentInstance().addMessage(
                     BasicUtils.findComponent(facesContext.getViewRoot(),

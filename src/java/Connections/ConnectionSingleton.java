@@ -39,12 +39,18 @@ public class ConnectionSingleton {
     public static final String loggedIn = "loggedin";
     public static final String researchPoints = "researchpoints";
     public static final String playerResources = "PlayerResources";
-    public static final String addAuth = "/TheDepartment/AddAuth.jsp";
-    public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";
     public static final String researchName = "researchName";
 
-    public static final String Auth = "Auth";
+    public static final String addTradeMessageReader = "/TheDepartment/AddTradeReader.jsp";
+    public static final String addTradeMessageWriter = "/TheDepartment/AddTradeWriter.jsp";
+    public static final String addAuth = "/TheDepartment/AddAuth.jsp";
+    public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";
+ 
+
+    public static final String auth = "auth";
     public static final String researchBag = "researchBag";
+    public static final String tradeMessageReader = "tradeMessageReader";
+    public static final String tradeMessageWriter = "tradeMessageWriter";
 
     public static final String gameName = "/TheDepartment";
     public static final String AddDepartment = "Welcome.xhtml";

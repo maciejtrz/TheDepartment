@@ -32,9 +32,14 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
 
     public TradeMessageReader() {
-        super(MessageSingleton.TRADE_OFFER);
+        super(null,MessageSingleton.TRADE_OFFER);
         checked = false;
         yourMessagesChecked = false;
+    }
+
+    public void initialize(String username) {
+        System.out.println("Username in trade reader: " + username);
+        super.setUsername(username);
     }
 
     public List<TradeOffer> getOfferedTrades() {
@@ -114,6 +119,8 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
             yourOfferedTrades = new ArrayList<TradeOffer>();
 
             List<Messagesystem> encodedTrades = getSentMessages();
+
+            System.out.println("Number of sent messages " + encodedTrades.size());
 
             Iterator<Messagesystem> iterator = encodedTrades.iterator();
 

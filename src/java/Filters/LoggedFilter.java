@@ -19,6 +19,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import messageSystem.TradeMessageReader;
+import messageSystem.TradeMessageWriter;
 
 /**
  *
@@ -45,9 +47,13 @@ public class LoggedFilter implements Filter {
 
         } else {
 
-            Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
-            ResearchBag researchBag = (ResearchBag)
-                    session.getAttribute(ConnectionSingleton.researchBag);
+            Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
+            ResearchBag researchBag = (ResearchBag)session.getAttribute(ConnectionSingleton.researchBag);
+            TradeMessageReader tradeMessageReader = (TradeMessageReader)
+                    session.getAttribute(ConnectionSingleton.tradeMessageReader);
+
+            TradeMessageWriter tradeMessageWriter = (TradeMessageWriter)
+                    session.getAttribute(ConnectionSingleton.tradeMessageWriter);
 
             if(auth == null) {
      
@@ -59,6 +65,19 @@ public class LoggedFilter implements Filter {
                
                 res.sendRedirect(ConnectionSingleton.addResearchBag);
                 return;
+            }
+
+            if(tradeMessageReader == null) {
+
+                res.sendRedirect(ConnectionSingleton.addTradeMessageReader);
+                return;
+                
+            }
+
+            if(tradeMessageWriter == null) {
+                res.sendRedirect(ConnectionSingleton.addTradeMessageWriter);
+                return;
+                
             }
 
             if(auth.logging){

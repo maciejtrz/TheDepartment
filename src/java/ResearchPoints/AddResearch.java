@@ -57,7 +57,7 @@ public class AddResearch implements Serializable {
 
         /* Adding research thread to the list of researches of the given user */
         researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
-        auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+        auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
         moneyAmount = 50;
         chosenResearch = 0;

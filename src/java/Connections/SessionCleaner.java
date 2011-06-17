@@ -2,7 +2,6 @@ package Connections;
 
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
-import ConnectionDataBase.ResearchHelper;
 import ResearchPoints.ResearchBag;
 import UserBeans.Auth;
 import javax.servlet.http.HttpSessionAttributeListener;
@@ -21,7 +20,7 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
     public void attributeAdded(HttpSessionBindingEvent event) {
 
-        if(event.getName().equals(ConnectionSingleton.Auth)) {
+        if(event.getName().equals(ConnectionSingleton.auth)) {
             Auth auth = (Auth) event.getValue();
             UserManager.addUser(auth);
         }
@@ -38,7 +37,7 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
             UserManager.removeResearchBag(researchBag.getUserid());
 
-        } else if (event.getName().equals(ConnectionSingleton.Auth)) {
+        } else if (event.getName().equals(ConnectionSingleton.auth)) {
 
             Auth auth = (Auth) event.getValue();
 

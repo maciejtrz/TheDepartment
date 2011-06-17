@@ -31,7 +31,7 @@ public class Shop implements Serializable {
     public Shop() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
         name = auth.getUsername();
         resources = auth.getResources();

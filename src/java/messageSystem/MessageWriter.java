@@ -23,13 +23,13 @@ import org.primefaces.event.FlowEvent;
 public abstract class MessageWriter implements Serializable {
 
     /* Type of the message, for example, regular message or a trade offer */
-    private final int messageType;
+    private int messageType;
 
     /* List of messages of the given type to the user */
     private List<Messagesystem> messages;
 
     /* UserId of the receiver */
-    private final String username;
+    private String username;
 
     /* Selected message */
     private Integer selectedMessage;
@@ -60,8 +60,14 @@ public abstract class MessageWriter implements Serializable {
         selectedReceiver = 0;
     }
 
+
+
     public int getMessageType() {
         return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
     }
 
     public List<Messagesystem> getMessages() {
@@ -80,6 +86,10 @@ public abstract class MessageWriter implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getReceiverid() {

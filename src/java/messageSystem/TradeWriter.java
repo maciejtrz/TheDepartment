@@ -32,9 +32,19 @@ public class TradeWriter extends MessageWriter implements Serializable {
         }
     }
 
-    TradeWriter(int messageType) {
+    public TradeWriter(int messageType) {
         super(messageType);
         tradeOffer = new TradeOffer();
+    }
+
+    public TradeWriter() {
+        super(null, 0);
+        tradeOffer = new TradeOffer();
+    }
+
+    public void initialize(String username, int messageType) {
+        super.setUsername(username);
+        super.setMessageType(messageType);
     }
 
     public String getResourceName(int i) {
@@ -110,6 +120,8 @@ public class TradeWriter extends MessageWriter implements Serializable {
     }
 
     public String sendTrade() {
+
+        System.out.println("Sending the trade...");
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
 

@@ -6,12 +6,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean class="UserBeans.Auth" id="auth" scope="session" />
+<jsp:useBean class="messageSystem.TradeMessageReader" id="tradeMessageReader" scope="session" />
 
 <%
-    auth.setUsername(session.getAttribute(ConnectionSingleton.idname).toString());
-    auth.updateResearchPoints();
-    session.setAttribute(ConnectionSingleton.auth, auth);
+    tradeMessageReader.initialize(session.getAttribute(ConnectionSingleton.idname).toString());
+    session.setAttribute(ConnectionSingleton.tradeMessageReader,tradeMessageReader);
 
     AuthorizationSingleton.goToWelcomePage(response);
 %>

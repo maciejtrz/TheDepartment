@@ -10,7 +10,7 @@
 <jsp:useBean class="ResearchPoints.ResearchBag" id="researchBag" scope="session" />
 
 <%
-    Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+    Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
     researchBag.initialize(new String(auth.getUsername()));
     

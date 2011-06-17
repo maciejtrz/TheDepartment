@@ -119,7 +119,7 @@ public class LecturersManager {
         /* Getting all required hibernate helpers. */
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
         Playerresources resources
                 = auth.getResources();

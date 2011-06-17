@@ -8,20 +8,19 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import utilities.BasicUtils;
 
-
-public class AuctionMessageReader extends MessageWriter implements Serializable  {
+public class AuctionMessageReader extends MessageWriter implements Serializable {
 
     private boolean checked;
     private List<Auction> auctionOffers = new ArrayList<Auction>();
 
     /** Creates a new instance of AuctionMessageReader */
     public AuctionMessageReader() {
-        super(MessageSingleton.AUCTION_BOARD,MessageSingleton.AUCTION_OFFER);
+        super(MessageSingleton.AUCTION_BOARD, MessageSingleton.AUCTION_OFFER);
         checked = false;
     }
 
     public List<Auction> getAuctionOffers() {
-          return OffersSuperviser.getAuctionMonitor().getAuctionList();
+        return OffersSuperviser.getAuctionMonitor().getAuctionList();
     }
 
     public List<Auctionhistory> getOffersHistory(Auction auction) {
@@ -34,7 +33,7 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        if(OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer())) {
+        if (OffersSuperviser.getAuctionMonitor().placeOffer(auction, auction.getOffer())) {
 
             FacesContext.getCurrentInstance().addMessage(
                     BasicUtils.findComponent(facesContext.getViewRoot(),
@@ -43,13 +42,18 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
                     "Successful bid, amount: " + auction.getOffer()));
 
         } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "bidOfferGrid").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
-                    "Unsuccessful bid, amount: " + auction.getOffer()));
+
+            if (!facesContext.getMessageList(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "bidOfferGrid").getClientId(facesContext)).isEmpty()) {
+
+                FacesContext.getCurrentInstance().addMessage(
+                        BasicUtils.findComponent(facesContext.getViewRoot(),
+                        "bidOfferGrid").getClientId(facesContext),
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sent trade",
+                        "Unsuccessful bid, amount: " + auction.getOffer()));
+
+            }
         }
 
     }
-
 }

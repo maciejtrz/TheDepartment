@@ -207,7 +207,7 @@
 
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="#{building.info}" />
-                        <h:outputText value="Price: #{building.cost}" />
+                        <h:outputText value="Price: #{building.cost} &#208;" />
                         <p:commandButton  value="Build" rendered="#{buildingbean.afford}">
                             <f:setPropertyActionListener target="#{buildingbean.doSelect}"
                                                          value="#{building}" />

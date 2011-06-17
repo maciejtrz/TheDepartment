@@ -52,7 +52,7 @@ public class BuyLecturers implements Serializable  {
         
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.Auth);
+        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
         LecturersManager mgr
                 = new LecturersManager(utilities.BasicUtils.getUserName());

@@ -160,6 +160,30 @@
         <managed-bean-class>messageSystem.PlainMessageReader</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>noticeMessageWriter</managed-bean-name>
+        <managed-bean-class>messageSystem.NoticeMessageWriter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    
+
+    <managed-bean>
+        <managed-bean-name>department</managed-bean-name>
+        <managed-bean-class>UserBeans.Department</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+    <managed-bean>
+        <managed-bean-name>message</managed-bean-name>
+        <managed-bean-class>messageSystem.Message</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>auctionMessageWriter</managed-bean-name>
+        <managed-bean-class>messageSystem.AuctionMessageWriter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>tradeMessageReader</managed-bean-name>
         <managed-bean-class>messageSystem.TradeMessageReader</managed-bean-class>
@@ -171,10 +195,11 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+
     <managed-bean>
-        <managed-bean-name>noticeMessageWriter</managed-bean-name>
-        <managed-bean-class>messageSystem.NoticeMessageWriter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-name>auctionMessageReader</managed-bean-name>
+        <managed-bean-class>messageSystem.AuctionMessageReader</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
@@ -183,55 +208,24 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean>
-        <managed-bean-name>department</managed-bean-name>
-        <managed-bean-class>UserBeans.Department</managed-bean-class>
 
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
-    <managed-bean>
-        <managed-bean-name>message</managed-bean-name>
-        <managed-bean-class>messageSystem.Message</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>highestPriceAuction</managed-bean-name>
-        <managed-bean-class>messageSystem.HighestPriceAuction</managed-bean-class>
-        <managed-bean-scope>page</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>blindAuction</managed-bean-name>
-        <managed-bean-class>messageSystem.BlindAuction</managed-bean-class>
-        <managed-bean-scope>page</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>vikreyAction</managed-bean-name>
-        <managed-bean-class>messageSystem.VikreyAuction</managed-bean-class>
-        <managed-bean-scope>page</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>auctionMessageWriter</managed-bean-name>
-        <managed-bean-class>messageSystem.AuctionMessageWriter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>auctionMessageReader</managed-bean-name>
-        <managed-bean-class>messageSystem.AuctionMessageReader</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
     <managed-bean>
         <managed-bean-name>mapPositionBean</managed-bean-name>
         <managed-bean-class>utilities.MapPositionBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+
     <managed-bean>
         <managed-bean-name>buildingbean</managed-bean-name>
         <managed-bean-class>buildings.BuildingBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+
+
+
+
+
     <navigation-rule>
         <from-view-id>/Logged/Trades.xhtml</from-view-id>
         <navigation-case>

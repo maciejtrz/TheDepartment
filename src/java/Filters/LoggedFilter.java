@@ -72,7 +72,7 @@ public class LoggedFilter implements Filter {
                 
             }
 
-            if(UserManager.isUserMonitored(auth.getUsername())) {
+            if(!UserManager.isUserMonitored(auth.getUsername())) {
                 UserManager.addUser(auth);
             }
 

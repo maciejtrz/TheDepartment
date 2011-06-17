@@ -1,4 +1,5 @@
 
+<%@page import="Connections.UserManager"%>
 <%@page import="Connections.AuthorizationSingleton"%>
 <%@page import="Connections.ConnectionSingleton"%>
 
@@ -11,7 +12,10 @@
 <%
     auth.setUsername(session.getAttribute(ConnectionSingleton.idname).toString());
     auth.updateResearchPoints();
+
     session.setAttribute(ConnectionSingleton.auth, auth);
+
+    UserManager.addUser(auth);
 
     AuthorizationSingleton.goToWelcomePage(response);
 %>

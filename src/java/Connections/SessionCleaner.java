@@ -22,6 +22,7 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
         if(event.getName().equals(ConnectionSingleton.auth)) {
             Auth auth = (Auth) event.getValue();
+            System.out.println("Adding auth with username: " +auth.getUsername());
             UserManager.addUser(auth);
         }
     }

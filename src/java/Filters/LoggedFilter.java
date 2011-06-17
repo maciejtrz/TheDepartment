@@ -7,6 +7,7 @@ package Filters;
 
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import ResearchPoints.ResearchBag;
 import UserBeans.Auth;
 import java.io.IOException;
@@ -52,10 +53,7 @@ public class LoggedFilter implements Filter {
             TradeMessageReader tradeMessageReader = (TradeMessageReader)
                     session.getAttribute(ConnectionSingleton.tradeMessageReader);
 
-            TradeMessageWriter tradeMessageWriter = (TradeMessageWriter)
-                    session.getAttribute(ConnectionSingleton.tradeMessageWriter);
-
-            if(auth == null) {
+            if(auth == null || auth.getUsername() == null) {
      
                  res.sendRedirect(ConnectionSingleton.addAuth);
                  return;
@@ -74,11 +72,10 @@ public class LoggedFilter implements Filter {
                 
             }
 
-            if(tradeMessageWriter == null) {
-                res.sendRedirect(ConnectionSingleton.addTradeMessageWriter);
-                return;
-                
+            if(UserManager.isUserMonitored(auth.getUsername())) {
+                UserManager.addUser(auth);
             }
+
 
             if(auth.logging){
 

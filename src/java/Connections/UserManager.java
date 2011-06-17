@@ -20,13 +20,8 @@ import resources.ResourcesType;
 public class UserManager {
 
     /* Set of all user currently having sessions */
-    private static Map<String,Auth> sessionMap;
-    private static Map<String,ResearchBag> sessionResearchBag;
-
-    static {
-       sessionMap = new HashMap<String,Auth>();
-       sessionResearchBag = new HashMap<String,ResearchBag>();
-    }
+    private static Map<String,Auth> sessionMap = new HashMap<String,Auth>();
+    private static Map<String,ResearchBag> sessionResearchBag = new HashMap<String,ResearchBag>();
 
     public static boolean containsResearchBag(String username) {
         return sessionResearchBag.containsKey(username);
@@ -65,7 +60,7 @@ public class UserManager {
     }
 
 
-    static private boolean isUserMonitored(String username) {
+    static public boolean isUserMonitored(String username) {
         return sessionMap.containsKey(username);
     }
 
@@ -315,9 +310,15 @@ public class UserManager {
     }
 
     public static void notifyAboutSendingMessage(String username) {
+        System.out.println("Notifying...");
+        System.out.println("User: " + username);
+        System.out.println("System contains auth: " + sessionMap.containsKey(username));
         if(isUserMonitored(username)) {
             Auth auth = getUser(username);
+           
             auth.notifyAboutSendingMessage();
+            System.out.println("Notified...");
+            System.out.println("User: " + auth.getUsername());
         }
     }
 

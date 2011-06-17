@@ -45,8 +45,6 @@ public class MessageSystemHelper extends AbstractHelper {
 
         UserManager.notifyAboutSendingMessage(SenderID);
 
-        System.out.println("Was message sent: " + UserManager.sentNewMessage(SenderID));
-
         return msg.getMsgnumber();
 
     }

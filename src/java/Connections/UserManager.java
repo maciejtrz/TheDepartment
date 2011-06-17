@@ -58,6 +58,8 @@ public class UserManager {
 
     }
 
+
+
     /* Singleton */
     private UserManager() {
     }
@@ -312,6 +314,13 @@ public class UserManager {
         }
     }
 
+    public static void notifyAboutSendingMessage(String username) {
+        if(isUserMonitored(username)) {
+            Auth auth = getUser(username);
+            auth.notifyAboutSendingMessage();
+        }
+    }
+
 
     public static boolean hasNewMessage(String username) {
         boolean result = false;
@@ -319,6 +328,17 @@ public class UserManager {
         if(isUserMonitored(username)) {
             Auth auth = getUser(username);
             result = auth.getHasNewMessage();
+        }
+
+        return result;
+    }
+
+    public static boolean sentNewMessage(String username) {
+        boolean result = false;
+
+        if(isUserMonitored(username)) {
+            Auth auth = getUser(username);
+            result = auth.sentNewMessage();
         }
 
         return result;

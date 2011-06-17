@@ -181,6 +181,60 @@
             <a onclick="viewtrade.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
+
+
+
+
+
+        <p:dialog header="View Your Trades" widgetVar="viewyourtrade" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+            <h:form>
+
+                <p:dataTable id="yourOfferedTrades"
+                             var="yourOfferedTrades"
+                             value="#{tradeMessageReader.yourOfferedTrades}" >
+
+                    <p:column headerText="Trade receiver">
+                        <h:outputText value="#{tradeOffer.receiverid}" />
+                    </p:column>
+
+                    <p:column headerText="Resource offered: ">
+                        <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount offered: " >
+                        <h:outputText value="#{tradeOffer.amountOffered}"/>
+                    </p:column>
+
+                    <p:column headerText="Resources wanted: ">
+                        <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount wanted: ">
+                        <h:outputText value="#{tradeOffer.amountWanted}" />
+                    </p:column>
+
+                    <p:column headerText="Expire date: ">
+                        <h:outputText value="#{tradeOffer.expireDateText}" />
+                    </p:column>
+
+                </p:dataTable>
+                <p:poll interval="10" update="yourOfferedTrades" />
+            </h:form>
+
+
+
+            <a onclick="viewyourtrade.hide()"> CLICK THIS TO HIDE </a>
+        </p:dialog>
+
+
+
+
+
+
+
+
+
         <p:dialog header="Notice board" widgetVar="noticeboard" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
@@ -369,7 +423,9 @@
 
                         <h:panelGrid id="bidOfferGrid" >
                         <p:commandButton value="Bid" update="bidOfferGrid">
-                            <f:setPropertyActionListener value="#{auction}" target="#{auctionMessageReader.sendOffer}" />
+                            <f:setPropertyActionListener 
+                                value="#{auction}"
+                                target="#{auctionMessageReader.sendOffer}" />
                         </p:commandButton>
                         <p:message for="bidOfferGrid" />
                         </h:panelGrid>

@@ -6,9 +6,7 @@ import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Iterator;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.BasicUtils;
@@ -25,6 +23,7 @@ public class Auth implements Serializable {
     private String password;
     private Boolean remember;
     private boolean hasNewMessage;
+    private boolean sentNewMessage;
     private Playerresources resources;
     private int buildingPosition;
 
@@ -197,6 +196,16 @@ public class Auth implements Serializable {
             context.addMessage(null, new FacesMessage("Message System","You've got a new message"));
             setHasNewMessage(false);
         }
+    }
+
+    public boolean sentNewMessage() {
+        boolean result = sentNewMessage;
+        sentNewMessage = false;
+        return result;
+    }
+
+    public void notifyAboutSendingMessage() {
+        sentNewMessage = true;
     }
 
 }

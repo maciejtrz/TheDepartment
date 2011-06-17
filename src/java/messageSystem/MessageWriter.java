@@ -69,6 +69,11 @@ public abstract class MessageWriter implements Serializable {
         return messageSystemHelper.getMessages(getUsername(), getMessageType());
     }
 
+    public List<Messagesystem> getSentMessages() {
+        MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+        return messageSystemHelper.getSentMessages(getUsername(), getMessageType());
+    }
+
     public void setMessages(List<Messagesystem> messages) {
         this.messages = messages;
     }

@@ -40,7 +40,12 @@ public class MessageSystemHelper extends AbstractHelper {
         commitTransaction(session);
 
         UserManager.notifyUserAboutMessage(ReceiverID);
+
+        System.out.println("Setting new message...");
+
         UserManager.notifyAboutSendingMessage(SenderID);
+
+        System.out.println("Was message sent: " + UserManager.sentNewMessage(SenderID));
 
         return msg.getMsgnumber();
 
@@ -83,8 +88,13 @@ public class MessageSystemHelper extends AbstractHelper {
 
     public List<Messagesystem> getSentMessages(String sender, int messageType) {
         Session session = createNewSessionAndTransaction();
-        Query q = session.createQuery("from Messagesystem where SenderId = '" + sender + "'"
-                + "and type=" + messageType);
+
+        String query = "from Messagesystem where senderid = '" + sender + "'"
+                + " and type = " + messageType;
+
+        System.out.println("Our query is: " + query);
+
+        Query q = session.createQuery(query);
 
         List<Messagesystem> ret = q.list();
         session.close();

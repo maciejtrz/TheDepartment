@@ -201,6 +201,7 @@ public class Auth implements Serializable {
     public boolean sentNewMessage() {
         boolean result = sentNewMessage;
         sentNewMessage = false;
+        System.out.println("Was there any new messages: " + result);
         return result;
     }
 

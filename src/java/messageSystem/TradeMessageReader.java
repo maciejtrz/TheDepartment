@@ -109,11 +109,14 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
             }
         }
 
-        if (!checked || UserManager.sentNewMessage(getUsername())) {
+        if (!yourMessagesChecked || UserManager.sentNewMessage(getUsername())) {
             yourMessagesChecked = true;
             yourOfferedTrades = new ArrayList<TradeOffer>();
 
-            List<Messagesystem> encodedTrades = getMessages();
+            List<Messagesystem> encodedTrades = getSentMessages();
+
+            System.out.println("Number of returned messages " + encodedTrades.size());
+
             Iterator<Messagesystem> iterator = encodedTrades.iterator();
 
             Date currentDate = new Date();
@@ -125,24 +128,21 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
 
                 tradeOffer.parse(message.getMsg());
 
-                if (tradeOffer.getExpireDate().compareTo(currentDate) > 0) {
+                System.out.println("Message: " + message.getMsg());
+                
 
-                    tradeOffer.setSenderid(message.getSenderid());
-                    tradeOffer.setReceiverid(message.getReceiverid());
-                    tradeOffer.setCreationtime(message.getCreationtime());
-                    tradeOffer.setMsgnumber(message.getMsgnumber());
-                    tradeOffer.setSubject(message.getSubject());
+                tradeOffer.setSenderid(message.getSenderid());
+                tradeOffer.setReceiverid(message.getReceiverid());
+                tradeOffer.setCreationtime(message.getCreationtime());
+                tradeOffer.setMsgnumber(message.getMsgnumber());
+                tradeOffer.setSubject(message.getSubject());
 
-                    yourOfferedTrades.add(tradeOffer);
-                    yourExpirationTimeList.offer(tradeOffer);
+                yourOfferedTrades.add(tradeOffer);
+                yourExpirationTimeList.offer(tradeOffer);
 
-                } else {
-
-                    messageSystemHelper.deleteMsg(tradeOffer.getMsgnumber());
-                    
-                }
             }
         }
+        
         return yourOfferedTrades;
     }
 
@@ -169,5 +169,12 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     public void setDeclineTradeOffer(TradeOffer declinedTradeOffer) {
         declinedTradeOffer.decline();
         offeredTrades.remove(declinedTradeOffer);
+        expirationTimeList.remove(declinedTradeOffer);
+    }
+    
+    public void setDeleteTradeOffer(TradeOffer declinedTradeOffer) {
+        declinedTradeOffer.decline();
+        yourOfferedTrades.remove(declinedTradeOffer);
+        yourExpirationTimeList.remove(declinedTradeOffer);
     }
 }

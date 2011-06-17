@@ -14,16 +14,29 @@ import utilities.LecturerBenefits;
 import utilities.LecturersManager;
 
 
-public class BuyLecturers implements Serializable  {
+public class BuyLecturers  {
 
     private Lecturer selected_lecturer;
     private List<Lecturer> lecturers;
 
+    private String username;
+
     /** Creates a new instance of BuyLecturers */
     public BuyLecturers() {
-        //System.out.println("The lecturers constructor is called");
+        System.out.println("The lecturers constructor is called");
+        
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    
+    public void initialize(String username) {
+
+        this.username = username;
+
         LecturersManager mgr
-                = new LecturersManager(utilities.BasicUtils.getUserName());
+                = new LecturersManager(username);
         lecturers = mgr.getAvailabeLecturers();
     }
 

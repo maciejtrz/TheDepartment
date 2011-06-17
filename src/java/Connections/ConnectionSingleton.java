@@ -40,11 +40,13 @@ public class ConnectionSingleton {
     public static final String researchPoints = "researchpoints";
     public static final String playerResources = "PlayerResources";
     public static final String researchName = "researchName";
+    public static final String buyLecturers ="buyLecturers";
 
     public static final String addTradeMessageReader = "/TheDepartment/AddTradeReader.jsp";
     public static final String addTradeMessageWriter = "/TheDepartment/AddTradeWriter.jsp";
     public static final String addAuth = "/TheDepartment/AddAuth.jsp";
     public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";
+    public static final String addBuyLecturers = "/TheDepartment/AddBuyLecturers.jsp";
  
 
     public static final String auth = "auth";

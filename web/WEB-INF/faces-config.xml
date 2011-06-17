@@ -32,23 +32,17 @@
     <managed-bean>
         <managed-bean-name>auth</managed-bean-name>
         <managed-bean-class>UserBeans.Auth</managed-bean-class>
-
         <managed-bean-scope>session</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>UserBeans.User</managed-bean-class>
-
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>addUser</managed-bean-name>
         <managed-bean-class>UserBeans.AddUser</managed-bean-class>
-
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
-
-
-
 
     <navigation-rule>
         <from-view-id>/Unlogged/AddUser.xhtml</from-view-id>
@@ -71,7 +65,7 @@
     <managed-bean>
         <managed-bean-name>addResearch</managed-bean-name>
         <managed-bean-class>ResearchPoints.AddResearch</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <navigation-rule>
@@ -89,7 +83,6 @@
     <managed-bean>
         <managed-bean-name>shop</managed-bean-name>
         <managed-bean-class>UserBeans.Shop</managed-bean-class>
-
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
@@ -97,8 +90,6 @@
         <managed-bean-class>rankings.Rankings</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
-
 
     <managed-bean>
         <managed-bean-name>researchBag</managed-bean-name>
@@ -108,16 +99,10 @@
     <managed-bean>
         <managed-bean-name>buyLecturers</managed-bean-name>
         <managed-bean-class>UserBeans.BuyLecturers</managed-bean-class>
-
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>addBuildings</managed-bean-name>
-        <managed-bean-class>UserBeans.AddBuildings</managed-bean-class>
-
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+        </managed-bean>
 
     <navigation-rule>
-
         <navigation-case>
             <from-action>#{user.logoff}</from-action>
             <to-view-id>/Unlogged/index.xhtml</to-view-id>

@@ -230,7 +230,7 @@
     <managed-bean>
         <managed-bean-name>buildingbean</managed-bean-name>
         <managed-bean-class>buildings.BuildingBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
         <from-view-id>/Logged/Trades.xhtml</from-view-id>

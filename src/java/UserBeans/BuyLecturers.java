@@ -14,12 +14,14 @@ public class BuyLecturers implements Serializable  {
 
     /** Creates a new instance of BuyLecturers */
     public BuyLecturers() {
+        //System.out.println("The lecturers constructor is called");
         LecturersManager mgr
                 = new LecturersManager(utilities.BasicUtils.getUserName());
         lecturers = mgr.getAvailabeLecturers();
     }
 
     public List<Lecturer> getLecturers() {
+        //System.out.println("The lecturers getter is called!");
         return lecturers;
     }
 

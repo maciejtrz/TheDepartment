@@ -115,8 +115,6 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
 
             List<Messagesystem> encodedTrades = getSentMessages();
 
-            System.out.println("Number of returned messages " + encodedTrades.size());
-
             Iterator<Messagesystem> iterator = encodedTrades.iterator();
 
             Date currentDate = new Date();
@@ -127,8 +125,6 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
                 TradeOffer tradeOffer = new TradeOffer();
 
                 tradeOffer.parse(message.getMsg());
-
-                System.out.println("Message: " + message.getMsg());
                 
 
                 tradeOffer.setSenderid(message.getSenderid());

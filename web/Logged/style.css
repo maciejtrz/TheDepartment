@@ -17,11 +17,23 @@ margin-right: auto;
 position:fixed;
 }
 
+#rform {
+position:absolute;
+top: 140px;
+right: 40px;
+}
+
 #lform {
 font-size: 18px;
 position: absolute;
 top: 140px;
 left: 40px;
+}
+
+.stats {
+font-family: 'Arial';
+color: #2E6F9E;
+font-size: 18px;
 }
 
 .rep

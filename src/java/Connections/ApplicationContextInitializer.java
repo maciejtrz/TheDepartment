@@ -25,8 +25,8 @@ public class ApplicationContextInitializer implements ServletContextListener {
 
             mgr.createRankingDeamon();
 
-            //mgr.createLecturersPopulator();
-            //mgr.createEventDeamon();
+            mgr.createLecturersPopulator();
+            mgr.createEventDeamon();
             mgr.createStatsDeamon();
     }
 

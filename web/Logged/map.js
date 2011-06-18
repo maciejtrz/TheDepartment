@@ -36,7 +36,7 @@ function dialog(position, building) {
 
 function over(poly) {
   // change cursor to pointer
-  document.body.style.cursor="url('first.cur'),pointer"
+  document.body.style.cursor="pointer"
   no=getNumber(poly);
   img=document.getElementById("p"+no);
   src=img.getAttribute("src");
@@ -48,7 +48,7 @@ function over(poly) {
 
 function out(poly) {
   // change cursor back to automatic
-  document.body.style.cursor="url('first.cur'),auto"
+  document.body.style.cursor="auto"
   no=getNumber(poly);
   img=document.getElementById("p"+no);
   src=img.getAttribute("src");

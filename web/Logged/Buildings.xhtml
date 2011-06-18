@@ -206,9 +206,9 @@
 
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="#{building.info}" />
-                        <h:outputText value="Price: #{building.cost} &#208;" />
-                        <p:commandButton value="Build" ajax="false">
-                            <f:setPropertyActionListener target="#{buildingbean.doSelect}"
+                        <h:outputText value="Price: #{building.cost}" />
+                        <p:commandButton value="Build" ajax="false" action="#{buildingbean.buy}">
+                            <f:setPropertyActionListener target="#{buildingbean.selectedBuilding}"
                                                          value="#{building}" />
                         </p:commandButton>
                     </h:panelGrid>

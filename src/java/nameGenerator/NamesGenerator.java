@@ -59,6 +59,10 @@ public class NamesGenerator {
                 // We are really unlucky.
                 String randomized = randomize();
                 output = output + "-" + randomized;
+                while (generatedNames.contains(output)) {
+                    randomized = randomize();
+                    output = output + "-" + randomized;
+                }
             }
             else {
                 output = output + "-" + secondName;

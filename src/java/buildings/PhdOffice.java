@@ -3,6 +3,7 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.UserManager;
@@ -10,10 +11,13 @@ import utilities.BuildingInfo;
 
 public class PhdOffice extends Building {
 
+    private int capacity_base_upgrade;
+
     public PhdOffice () {
         cost = 2000;
         max_level = ADVANCED_LEVEL;
         upgrade_base_cost = 1000;
+        capacity_base_upgrade = 100;
     }
 
     @Override
@@ -55,6 +59,10 @@ public class PhdOffice extends Building {
 
         /* Updating players money. */
         UserManager.removeMoney(playerName, cost);
+
+        /* Upgradting PhD capacity. */
+        CapacityHelper helper = new CapacityHelper();
+        helper.updatePhDsCapacity(playerName, capacity_base_upgrade);
 
         return true;
     }
@@ -175,6 +183,11 @@ public class PhdOffice extends Building {
             posHelper.updateBuildingPosition(playerName, position, CODE_PHD_OFFICE_3);
             UserManager.removeMoney(playerName, cost);
         }
+
+        /* Upgradting PhD capacity. */
+        CapacityHelper helper = new CapacityHelper();
+        helper.updatePhDsCapacity
+                (playerName, capacity_base_upgrade*(cur_level+1));
 
         return true;
     }

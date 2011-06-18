@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import utilities.BuildingsUtils;
 import utilities.LecturersManager;
+import utilities.BuildingsUtils ;
 
 
 /* A daemon thread responsible for increasing and decreasing player's statistics
@@ -156,9 +157,32 @@ public class StatsDeamon extends Thread {
 
     private void updateMoney(String playerName) {
 
+        int update_money = 0;
+        int tresco_update = 200;
+        int mac_chicken_update = 300;
+        int doc_pub_update = 500;
+
         /* For each lecturers owned substract a small amount of cash. */
         LecturersManager mgr = new LecturersManager(playerName);
         int decrease_value = mgr.getOwnedLecturers().size() * UPDATE_VALUE;
-        UserManager.removeMoney(playerName, decrease_value);
+        update_money =- decrease_value;
+
+        BuildingsUtils utils = new BuildingsUtils();
+        if (utils.isTrescoBuilt(playerName)) {
+            update_money += tresco_update;
+        }
+        if (utils.isMacChickenBuilt(playerName)) {
+            update_money += mac_chicken_update;
+        }
+        if (utils.isDocPubBuilt(playerName)) {
+            update_money += doc_pub_update;
+        }
+
+        if (update_money >= 0) {
+            UserManager.addMoney(playerName, update_money);
+        }
+        else {
+            UserManager.removeMoney(playerName, decrease_value);
+        }
     }
 }

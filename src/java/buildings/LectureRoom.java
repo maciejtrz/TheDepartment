@@ -3,6 +3,7 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.UserManager;
@@ -10,11 +11,13 @@ import utilities.BuildingInfo;
 
 public class LectureRoom extends Building {
 
+    private int capacity_base_upgrade;
 
     public LectureRoom () {
         cost = 1000;
         max_level = ADVANCED_LEVEL;
         upgrade_base_cost = 500;
+        capacity_base_upgrade = 2000;
     }
 
     @Override
@@ -53,6 +56,10 @@ public class LectureRoom extends Building {
 
         /* Updating players money. */
         UserManager.removeMoney(playerName, cost);
+
+        /* Upgradting students capacity. */
+        CapacityHelper capacity = new CapacityHelper();
+        capacity.updateStudentsCapacity(playerName, capacity_base_upgrade);
 
         return true;
     }
@@ -171,6 +178,11 @@ public class LectureRoom extends Building {
             posHelper.updateBuildingPosition(playerName, position, CODE_LECTURER_ROOM_3);
             resourcesHelper.updateMoney(playerName, cash - cost);
         }
+
+        /* Upgradting students capacity. */
+        CapacityHelper capacity = new CapacityHelper();
+        capacity.updateStudentsCapacity
+                (playerName, capacity_base_upgrade * (cur_level+1));
 
         return true;
     }

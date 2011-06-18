@@ -6,33 +6,30 @@
 
     <ui:component>
 
-           <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
+        <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-
+            <br/>
             <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="To:" />
+                    <h:selectOneMenu value="#{message.selectedReceiver}" style="width:200px;" >
+                        <f:selectItems value="#{message.receivers}" />
+                    </h:selectOneMenu>
 
-                <h:outputText value="To: " />
-                <h:selectOneMenu value="#{message.selectedReceiver}">
-                    <f:selectItems value="#{message.receivers}"/>
-                </h:selectOneMenu>
+                    <h:outputText value="Subject:"/>
+                    <h:inputText value="#{message.subject}" style="width:550px;" />
 
-                <br></br>
-                <h:outputText value="Subject:"/>
-                <h:inputText value="#{message.subject}"/>
-                <br></br>
-
-
-                <h:inputTextarea style="width:300px;height:100px;" value="#{message.msg}"/>
-                <br></br>
-
-                <h:commandButton value="Send" action="#{message.send}"/>
+                    <br/>
+                    <h:inputTextarea style="width:550px;height:300px;" value="#{message.msg}"/>
+                    <br/>
+                    <p:commandButton value="Send" action="#{message.send}"/>
+                </h:panelGrid>
             </h:form>
 
-            <a onclick="newmsg.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
-        <p:dialog header="Message inbox" widgetVar="readmsg" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+        <p:dialog header="Inbox" widgetVar="readmsg" modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
 
             <h:form>
                 <p:dataTable id="receivedMessage" var="message" value="#{plainMessageReader.messages}" >
@@ -41,7 +38,7 @@
                         <h:outputText value="#{message.senderid}" />
                     </p:column>
 
-                    <p:column headerText="Creation time">
+                    <p:column headerText="Sent">
                         <h:outputText value="#{message.sentTime}"/>
                     </p:column>
 
@@ -49,22 +46,16 @@
                         <h:outputText value="#{message.subject}" />
                     </p:column>
 
-                    <p:column headerText="Details">
-                        <p:commandButton value="Show Details"
-                                         onclick="messagedetails.show()" />
-
-                        <p:commandButton value="Delete"
-                                         id="deleteButton">
-                            <f:setPropertyActionListener value="#{message}" target="#{plainMessageReader.deleteMessage}" />
-                        </p:commandButton>
-
-
-                        <p:dialog header="Message Details"
+                    <p:column headerText="Show">
+                        <div align="center">
+                        <p:commandButton onclick="messagedetails.show()" image="ui-icon ui-icon-newwin"/>
+                        </div>
+                        <p:dialog header="Message"
                                   widgetVar="messagedetails"
                                   resizable="false"
-                                  closeOnEscape="true">
+                                  closeOnEscape="true" height="400" width="500">
                             <h:form>
-                                <h:panelGrid columns="2">
+                                <h:panelGrid  columns="2">
 
                                     <h:outputText value="Sender: " />
                                     <h:outputText value="#{message.senderid}" />
@@ -72,29 +63,32 @@
                                     <h:outputText value="Subject: " />
                                     <h:outputText value="#{message.subject}" />
 
-                                    <h:outputText value="Creation time" />
-                                    <h:outputText value="#{message.sentTime}" />
-
                                     <h:outputText value="Message: "/>
                                     <h:outputText value="#{message.msg}" />
 
-                                    <p:commandButton value="Close" onclick="messagedetails.hide()" />
 
-                               </h:panelGrid>
-
+                                </h:panelGrid>
                             </h:form>
                         </p:dialog>
-
                     </p:column>
 
-            </p:dataTable>
+                    <p:column headerText="Delete" colspan="">
+                        <div align="center">
+                    <p:commandButton 
+                                     id="deleteButton" update="receivedMessage"  image="ui-icon ui-icon-close">
+                        <f:setPropertyActionListener value="#{message}" target="#{plainMessageReader.deleteMessage}" />
+                    </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
 
-            <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
+
 
             </h:form>
         </p:dialog>
 
-        
+
+
 
 
 

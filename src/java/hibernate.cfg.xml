@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://db:5432/g1027104_u</property>
-    <property name="hibernate.connection.username">g1027104_u</property>
-    <property name="hibernate.connection.password">EldyDqOUXi</property>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://db:5432/g1027104_u</property>
+        <property name="hibernate.connection.username">g1027104_u</property>
+        <property name="hibernate.connection.password">EldyDqOUXi</property>
 
+         <!--CONNECTION POOL CONFIGURATION -->
+        <property name="c3p0.acquire_increment">1</property>
+        <property name="c3p0.idle_test_period">100</property>
+        <property name="c3p0.max_size">100</property>
+        <property name="c3p0.max_statements">10</property>
+        <property name="c3p0.min_size">10</property>
+        <property name="c3p0.timeout">100</property>
+        <!---->
 
-    <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Tests.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Subject.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Extrastats.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Researchcatalogue.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Auctionhistory.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Messagesystem.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Events.hbm.xml"/>
-    <mapping resource="ConnectionDataBase/Playerresearch.hbm.xml"/>
-  </session-factory>
+        <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Tests.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Lecturersspecializations.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Lecturerssepciatlizations.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Subject.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Researchdependencies.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Research.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Lecturersowned.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Lecturersavailable.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Players.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Departmentinfo.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Extrastats.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Playerresources.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Researchcatalogue.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Buildingsposition.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Auctionhistory.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Messagesystem.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Capacity.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Buildings.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Events.hbm.xml"/>
+        <mapping resource="ConnectionDataBase/Playerresearch.hbm.xml"/>
+    </session-factory>
 </hibernate-configuration>

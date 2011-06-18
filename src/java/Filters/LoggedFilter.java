@@ -10,6 +10,7 @@ import Connections.ConnectionSingleton;
 import Connections.UserManager;
 import ResearchPoints.ResearchBag;
 import UserBeans.Auth;
+import UserBeans.BuyLecturers;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import messageSystem.TradeMessageReader;
-import messageSystem.TradeMessageWriter;
 
 /**
  *
@@ -53,6 +53,8 @@ public class LoggedFilter implements Filter {
             TradeMessageReader tradeMessageReader = (TradeMessageReader)
                     session.getAttribute(ConnectionSingleton.tradeMessageReader);
 
+            BuyLecturers buyLecturers = (BuyLecturers) session.getAttribute(ConnectionSingleton.buyLecturers);
+
             if(auth == null || auth.getUsername() == null) {
      
                  res.sendRedirect(ConnectionSingleton.addAuth);
@@ -75,6 +77,15 @@ public class LoggedFilter implements Filter {
             if(!UserManager.isUserMonitored(auth.getUsername())) {
                 UserManager.addUser(auth);
             }
+
+            if(buyLecturers == null) {
+                res.sendRedirect(ConnectionSingleton.addBuyLecturers);
+                return;
+            }
+            
+            if(buyLecturers.getUsername() == null) {
+                buyLecturers.initialize(auth.getUsername());
+            } 
 
 
             if(auth.logging){

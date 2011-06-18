@@ -77,6 +77,45 @@ public class LecturersManager {
 
     }
 
+    /* Checks whether a given lecturer can be removed from users owned
+       lecturers. */
+    public boolean canRemoveLecturer(String lecturerName) {
+        ArrayList<Lecturer> ownedLecturers = getOwnedLecturers();
+        Lecturer lec = lookUpLecturer(lecturerName, ownedLecturers);
+        if (lec == null) {
+            return false;
+        }
+        return (lec.getUsable());
+    }
+
+    /* Removes a given lecturer from player's owned list. */
+    public boolean removeOwnedLecturer(String lecturerName) {
+        if (!canRemoveLecturer(lecturerName)) {
+            return false;
+        }
+
+        /* Removing lecturer from the owned database*/
+        LecturersOwnedHelper helper = new LecturersOwnedHelper();
+        helper.deleteLecturer(lecturerName);
+        return true;
+    }
+
+    /* Adds lecturers to the players list if possible.*/
+    public boolean addLecturer(String lecturerName) {
+        ArrayList<Lecturer> ownedLecturers = getOwnedLecturers();
+        Lecturer lec = lookUpLecturer(lecturerName, ownedLecturers);
+        if (lec != null) {
+            return false;
+        }
+
+        /* Adding lecturer to the database. */
+        LecturersOwnedHelper helper = new LecturersOwnedHelper();
+        helper.addLecturer(lecturerName, userName);
+        return true;
+    }
+
+
+
     /* Generates one lecturer and adds him to the player's owned list. */
     public void generateOneOwnedLecturer() {
 

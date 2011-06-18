@@ -64,17 +64,18 @@
                     <h:column>
                         <div align="center">
                             <h2>
-                            <h:outputLabel for="students" value="Student(5 &#208;/10units):" />
+                            <h:outputLabel for="students" value="Student - 0.5&#208;" />
                             </h2>
-                            You currently have <h:outputText value="#{shop.studentNumber}"/> student(s).
+                            You have <h:outputText value="#{shop.studentNumber}"/> students.
                             <br/>
                             Your current maximum capacity is <h:outputText value="#{shop.studentCapacity}" />
+                            <br/>
                             <br/>
                              <p:spinner id="spinnerStudent"
                                value="#{shop.students}" stepFactor="10" min="0"  />
                             <br/>
                             <br/>
-                             <p:commandButton  id="submitStudent" value="Buy!" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
+                             <p:commandButton  id="submitStudent" value="Buy" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
                         </div>
                     </h:column>
                 </h:panelGrid>
@@ -89,9 +90,9 @@
                     <h:column>
                         <div align="center">
                             <h2>
-                            <h:outputLabel for="phds" value="PhD(20 &#208;/unit):" />
+                            <h:outputLabel for="phds" value="PhD - 20&#208;" />
                             </h2>
-                            You currently have <h:outputText value="#{shop.phdsNumber}"/> student(s).
+                            You have <h:outputText value="#{shop.phdsNumber}"/> PhD(s).
                             <br/>
                             Your current maximum capacity is <h:outputText value="#{shop.phdsCapacity}" />
                             <br/>
@@ -100,7 +101,7 @@
                                value="#{shop.phds}" stepFactor="1" min="0" />
                             <br/>
                             <br/>
-                             <p:commandButton id="submitPhd" value="Buy!" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
+                             <p:commandButton id="submitPhd" value="Buy" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
                         </div>
                     </h:column>
                 </h:panelGrid>

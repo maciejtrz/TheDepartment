@@ -27,6 +27,7 @@ public class ApplicationContextInitializer implements ServletContextListener {
 
             mgr.createLecturersPopulator();
             //mgr.createEventDeamon();
+            mgr.createStatsDeamon();
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

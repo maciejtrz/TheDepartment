@@ -38,8 +38,12 @@ public class LecturersHelper extends AbstractHelper {
             boolean usable) {
 
         Session session = createNewSessionAndTransaction();
-        Lecturers newLecturer
-                = new Lecturers(lecturerName, price, usable);
+        Lecturers newLecturer = new Lecturers();
+
+        newLecturer.setLecturername(lecturerName);
+        newLecturer.setPrice(price);
+        newLecturer.setUsable(usable);
+
         session.save(newLecturer);
         commitTransaction(session);
     }
@@ -53,6 +57,19 @@ public class LecturersHelper extends AbstractHelper {
             lecturer_info.setUsable(usable);
         }
         commitTransaction(session);
+    }
+
+    public boolean isUsable(String lecturerName) {
+        boolean output = false;
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Lecturers where "
+                + "LecturerName = '" + lecturerName + "'" );
+        Lecturers lecturer_info = (Lecturers)q.uniqueResult();
+        if (lecturer_info != null) {
+            output = lecturer_info.getUsable();
+        }
+        session.close();
+        return output;
     }
 
 }

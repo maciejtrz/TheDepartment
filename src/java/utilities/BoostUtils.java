@@ -1,7 +1,6 @@
 
 package utilities;
 
-import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.Extrastats;
 import ConnectionDataBase.ExtrastatsHelper;
 import java.util.Iterator;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class BoostUtils {
 
-    private static final double MONEY_BOOST = 0.5;
+    private static final double MONEY_BOOST = 0.05;
     private static final double UNDERGRADS_BOOST = 0.5;
     private static final double PHD_BOOST = 1.0;
     private static final double PHD_RESSISTANCE = 1.5;

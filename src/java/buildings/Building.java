@@ -3,10 +3,11 @@ package buildings;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.UserManager;
+import java.io.Serializable;
 import utilities.BuildingInfo;
 
 
-public abstract class Building {
+public abstract class Building implements Serializable {
 
 
     public static final int NOT_BUILT_LEVEL = 0;

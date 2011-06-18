@@ -10,49 +10,83 @@
 
         <p:dialog header="Tresco" widgetVar="tr1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
 
-                This is Tresco
+                <h:panelGrid columns="2" >
+                    <h:graphicImage value="/images/tresco_vodka.jpg" width="350" />
+                    <h:outputText value = "Tresco is a famous, world-class reduced food supplier.
+                    You can buy there anything, from ten-days, freshly reduced bread
+                    to a very cheap Tresco-Basic “blinding”vodka. Unfortunately,
+                    this fabulous brand is recently plagued by so called “organic
+                    food”. Possessing Tresco allows you to build MacChicken.
+                    It also has a positive effect on the starvation level
+                    of your students. Additionally, Tresco generates a small
+                    amount of income each day." />
 
-            </p:panel>
+                </h:panelGrid>
 
         </p:dialog>
 
         <p:dialog header="MacChicken" widgetVar="mc1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
 
-                This is McChicken
-
-            </p:panel>
+               <h:panelGrid columns="2" >
+                    <h:outputText value = "MacChicken is the most famous fast
+                                  food restaurant in the world. Despite its
+                                  continuous attempt to produce chickens with
+                                  more than two legs, MacChicken still remains
+                                  one of the largest chicken supplier in the
+                                  world. Possessing MacChicken has a considerable
+                                  effect on the starvation of your students.
+                                  MacChicken also generates a considerable amount
+                                  of money each day." />
+                    <h:graphicImage value="/images/mac_chicken.jpeg" width="350" />
+                </h:panelGrid>
 
         </p:dialog>
 
         <p:dialog header="DoC Pub" widgetVar="dp1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
-
-                This is DoC Pub
-
-            </p:panel>
-
-        </p:dialog>
-
-        <p:dialog header="Black Market" widgetVar="abm1" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
-
-                This is Black Market
-
-            </p:panel>
+               <h:panelGrid columns="2" >
+                    <h:outputText value = "You probably think that DoC
+                                  students do not have life, so why building
+                                  DocPub? Well, they once had life and may
+                                  very well want to come back to social
+                                  existence. More importantly, your students
+                                  took taste in  Tresco-Basic “blinding”vodka.
+                                  DocPub reduces the negative effect
+                                  Tresco-Basic “blinding”vodka have on your
+                                  students. It also makes your students happier,
+                                  increasing their satisfaction. Every friday
+                                  the flat is floated by a massive amount of
+                                  students, generating large incomes for you,
+                                  manager." />
+                    <h:graphicImage value="/images/sexy_beer.jpeg" width="350" />
+                </h:panelGrid>
 
         </p:dialog>
 
         <p:dialog header="Lecture Room lev 1" widgetVar="lr1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
+              <p:panel>
 
-                This is Lecture room lev 1
+                <h:form>
+                <h:panelGrid columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Lecture room increases the
+                                      population (the capacity) of your
+                                      students. Not that any one cares whether
+                                      students have any space or convenience
+                                      during lectures. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      undergraduates capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" ajax="false" />
+
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/crazy_student.jpg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -62,7 +96,24 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
 
-                This is Lecture room lev 2
+                <h:form>
+                <h:panelGrid columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Lecture room increases the
+                                      population (the capacity) of your
+                                      students. Not that any one cares whether
+                                      students have any space or convenience
+                                      during lectures. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      undergraduates capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" ajax="false"/>
+
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/crazy_student.jpg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -70,10 +121,20 @@
 
         <p:dialog header="Lecture Room lev 3" widgetVar="lr3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
             <p:panel>
-
-                This is Lecture room lev 3
-
+                <h:form>
+                <h:panelGrid columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Lecture room increases the
+                                      population (the capacity) of your
+                                      students. Not that any one cares whether
+                                      students have any space or convenience
+                                      during lectures. " />
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/crazy_student.jpg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
             </p:panel>
 
         </p:dialog>
@@ -81,18 +142,51 @@
         <p:dialog header="PhD office lev 1" widgetVar="po1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Ph.D. Office increases the
+                                      population of your Ph.D. students.
+                                      Possessing convenient and cosy offices
+                                      without any access to the sun light
+                                      allows you to recruit more of
+                                      those batmans. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      batmans capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" ajax="false" />
 
-                This is PhDs office lev 1
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/phd.jpeg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
-
         </p:dialog>
 
         <p:dialog header="PhD office lev 2" widgetVar="po2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Ph.D. Office increases the
+                                      population of your Ph.D. students.
+                                      Possessing convenient and cosy offices
+                                      without any access to the sun light
+                                      allows you to recruit more of
+                                      those batmans. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      batmans capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" ajax="false" />
 
-                This is PhDs office lev 2
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/phd.jpeg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -101,8 +195,20 @@
         <p:dialog header="PhD office lev 3" widgetVar="po3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Ph.D. Office increases the
+                                      population of your Ph.D. students.
+                                      Possessing convenient and cosy offices
+                                      without any access to the sun light
+                                      allows you to recruit more of
+                                      those batmans. " />
 
-                This is PhDs office lev 3
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/phd.jpeg" width="275" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -111,8 +217,24 @@
         <p:dialog header="Prof office lev 1" widgetVar="ro1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Professors are the main source of
+                                      your research power. This building allows
+                                      you to recruit more professors for the
+                                      benefit of your research and for the
+                                      peril of your students. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      precious professors capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" ajax="false"/>
 
-                This is Prof office lev 1
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -121,8 +243,24 @@
         <p:dialog header="Prof office lev 2" widgetVar="ro2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Professors are the main source of
+                                      your research power. This building allows
+                                      you to recruit more professors for the
+                                      benefit of your research and for the
+                                      peril of your students. " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading increases your
+                                      precious professors capacity." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" ajax="false"/>
 
-                This is Prof office lev 2
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -131,8 +269,19 @@
         <p:dialog header="Prof office lev 3" widgetVar="ro3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Professors are the main source of
+                                      your research power. This building allows
+                                      you to recruit more professors for the
+                                      benefit of your research and for the
+                                      peril of your students. " />
 
-                This is Prof office lev 3
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -141,8 +290,26 @@
         <p:dialog header="Labolatories" widgetVar="lb1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Laboratories are necessary for
+                                      your students to do any useful work and
+                                      use Facebook. With labs the performance
+                                      of your students will slightly increase.
+                                      Labs also decreases the alcoholism of your
+                                      students, as they do not have time to
+                                      drink any more (which is sad). " />
+                        <br/><br/>
+                        <h:outputText value="Upgrading labs increases
+                                      your research power." />
+                         <br/><br/><br/><br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLabs}" value="Upgrade" action="#{upgradeBean.upgradeLabs}" ajax="false" />
 
-                This is Labolatory
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -150,9 +317,22 @@
 
         <p:dialog header="Superlabolatory" widgetVar="sb1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
+           <p:panel>
+                <h:form>
+                <h:panelGrid  columns="2" style="text-align: center">
+                   <h:panelGrid columns="1">
+                        <h:outputText value = "Laboratories are necessary for
+                                      your students to do any useful work and
+                                      use Facebook. With labs the performance
+                                      of your students will slightly increase.
+                                      Labs also decreases the alcoholism of your
+                                      students, as they do not have time to
+                                      drink any more (which is sad). " />
 
-                This is Superlabolatory
+                    </h:panelGrid>
+                    <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                </h:panelGrid>
+            </h:form>
 
             </p:panel>
 
@@ -160,31 +340,39 @@
 
         <p:dialog header="Student Union" widgetVar="su1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
-
-                This is Student Union
-
-            </p:panel>
+                <h:panelGrid columns="1" >
+                    <h:outputText value = "I am useless, sorry. 
+                                  Try other buildings and do not click me again!" />
+                </h:panelGrid>
 
         </p:dialog>
 
         <p:dialog header="This is brain" widgetVar="br1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
-
-                This is Brain
-
-            </p:panel>
+               <h:panelGrid columns="2" style="text-align: center" >
+                    <h:outputText value = "Careful! You are inside the Brain of
+                                  your university. The best description of Brain
+                                  was once given by a famous 4chan poet and is
+                                  as follows: “And here is where the magic
+                                  happens”. No, not that sort of magic.
+                                  Anyway, Brain gives you a dramatic boost
+                                  in the efficiency of your research. " />
+                    <h:graphicImage value="/images/brain.jpeg" width="275" height="400" />
+                </h:panelGrid>
 
         </p:dialog>
 
         <p:dialog header="This is Queens Tower" widgetVar="qt1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-            <p:panel>
-
-                This is Queens Tower
-
-            </p:panel>
+               <h:panelGrid columns="2" >
+                    <h:outputText value = "This is the Queen's Tower building,
+                                  the only remnant of the once great and
+                                  beautiful Imperial Institute. Sadly,
+                                  the institute had to be destroyed to
+                                  “make place” for modern Imperial College
+                                  London. Don't jump! " />
+                    <h:graphicImage value="/images/brain.jpeg" width="275" height="400" />
+                </h:panelGrid>
 
         </p:dialog>
 
@@ -196,7 +384,7 @@
 
             <div align="center">
             <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
-            <h:form>
+                <h:form>
                 <p:carousel widgetVar="nop" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
                         style="position: relative; top:50px; " rows="1" effect="easeInStrong">
                 <p:column>
@@ -207,15 +395,16 @@
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="#{building.info}" />
                         <h:outputText value="Price: #{building.cost}" />
-                        <p:commandButton value="Build" ajax="false" action="#{buildingbean.buy}">
+                        <p:commandButton id="buyBuildingsButton" value="Build" ajax="false" action="#{buildingbean.buy}">
                             <f:setPropertyActionListener target="#{buildingbean.selectedBuilding}"
-                                                         value="#{building}" />
+                                                         value="#{building}"  />
                         </p:commandButton>
                     </h:panelGrid>
 
 
                 </h:panelGrid>
                 </p:column>
+               
             </p:carousel>
             </h:form>
             </div>

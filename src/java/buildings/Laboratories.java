@@ -129,6 +129,26 @@ public class Laboratories  extends Building {
                 = new BuildingsPositionHelper();
 
 
+        if(!canUpgradeLabs(playerName,position)) {
+            return false;
+        }
+
+        // Upgrading to the superlabs
+        buildingHelper.updateLabolatories(playerName, MEDIUM_LEVEL);
+        posHelper.updateBuildingPosition(playerName, position, CODE_SUPERLABS);
+        UserManager.removeMoney(playerName, cost);
+
+        return true;
+    }
+
+    public boolean canUpgradeLabs(String playerName, int position) {
+                // Getting all required helpers.
+        BuildingsHelper buildingHelper
+                = new BuildingsHelper();
+        BuildingsPositionHelper posHelper
+                = new BuildingsPositionHelper();
+
+
         /* Checking whether the building is eligible for an upgrade. */
         // Getting current level
         Buildings building_record = buildingHelper.getBuildings(playerName);
@@ -154,11 +174,6 @@ public class Laboratories  extends Building {
         if (!occupant.equals(CODE_LABS)) {
             return false;
         }
-
-        // Upgrading to the superlabs
-        buildingHelper.updateLabolatories(playerName, MEDIUM_LEVEL);
-        posHelper.updateBuildingPosition(playerName, position, CODE_SUPERLABS);
-        UserManager.removeMoney(playerName, cost);
 
         return true;
     }

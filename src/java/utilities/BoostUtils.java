@@ -3,10 +3,11 @@ package utilities;
 
 import ConnectionDataBase.Extrastats;
 import ConnectionDataBase.ExtrastatsHelper;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-public class BoostUtils {
+public class BoostUtils implements Serializable {
 
     private static final double MONEY_BOOST = 0.05;
     private static final double UNDERGRADS_BOOST = 0.5;

@@ -34,7 +34,6 @@ public class UpgradeBean {
     }
 
     public void upgradeLectureRoom() {
-        System.out.println("UPGRADING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         BuildingFactory factory = new BuildingFactory();
         LectureRoom lec_room = factory.getLecturerRoom();
 

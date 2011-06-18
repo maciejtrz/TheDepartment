@@ -23,6 +23,9 @@ import specializationsGenerator.SpecializationsGenerator;
 
 public class LecturersManager {
 
+    /* Used to mimic random specialization number generator. */
+    private static int[] specializations_numbers =
+            {1,1,1,1,1,2,2,2,2,3,3,3,4,4,5};
 
     private String userName;
     private static final int MAX_AVAILABLE = 5;
@@ -395,20 +398,25 @@ public class LecturersManager {
 
         /* Generating all atributes. */
         Random rand = new Random();
-        int boost = rand.nextInt(10);
-        int price = rand.nextInt(20) * 100;
+        int price = 100; // Initial value.
         boolean usable = true;
 
         /* Generating specialization. */
-        String specialization
-                = specGenerator.generate();
-
-        /* Setting up the specialization. */
         ArrayList<LecturerBenefits> specList
                 = new ArrayList<LecturerBenefits>();
+        int spec_index = rand.nextInt(specializations_numbers.length);
+        int specializations_number = specializations_numbers[spec_index];
+        
+        for (int i = 0 ; i < specializations_number ; i ++) {
+            String specialization
+                    = specGenerator.generate();
+            int boost = (rand.nextInt(10) + 1);
 
-        LecturerBenefits lb = new LecturerBenefits(specialization , boost);
-        specList.add(lb);
+            /* Setting up the specialization. */
+            LecturerBenefits lb = new LecturerBenefits(specialization , boost);
+            specList.add(lb);
+        }
+
         return new Lecturer(name , price , usable , specList);
     }
 

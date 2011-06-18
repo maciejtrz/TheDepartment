@@ -40,19 +40,18 @@ public class LecturerResource implements Resource {
     @Override
     public void remove(Playerresources resources, int amount) {
       lecturersManager = new LecturersManager(resources.getIdname());
-     // lecturersManager.removeOwnedLecturer(amount);
+      lecturersManager.removeOwnedLecturer(amount);
     }
 
     @Override
     public void add(Playerresources resources, int amount) {
         lecturersManager = new LecturersManager(resources.getIdname());
-       // lecturersManager.addLecturer(amount);
+        lecturersManager.addLecturer(amount);
     }
 
     public boolean canRemove(Playerresources resources, int amount) {
-        //lecturersManager = new LecturersManager(resources.getIdname());
-        //return lecturersManager.canRemoveLecturer(amount);
-        return false;
+        lecturersManager = new LecturersManager(resources.getIdname());
+        return lecturersManager.canRemoveLecturer(amount);
     }
 
 }

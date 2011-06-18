@@ -72,4 +72,18 @@ public class LecturersHelper extends AbstractHelper {
         return output;
     }
 
+    public String getLecturer(int idnumber) {
+        String result = null;
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Lecturers where " +
+                "LecturerId = " + idnumber);
+
+        Lecturers lecturer = (Lecturers) q.uniqueResult();
+        result = lecturer.getLecturername();
+
+        session.close();
+
+        return result;
+    }
+
 }

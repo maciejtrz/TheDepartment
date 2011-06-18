@@ -6,7 +6,6 @@
 
     <ui:component>
 
-
         <p:dialog header="New Trade" widgetVar="newtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
@@ -23,17 +22,32 @@
                     <p:message for="PrivateTradeWriter" />
 
                     <br/>
-                    <h:outputText value="Title of the trade: "/>
+                    <h:outputText value="Title of the trade: " />
                     <h:inputText value="#{tradeMessageWriter.subject}" />
                     <br/>
                     <h:outputText value="Offered resources:" />
-                    <h:selectOneMenu value="#{tradeMessageWriter.resourcesOfferedType}">
-                        <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
+
+                    <h:selectOneMenu  id="resourcesOffered"
+                                     value="#{tradeMessageWriter.resourcesOfferedType}"
+                                     onchange="hide();">
+                        <f:selectItems value="#{tradeMessageWriter.availableResources}"  />
                     </h:selectOneMenu>
 
+                    <h:panelGrid id="OfferedAmountGrid" >
                     <h:outputText value="Offered amount: "/>
-                    <p:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" />
+                    <h:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" />
                     <p:slider for="offeredAmount"/>
+                    </h:panelGrid>
+
+                    <p:panel id="OfferedLecturerGrid" visible="false" >
+                    <h:outputText value="Offered Lecturer: " />
+
+                    <h:selectOneMenu  id="lecturersOffered" value="#{tradeMessageWriter.selectedLecturer}">
+                        <f:selectItems value="#{tradeMessageWriter.lecturesAvailable}"  />
+                    </h:selectOneMenu>
+
+                    </p:panel>
+
                     <p:message for="offeredAmount" />
                     <br/>
                     <h:outputText value="Wanted resources:" />

@@ -76,6 +76,14 @@ public class LecturersManager {
         }
 
     }
+    
+    public boolean canRemoveLecturer(int lecturerid) {
+        LecturersHelper lecturersHelper = new LecturersHelper();
+        String lecturerName = lecturersHelper.getLecturer(lecturerid);
+        
+        return canRemoveLecturer(lecturerName);
+    }
+
 
     /* Checks whether a given lecturer can be removed from users owned
        lecturers. */
@@ -89,6 +97,23 @@ public class LecturersManager {
     }
 
     /* Removes a given lecturer from player's owned list. */
+    public boolean removeOwnedLecturer(int lecturerid) {
+
+        LecturersHelper lecturersHelper = new LecturersHelper();
+        String lecturerName = lecturersHelper.getLecturer(lecturerid);
+
+        if (!canRemoveLecturer(lecturerName)) {
+            return false;
+        }
+
+        /* Removing lecturer from the owned database*/
+        LecturersOwnedHelper helper = new LecturersOwnedHelper();
+        helper.deleteLecturer(lecturerName);
+        return true;
+    }
+
+
+    /* Removes a given lecturer from player's owned list. */
     public boolean removeOwnedLecturer(String lecturerName) {
         if (!canRemoveLecturer(lecturerName)) {
             return false;
@@ -97,6 +122,24 @@ public class LecturersManager {
         /* Removing lecturer from the owned database*/
         LecturersOwnedHelper helper = new LecturersOwnedHelper();
         helper.deleteLecturer(lecturerName);
+        return true;
+    }
+
+    /* Adds lecturers to the players list if possible.*/
+        public boolean addLecturer(int lecturerid) {
+        ArrayList<Lecturer> ownedLecturers = getOwnedLecturers();
+
+        LecturersHelper lecturersHelper = new LecturersHelper();
+        String lecturerName = lecturersHelper.getLecturer(lecturerid);
+
+        Lecturer lec = lookUpLecturer(lecturerName, ownedLecturers);
+        if (lec != null) {
+            return false;
+        }
+
+        /* Adding lecturer to the database. */
+        LecturersOwnedHelper helper = new LecturersOwnedHelper();
+        helper.addLecturer(lecturerName, userName);
         return true;
     }
 
@@ -413,6 +456,8 @@ public class LecturersManager {
         list.add(lecturer);
 
     }
+
+
 
 
 }

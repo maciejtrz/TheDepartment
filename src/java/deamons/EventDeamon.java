@@ -28,7 +28,7 @@ public class EventDeamon extends Thread {
            /* Sleep for four minutes. */
            System.out.println(this.getName() +
                    " is going to sleep for two minutes.");
-           sleep(1000 * 60 * 2);
+           sleep(10000 * 60 * 2);
 
            List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {

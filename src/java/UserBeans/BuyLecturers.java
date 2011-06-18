@@ -56,7 +56,9 @@ public class BuyLecturers  {
         return selected_lecturer.getSpecializations();
     }
 
-    public String buy() {
+    public void buy() {
+
+        System.out.println("buying prof");
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -64,19 +66,26 @@ public class BuyLecturers  {
 
         Playerresources resources = auth.getResources();
         CapacityHelper capacityhelper = new CapacityHelper();
+        
+        System.out.println(" cases start");
+
         if( capacityhelper.getCapacity(auth.getUsername()).getProfessorscapacity() <=  mgr.getOwnedLecturers().size() ){
+
+            System.out.println("capacity fail");
 
                 FacesContext.getCurrentInstance().addMessage(
                 BasicUtils.findComponent(facesContext.getViewRoot(),"submitProf").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR," Me ", "Not enought space for new Prof!!!"));
-                return "fail";
+                return;
 
         } else if ( resources.getMoney() < selected_lecturer.getPrice()){
+
+            System.out.println("money fail");
 
              FacesContext.getCurrentInstance().addMessage(
              BasicUtils.findComponent(facesContext.getViewRoot(),"submitProf").getClientId(facesContext),
              new FacesMessage(FacesMessage.SEVERITY_ERROR," Me ", "This guy is too expensive for your DoC!!!"));
-             return "fail";
+             return;
         }
 
         /* if trasaction ok then:
@@ -87,18 +96,17 @@ public class BuyLecturers  {
          * 4) subtract the price from players money
          * 5) DONE !
          */
+
+        System.out.println("buying procedure");
         LecturersAvailableHelper avail = new LecturersAvailableHelper();
 
 
         int price = getSelected_lecturer().getPrice();
         avail.deleteLecturer(getSelected_lecturer().getName());
         this.owned.addLecturer(getSelected_lecturer().getName(), username);
-        capacityhelper.updateProfessorsCapacity(username, capacityhelper.getCapacity(username).getProfessorscapacity()-1);
+        //capacity thing to be done
         resources.setMoney(resources.getMoney()-price);
 
-
-
-        return "success";
 
     }
 

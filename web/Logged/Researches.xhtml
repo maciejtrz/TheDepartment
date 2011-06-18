@@ -16,35 +16,32 @@
 
                 <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
 
-                    <p:tab id="researchSubject" title="Research Subject" >
-                        <p:panel header="ResarchSubject">
-                            <h:outputText value="Choose research subject: " />
+                    <p:tab id="researchSubject" title="Category" >
+                        <p:panel>
                             <h:selectOneMenu value="#{addResearch.subject}" >
                                 <f:selectItems value="#{addResearch.subjects}"/>
                             </h:selectOneMenu>
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="researchLecturers" title="Lecturers for Research" >
-                        <p:panel header="Lecturers for Research">
-                            <h:outputText value="Choose lecturers: "/>
+                    <p:tab id="researchLecturers" title="Lecturers" >
+                        <p:panel>
                             <h:selectManyListbox value="#{addResearch.lecturers}">
                                 <f:selectItems value="#{addResearch.lecturerList}"/>
                             </h:selectManyListbox>
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="availableResearches" title="Available Researches" >
-                        <p:panel header="Available Researches">
-                            <h:outputText value="Choose research: "/>
+                    <p:tab id="availableResearches" title="Subject" >
+                        <p:panel>
                             <h:selectOneMenu value="#{addResearch.chosenResearch}" >
                                 <f:selectItems value="#{addResearch.availableResearches}"/>
                             </h:selectOneMenu>
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="moneyAmount" title="Specify money grant for research" >
-                        <p:panel header="Specify money grant for research">
+                    <p:tab id="moneyAmount" title="Grant" >
+                        <p:panel>
                             <h:outputText value="Input money min: "/>
                             <h:outputText value="#{addResearch.minimumMoney}" />
                             <h:outputText value=" max: " />
@@ -53,8 +50,8 @@
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="confirmation" title="Research Confirmation" >
-                        <p:panel header="Research Confirmation">
+                    <p:tab id="confirmation" title="Confirmation" >
+                        <p:panel>
 
                             <h:panelGrid columns="2" border="1" >
 

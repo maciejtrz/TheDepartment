@@ -9,8 +9,8 @@
         <p:dialog header="New Message" widgetVar="newmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <br/>
-            <h:form>
-                <h:panelGrid columns="2">
+            <h:form id="newmsgform">
+                <h:panelGrid columns="2" >
                     <h:outputText value="To:" />
                     <h:selectOneMenu value="#{message.selectedReceiver}" style="width:200px;" >
                         <f:selectItems value="#{message.receivers}" />
@@ -22,7 +22,8 @@
                     <br/>
                     <h:inputTextarea style="width:550px;height:300px;" value="#{message.msg}"/>
                     <br/>
-                    <p:commandButton value="Send" action="#{message.send}"/>
+                    <h:panelGroup><p:commandButton value="Send" action="#{message.send}" ajax="false" />
+                        <p:commandButton value="Clear" onclick="reset()" update="newmsgform"/> </h:panelGroup>
                 </h:panelGrid>
             </h:form>
 

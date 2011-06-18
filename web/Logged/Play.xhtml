@@ -23,12 +23,11 @@ and open the template in the editor.
 
     <body>
 
-        
+
         <ui:include src="Map.xhtml"/>
 
         <h:form>
-            <p:growl id="growl" showDetail="true" sticky="true"  />
-            <p:poll interval="20" update="growl" listener="#{auth.hasNewMessage}"></p:poll>
+            <p:growl id="growl" showDetail="true" sticky="true" />
         </h:form>
 
         <h:form id="tbar">
@@ -62,8 +61,18 @@ and open the template in the editor.
 
             </p:toolbar>
 
-            <p:poll interval="10" update="tbar"/>
         </h:form>
+
+            <script type="text/javascript">
+                function pollAll(){
+                PrimeFaces.ab({formId:'tbar',source:'tbar:update',process:'@all',update:'growl tbar rform'});
+                return false;
+                }
+
+                setInterval( "pollAll()", 1000 );
+
+            </script>
+
 
         <p:notificationBar position="bottom" effect="slide" widgetVar="bm1"><div align="center">
                 <h:outputText value="Welcome to the black market!" style="color:#FFF;font-size:36px;" /> <br/> <br/>
@@ -80,9 +89,8 @@ and open the template in the editor.
             <p:progressBar value="#{eventBean.alcoholism}" style="width:300px; height: 20px"/>
             <a class="stats">Satisfaction</a>
             <p:progressBar value="#{eventBean.satisfaction}" style="width:300px; height: 20px"/>
-            <p:poll interval="10" update="rform"/>
         </h:form>
-        
+
         <h:form id="lform">
             <p:menu id="lmenu" style="width: 230px">
                 <p:submenu label="Messages">
@@ -90,7 +98,7 @@ and open the template in the editor.
                     <p:menuitem value="Inbox" icon="ui-icon ui-icon-mail-closed" onclick="readmsg.show();"   />
                 </p:submenu>
 
-                
+
                 <p:submenu label="Trading">
                     <p:menuitem value="Add Offer" icon="ui-icon ui-icon-plus" onclick="addnoticeoffer.show();" />
                     <p:menuitem value="Noticeboard" icon="ui-icon ui-icon-clipboard" onclick="noticeboard.show();" />
@@ -123,6 +131,8 @@ and open the template in the editor.
         <ui:include src="Researches.xhtml"/>
         <ui:include src="Shop.xhtml"/>
         <ui:include src="Buildings.xhtml"/>
+
+
 
     </body>
 </html>

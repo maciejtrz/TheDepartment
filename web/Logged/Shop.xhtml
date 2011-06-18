@@ -9,104 +9,116 @@
         <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="600" width="800"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <p:carousel value="#{buyLecturers.lecturers}" var="naukowiec"
-                        rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong"
-                        >
-     <h:form>
-                    <h:panelGrid columns="2" style="width:100% ; height:100%">
+            <h:form>
+                <p:carousel id="karuz" value="#{buyLecturers.lecturers}" var="lecturer"
+                            rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong">
 
-                     <h:column>
-                        <img src="ico/pro.png"/>
-                    </h:column>
-                        <h:column>
-                        <h:panelGrid cellpadding="5">
-                            <h:outputText value="Name: #{naukowiec.name}" />
-                            <h:outputText value="Price: #{naukowiec.price}" />
-                       
-                   
-                                <p:dataTable var="list" value="#{naukowiec.specializations}" >
-                                    <p:column headerText="Specialisation"  >
+
+
+                    <p:column>
+                        <h:panelGrid id ="panel" columns="2" style="width:100% ; height:100%">
+                            <h:column>
+                            <img src="ico/pro.png"/>
+                            </h:column>
+
+                            <h:panelGrid>
+                            <h:outputText value="Name: #{lecturer.name}" />
+                            <h:outputText value="Price: #{lecturer.price}" />
+
+                            <p:dataTable var="list" value="#{lecturer.specializations}" >
+                                <p:column headerText="Specialisation"  >
                                     <h:outputText value="#{list.field}"/>
                                 </p:column>
-                                    <p:column headerText="Boost">
+                                <p:column headerText="Boost">
                                     <h:outputText value="#{list.boost}"/>
                                 </p:column>
-                                </p:dataTable>
-                            <p:commandButton id="submitProf" style="width:150px" update="errorInfoProf" value="Buy!" action="#{buyLecturers.buy}"/>
-                        </h:panelGrid>
-                            </h:column>
-                    </h:panelGrid>
+                            </p:dataTable>
 
-                        <h:panelGrid id="errorInfoProf">
-                        <p:message for="submitProf"/>
-                        </h:panelGrid>
-          </h:form>
-            </p:carousel>
+                            <p:commandButton id="submitProf"
+                                             style="width:150px"
+                                             value="Buy!"
+                                             action="#{buyLecturers.buy}"
+                                             update="error">
 
+                                <f:setPropertyActionListener value="#{lecturer}" target="#{buyLecturers.selected_lecturer}" for="submitProf" />
+                            </p:commandButton>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid id="error">
+                            <p:message for="submitProf"/>
+                        </h:panelGrid>
+                    </p:column>
+
+                </p:carousel>
+            </h:form>
         </p:dialog>
 
+
+
         <p:dialog header="Buy Students" widgetVar="buystu" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" 
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false"
                   onCloseUpdate="refreshAll()" onHide="refreshAll()"  >
             <h:form>
                 <div align="center">
-                <h:panelGrid columns="2"  id="studentPanelGrid"  >
-                    <h:column>
-                          <img src="ico/stu.png"/>
-                    </h:column>
-                    <h:column>
-                        <div align="center">
-                            <h2>
-                            <h:outputLabel for="students" value="Student - 0.5&#208;" />
-                            </h2>
-                            You have <h:outputText value="#{shop.studentNumber}"/> students.
-                            <br/>
-                            Your current maximum capacity is <h:outputText value="#{shop.studentCapacity}" />
-                            <br/>
-                            <br/>
-                             <p:spinner id="spinnerStudent"
-                               value="#{shop.students}" stepFactor="10" min="0"  />
-                            <br/>
-                            <br/>
-                             <p:commandButton  id="submitStudent" value="Buy" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
-                        </div>
-                    </h:column>
-                </h:panelGrid>
-                    
+                    <h:panelGrid columns="2"  id="studentPanelGrid"  >
+                        <h:column>
+                            <img src="ico/stu.png"/>
+                        </h:column>
+                        <h:column>
+                            <div align="center">
+                                <h2>
+                                    <h:outputLabel for="students" value="Student - 0.5&#208;" />
+                                </h2>
+                                You have <h:outputText value="#{shop.studentNumber}"/> students.
+                                <br/>
+                                Your current maximum capacity is <h:outputText value="#{shop.studentCapacity}" />
+                                <br/>
+                                <br/>
+                                <p:spinner id="spinnerStudent"
+                                           value="#{shop.students}" stepFactor="10" min="0"  />
+                                <br/>
+                                <br/>
+                                <p:commandButton  id="submitStudent" value="Buy" action="#{shop.submitstudents}" style="width:150px" update="studentPanelGrid,errorInfoStudent"/>
+                            </div>
+                        </h:column>
+                    </h:panelGrid>
 
 
 
-                <h:panelGrid columns="2"  id="phdPanelGrid">
-                    <h:column>
-                        <img src="ico/phd.png"/>
-                    </h:column>
-                    <h:column>
-                        <div align="center">
-                            <h2>
-                            <h:outputLabel for="phds" value="PhD - 20&#208;" />
-                            </h2>
-                            You have <h:outputText value="#{shop.phdsNumber}"/> PhD(s).
-                            <br/>
-                            Your current maximum capacity is <h:outputText value="#{shop.phdsCapacity}" />
-                            <br/>
-                            <br/>
-                            <p:spinner id="spinnerPhds"
-                               value="#{shop.phds}" stepFactor="1" min="0" />
-                            <br/>
-                            <br/>
-                             <p:commandButton id="submitPhd" value="Buy" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
-                        </div>
-                    </h:column>
-                </h:panelGrid>
+
+                    <h:panelGrid columns="2"  id="phdPanelGrid">
+                        <h:column>
+                            <img src="ico/phd.png"/>
+                        </h:column>
+                        <h:column>
+                            <div align="center">
+                                <h2>
+                                    <h:outputLabel for="phds" value="PhD - 20&#208;" />
+                                </h2>
+                                You have <h:outputText value="#{shop.phdsNumber}"/> PhD(s).
+                                <br/>
+                                Your current maximum capacity is <h:outputText value="#{shop.phdsCapacity}" />
+                                <br/>
+                                <br/>
+                                <p:spinner id="spinnerPhds"
+                                           value="#{shop.phds}" stepFactor="1" min="0" />
+                                <br/>
+                                <br/>
+                                <p:commandButton id="submitPhd" value="Buy" action="#{shop.submitphds}" style="width:150px" update="phdPanelGrid,errorInfoPhs"/>
+                            </div>
+                        </h:column>
+                    </h:panelGrid>
 
 
-                        <h:panelGrid id="errorInfoStudent" >
+                    <h:panelGrid id="errorInfoStudent" >
                         <p:message for="submitStudent"/>
-                        </h:panelGrid>
+                    </h:panelGrid>
 
-                        <h:panelGrid id="errorInfoPhd">
+                    <h:panelGrid id="errorInfoPhd">
                         <p:message for="submitPhd"/>
-                        </h:panelGrid>
+                    </h:panelGrid>
 
                 </div>
             </h:form>

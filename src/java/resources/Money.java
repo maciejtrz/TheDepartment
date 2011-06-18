@@ -11,7 +11,7 @@ import ConnectionDataBase.Playerresources;
  *
  * @author kp1209
  */
-public class Money  extends Resource {
+public class Money  implements Resource {
 
     private static final String resourceName = "Money";
 

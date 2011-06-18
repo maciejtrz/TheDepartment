@@ -56,3 +56,20 @@ function out(poly) {
     img.src="img/nop.png";
   }
 }
+
+function hide()
+{
+    var resourcesOffered = document.getElementById("j_idt124:resourcesOffered");
+    var numberOffers = document.getElementById("j_idt124:OfferedAmountGrid");
+    var lecturerOffers = document.getElementById("j_idt124:OfferedLecturerGrid");
+
+    if(resourcesOffered.value == 3) {
+
+        numberOffers.style.display = "none";
+        lecturerOffers.style.display ='';
+        
+    } else {
+        numberOffers.style.display = '';
+        lecturerOffers.style.display= "none";
+    }
+}

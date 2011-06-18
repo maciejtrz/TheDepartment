@@ -27,6 +27,7 @@ public class LecturersOwnedHelper extends AbstractHelper {
         commitTransaction(session);
     }
 
+
     public void deleteLecturer(String lecturerName) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Lecturersowned  where "
@@ -38,4 +39,17 @@ public class LecturersOwnedHelper extends AbstractHelper {
         }
         super.commitTransaction(session);
     }
+
+    public void deleteLecturer(int lecturerid) {
+        Session session = createNewSessionAndTransaction();
+        Query q = session.createQuery("from Lecturersowned  where "
+                + "LecturerId = '" + lecturerid + "'" );
+        Lecturersowned  lecturer_record = (Lecturersowned ) q.uniqueResult();
+        if (lecturer_record != null) {
+            session.delete(lecturer_record);
+        }
+        super.commitTransaction(session);
+    }
+
+
 }

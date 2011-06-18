@@ -188,5 +188,14 @@ public abstract class MessageWriter implements Serializable {
         return this.selectedReceiver;
 
     }
+
+    public void setDeleteMessage(Messagesystem message) {
+
+        System.out.println("deleting message...");
+
+        MessageSystemHelper messageHelper = new MessageSystemHelper();
+        messageHelper.deleteMsg(message.getMsgnumber());
+
+    }
     
 }

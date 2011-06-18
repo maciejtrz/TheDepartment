@@ -35,35 +35,68 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <h:form>
+                <p:dataTable id="receivedMessage" var="message" value="#{plainMessageReader.messages}" >
 
-                <p:wizard widgetVar="wizzard"  flowListener="#{plainMessageReader.onFlowProcess}">
+                    <p:column headerText="Sender">
+                        <h:outputText value="#{message.senderid}" />
+                    </p:column>
 
-                    <p:tab id="subject" title="MessageSubject">
+                    <p:column headerText="Creation time">
+                        <h:outputText value="#{message.sentTime}"/>
+                    </p:column>
 
-                        <p:panel header="Message subject">
+                    <p:column headerText="Subject">
+                        <h:outputText value="#{message.subject}" />
+                    </p:column>
 
-                            <h:outputText value="Choose message subject: " />
-                            <h:selectOneMenu value="#{plainMessageReader.selectedMessage}" >
-                                <f:selectItems value="#{plainMessageReader.messagesSubjects}"/>
-                            </h:selectOneMenu>
-                        </p:panel>
-                    </p:tab>
+                    <p:column headerText="Details">
+                        <p:commandButton value="Show Details"
+                                         onclick="messagedetails.show()" />
 
-                    <p:tab title="MessageText" id="text">
-                        <p:panel header="Message data" >
-                            <h:outputText value="Message: "/>
-                            <br/>
-                            <h:outputText value="#{plainMessageReader.text}" />
-
-                        </p:panel>
-                    </p:tab>
+                        <p:commandButton value="Delete"
+                                         id="deleteButton">
+                            <f:setPropertyActionListener value="#{message}" target="#{plainMessageReader.deleteMessage}" />
+                        </p:commandButton>
 
 
-                </p:wizard>
-            </h:form>
+                        <p:dialog header="Message Details"
+                                  widgetVar="messagedetails"
+                                  resizable="false"
+                                  closeOnEscape="true">
+                            <h:form>
+                                <h:panelGrid columns="2">
+
+                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="#{message.senderid}" />
+
+                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="#{message.subject}" />
+
+                                    <h:outputText value="Creation time" />
+                                    <h:outputText value="#{message.sentTime}" />
+
+                                    <h:outputText value="Message: "/>
+                                    <h:outputText value="#{message.msg}" />
+
+                                    <p:commandButton value="Close" onclick="messagedetails.hide()" />
+
+                               </h:panelGrid>
+
+                            </h:form>
+                        </p:dialog>
+
+                    </p:column>
+
+            </p:dataTable>
 
             <a onclick="readmsg.hide()"> CLICK THIS TO HIDE </a>
+
+            </h:form>
         </p:dialog>
+
+        
+
+
 
     </ui:component>
 </html>

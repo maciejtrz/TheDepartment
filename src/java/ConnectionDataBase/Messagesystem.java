@@ -1,6 +1,9 @@
 package ConnectionDataBase;
 // Generated 14-Jun-2011 16:43:10 by Hibernate Tools 3.2.1.GA
 
+import java.util.Date;
+
+
 
 
 /**
@@ -57,6 +60,10 @@ public class Messagesystem  implements java.io.Serializable {
     }
     public String getReceiverid() {
         return this.receiverid;
+    }
+
+    public Date getSentTime() {
+        return new Date(getCreationtime());
     }
     
     public void setReceiverid(String receiverid) {

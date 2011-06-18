@@ -3,7 +3,6 @@ package UserBeans;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import Connections.ConnectionSingleton;
-import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -22,10 +21,7 @@ public class BuyLecturers  {
     private String username;
 
     /** Creates a new instance of BuyLecturers */
-    public BuyLecturers() {
-        System.out.println("The lecturers constructor is called");
-        
-    }
+    public BuyLecturers() {}
 
     public String getUsername() {
         return username;
@@ -41,7 +37,6 @@ public class BuyLecturers  {
     }
 
     public List<Lecturer> getLecturers() {
-        //System.out.println("The lecturers getter is called!");
         return lecturers;
     }
 

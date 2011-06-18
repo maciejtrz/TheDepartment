@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.TreeNode;
 import specializationsGenerator.SpecializationsGenerator;
+import utilities.BoostUtils;
 import utilities.Lecturer;
 import utilities.LecturerBenefits;
 import utilities.LecturersManager;
@@ -203,11 +204,14 @@ public class AddResearch implements Serializable {
 
         // Calculacting the boost a given research would give.
         int boost_value = 0;
+        BoostUtils boostHelper = new BoostUtils();
+
         for (int i = 0; i < chosenLecturers.size(); i++) {
             String lecturerName = chosenLecturers.get(i);
 
             Lecturer lecturer = mgr.lookUpLecturer(lecturerName, owned_lecturers);
-
+            String research_area = getSubjectList()[subject];
+            boost_value += boostHelper.calculateLecturerBoost(lecturer, research_area);
 
             /* Making the researcher unusable. */
             helper.setUsable(lecturerName, false);
@@ -215,19 +219,18 @@ public class AddResearch implements Serializable {
             /* Setting the research object. */
             research.addResearcher(lecturer);
 
-            // Checking whether a given lecturer is has a given research as
-            // its attribtues
-            List<LecturerBenefits> benefits = lecturer.getSpecializations();
-            String research_area = getSubjectList()[subject];
-            Iterator<LecturerBenefits> it = benefits.iterator();
-            while (it.hasNext()) {
-                LecturerBenefits benefit = it.next();
-                if (benefit.getField().equals(research_area)) {
-                    boost_value += benefit.getBoost();
-                    break;
-                }
-            }
         }
+
+        // Calculating additionaly research boost.
+        double building_rate
+             = boostHelper.calculateBuildingBoostMultiplier(mgr.getUserName());
+        double students_boost
+             = boostHelper.calculateStudentsBoost(mgr.getUserName(), 0, 0);
+        double money_boost
+             = boostHelper.calculateMoneyBoost(moneyAmount);
+
+        double temp = (boost_value + students_boost + money_boost) * building_rate;
+        boost_value = (int)Math.round(temp);
 
         /* Creating new object research */
         research.addAvailableResearchList(researchBag.getAvailableResearch());

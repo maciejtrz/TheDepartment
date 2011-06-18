@@ -14,7 +14,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>The Department</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link rel="shortcut icon" href="../ac.png"/>
+        <link rel="shortcut icon" href="/TheDepartment/ac.png"/>
         <script type="text/javascript" src="map.js"></script>
         <script type="text/javascript" src="jquery-1-6-1.js"></script>
         <p:resources/>
@@ -75,13 +75,14 @@ and open the template in the editor.
 
         <h:form id="rform">
             <a class="stats">Starvation</a>
-            <p:progressBar style="width:300px; height: 20px"/>
+            <p:progressBar value="#{eventBean.starvation}" style="width:300px; height: 20px"/>
             <a class="stats">Alcoholism</a>
-            <p:progressBar style="width:300px; height: 20px"/>
+            <p:progressBar value="#{eventBean.alcoholism}" style="width:300px; height: 20px"/>
             <a class="stats">Satisfaction</a>
-            <p:progressBar style="width:300px; height: 20px"/>
+            <p:progressBar value="#{eventBean.satisfaction}" style="width:300px; height: 20px"/>
+            <p:poll interval="10" update="rform"/>
         </h:form>
-
+        
         <h:form id="lform">
             <p:menu id="lmenu" style="width: 230px">
                 <p:submenu label="Messages">

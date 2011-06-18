@@ -26,8 +26,7 @@ public class EventBean {
     }
 
     public int getStarvation() {
-        int starvation = helper.getPlayerStatsRecrod(playerName).getStarvation();
-        return starvation;
+        return helper.getPlayerStatsRecrod(playerName).getStarvation();
     }
 
     public int getAlcoholism() {

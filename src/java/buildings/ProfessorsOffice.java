@@ -4,6 +4,7 @@ package buildings;
 import ConnectionDataBase.Buildings;
 import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
+import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.UserManager;
@@ -11,10 +12,13 @@ import utilities.BuildingInfo;
 
 public class ProfessorsOffice extends Building {
 
+    private int capacity_base_upgrade;
+
     public ProfessorsOffice () {
         cost = 3000;
         max_level = ADVANCED_LEVEL;
         upgrade_base_cost = 2000;
+        capacity_base_upgrade = 5;
     }
 
     @Override
@@ -52,6 +56,10 @@ public class ProfessorsOffice extends Building {
 
         /* Updating players money. */
         UserManager.removeMoney(playerName, cost);
+
+        /* Upgradting lecturers capacity. */
+        CapacityHelper capacity = new CapacityHelper();
+        capacity.updateProfessorsCapacity(playerName, capacity_base_upgrade);
 
         return true;
     }
@@ -170,6 +178,11 @@ public class ProfessorsOffice extends Building {
             posHelper.updateBuildingPosition(playerName, position, CODE_PROF_OFFICE_3);
             UserManager.removeMoney(playerName, cost);
         }
+
+       /* Upgrading lecturers capacity. */
+        CapacityHelper capacity = new CapacityHelper();
+        capacity.updateProfessorsCapacity
+                (playerName, capacity_base_upgrade * (cur_level + 1));
 
         return true;
     }

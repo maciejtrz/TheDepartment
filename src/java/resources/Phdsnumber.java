@@ -11,7 +11,7 @@ import ConnectionDataBase.Playerresources;
  *
  * @author kp1209
  */
-public class Phdsnumber extends Resource {
+public class Phdsnumber implements Resource {
 
      private static final String resourceName = "Phds students";
 

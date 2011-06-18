@@ -11,11 +11,12 @@ import ConnectionDataBase.Playerresources;
  *
  * @author kp1209
  */
-public abstract class Resource {
+public interface Resource {
 
-    abstract public String getResourcesName();
-    abstract public boolean canRemove(Playerresources resources, int amount);
-    abstract public void remove(Playerresources resources, int amount);
-    abstract public void add(Playerresources resources, int amount);
+    public String getResourcesName();
+    public boolean canRemove(Playerresources resources, int amount);
+    public void remove(Playerresources resources, int amount);
+    public void add(Playerresources resources, int amount);
+
 
 }

@@ -10,41 +10,38 @@
         <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <p>Now, you must specify what research you would like to perform.</p>
+            <p>Please specify what research you would like to perform.</p>
 
             <h:form>
 
                 <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
 
-                    <p:tab id="researchSubject" title="Research Subject" >
-                        <p:panel header="ResarchSubject">
-                            <h:outputText value="Choose research subject: " />
+                    <p:tab id="researchSubject" title="Category" >
+                        <p:panel header="Choose research category">
                             <h:selectOneMenu value="#{addResearch.subject}" >
                                 <f:selectItems value="#{addResearch.subjects}"/>
                             </h:selectOneMenu>
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="researchLecturers" title="Lecturers for Research" >
-                        <p:panel header="Lecturers for Research">
-                            <h:outputText value="Choose lecturers: "/>
-                            <h:selectManyListbox value="#{addResearch.lecturers}">
+                    <p:tab id="researchLecturers" title="Lecturers" >
+                        <p:panel header="Choose lecturers">
+                            <h:selectManyListbox value="#{addResearch.lecturers}" style="width:300px">
                                 <f:selectItems value="#{addResearch.lecturerList}"/>
                             </h:selectManyListbox>
                         </p:panel>
                     </p:tab>
 
                     <p:tab id="availableResearches" title="Available Researches" >
-                        <p:panel header="Available Researches">
-                            <h:outputText value="Choose research: "/>
-                            <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                        <p:panel header="Choose research">
+                            <h:selectOneMenu value="#{addResearch.chosenResearch}" style="width:300px">
                                 <f:selectItems value="#{addResearch.availableResearches}"/>
                             </h:selectOneMenu>
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="moneyAmount" title="Specify money grant for research" >
-                        <p:panel header="Specify money grant for research">
+                    <p:tab id="moneyAmount" title="Grant size" >
+                        <p:panel header="Specify grant size">
                             <h:outputText value="Input money min: "/>
                             <h:outputText value="#{addResearch.minimumMoney}" />
                             <h:outputText value=" max: " />
@@ -53,7 +50,7 @@
                         </p:panel>
                     </p:tab>
 
-                    <p:tab id="confirmation" title="Research Confirmation" >
+                    <p:tab id="confirmation" title="Confirmation" >
                         <p:panel header="Research Confirmation">
 
                             <h:panelGrid columns="2" border="1" >
@@ -93,7 +90,7 @@
 
 
 
-        <p:dialog header="Manage researches" widgetVar="resmag" modal="true" height="500" width="700"
+        <p:dialog header="Manage Researches" widgetVar="resmag" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <h:form>

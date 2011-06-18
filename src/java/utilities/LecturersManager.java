@@ -116,6 +116,8 @@ public class LecturersManager {
 
 
 
+
+
     /* Generates one lecturer and adds him to the player's owned list. */
     public void generateOneOwnedLecturer() {
 
@@ -389,7 +391,7 @@ public class LecturersManager {
         Lecturers lecturer_record = lecturersHelper.getLecturer(lecturerName);
         if (lecturer_record != null) {
             price = lecturer_record.getPrice();
-            usable = lecturer_record.isUsable();
+            usable = lecturer_record.getUsable();
         }
 
         // Obtaining specializations
@@ -411,4 +413,6 @@ public class LecturersManager {
         list.add(lecturer);
 
     }
+
+
 }

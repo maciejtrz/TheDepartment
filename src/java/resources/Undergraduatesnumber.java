@@ -11,9 +11,9 @@ import ConnectionDataBase.Playerresources;
  *
  * @author kp1209
  */
-public class Undergraduatesnumber extends Resource {
+public class Undergraduatesnumber implements Resource {
 
-    private static final String resourceName = "Undergraduates";
+    private static String resourceName = "Undegraduates Number";
 
     @Override
     public String getResourcesName() {

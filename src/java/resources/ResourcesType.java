@@ -14,10 +14,11 @@ public class ResourcesType {
     private static Resource[] resources;
 
     static {
-        resources = new Resource[3];
+        resources = new Resource[4];
         resources[0] = new Money();
         resources[1] = new Phdsnumber();
         resources[2] = new Undergraduatesnumber();
+        resources[3] = new LecturerResource();
     }
 
     public static Resource[] getResourcesList() {

@@ -56,6 +56,13 @@ public class Message extends Messagesystem implements Serializable {
         msghelp.createMessage(getSenderid(), users.get(selectedReceiver).getIdname(), getSubject(),
                 getMsg(), MessageSingleton.PLAIN_MESSAGE);
 
+        clear();
+    }
+
+    public void clear() {
+        super.setCreationtime(new Date().getTime());
+        super.setMsg("");
+        super.setSubject("");
     }
  
 

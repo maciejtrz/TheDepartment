@@ -8,6 +8,7 @@ import ConnectionDataBase.Capacity;
 import ConnectionDataBase.CapacityHelper;
 import ConnectionDataBase.Playerresources;
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import java.io.Serializable;
 import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
@@ -21,10 +22,9 @@ import utilities.BasicUtils;
  */
 public class Shop implements Serializable {
 
-    public String playerName;
+
     public int students;
     public int phds;
-    private Playerresources resources;
     private CapacityHelper capacityhelper;
     private String name;
 
@@ -32,20 +32,11 @@ public class Shop implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
-
         name = auth.getUsername();
-        resources = auth.getResources();
         capacityhelper = new CapacityHelper();
     }
 
-    public void setPlayername(String s) {
-        playerName = s;
-    }
 
-    public String getPlayername() {
-
-        return playerName;
-    }
 
     public int getPhds() {
         return phds;
@@ -72,7 +63,7 @@ public class Shop implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
-        if ((getPhds()+ resources.getPhdsnumber()) > capacity.getPhdscapacity()) {
+        if ((getPhds()+ UserManager.getPhds(name)) > capacity.getPhdscapacity()) {
             System.out.println("Not enough space for new Phds");
 
                 FacesContext.getCurrentInstance().addMessage(
@@ -85,13 +76,14 @@ public class Shop implements Serializable {
             return ("failure");
         }
 
-        else if (resources.getMoney() < getPhds()*20) {
+        else if (UserManager.getMoney(name) < getPhds()*20) {
             System.out.println("Not enought money");
 
                 FacesContext.getCurrentInstance().addMessage(
                 BasicUtils.findComponent(facesContext.getViewRoot(),"submitStudent").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,"Insufficeint Money", "PhDs aren't slaves,they won't work for penny!"));
-            error= true;
+
+                error= true;
             phds=0;
             return ("failure");
         } else if (!error){
@@ -103,8 +95,8 @@ public class Shop implements Serializable {
         }
         int phdsCost = getPhds()* 20;
 
-        resources.setMoney(resources.getMoney() - phdsCost);
-        resources.setPhdsnumber(resources.getPhdsnumber() + getPhds());
+        UserManager.removeMoney(name, phdsCost);
+        UserManager.addPhdsnumber(name, getPhds());
 
         phds=0;
         return "success";
@@ -120,7 +112,7 @@ public class Shop implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
-        if ((getStudents() + resources.getUndergraduatesnumber()) > capacity.getStudentscapacity()) {
+        if ((getStudents() + UserManager.getStudents(name)) > capacity.getStudentscapacity()) {
             System.out.println("Not enough space for studetns");
 
             FacesContext.getCurrentInstance().addMessage(
@@ -134,7 +126,7 @@ public class Shop implements Serializable {
 
 
 
-        else if (resources.getMoney() < getStudents()*5) {
+        else if (UserManager.getMoney(name) < getStudents()*5) {
             System.out.println("Not enought money");
 
              FacesContext.getCurrentInstance().addMessage(
@@ -159,8 +151,8 @@ public class Shop implements Serializable {
 
         int studentCost = getStudents() * 5;
 
-        resources.setMoney(resources.getMoney() - studentCost);
-        resources.setUndergraduatesnumber(resources.getUndergraduatesnumber() + getStudents());
+        UserManager.removeMoney(name, studentCost);
+        UserManager.addUndegraduatesnumber(name, getStudents());
 
         students = 0;
         return "success";
@@ -191,9 +183,9 @@ public class Shop implements Serializable {
     public String getBalance() throws SQLException {
 
 
-        int balance = resources.getMoney();
+        int balance = UserManager.getMoney(name);
 
-        System.out.println(this.playerName);
+        System.out.println(name);
 
         return (balance + "");
     }
@@ -203,12 +195,12 @@ public class Shop implements Serializable {
     }
 
     public String getStudentNumber(){
-        Integer num = this.resources.getUndergraduatesnumber();
+        Integer num = UserManager.getStudents(name);
         return num.toString();
     }
 
         public String getPhdsNumber(){
-        Integer num = this.resources.getPhdsnumber();
+        Integer num = UserManager.getPhds(name);
         return num.toString();
     }
 

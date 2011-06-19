@@ -13,8 +13,12 @@ import java.io.Serializable;
  */
 public class PlainMessageReader extends MessageWriter implements Serializable  {
 
+
+
     public PlainMessageReader() {
         super(MessageSingleton.PLAIN_MESSAGE);
     }
+
+    
 
 }

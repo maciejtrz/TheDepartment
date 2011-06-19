@@ -30,6 +30,8 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     private PriorityQueue<TradeOffer> yourExpirationTimeList = new PriorityQueue<TradeOffer>();
 
     MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
+    private TradeOffer selectedTradeOffer;
+    private TradeOffer yourSelectedTradeOffer;
 
     public TradeMessageReader() {
         super(null,MessageSingleton.TRADE_OFFER);
@@ -183,5 +185,27 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
         yourExpirationTimeList.remove(declinedTradeOffer);
 
         UserManager.notifyUserAboutMessage(declinedTradeOffer.getReceiverid());
+    }
+
+    public void setSelectedShowTrade(TradeOffer selectedTradeOffer) {
+        System.out.println("Selected trade: " + selectedTradeOffer.getSubject());
+        
+        this.selectedTradeOffer = selectedTradeOffer;
+    }
+
+    public TradeOffer getSelectedShowTrade() {
+        if(selectedTradeOffer != null) {
+        System.out.println("Returning trade: " + selectedTradeOffer.getSubject());
+        System.out.println("Sender: " + selectedTradeOffer.getSenderid());
+        }
+        return selectedTradeOffer;
+    }
+
+    public void setYourSelectedShowTrade(TradeOffer yourSelectedTradeOffer) {
+        this.yourSelectedTradeOffer = yourSelectedTradeOffer;
+    }
+
+    public TradeOffer getYourSelectedShowTrade() {
+        return yourSelectedTradeOffer;
     }
 }

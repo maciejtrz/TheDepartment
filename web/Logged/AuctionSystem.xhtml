@@ -62,7 +62,7 @@
 
                         <p:commandButton value="Show Details"
                                          oncomplete="auctionOfferDetails.show()"
-                                         update="auctionTableForm:auctionOffersTableGrid">
+                                         update=":auctionTableForm:auctionOffersTableGrid">
 
                             <f:setPropertyActionListener value="#{auction}"
                                                          target="#{auctionMessageReader.selectedAuction}" />

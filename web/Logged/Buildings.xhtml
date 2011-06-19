@@ -8,6 +8,14 @@
 
 
 
+
+        <script language="JavaScript">
+            function reload(){
+            window.location.reload(true);
+            alert("KURWA");
+            }
+        </script>
+
         <p:dialog header="Tresco" widgetVar="tr1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
@@ -388,7 +396,8 @@
             <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
                 <h:form>
                 <p:carousel widgetVar="nop" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
-                        style="position: relative; top:50px; " rows="1" effect="easeInStrong">
+                        style="position: relative; top:50px; " rows="1" effect="easeInStrong"
+                        >
                 <p:column>
                 <h:panelGrid columns="2" style="width:100% ; height:100%">
 
@@ -397,9 +406,9 @@
                     <h:panelGrid columns="1" cellpadding="5">
                         <h:outputText value="#{building.info}" />
                         <h:outputText value="Price: #{building.cost}" />
-                        <p:commandButton id="buyBuildingsButton" value="Build" ajax="false" action="#{buildingbean.buy}">
+                        <p:commandButton id="buyBuildingsButton" value="Build" ajax="false" action="#{buildingbean.buy}" >
                             <f:setPropertyActionListener target="#{buildingbean.selectedBuilding}"
-                                                         value="#{building}"  />
+                                                         value="#{building}" />
                         </p:commandButton>
                     </h:panelGrid>
 

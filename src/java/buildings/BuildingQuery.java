@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author kp1209
  */
 public class BuildingQuery extends HttpServlet {
+
+    private static final String BUILD_QUERY = "t";
+    private static final String NOT_BUILD_QUERY = "n";
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,6 +38,7 @@ public class BuildingQuery extends HttpServlet {
         try {
 
             String input_position = request.getParameter("position");
+            String input_buy = request.getParameter("buy");
             Integer position = Integer.parseInt(input_position);
             BuildingsPositionHelper helper
                     = new BuildingsPositionHelper();
@@ -45,13 +49,23 @@ public class BuildingQuery extends HttpServlet {
             String output = helper.getAtPosition(userName, position);
 
             if ( output == null) {
+                output = "nop";
                 out.print("nop");
             }
 
             else {
                 out.print(output);
             }
-            UserManager.setBuildingPosition(userName, position);
+            /*System.out.println("Printing all info of object!: " + this.toString() +
+                               " PlayerName: " + userName +
+                               " input_position: " + input_position +
+                               " input_buy: " + input_buy +
+                               " position: " + position +
+                               " output: " + output +
+                               " end of print: " + this.toString()); */
+            if (input_buy.equals(BUILD_QUERY)) {
+                UserManager.setBuildingPosition(userName, position);
+            }
 
         } finally { 
             out.close();

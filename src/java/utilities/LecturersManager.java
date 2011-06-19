@@ -47,6 +47,21 @@ public class LecturersManager {
     }
 
 
+    public List<Lecturer> getAssossiatedLecturers(String subjectName) {
+        
+        List<Lecturer>output_list = new ArrayList<Lecturer>();
+        List<Lecturer>owned_list = getOwnedLecturers();
+        Iterator<Lecturer> it = owned_list.iterator();
+        while (it.hasNext()) {
+            Lecturer lec = it.next();
+            if (lec.getUsable() && lec.hasSpecialization(subjectName)) {
+                output_list.add(lec);
+            }
+        }
+        return output_list;
+        
+    }
+
     public void  repopulateAvailableLec() {
         for (int i = 0 ; i < MAX_AVAILABLE ; i++) {
             Lecturer newLecturer = generateLecturer();

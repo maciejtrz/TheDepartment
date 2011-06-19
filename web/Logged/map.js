@@ -8,16 +8,16 @@ function getNumber(poly) {
 }
 
 // AJAX function
-function queryServer(position,fn)
+function queryServer(position,fn,buy)
 {
-  $.post("/TheDepartment/Logged/BuildingQuery", {"position": position}, function(data) {
+  $.post("/TheDepartment/Logged/BuildingQuery", {"position": position , "buy" : buy}, function(data) {
       fn(position, data);
   });
 }
 
 function refreshAll() {
   for (i=1;i<=16;i++) {
-  queryServer(i, refresh);
+  queryServer(i, refresh,"n");
   }
 }
 
@@ -27,7 +27,7 @@ function refresh(position, building) {
 
 function clickSite(poly) {
   no=getNumber(poly);
-  queryServer(no,dialog);
+  queryServer(no,dialog,"t");
 }
 
 function dialog(position, building) {

@@ -10,6 +10,7 @@ import ConnectionDataBase.BuildingsHelper;
 import buildings.Building;
 import buildings.BuildingFactory;
 import buildings.Laboratories;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author kwh109
  */
-public class BuildingsUtils {
+public class BuildingsUtils implements Serializable {
 
     /* Returns all buildings. */
     public List<Building> getBuildings(String playerName) {

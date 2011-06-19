@@ -28,7 +28,7 @@ public class PrivateCompanyGrant extends Event {
 
     @Override
     public boolean isEqual(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (name.equals(LotteryManager.PRIVATE_INVESTOR_GRANT));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -35,6 +36,17 @@ public class Lecturer {
 
     public List<LecturerBenefits> getSpecializations(){
         return specializations;
+    }
+
+    public boolean hasSpecialization(String specialization) {
+        Iterator<LecturerBenefits> it = specializations.iterator();
+        while (it.hasNext()) {
+            LecturerBenefits benefit = it.next();
+            if (benefit.getField().equals(specialization)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

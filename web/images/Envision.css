@@ -121,8 +121,8 @@ tr {
 td {
 	padding-left: 11px;
 	padding-right: 11px;
-	border-left: 0px solid #FFF;
-	border-bottom: solid 0px #ffffff;
+	border-left: 1px solid #FFF;
+	border-bottom: solid 1px #ffffff;
 }
 td.first,th.first {
 	border-left: 0px;
@@ -138,8 +138,8 @@ tr.row-b {
 /* form elements */
 form {
 	margin: 0px; padding: 0 5px;
-	border: 0px solid #f2f2f2;
-
+	border: 1px solid #f2f2f2; 
+	background-color: #fff;
 }
 label {
 	display:block;

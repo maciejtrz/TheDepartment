@@ -23,7 +23,7 @@
                     <h:inputTextarea style="width:550px;height:300px;" value="#{message.msg}"/>
                     <br/>
                     <h:panelGroup><p:commandButton value="Send" action="#{message.send}" ajax="false" />
-                        <p:commandButton value="Clear" onclick="reset()" update="newmsgform"/> </h:panelGroup>
+                        <p:commandButton value="Clear" action="#{message.clear}" update="newmsgform"/> </h:panelGroup>
                 </h:panelGrid>
             </h:form>
 

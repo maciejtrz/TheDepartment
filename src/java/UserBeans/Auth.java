@@ -190,10 +190,10 @@ public class Auth implements Serializable {
         return hasNewMessage;
     }
 
-    public void hasNewMessage() {
+    public void hasAnyNewMessage() {
         if(getHasNewMessage()) {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Message System","You've got a new message"));
+            context.addMessage(null, new FacesMessage("Messaging System","You've got a new message"));
             setHasNewMessage(false);
         }
     }

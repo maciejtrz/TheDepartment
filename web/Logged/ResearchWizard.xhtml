@@ -95,10 +95,13 @@
                                 <h:outputText value="#{addResearch.subjectName}" />
 
                             </h:panelGrid>
-                            <p:commandButton value="Add Research"  ajax="false"
+                            <p:commandButton value="Add Research"
                                              actionListener="#{addResearch.startResearch}"
-                                             update=":researchForm:researchTable"/>
-                            <p:commandButton actionListener="#{addResearch.clean}" value="Clean" ajax="false"/>
+                                             update=":researchForm:researchTable"
+                                             onclick="wiz.next()"/>
+                            <p:commandButton actionListener="#{addResearch.clean}"
+                                             value="Clean"
+                                             onclick="wiz.next()"  />
                         </p:panel>
                     </p:tab>
                 </p:wizard>

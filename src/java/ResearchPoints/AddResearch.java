@@ -63,12 +63,8 @@ public class AddResearch implements Serializable {
     private Integer subject;  // The index of the selected item
     // can be given as String/Integer/int ...
     private boolean initialized = false;
-    private static final String firstStep = "researchSubject";
-
-    private static String getFirstStep() {
-        return firstStep;
-    }
     private boolean confirmation;
+    
 
     public void initialize(HttpSession session) {
         researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
@@ -294,6 +290,8 @@ public class AddResearch implements Serializable {
 
         thread.start();
 
+        clean();
+
     }
 
     public String onFlowProcess(FlowEvent event) {
@@ -405,6 +403,10 @@ public class AddResearch implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No phds",
                     "You cannot assign negative amount of phds!"));
 
+        } else if(currentStep.equals("confirmation") && nextStep.equals("undefined")) {
+
+            next = "researchSubject";
+
         } else {
 
             next = nextStep;
@@ -419,6 +421,24 @@ public class AddResearch implements Serializable {
     }
 
     public void clean() {
+
+        /* The title of the research */
+    String name = new String();
+    ResearchPoints = 0;
+    chosenLecturers = new ArrayList<String>();
+    lecturers = new ArrayList<SelectItem>();
+    researchesList = new ArrayList<SelectItem>();
+    availableResearches = new ArrayList<ResearchTreeNode>();
+    owned_lecturers = new ArrayList<Lecturer>();
+    moneyAmount = 0;
+    undergraduates = 0;
+    phds = 0;
+    chosenResearch = 0;
+    subject = 0;
+    initialized = false;
+    confirmation = false;
+
+
     }
 
     private static String[] getSubjectList() {

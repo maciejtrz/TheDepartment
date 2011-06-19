@@ -59,11 +59,13 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
     }
 
     public void setSelectedAuction(Auction auction){
-        System.out.println("Selected auction is: " + auction.getSubject());
+
         this.selectedAuction = auction;
     }
 
     public Auction getSelectedAuction() {
+        if(selectedAuction == null)
+            return new Auction();
         return selectedAuction;
     }
 }

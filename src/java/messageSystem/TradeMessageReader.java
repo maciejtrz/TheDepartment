@@ -187,17 +187,11 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
         UserManager.notifyUserAboutMessage(declinedTradeOffer.getReceiverid());
     }
 
-    public void setSelectedShowTrade(TradeOffer selectedTradeOffer) {
-        System.out.println("Selected trade: " + selectedTradeOffer.getSubject());
-        
+    public void setSelectedShowTrade(TradeOffer selectedTradeOffer) {    
         this.selectedTradeOffer = selectedTradeOffer;
     }
 
     public TradeOffer getSelectedShowTrade() {
-        if(selectedTradeOffer != null) {
-        System.out.println("Returning trade: " + selectedTradeOffer.getSubject());
-        System.out.println("Sender: " + selectedTradeOffer.getSenderid());
-        }
         return selectedTradeOffer;
     }
 

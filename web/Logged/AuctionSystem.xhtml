@@ -48,7 +48,7 @@
                         <div align="center">
                         <p:commandButton image="ui-icon ui-icon-newwin"
                                          oncomplete="auctionOfferDetails.show()"
-                                         update=":auctionTableForm:auctionOffersTableGrid">
+                                         update="auctionTableForm:auctionOffersTableGrid">
 
                             <f:setPropertyActionListener value="#{auction}"
                                                          target="#{auctionMessageReader.selectedAuction}" />
@@ -90,15 +90,18 @@
 
                         <h:panelGroup>
                         <h:outputText value="Your offer"/>
-                        <p:inputText value="#{auction.offer}" style="width: 50px" />
+                        <p:inputText value="#{auctionMessageReader.selectedAuction.offer}" style="width: 50px" />
                         </h:panelGroup>
+                        
                         <h:panelGrid id="bidOfferGrid" >
+
                             <p:commandButton value="Bid" update="bidOfferGrid">
                                 <f:setPropertyActionListener
-                                    value="#{auction}"
+                                    value="#{auctionMessageReader.selectedAuction}"
                                     target="#{auctionMessageReader.sendOffer}" />
                             </p:commandButton>
                             <p:message for="bidOfferGrid" />
+                            
                         </h:panelGrid>
 
                     </h:panelGrid>

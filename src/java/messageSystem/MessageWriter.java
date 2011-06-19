@@ -39,6 +39,7 @@ public abstract class MessageWriter implements Serializable {
 
     /*List of users*/
     public List<Players> users;
+    private Messagesystem selectedShowMessage;
 
     public MessageWriter(int messageType) {
         this.messageType = messageType;
@@ -196,6 +197,17 @@ public abstract class MessageWriter implements Serializable {
         MessageSystemHelper messageHelper = new MessageSystemHelper();
         messageHelper.deleteMsg(message.getMsgnumber());
 
+    }
+
+    public void setSelectedShowMessage(Messagesystem message) {
+        System.out.println(message.getSubject() + " selected");
+        selectedShowMessage = message;
+    }
+
+    public Messagesystem getSelectedShowMessage() {
+        if(selectedShowMessage != null)
+        System.out.println("Returning " + selectedShowMessage.getSubject());
+        return selectedShowMessage;
     }
     
 }

@@ -32,64 +32,65 @@
         <p:dialog header="Inbox" widgetVar="readmsg" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
 
-            <h:form>
-                <p:dataTable id="receivedMessage" var="message" value="#{plainMessageReader.messages}" >
+            <h:form id="messageDetailsForm">
+                <p:dataTable id="receivedMessage" var="messageReceived" value="#{plainMessageReader.messages}" >
 
                     <p:column headerText="Sender">
-                        <h:outputText value="#{message.senderid}" />
+                        <h:outputText value="#{messageReceived.senderid}" />
                     </p:column>
 
                     <p:column headerText="Sent">
-                        <h:outputText value="#{message.sentTime}"/>
+                        <h:outputText value="#{messageReceived.sentTime}"/>
                     </p:column>
 
                     <p:column headerText="Subject">
-                        <h:outputText value="#{message.subject}" />
+                        <h:outputText value="#{messageReceived.subject}" />
                     </p:column>
 
                     <p:column headerText="Show">
-                        <div align="center">
-                        <p:commandButton onclick="messagedetails.show()" image="ui-icon ui-icon-newwin"/>
-                        </div>
-                        <p:dialog header="Message"
-                                  widgetVar="messagedetails"
-                                  resizable="false"
-                                  closeOnEscape="true" height="400" width="500">
-                            <h:form>
-                                <h:panelGrid  columns="2">
+                        <p:commandButton oncomplete="messagedetails.show()"
+                                         image="ui-icon ui-icon-newwin"
+                                         update="messageDetailsForm:showMessageDetails">
 
-                                    <h:outputText value="Sender: " />
-                                    <h:outputText value="#{message.senderid}" />
+                            <f:setPropertyActionListener 
+                                target="#{plainMessageReader.selectedShowMessage}"
+                                value="#{messageReceived}" />
 
-                                    <h:outputText value="Subject: " />
-                                    <h:outputText value="#{message.subject}" />
+                        </p:commandButton>
 
-                                    <h:outputText value="Message: "/>
-                                    <h:outputText value="#{message.msg}" />
-
-
-                                </h:panelGrid>
-                            </h:form>
-                        </p:dialog>
                     </p:column>
 
                     <p:column headerText="Delete" colspan="">
                         <div align="center">
                     <p:commandButton 
                                      id="deleteButton" update="receivedMessage"  image="ui-icon ui-icon-close">
-                        <f:setPropertyActionListener value="#{message}" target="#{plainMessageReader.deleteMessage}" />
+                        <f:setPropertyActionListener value="#{messageReceived}" target="#{plainMessageReader.deleteMessage}" />
                     </p:commandButton>
                         </div>
                     </p:column>
                 </p:dataTable>
 
+                <p:dialog header="Message"
+                                  widgetVar="messagedetails"
+                                  resizable="false"
+                                  closeOnEscape="true" height="400" width="500">
 
+                                <h:panelGrid id="showMessageDetails"  columns="2">
 
+                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="#{plainMessageReader.selectedShowMessage.senderid}" />
+
+                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="#{plainMessageReader.selectedShowMessage.subject}" />
+
+                                    <h:outputText value="Message: "/>
+                                    <h:outputText value="#{plainMessageReader.selectedShowMessage.msg}" />
+
+                                </h:panelGrid>
+                        </p:dialog>
+                        
             </h:form>
         </p:dialog>
-
-
-
 
 
 

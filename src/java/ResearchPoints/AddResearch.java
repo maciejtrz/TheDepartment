@@ -7,7 +7,9 @@ package ResearchPoints;
 import ConnectionDataBase.LecturersHelper;
 import ConnectionDataBase.Research;
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import UserBeans.Auth;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class AddResearch implements Serializable {
     private List<ResearchTreeNode> availableResearches = new ArrayList<ResearchTreeNode>();
     private List<Lecturer> owned_lecturers;
     private Integer moneyAmount;
+    private Integer undergraduates;
+    private Integer phds;
     private Integer chosenResearch;
     private ResearchBag researchBag;
     private Auth auth;
@@ -64,17 +68,35 @@ public class AddResearch implements Serializable {
     private static String getFirstStep() {
         return firstStep;
     }
+    private boolean confirmation;
 
     public void initialize(HttpSession session) {
         researchBag = (ResearchBag) session.getAttribute(Connections.ConnectionSingleton.researchBag);
         auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
 
-        moneyAmount = 50;
+        moneyAmount = 0;
+        undergraduates = 0;
+        phds = 0;
         chosenResearch = 0;
-
         subject = 0;
 
         initialized = true;
+    }
+
+    public int getPhds() {
+        return phds;
+    }
+
+    public void setPhds(int phds) {
+        this.phds = phds;
+    }
+
+    public int getUndergraduates() {
+        return undergraduates;
+    }
+
+    public void setUndergraduates(int undergraduates) {
+        this.undergraduates = undergraduates;
     }
 
     public boolean isInitialized() {
@@ -91,56 +113,54 @@ public class AddResearch implements Serializable {
 
     public void setSubject(int subject) {
 
-        System.out.println("Setting subject...");
+        if(confirmation)
+            return;
 
 
-            researchesList = new ArrayList<SelectItem>();
-            availableResearches = new ArrayList<ResearchTreeNode>();
-
-            List<ResearchTreeNode> subjectList =
-                    ResearchDevelopment.getFirstResearch(subject);
-
-            List<Integer> integerList = researchBag.getAvailableResearch();
-
-            int i = 0;
-            Iterator<Integer> iterator = integerList.iterator();
-            while (iterator.hasNext()) {
-                Integer researchId = iterator.next();
-                ResearchTreeNode researchNode = ResearchDevelopment.getResearchTreeNode(researchId);
-
-                if (researchNode.getResearchInstance().getSubjectid() == subject) {
-                    availableResearches.add(researchNode);
-                    researchesList.add(new SelectItem(new Integer(i), researchNode.toString()));
-                }
-            }
-
-            String playerName = utilities.BasicUtils.getUserName();
-            LecturersManager mgr = new LecturersManager(playerName);
-            List<Lecturer> owned = mgr.getAssossiatedLecturers(SpecializationsGenerator.subjectList[getSubject()]);
-
-            lecturers = new ArrayList<SelectItem>();
-            owned_lecturers = new ArrayList<Lecturer>();
-
-            Iterator<Lecturer> lecturerIterator = owned.iterator();
-            i = 0;
-
-            System.out.println("Number of lecturers returned: " + owned.size());
-
-            while (lecturerIterator.hasNext()) {
-                Lecturer lec = lecturerIterator.next();
-                List<LecturerBenefits> list = lec.getSpecializations();
-
-                lecturers.add(new SelectItem(new Integer(i++), lec.getName()));
-                owned_lecturers.add(lec);
-
-                System.out.println("Lecturer added");
-            }
-
-            System.out.println("Lecturer size: " + lecturers.size());
-
-        
-        System.out.println("Setting subject... " + subject);
         this.subject = subject;
+
+        System.out.println("Current subject is: " + getSubject());
+        System.out.println("Current subject name is: " + getSubjectName());
+
+        researchesList = new ArrayList<SelectItem>();
+        availableResearches = new ArrayList<ResearchTreeNode>();
+
+        List<ResearchTreeNode> subjectList =
+                ResearchDevelopment.getFirstResearch(subject);
+
+        List<Integer> integerList = researchBag.getAvailableResearch();
+
+        int i = 0;
+        Iterator<Integer> iterator = integerList.iterator();
+        while (iterator.hasNext()) {
+            Integer researchId = iterator.next();
+            ResearchTreeNode researchNode = ResearchDevelopment.getResearchTreeNode(researchId);
+
+            if (researchNode.getResearchInstance().getSubjectid() == subject) {
+                availableResearches.add(researchNode);
+                researchesList.add(new SelectItem(new Integer(i), researchNode.toString()));
+            }
+        }
+
+        String playerName = utilities.BasicUtils.getUserName();
+        LecturersManager mgr = new LecturersManager(playerName);
+        List<Lecturer> owned = mgr.getAssossiatedLecturers(SpecializationsGenerator.subjectList[getSubject()]);
+
+        lecturers = new ArrayList<SelectItem>();
+        owned_lecturers = new ArrayList<Lecturer>();
+
+        Iterator<Lecturer> lecturerIterator = owned.iterator();
+        i = 0;
+
+        while (lecturerIterator.hasNext()) {
+            Lecturer lec = lecturerIterator.next();
+            List<LecturerBenefits> list = lec.getSpecializations();
+
+            lecturers.add(new SelectItem(new Integer(i++), lec.getName()));
+            owned_lecturers.add(lec);
+        }
+
+
     }
 
     public void setLecturers(List chosenLects) {
@@ -209,7 +229,15 @@ public class AddResearch implements Serializable {
         return getSubjectList()[getSubject()];
     }
 
-    public String startResearch() {
+    public void startResearch() {
+
+        confirmation = false;
+        
+        System.out.println("Chosen integer: " + getChosenResearch());
+        System.out.println("Name: " + getResearchName());
+        
+        System.out.println("starting research " + availableResearches.get(getChosenResearch()).getResearchInstance().getResearchname()
+                + " at " + availableResearches.get(getChosenResearch()).getResearchInstance().getSubjectid());
 
         Research research = new Research(auth, availableResearches.get(getChosenResearch()).
                 getResearchInstance().getResearchid());
@@ -242,7 +270,7 @@ public class AddResearch implements Serializable {
 
         // Calculating additionaly research boost.
         double building_rate = boostHelper.calculateBuildingBoostMultiplier(mgr.getUserName());
-        double students_boost = boostHelper.calculateStudentsBoost(mgr.getUserName(), 0, 0);
+        double students_boost = boostHelper.calculateStudentsBoost(mgr.getUserName(), getUndergraduates(), getPhds());
         double money_boost = boostHelper.calculateMoneyBoost(moneyAmount);
 
         double temp = (boost_value + students_boost + money_boost) * building_rate;
@@ -266,8 +294,6 @@ public class AddResearch implements Serializable {
 
         thread.start();
 
-        return "success";
-
     }
 
     public String onFlowProcess(FlowEvent event) {
@@ -279,22 +305,20 @@ public class AddResearch implements Serializable {
         System.out.println("New: " + event.getNewStep());
 
         String next = null;
-        
-        if(currentStep.equals("researchSubject") && nextStep.equals("researchLecturers")
+
+        if (currentStep.equals("researchSubject") && nextStep.equals("researchLecturers")
                 && getLecturerList().isEmpty()) {
-            
+
             next = currentStep;
 
-            System.out.println("Number of lectures available at given subject: " + getLecturerList().size());
-            
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
                     "subjectList").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturers available",
                     "You must have at least one lecturer in your chosen subject!"));
-            
+
         } else if (currentStep.equals("researchSubject") && nextStep.equals("researchLecturers")
-                && getLecturerList().isEmpty()) {
+                && availableResearches.isEmpty()) {
 
             next = currentStep;
 
@@ -304,7 +328,7 @@ public class AddResearch implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No research available",
                     "You have no available research at given subject!"));
 
-        }else if (currentStep.equals("researchLecturers") && getLecturers().isEmpty()
+        } else if (currentStep.equals("researchLecturers") && chosenLecturers.isEmpty()
                 && !nextStep.equals("researchSubject")) {
 
             next = currentStep;
@@ -315,9 +339,81 @@ public class AddResearch implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturer chosen",
                     "You must chose at least one lecturer for your research!"));
 
+        } else if(currentStep.equals("moneyAmount") && nextStep.equals("undegraduates")
+                 && getMoneyAmount() <= 0){
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "researchMoneyAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No money",
+                    "You must spend some money on your research!"));
+
+        } else if (currentStep.equals("moneyAmount") && nextStep.equals("undegraduates")
+                 && getMoneyAmount() > UserManager.getMoney(BasicUtils.getUserName())) {
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "researchMoneyAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No money",
+                    "You do not have so much money!"));
+
+        } else if (currentStep.equals("undegraduates") && nextStep.equals("phds")
+                 && getUndergraduates() > UserManager.getStudents(BasicUtils.getUserName())) {
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "undegraduatesAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No students",
+                    "You do not have so many students!"));
+
+        } else if (currentStep.equals("undegraduates") && nextStep.equals("phds")
+                 && getUndergraduates() < 0) {
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "undegraduatesAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No students",
+                    "You cannot assign negative number of students"));
+
+        } else if (currentStep.equals("phds") && nextStep.equals("confirmation")
+                 && getPhds() > UserManager.getStudents(BasicUtils.getUserName())) {
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "phdsAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No phds",
+                    "You do not have so many PhD students!"));
+
+        } else if (currentStep.equals("phds") && nextStep.equals("confirmation")
+                 && getPhds() < 0) {
+
+            next = currentStep;
+
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "phdsAmount").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No phds",
+                    "You cannot assign negative amount of phds!"));
+
         } else {
+
             next = nextStep;
+
         }
+
+        confirmation = next.equals("confirmation");
+
+        System.out.println("Current subject in startResearch: " + getSubject());
 
         return next;
     }

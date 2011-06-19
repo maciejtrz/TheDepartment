@@ -6,101 +6,13 @@
 
     <ui:component>
 
-
-        <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-
-            <p>Now, you must specify what research you would like to perform.</p>
-
-            <h:form>
-
-                <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
-
-                    <p:tab id="researchSubject" title="Category" >
-                        <p:panel>
-                            <h:selectOneMenu value="#{addResearch.subject}" id="subjectList" >
-                                <f:selectItems value="#{addResearch.subjects}"/>
-                            </h:selectOneMenu>
-                            <p:message for="subjectList" />
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="researchLecturers" title="Lecturers" >
-                        <p:panel>
-                            <h:selectManyListbox 
-                                value="#{addResearch.lecturers}"
-                                id="lecturersList">
-                                <f:selectItems value="#{addResearch.lecturerList}"/>
-                            </h:selectManyListbox>
-
-                            <p:message for="lecturersList" />
-
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="availableResearches" title="Subject" >
-                        <p:panel>
-                            <h:selectOneMenu value="#{addResearch.chosenResearch}" >
-                                <f:selectItems value="#{addResearch.availableResearches}"/>
-                            </h:selectOneMenu>
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="moneyAmount" title="Grant" >
-                        <p:panel>
-                            <h:outputText value="Input money min: "/>
-                            <h:outputText value="#{addResearch.minimumMoney}" />
-                            <h:outputText value=" max: " />
-                            <h:outputText value="#{addResearch.maximumMoney}"/>
-                            <h:inputText value="#{addResearch.moneyAmount}" />
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="confirmation" title="Confirmation" >
-                        <p:panel>
-
-                            <h:panelGrid columns="2" border="1" >
-
-                                <h:outputText value="Name of Research: "/>
-                                <h:outputText value="#{addResearch.researchName}" />
-
-                                <h:outputText value="Money: "/>
-                                <h:outputText value="#{addResearch.moneyAmount}" />
-
-                                <h:outputText value="Subject: "/>
-                                <h:outputText value="#{addResearch.subjectName}" />
-
-                                <h:commandButton actionListener="#{addResearch.startResearch}" value="Add Research"/>
-                                <h:commandButton actionListener="#{addResearch.clean}" value="Clean" />
-
-                            </h:panelGrid>
-
-
-                        </p:panel>
-                    </p:tab>
-                </p:wizard>
-            </h:form>
-
-            <h3>Available researches: </h3>
-
-            <h:form>
-                <p:tree value="#{addResearch.root}" var="node">
-                    <p:treeNode>
-                        <h:outputText value="#{node}"/>
-                    </p:treeNode>
-                </p:tree>
-
-            </h:form>
-
-        </p:dialog>
-
-
+        <h:form id="researchForm">
 
         <p:dialog header="Manage researches" widgetVar="resmag" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <h:form>
-                <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}">
+       
+                <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}" widgetVar="researchTable">
 
                     <p:column headerText="Research Title">
                         <h:outputText value="#{research.name}" />
@@ -118,21 +30,23 @@
                     </p:column>
                 </p:dataTable>
                 <p:poll interval="10" update="ongoingResearches" />
-            </h:form>
+           
 
             <h3>Finished Researches</h3>
 
-            <h:form>
+         
                 <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
                     <p:treeNode>
                         <h:outputText value="#{node}"/>
                     </p:treeNode>
                 </p:tree>
                 <p:poll interval="10" update="finishedResearches" />
-            </h:form>
+           
 
 
         </p:dialog>
+
+            </h:form>
 
     </ui:component>
 </html>

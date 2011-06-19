@@ -48,6 +48,7 @@
                     </p:column>
 
                     <p:column headerText="Show">
+                        <div align="center">
                         <p:commandButton oncomplete="messagedetails.show()"
                                          image="ui-icon ui-icon-newwin"
                                          update="messageDetailsForm:showMessageDetails">
@@ -57,7 +58,7 @@
                                 value="#{messageReceived}" />
 
                         </p:commandButton>
-
+                         </div>
                     </p:column>
 
                     <p:column headerText="Delete" colspan="">

@@ -13,7 +13,7 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
 
-            <h:form>
+            <h:form id="auctionTableForm">
 
                 <p:dataTable id="auctionBoard" var="auction" value="#{auctionMessageReader.auctionOffers}" >
                     <p:column headerText="Auction sender">
@@ -61,46 +61,54 @@
                         </h:panelGrid>
 
                         <p:commandButton value="Show Details"
-                                         onclick="auctionOfferDetails.show()" />
+                                         oncomplete="auctionOfferDetails.show()"
+                                         update="auctionTableForm:auctionOffersTableGrid">
 
-                        <p:dialog header="Auction Offer Details"
-                                  widgetVar="auctionOfferDetails"
-                                  resizable="false"
-                                  closeOnEscape="true">
-                            <h:form>
-                                <h:panelGrid columns="2">
+                            <f:setPropertyActionListener value="#{auction}"
+                                                         target="#{auctionMessageReader.selectedAuction}" />
 
-                                    <h:outputText value="Sender: " />
-                                    <h:outputText value="#{auction.senderid}" />
-
-                                    <h:outputText value="Subject: " />
-                                    <h:outputText value="#{auction.subject}" />
-
-                                    <h:outputText value="Resources offered: " />
-                                    <h:outputText value="#{auction.resourcesOfferedName}"/>
-
-                                    <h:outputText value="Amount offered: " />
-                                    <h:outputText value="#{auction.amountOffered}" />
-
-                                    <h:outputText value="Resources wanted: " />
-                                    <h:outputText value="#{auction.resourcesWantedName}"/>
-
-                                    <h:outputText value="Description: "/>
-                                    <h:outputText value="#{auction.tradeDescription}" />
-
-                                    <h:outputText value="Expire date: " />
-                                    <h:outputText value="#{auction.expireDate}" />
-
-                                    <p:commandButton value="Close" onclick="auctionOfferDetails.hide()" />
-
-                               </h:panelGrid>
-                            </h:form>
-                        </p:dialog>
+                        </p:commandButton>
 
                     </p:column>
                 </p:dataTable>
 
                 <p:poll interval="30" update="auctionBoard" />
+
+
+                <p:dialog header="Auction Offer Details"
+                                  widgetVar="auctionOfferDetails"
+                                  resizable="false"
+                                  closeOnEscape="true">
+     
+                                <h:panelGrid columns="2" id="auctionOffersTableGrid">
+
+                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.senderid}" />
+
+                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.subject}" />
+
+                                    <h:outputText value="Resources offered: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesOfferedName}"/>
+
+                                    <h:outputText value="Amount offered: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.amountOffered}" />
+
+                                    <h:outputText value="Resources wanted: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesWantedName}"/>
+
+                                    <h:outputText value="Description: "/>
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.tradeDescription}" />
+
+                                    <h:outputText value="Expire date: " />
+                                    <h:outputText value="#{auctionMessageReader.selectedAuction.expireDate}" />
+
+                                    <p:commandButton value="Close" onclick="auctionOfferDetails.hide()" />
+
+                               </h:panelGrid>
+
+                        </p:dialog>
+
             </h:form>
 
 

@@ -12,6 +12,7 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
 
     private boolean checked;
     private List<Auction> auctionOffers = new ArrayList<Auction>();
+    private Auction selectedAuction;
 
     /** Creates a new instance of AuctionMessageReader */
     public AuctionMessageReader() {
@@ -55,5 +56,14 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
             }
         }
 
+    }
+
+    public void setSelectedAuction(Auction auction){
+        System.out.println("Selected auction is: " + auction.getSubject());
+        this.selectedAuction = auction;
+    }
+
+    public Auction getSelectedAuction() {
+        return selectedAuction;
     }
 }

@@ -95,7 +95,7 @@
                         
                         <h:panelGrid id="bidOfferGrid" >
 
-                            <p:commandButton value="Bid" update="bidOfferGrid">
+                            <p:commandButton value="Bid" update="bidOfferGrid,:auctionTableForm:auctionBoard" >
                                 <f:setPropertyActionListener
                                     value="#{auctionMessageReader.selectedAuction}"
                                     target="#{auctionMessageReader.sendOffer}" />

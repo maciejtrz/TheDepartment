@@ -92,7 +92,6 @@ public class BuyLecturers  {
          * 1) get the price of selected
          * 2) remove from avauilable lec
          * 3) add lec to player lec
-         * 3a) update capacity
          * 4) subtract the price from players money
          * 5) DONE !
          */
@@ -104,7 +103,6 @@ public class BuyLecturers  {
         int price = getSelected_lecturer().getPrice();
         avail.deleteLecturer(getSelected_lecturer().getName());
         this.owned.addLecturer(getSelected_lecturer().getName(), username);
-        //capacity thing to be done
         resources.setMoney(resources.getMoney()-price);
 
 

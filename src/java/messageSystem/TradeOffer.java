@@ -222,6 +222,18 @@ public class TradeOffer extends Messagesystem implements Serializable, Comparabl
             setTradeDescription("");
             setReceiverid("");
     }
+
+    public void setTradeOffer(TradeOffer tradeOffer) {
+        setAmountOffered(tradeOffer.getAmountOffered());
+        setAmountWanted(tradeOffer.getAmountWanted());
+        setExpireDate(tradeOffer.getExpireDate());
+        setResourcesOfferedType(tradeOffer.getResourcesOfferedType());
+        setResourcesWantedType(tradeOffer.getResourcesWantedType());
+        setTradeDescription(tradeOffer.getTradeDescription());
+        setSubject(tradeOffer.getSubject());
+        setReceiverid(tradeOffer.getReceiverid());
+        setSenderid(tradeOffer.getSenderid());
+    }
     
 
 }

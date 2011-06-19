@@ -24,6 +24,8 @@ public class NoticeMonitor {
         Set<TradeOffer> noticesToRemove = new HashSet<TradeOffer>();
         Date currentDate = new Date();
 
+        System.out.println("Number of notices to read from db: " + noticesDb.size());
+
         Iterator<Messagesystem> iterator = noticesDb.iterator();
 
        while(iterator.hasNext()) {
@@ -33,7 +35,7 @@ public class NoticeMonitor {
            tradeOffer.parse(noticeOffer.getMsg());
            tradeOffer.setMsgnumber(noticeOffer.getMsgnumber());
 
-           if(tradeOffer.getExpireDate().compareTo(currentDate) <= 0) {
+           if(tradeOffer.getExpireDate().before(currentDate)) {
                 noticesToRemove.add(tradeOffer);
            } else {
            tradeOffer.setSenderid(noticeOffer.getSenderid());
@@ -48,7 +50,7 @@ public class NoticeMonitor {
 
        Iterator<TradeOffer> noticeIterator = noticesToRemove.iterator();
 
-        while (iterator.hasNext()) {
+        while (noticeIterator.hasNext()) {
             TradeOffer noticeOffer = noticeIterator.next();
             messageSystemHelper.deleteMsg(noticeOffer.getMsgnumber());
         }
@@ -56,15 +58,23 @@ public class NoticeMonitor {
     }
 
     public synchronized void addNoticeOffer(TradeOffer noticeOffer) {
-        currentNotices.add(noticeOffer);
-        listNotices.add(noticeOffer);
+
+        TradeOffer tradeOffer = new TradeOffer();
+        tradeOffer.setTradeOffer(noticeOffer);
+
+        currentNotices.add(tradeOffer);
+        listNotices.add(tradeOffer);
+
+        System.out.println("Adding notice offer...");
+        System.out.println("Amount offered: " + noticeOffer.getAmountOffered());
+        System.out.println("Amount wanted: " + noticeOffer.getAmountWanted());
 
         int msgNumber = messageSystemHelper.createMessage(noticeOffer.getSenderid(),
                 MessageSingleton.NOTICE_BOARD,
                 noticeOffer.getSubject(),noticeOffer.encode(), 
                 MessageSingleton.NOTICE_BOARD_OFFER);
 
-        noticeOffer.setMsgnumber(msgNumber);
+        tradeOffer.setMsgnumber(msgNumber);
     }
 
     public synchronized void update() {
@@ -73,7 +83,7 @@ public class NoticeMonitor {
         while(!currentNotices.isEmpty()) {
             
             TradeOffer noticeOffer = currentNotices.peek();
-            if(noticeOffer.getExpireDate().compareTo(currentDate) <= 0) {
+            if(noticeOffer.getExpireDate().before(currentDate)) {
                 currentNotices.poll();
                 listNotices.remove(noticeOffer);
 
@@ -85,6 +95,7 @@ public class NoticeMonitor {
     }
 
     public synchronized List<TradeOffer> getNoticeOffers() {
+        
         return listNotices;
     }
 

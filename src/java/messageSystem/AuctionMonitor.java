@@ -58,7 +58,7 @@ public class AuctionMonitor {
         }
 
         Iterator<Auction> auctionIterator = auctionsToRemove.iterator();
-        while (iterator.hasNext()) {
+        while (auctionIterator.hasNext()) {
             Auction auction = auctionIterator.next();
 
             messageSystemHelper.deleteMsg(auction.getMsgnumber());
@@ -69,6 +69,9 @@ public class AuctionMonitor {
     }
 
     public synchronized void addAuction(Auction auction) {
+
+        Auction auctionOffer = new Auction();
+
         currentAuctions.add(auction);
         listAuction.add(auction);
 
@@ -89,6 +92,7 @@ public class AuctionMonitor {
                 listAuction.remove(auction);
 
                 messageSystemHelper.deleteMsg(auction.getMsgnumber());
+                auctionHistoryHelper.deleteOffers(auction.getMsgnumber());
 
                 auction.finishAuction();
             } else {

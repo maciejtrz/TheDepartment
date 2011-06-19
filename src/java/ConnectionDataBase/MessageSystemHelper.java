@@ -50,12 +50,18 @@ public class MessageSystemHelper extends AbstractHelper {
     public void deleteMsg(int num) {
         Session session = createNewSessionAndTransaction();
         Query q = session.createQuery("from Messagesystem where msgnumber='" + num + "'");
+
         Messagesystem msg = (Messagesystem) q.uniqueResult();
 
-        if (msg != null) {
-            session.delete(msg);
-            commitTransaction(session);
-        }
+        session.delete(msg);
+        commitTransaction(session);
+    }
+
+    public void deleteMsg(Messagesystem message) {
+        Session session = createNewSessionAndTransaction();
+
+        session.delete(message);
+        commitTransaction(session);
     }
 
     public void readMsg(int num) {

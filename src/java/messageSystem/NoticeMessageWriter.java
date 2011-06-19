@@ -23,6 +23,9 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
     }
 
     public String sendNoticeOffer() {
+
+        System.out.println("Sending a notice offfer...");
+
         getTradeOffer().setSenderid(BasicUtils.getUserName());
 
         String result = null;
@@ -35,12 +38,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendNoticeOfferTrade").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
-                    "You sent a notice offer " + getAmountOffered() + ""
-                    + " of " + getResourceName(getResourcesOfferedType()) +
-                    getAmountWanted() + " of " +
-                    getResourceName(getResourcesWantedType()) +
-                    "\n" + "Trade Subject: " + getSubject() + "\n" +
-                    "Tade Description: \n" + getTradeDescription()));
+                    "Noticeboard offer sent successfully"));
 
              getTradeOffer().cleanTradeOffer();
 

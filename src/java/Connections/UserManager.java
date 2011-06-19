@@ -289,6 +289,8 @@ public class UserManager {
     synchronized public static boolean makeTrade(TradeOffer tradeOffer) {
         
 
+        System.out.println("Trade between: " + tradeOffer.getSenderid() + " and " + tradeOffer.getReceiverid());
+
         Playerresources senResources = getResources(tradeOffer.getSenderid());
         Playerresources recResources = getResources(tradeOffer.getReceiverid());
 
@@ -301,11 +303,15 @@ public class UserManager {
                 resourceWanted.canRemove(recResources, tradeOffer.getAmountWanted())) {
             result = true;
 
+            System.out.println("Trade executed");
+
             resourceOffered.remove(senResources, tradeOffer.getAmountOffered());
             resourceOffered.add(recResources, tradeOffer.getAmountOffered());
 
             resourceWanted.remove(recResources, tradeOffer.getAmountWanted());
             resourceWanted.add(senResources, tradeOffer.getAmountWanted());
+        } else {
+            System.out.println("Trade not executed");
         }
 
         saveResources(senResources);

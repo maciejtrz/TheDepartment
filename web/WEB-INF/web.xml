@@ -56,24 +56,24 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>QueryBuilding</servlet-name>
-        <servlet-class>QueryBuilding</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BuildingQuery</servlet-name>
         <servlet-class>buildings.BuildingQuery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PollQuery</servlet-name>
+        <servlet-class>Connections.PollQuery</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>QueryBuilding</servlet-name>
-        <url-pattern>/QueryBuilding</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>BuildingQuery</servlet-name>
         <url-pattern>/Logged/BuildingQuery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PollQuery</servlet-name>
+        <url-pattern>/Logged/PollQuery</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>10</session-timeout>

@@ -18,17 +18,23 @@
 
                     <p:tab id="researchSubject" title="Category" >
                         <p:panel>
-                            <h:selectOneMenu value="#{addResearch.subject}" >
+                            <h:selectOneMenu value="#{addResearch.subject}" id="subjectList" >
                                 <f:selectItems value="#{addResearch.subjects}"/>
                             </h:selectOneMenu>
+                            <p:message for="subjectList" />
                         </p:panel>
                     </p:tab>
 
                     <p:tab id="researchLecturers" title="Lecturers" >
                         <p:panel>
-                            <h:selectManyListbox value="#{addResearch.lecturers}">
+                            <h:selectManyListbox 
+                                value="#{addResearch.lecturers}"
+                                id="lecturersList">
                                 <f:selectItems value="#{addResearch.lecturerList}"/>
                             </h:selectManyListbox>
+
+                            <p:message for="lecturersList" />
+
                         </p:panel>
                     </p:tab>
 

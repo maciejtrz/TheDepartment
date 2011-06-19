@@ -8,11 +8,10 @@
 
 
 
-
+        <script type="text/javascript" src="map.js"></script>
         <script language="JavaScript">
             function reload(){
             window.location.reload(true);
-            alert("KURWA");
             }
         </script>
 
@@ -387,39 +386,36 @@
         </p:dialog>
 
 
-        <p:dialog header="Building Site" widgetVar="nop" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
+        <h:form>
+            <p:dialog header="Building Site" widgetVar="nop" height="500" width="900" onHide="reload()"
+                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
+                <div align="center">
+                    <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
+                    <p:carousel widgetVar="ble" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
+                                style="position: relative; top:50px; " rows="1" effect="easeInStrong"
+                                >
+                        <p:column>
+                            <h:panelGrid columns="2" style="width:100% ; height:100%">
+
+                                <p:graphicImage value="/Logged/img/#{building.picture}.png"/>
+
+                                <h:panelGrid columns="1" cellpadding="5">
+                                    <h:outputText value="#{building.info}" />
+                                    <h:outputText value="Price: #{building.cost}" />
+                                    <p:commandButton id="buyBuildingsButton" value="Build" action="#{buildingbean.buy}" ondblclick="nop.hide()"
+                                                     actionListener="#{buildingbean.loadCurrentBuilding}" >
+                                        <f:attribute name="input_building" value="#{building}"/>
+                                    </p:commandButton>
+                                </h:panelGrid>
 
 
+                            </h:panelGrid>
+                        </p:column>
 
-            <div align="center">
-            <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
-                <h:form>
-                <p:carousel widgetVar="nop" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
-                        style="position: relative; top:50px; " rows="1" effect="easeInStrong"
-                        >
-                <p:column>
-                <h:panelGrid columns="2" style="width:100% ; height:100%">
-
-                    <p:graphicImage value="/Logged/img/#{building.picture}.png"/>
-
-                    <h:panelGrid columns="1" cellpadding="5">
-                        <h:outputText value="#{building.info}" />
-                        <h:outputText value="Price: #{building.cost}" />
-                        <p:commandButton id="buyBuildingsButton" value="Build" ajax="false" action="#{buildingbean.buy}" >
-                            <f:setPropertyActionListener target="#{buildingbean.selectedBuilding}"
-                                                         value="#{building}" />
-                        </p:commandButton>
-                    </h:panelGrid>
-
-
-                </h:panelGrid>
-                </p:column>
-               
-            </p:carousel>
-            </h:form>
-            </div>
-        </p:dialog>
+                    </p:carousel>
+                </div>
+            </p:dialog>
+        </h:form>
 
     </ui:component>
 </html>

@@ -9,110 +9,104 @@
 
 
 
-        <p:dialog header="Auction table" widgetVar="auctiontable" modal="true" height="500" width="700"
+        <p:dialog header="Auctions" widgetVar="auctiontable" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
 
             <h:form id="auctionTableForm">
 
                 <p:dataTable id="auctionBoard" var="auction" value="#{auctionMessageReader.auctionOffers}" >
-                    <p:column headerText="Auction sender">
+                    <p:column headerText="Author">
                         <h:outputText value="#{auction.senderid}" />
                     </p:column>
 
-                    <p:column headerText="Auction subject: ">
+                    <p:column headerText="Title">
                         <h:outputText value="#{auction.subject}" />
                     </p:column>
 
-                    <p:column headerText="Resource offered: ">
+                    <p:column headerText="Offered">
                         <h:outputText value="#{auction.resourcesOfferedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount offered: " >
+                    <p:column headerText="Quantity" >
                         <h:outputText value="#{auction.amountOffered}"/>
                     </p:column>
 
-                    <p:column headerText="Resources wanted: ">
+                    <p:column headerText="Wanted">
                         <h:outputText value="#{auction.resourcesWantedName}"/>
                     </p:column>
 
-                    <p:column headerText="Highest offer: ">
+                    <p:column headerText="Highest offer">
                         <h:outputText value="#{auction.highestOfferedPrice}"/>
                     </p:column>
 
-                    <p:column headerText="Expire date: ">
+                    <p:column headerText="Expires">
                         <h:outputText value="#{auction.expireDateText}" />
                     </p:column>
 
-                    <p:column headerText="Action: ">
-
-                        <h:outputText value="Your offer: "/>
-                        <h:inputText value="#{auction.offer}" />
-
-                        <br/>
-
-                        <h:panelGrid id="bidOfferGrid" >
-                        <p:commandButton value="Bid" update="bidOfferGrid">
-                            <f:setPropertyActionListener
-                                value="#{auction}"
-                                target="#{auctionMessageReader.sendOffer}" />
-                        </p:commandButton>
-                        <p:message for="bidOfferGrid" />
-                        </h:panelGrid>
-
-                        <p:commandButton value="Show Details"
+                    <p:column headerText="Details">
+                        <div align="center">
+                        <p:commandButton image="ui-icon ui-icon-newwin"
                                          oncomplete="auctionOfferDetails.show()"
                                          update="auctionTableForm:auctionOffersTableGrid">
 
                             <f:setPropertyActionListener value="#{auction}"
                                                          target="#{auctionMessageReader.selectedAuction}" />
-
                         </p:commandButton>
-
+                        </div>
                     </p:column>
                 </p:dataTable>
 
                 <p:poll interval="30" update="auctionBoard" />
 
 
-                <p:dialog header="Auction Offer Details"
-                                  widgetVar="auctionOfferDetails"
-                                  resizable="false"
-                                  closeOnEscape="true">
-     
-                                <h:panelGrid columns="2" id="auctionOffersTableGrid">
+                <p:dialog header="Auction Details"
+                          widgetVar="auctionOfferDetails"
+                          resizable="false"
+                          closeOnEscape="true">
 
-                                    <h:outputText value="Sender: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.senderid}" />
+                    <h:panelGrid columns="2" id="auctionOffersTableGrid">
 
-                                    <h:outputText value="Subject: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.subject}" />
+                        <h:outputText value="Author" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.senderid}" />
 
-                                    <h:outputText value="Resources offered: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesOfferedName}"/>
+                        <h:outputText value="Title" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.subject}" />
 
-                                    <h:outputText value="Amount offered: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.amountOffered}" />
+                        <h:outputText value="Offered" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesOfferedName}"/>
 
-                                    <h:outputText value="Resources wanted: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesWantedName}"/>
+                        <h:outputText value="Quantity" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.amountOffered}" />
 
-                                    <h:outputText value="Description: "/>
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.tradeDescription}" />
+                        <h:outputText value="Wanted" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.resourcesWantedName}"/>
 
-                                    <h:outputText value="Expire date: " />
-                                    <h:outputText value="#{auctionMessageReader.selectedAuction.expireDate}" />
+                        <h:outputText value="Description"/>
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.tradeDescription}" />
 
-                                    <p:commandButton value="Close" onclick="auctionOfferDetails.hide()" />
+                        <h:outputText value="Expires" />
+                        <h:outputText value="#{auctionMessageReader.selectedAuction.expireDate}" />
 
-                               </h:panelGrid>
+                        <h:panelGroup>
+                        <h:outputText value="Your offer"/>
+                        <p:inputText value="#{auction.offer}" style="width: 50px" />
+                        </h:panelGroup>
+                        <h:panelGrid id="bidOfferGrid" >
+                            <p:commandButton value="Bid" update="bidOfferGrid">
+                                <f:setPropertyActionListener
+                                    value="#{auction}"
+                                    target="#{auctionMessageReader.sendOffer}" />
+                            </p:commandButton>
+                            <p:message for="bidOfferGrid" />
+                        </h:panelGrid>
 
-                        </p:dialog>
+                    </h:panelGrid>
+
+                </p:dialog>
 
             </h:form>
 
-
-            <a onclick="auctiontable.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
         <p:dialog header="Add auction" widgetVar="addauction" modal="true" height="500" width="700"
@@ -121,53 +115,54 @@
 
             <h:form>
 
-                <h:panelGrid id="newAuctionOffer">
-                    <h:outputText value="Type of auction:" />
+                <h:panelGrid id="newAuctionOffer" columns="2">
+
+                    <h:panelGroup>
+                    <h:outputText value="Title:"/> <br/>
+                    <p:inputText value="#{auctionMessageWriter.subject}" style="width:300px"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                    <h:outputText value="Type:" /> <br/>
                     <h:selectOneMenu value="#{auctionMessageWriter.selectedAuctionType}">
                         <f:selectItems value="#{auctionMessageWriter.availableAuctionTypes}"/>
                     </h:selectOneMenu>
+                    </h:panelGroup>
 
-                    <br/>
 
-                    <h:outputText value="Auction subject: "/>
-                    <h:inputText value="#{auctionMessageWriter.subject}" />
-
-                    <br/>
-
-                    <h:outputText value="Offered resources:" />
+                    
+                    <h:panelGroup>
+                    <h:outputText value="Offered resource:" /> <br/>
                     <h:selectOneMenu value="#{auctionMessageWriter.resourcesOfferedType}">
                         <f:selectItems value="#{auctionMessageWriter.availableResources}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu> <br/>
 
-
-                    <br/>
-
-                    <h:outputText value="Offered amount: "/>
-                    <p:inputText id="offeredAuctionAmount" value="#{auctionMessageWriter.amountOffered}" />
-                    <p:slider for="offeredAuctionAmount"/>
+                    <h:outputText value="Offered amount: "/> <br/>
+                    <p:inputText id="offeredAuctionAmount" value="#{auctionMessageWriter.amountOffered}" /> <br/> <br/>
+                    <p:slider for="offeredAuctionAmount" style="width: 300px"/>
                     <p:message for="offeredAuctionAmount" />
-                    <br/>
+                    </h:panelGroup>
 
-                    <h:outputText value="Wanted resources:" />
+                    <h:panelGroup>
+                    <h:outputText value="Wanted resource:" /> <br/>
                     <h:selectOneMenu value="#{auctionMessageWriter.resourcesWantedType}">
                         <f:selectItems value="#{auctionMessageWriter.availableResources}"/>
                     </h:selectOneMenu>
 
-                    <br/>
+                    </h:panelGroup>
 
-                    <h:outputText value="Auction descriptions: "/>
+                    <h:outputText value="Description"/>
                     <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                      value="#{auctionMessageWriter.tradeDescription}"/>
 
-                    <br/>
 
-                    <h:outputText value="Expire date: "/>
+                    <h:outputText value="Expiry date:"/>
                     <p:calendar value="#{auctionMessageWriter.expireDate}"
                                 pattern="MM/dd/yyyy HH:mm"
                                 id="expireAuctionOfferDate"/>
                     <p:message for="expireAuctionOfferDate"/>
 
-                    <p:commandButton value="Submit Auction"
+                    <p:commandButton value="Submit"
                                      id="sendAuctionOfferTrade"
                                      action="#{auctionMessageWriter.sendAuction}"
                                      update="newAuctionOffer" />
@@ -179,10 +174,9 @@
 
             </h:form>
 
-            <a onclick="addauction.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
 
 
-</ui:component>
+    </ui:component>
 </html>

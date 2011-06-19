@@ -68,12 +68,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendAuctionOfferTrade").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
-                    "You sent an auction " + getAmountOffered() + ""
-                    + " of " + getResourceName(getResourcesOfferedType()) +
-                    " and you want to get " +
-                    getResourceName(getResourcesWantedType()) +
-                    "\n" + "Trade Subject: " + getSubject() + "\n" +
-                    "Tade Description: \n" + getTradeDescription()));
+                    "Auction sent sucessfully"));
 
              getTradeOffer().cleanTradeOffer();
 
@@ -95,7 +90,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "expireAuctionOfferDate").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expire date error",
-                    "Expire date of trade offer cannot be earlier than the current time!"));
+                    "Expiry date earlier than the current time"));
 
             error = false;
         }
@@ -105,7 +100,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "offeredAuctionAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
-                    "Offered amount must be greater than 0"));
+                    "Amount has to be greater than 0"));
 
             error = false;
         }
@@ -115,7 +110,7 @@ public class AuctionMessageWriter extends TradeWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendAuctionOfferTrade").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
-                    "Reasources wanted and offered cannot be of the same type"));
+                    "Wanted and offered have the same type"));
 
             error = false;
         }

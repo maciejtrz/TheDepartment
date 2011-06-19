@@ -75,18 +75,19 @@
                                   resizable="false"
                                   closeOnEscape="true" height="400" width="500">
 
-                                <h:panelGrid id="showMessageDetails"  columns="2">
+                    <h:panelGrid id="showMessageDetails">
+                                <h:panelGrid   columns="2">
 
                                     <h:outputText value="Sender: " />
                                     <h:outputText value="#{plainMessageReader.selectedShowMessage.senderid}" />
 
                                     <h:outputText value="Subject: " />
                                     <h:outputText value="#{plainMessageReader.selectedShowMessage.subject}" />
-
-                                    <h:outputText value="Message: "/>
-                                    <h:outputText value="#{plainMessageReader.selectedShowMessage.msg}" />
-
                                 </h:panelGrid>
+                                    
+                                    <h:inputTextarea value="#{plainMessageReader.selectedShowMessage.msg}" style="width:450px; height: 250px" disabled="true"/>
+                    </h:panelGrid>
+                                
                         </p:dialog>
                         
             </h:form>

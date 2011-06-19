@@ -29,7 +29,7 @@
 
 
                     <h:panelGroup>
-                        <h:outputText value="Offered resources:" /> <br/>
+                        <h:outputText value="Offered resource:" /> <br/>
                         <h:selectOneMenu  id="resourcesOffered"
                                           value="#{tradeMessageWriter.resourcesOfferedType}"
                                           onchange="hide();">
@@ -45,7 +45,7 @@
 
 
                     <h:panelGroup>
-                        <h:outputText value="Wanted resources:" /> <br/>
+                        <h:outputText value="Wanted resource:" /> <br/>
                         <h:selectOneMenu value="#{tradeMessageWriter.resourcesWantedType}">
                             <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
                         </h:selectOneMenu><br/>

@@ -13,7 +13,7 @@ import ConnectionDataBase.Playerresources;
  */
 public class Money  implements Resource {
 
-    private static final String resourceName = "Money";
+    private static final String resourceName = "Cash";
 
     @Override
     public boolean canRemove(Playerresources resources, int amount) {

@@ -51,7 +51,8 @@ public class StatsDeamon extends Thread {
 
             try {
             // Initially sleep for one unit of time.
-            sleep(SLEEP_TIME * 1000 * 60);
+                System.out.println("Stats deamon operating");
+            sleep(SLEEP_TIME * 1000 * 30);
 
             // Iterating through a player list, updating all statistics.
             List<Players> allPlayers = playerHelper.getPlayers();

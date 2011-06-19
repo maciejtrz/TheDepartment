@@ -10,6 +10,7 @@ package utilities;
 
 import ConnectionDataBase.*;
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import UserBeans.Auth;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -205,13 +206,6 @@ public class LecturersManager {
     /* returns true if successful. */
     public boolean purchaseLecturer(String lecName) {
 
-        /* Getting all required hibernate helpers. */
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
-
-        Playerresources resources
-                = auth.getResources();
         LecturersHelper lecturersHelper
                 = new LecturersHelper();
         LecturersAvailableHelper lecturersAvHelper
@@ -230,7 +224,7 @@ public class LecturersManager {
         }
 
         // Obtaining players money.
-        int money = resources.getMoney();
+        int money = UserManager.getMoney(userName);
         // Obtaining lecturers price.
         int price = 0;
 
@@ -248,7 +242,7 @@ public class LecturersManager {
         System.out.println("Money " + money + " price " + price);
 
         // Updating the database.
-        resources.setMoney(money-price);
+        UserManager.addMoney(userName, price);
         lecturersAvHelper.deleteLecturer(lecName);
         lecturersOwnedHelper.addLecturer(lecName, userName);
 

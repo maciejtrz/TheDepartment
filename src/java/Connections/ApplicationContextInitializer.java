@@ -23,15 +23,13 @@ public class ApplicationContextInitializer implements ServletContextListener {
 
             DeamonManager mgr = DeamonManager.getManager();
 
-            mgr.createRankingDeamon();
+            //mgr.createRankingDeamon();
 
-            mgr.createLecturersPopulator();
+            //mgr.createLecturersPopulator();
 
             //mgr.createEventDeamon();
 
-            mgr.createEventDeamon();
-
-            mgr.createStatsDeamon();
+            //mgr.createStatsDeamon();
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

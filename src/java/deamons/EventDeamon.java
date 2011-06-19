@@ -1,16 +1,17 @@
 package deamons;
 
 import ConnectionDataBase.DepartmentinfoHelper;
+import ConnectionDataBase.MessageSystemHelper;
 import ConnectionDataBase.PlayerHelper;
 import ConnectionDataBase.Players;
 import events.Event;
 import events.LotteryManager;
 import java.util.Iterator;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 public class EventDeamon extends Thread {
+
+    private static final int SLEEP_TIME = 5;
 
     public EventDeamon() {
         setDaemon(true);
@@ -22,13 +23,16 @@ public class EventDeamon extends Thread {
         PlayerHelper playersHelper = new PlayerHelper();
         DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
        
+        System.out.println("Event deamon started operating!");
+
+
         while (true) {
 
             try {
            /* Sleep for four minutes. */
-           System.out.println(this.getName() +
+           System.out.println("Event daemon " + this.getName() +
                    " is going to sleep for two minutes.");
-           sleep(10000 * 60 * 2);
+           sleep(1000 * 60 * SLEEP_TIME);
 
            List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {
@@ -56,10 +60,11 @@ public class EventDeamon extends Thread {
                             idname);
                     LotteryManager mgr = new LotteryManager(idname);
                     mgr.readEventsFromDB();
-                    Event e = mgr.getEvent(idname);
+                    Event e = mgr.getWinner();
+                    e.invoke(idname);
 
-                    FacesContext context = FacesContext.getCurrentInstance();
-                    context.addMessage(null, new FacesMessage("Hello!"));
+                    MessageSystemHelper helper = new MessageSystemHelper();
+                    helper.createMessage("Main advisor",idname , e.getName(), e.getInfo(), 0);
 
                     System.out.println
                       ("For " + idname +" THE WINNER IS: " + e.getName());

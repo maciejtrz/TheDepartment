@@ -24,16 +24,10 @@ public class LecturersPopulator extends Thread {
         LecturersSpecializationsHelper specHelper = new LecturersSpecializationsHelper();
 
         DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
-
-        System.out.println("THREAD "
-                + this.getName() + " is READY TO OPERATE");
+        
 
         while (true) {
             try {
-
-                /* Sleep for five minutes. */
-                System.out.println(this.getName() + " is going to sleep.");
-                sleep(10000 * 60 * 1);
 
 
                 System.out.println(this.getName()
@@ -76,6 +70,10 @@ public class LecturersPopulator extends Thread {
                         manager.repopulateAvailableLec();
                     }
                 }
+
+                /* Sleep for five minutes. */
+                System.out.println(this.getName() + " is going to sleep.");
+                sleep(10000 * 60 * 1);
 
             } catch (InterruptedException ex) {
                 System.out.println(this.getName() + " I BROKE :((((((((((");

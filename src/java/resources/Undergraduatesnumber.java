@@ -13,7 +13,7 @@ import ConnectionDataBase.Playerresources;
  */
 public class Undergraduatesnumber implements Resource {
 
-    private static String resourceName = "Undegraduates";
+    private static String resourceName = "Students";
 
     @Override
     public String getResourcesName() {

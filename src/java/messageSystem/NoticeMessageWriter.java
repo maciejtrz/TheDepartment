@@ -68,7 +68,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "wantedNoticeOfferAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wanted Amount Limi",
-                    "Amount has be greater than 0"));
+                    "Amount has to be greater than 0"));
 
             error = false;
         }
@@ -78,7 +78,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "offeredNoticeOfferAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
-                    "Amount has be greater than 0"));
+                    "Amount has to be greater than 0"));
 
             error = false;
         }

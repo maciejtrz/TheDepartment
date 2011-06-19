@@ -6,63 +6,72 @@
 
     <ui:component>
 
-        <p:dialog header="New Trade" widgetVar="newtrade" modal="true" height="500" width="700"
+        <p:dialog header="New Offer" widgetVar="newtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
 
             <h:form>
 
-                <h:panelGrid columns="1" id="PrivateTradeWriter" >
-                    <h:outputText value="To: " />
+                <h:panelGrid columns="2" id="PrivateTradeWriter" >
 
-                    <h:selectOneMenu value="#{tradeMessageWriter.selectedReceiver}">
-                        <f:selectItems value="#{tradeMessageWriter.receivers}"/>
-                    </h:selectOneMenu>
+                    <h:panelGroup>
+                        <h:outputText value="Title:" /><br/>
+                        <p:inputText value="#{tradeMessageWriter.subject}" style="width:300px"/>
+                    </h:panelGroup>
 
-                    <p:message for="PrivateTradeWriter" />
+                    <h:panelGroup>
+                        <h:outputText value="To:" /><br/>
+                        <h:selectOneMenu value="#{tradeMessageWriter.selectedReceiver}">
+                            <f:selectItems value="#{tradeMessageWriter.receivers}"/>
+                        </h:selectOneMenu>
+                        <p:message for="PrivateTradeWriter" />
+                    </h:panelGroup>
 
-                    <br/>
-                    <h:outputText value="Title of the trade: " />
-                    <h:inputText value="#{tradeMessageWriter.subject}" />
-                    <br/>
-                    <h:outputText value="Offered resources:" />
 
-                    <h:selectOneMenu  id="resourcesOffered"
-                                     value="#{tradeMessageWriter.resourcesOfferedType}"
-                                     onchange="hide();">
-                        <f:selectItems value="#{tradeMessageWriter.availableResources}"  />
-                    </h:selectOneMenu>
+                    <h:panelGroup>
+                        <h:outputText value="Offered resources:" /> <br/>
 
-                    <h:panelGrid id="OfferedAmountGrid" >
-                    <h:outputText value="Offered amount: "/>
-                    <h:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" />
-                    <p:slider for="offeredAmount"/>
-                    </h:panelGrid>
+                        <h:selectOneMenu  id="resourcesOffered"
+                                          value="#{tradeMessageWriter.resourcesOfferedType}"
+                                          onchange="hide();">
+                            <f:selectItems value="#{tradeMessageWriter.availableResources}"  />
+                        </h:selectOneMenu> <br/>
 
+
+                        <h:outputText value="Offered amount: "/> <br/>
+                        <p:inputText id="offeredAmount" value="#{tradeMessageWriter.amountOffered}" /> <br/><br/>
+                        <p:slider for="offeredAmount" style="width: 300px"/> <br/>
+                    
                     <p:panel id="OfferedLecturerGrid" visible="false" >
-                    <h:outputText value="Offered Lecturer: " />
+                        <h:outputText value="Offered Lecturer: " />
 
-                    <h:selectOneMenu  id="lecturersOffered" value="#{tradeMessageWriter.selectedLecturer}">
-                        <f:selectItems value="#{tradeMessageWriter.lecturesAvailable}"  />
-                    </h:selectOneMenu>
+                        <h:selectOneMenu  id="lecturersOffered" value="#{tradeMessageWriter.selectedLecturer}">
+                            <f:selectItems value="#{tradeMessageWriter.lecturesAvailable}"  />
+                        </h:selectOneMenu>
 
                     </p:panel>
+                    <p:message for="offeredAmount" /><br/>
+                    </h:panelGroup>
 
-                    <p:message for="offeredAmount" />
-                    <br/>
-                    <h:outputText value="Wanted resources:" />
+                    
+                    <h:panelGrid>
+                    <h:outputText value="Wanted resources:" /> 
                     <h:selectOneMenu value="#{tradeMessageWriter.resourcesWantedType}">
                         <f:selectItems value="#{tradeMessageWriter.availableResources}"/>
                     </h:selectOneMenu>
 
-                    <h:outputText value="Wanted amount: "/>
+                    <h:outputText value="Wanted amount:"/> <br/>
                     <p:inputText id="wantedAmount" value="#{tradeMessageWriter.amountWanted}" />
-                    <p:slider for="wantedAmount"/>
+                    <p:slider for="wantedAmount" style="width: 300px"/>
                     <p:message for="wantedAmount" />
-                    <br/>
-                    <h:outputText value="Trade description (arguments?)"/>
+                    </h:panelGrid>
+
+
+                    
+                    <h:outputText value="Description"/>
                     <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                      value="#{tradeMessageWriter.tradeDescription}"/>
+
 
                     <h:outputText value="Expire date: "/>
                     <p:calendar value="#{tradeMessageWriter.expireDate}"
@@ -70,7 +79,7 @@
                                 id="expireTradeOfferDate"/>
                     <p:message for="expireTradeOfferDate" />
 
-                    <p:commandButton value="Make Trade Offer"
+                    <p:commandButton value="Submit"
                                      action="#{tradeMessageWriter.sendTrade}"
                                      update="PrivateTradeWriter,viewyourtrade"
                                      id="sendTradeOffer"/>
@@ -80,45 +89,39 @@
                 </h:panelGrid>
             </h:form>
 
-
-            <a onclick="newtrade.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
-        <p:dialog header="View Trades" widgetVar="viewtrade" modal="true" height="500" width="700"
+        <p:dialog header="Received Offers" widgetVar="viewtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <h:form>
 
                 <p:dataTable id="offeredTrades" var="tradeOffer" value="#{tradeMessageReader.offeredTrades}" >
 
-                    <p:column headerText="Trade sender">
+                    <p:column headerText="Sender">
                         <h:outputText value="#{tradeOffer.senderid}" />
                     </p:column>
 
-                    <p:column headerText="Trade receiver">
-                        <h:outputText value="#{tradeOffer.receiverid}" />
-                    </p:column>
-
-                    <p:column headerText="Resource offered: ">
+                    <p:column headerText="Offered">
                         <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount offered: " >
+                    <p:column headerText="Quantity" >
                         <h:outputText value="#{tradeOffer.amountOffered}"/>
                     </p:column>
 
-                    <p:column headerText="Resources wanted: ">
+                    <p:column headerText="Wanted">
                         <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount wanted: ">
+                    <p:column headerText="Quantity">
                         <h:outputText value="#{tradeOffer.amountWanted}" />
                     </p:column>
 
-                    <p:column headerText="Expire date: ">
+                    <p:column headerText="Expires">
                         <h:outputText value="#{tradeOffer.expireDateText}" />
                     </p:column>
 
-                    <p:column>
+                    <p:column headerText="Action">
                         <p:commandButton value="Accept"
                                          id="acceptButton"
                                          update="offeredTrades">
@@ -128,57 +131,9 @@
                         <p:message for="acceptButton" />
 
 
-                        <p:commandButton value="Show Details"
+                        <p:commandButton value="Details"
                                          onclick="privateTradeDetails.show()" />
-                        <p:dialog header="Private Trade Details"
-                                  widgetVar="privateTradeDetails"
-                                  resizable="false"
-                                  closeOnEscape="true">
-                            <h:form>
-                                <h:panelGrid columns="2">
 
-                                    <h:outputText value="Sender: " />
-                                    <h:outputText value="#{tradeOffer.senderid}" />
-
-                                    <h:outputText value="Subject: " />
-                                    <h:outputText value="#{tradeOffer.subject}" />
-
-                                    <h:outputText value="Resources offered: " />
-                                    <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
-
-                                    <h:outputText value="Amount offered: " />
-                                    <h:outputText value="#{tradeOffer.amountOffered}" />
-
-                                    <h:outputText value="Resources wanted: " />
-                                    <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
-
-                                    <h:outputText value="Amount wanted: " />
-                                    <h:outputText value="#{tradeOffer.amountWanted}" />
-
-                                    <h:outputText value="Description: "/>
-                                    <h:outputText value="#{tradeOffer.tradeDescription}" />
-
-                                    <h:outputText value="Expire date: " />
-                                    <h:outputText value="#{tradeOffer.expireDate}" />
-
-                                    <p:commandButton value="Accept"
-                                         id="acceptButton"
-                                         update="offeredTrades"
-                                         onclick="privateTradeDetails.close()">
-                                    <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
-                                    </p:commandButton>
-
-                                    <p:commandButton value="Decline"
-                                                     onclick="privateTradeDetails.close()">
-                                    <f:setPropertyActionListener
-                                        value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
-                                    </p:commandButton>
-
-                                    <p:commandButton value="Close" onclick="privateTradeDetails.hide()" />
-
-                               </h:panelGrid>
-                            </h:form>
-                        </p:dialog>
 
                         <p:commandButton value="Decline" >
                             <f:setPropertyActionListener
@@ -190,18 +145,64 @@
                 </p:dataTable>
                 <p:poll interval="10" update="offeredTrades" />
             </h:form>
+        </p:dialog>
 
 
+        <p:dialog header="Private Trade Details"
+                  widgetVar="privateTradeDetails"
+                  resizable="false"
+                  closeOnEscape="true">
+            <h:form>
+                <h:panelGrid columns="2">
 
-            <a onclick="viewtrade.hide()"> CLICK THIS TO HIDE </a>
+                    <h:outputText value="Sender: " />
+                    <h:outputText value="#{tradeOffer.senderid}" />
+
+                    <h:outputText value="Subject: " />
+                    <h:outputText value="#{tradeOffer.subject}" />
+
+                    <h:outputText value="Resources offered: " />
+                    <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+
+                    <h:outputText value="Amount offered: " />
+                    <h:outputText value="#{tradeOffer.amountOffered}" />
+
+                    <h:outputText value="Resources wanted: " />
+                    <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+
+                    <h:outputText value="Amount wanted: " />
+                    <h:outputText value="#{tradeOffer.amountWanted}" />
+
+                    <h:outputText value="Description: "/>
+                    <h:outputText value="#{tradeOffer.tradeDescription}" />
+
+                    <h:outputText value="Expire date: " />
+                    <h:outputText value="#{tradeOffer.expireDate}" />
+
+                    <p:commandButton value="Accept"
+                                     id="acceptButton"
+                                     update="offeredTrades"
+                                     onclick="privateTradeDetails.close()">
+                        <f:setPropertyActionListener value="#{tradeOffer}" target="#{tradeMessageReader.acceptTradeOffer}" />
+                    </p:commandButton>
+
+                    <p:commandButton value="Decline"
+                                     onclick="privateTradeDetails.close()">
+                        <f:setPropertyActionListener
+                            value="#{tradeOffer}" target="#{tradeMessageReader.declineTradeOffer}" />
+                    </p:commandButton>
+
+                    <p:commandButton value="Close" onclick="privateTradeDetails.hide()" />
+
+                </h:panelGrid>
+            </h:form>
         </p:dialog>
 
 
 
 
 
-
-        <p:dialog header="View Your Trades" widgetVar="viewyourtrade" modal="true" height="500" width="700"
+        <p:dialog header="Sent Offers" widgetVar="viewyourtrade" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <h:form>
 
@@ -209,73 +210,35 @@
                              var="tradeOffer"
                              value="#{tradeMessageReader.yourOfferedTrades}" >
 
-                    <p:column headerText="Trade receiver">
+                    <p:column headerText="Receiver">
                         <h:outputText value="#{tradeOffer.receiverid}" />
                     </p:column>
 
-                    <p:column headerText="Resource offered: ">
+                    <p:column headerText="Offered">
                         <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount offered: " >
+                    <p:column headerText="Quantity" >
                         <h:outputText value="#{tradeOffer.amountOffered}"/>
                     </p:column>
 
-                    <p:column headerText="Resources wanted: ">
+                    <p:column headerText="Wanted">
                         <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount wanted: ">
+                    <p:column headerText="Quantity">
                         <h:outputText value="#{tradeOffer.amountWanted}" />
                     </p:column>
 
-                    <p:column headerText="Expire date: ">
+                    <p:column headerText="Expiries">
                         <h:outputText value="#{tradeOffer.expireDateText}" />
                     </p:column>
 
-                    <p:column>
-                        <p:commandButton value="Show Details"
+                    <p:column headerText="Action">
+                        <p:commandButton value="Details"
                                          onclick="privateTradeDetails.show()" />
-                        <p:dialog header="Private Trade Details"
-                                  widgetVar="privateTradeDetails"
-                                  resizable="false"
-                                  closeOnEscape="true">
-                            <h:form>
-                                <h:panelGrid columns="2">
 
-                                    <h:outputText value="Receiver: " />
-                                    <h:outputText value="#{tradeOffer.receiverid}" />
-
-                                    <h:outputText value="Subject: " />
-                                    <h:outputText value="#{tradeOffer.subject}" />
-
-                                    <h:outputText value="Resources offered: " />
-                                    <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
-
-                                    <h:outputText value="Amount offered: " />
-                                    <h:outputText value="#{tradeOffer.amountOffered}" />
-
-                                    <h:outputText value="Resources wanted: " />
-                                    <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
-
-                                    <h:outputText value="Amount wanted: " />
-                                    <h:outputText value="#{tradeOffer.amountWanted}" />
-
-                                    <h:outputText value="Description: "/>
-                                    <h:outputText value="#{tradeOffer.tradeDescription}" />
-
-                                    <h:outputText value="Expire date: " />
-                                    <h:outputText value="#{tradeOffer.expireDate}" />
-
-                                    <p:commandButton value="Close" onclick="privateTradeDetails.hide()" />
-
-                               </h:panelGrid>
-                            </h:form>
-                        </p:dialog>
-                    </p:column>
-
-                    <p:column>
-                        <p:commandButton value="Decline"
+                        <p:commandButton value="Cancel"
                                          update="yourOfferedTrades">
                             <f:setPropertyActionListener
                                 value="#{tradeOffer}" target="#{tradeMessageReader.deleteTradeOffer}" />
@@ -286,12 +249,44 @@
                 <p:poll interval="10" update="yourOfferedTrades" />
             </h:form>
 
-
-
-            <a onclick="viewyourtrade.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
+        <p:dialog header="Private Offer Details"
+                  widgetVar="privateTradeDetails"
+                  resizable="false"
+                  closeOnEscape="true">
+            <h:form>
+                <h:panelGrid columns="2">
 
+                    <h:outputText value="Receiver: " />
+                    <h:outputText value="#{tradeOffer.receiverid}" />
+
+                    <h:outputText value="Subject: " />
+                    <h:outputText value="#{tradeOffer.subject}" />
+
+                    <h:outputText value="Resources offered: " />
+                    <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
+
+                    <h:outputText value="Amount offered: " />
+                    <h:outputText value="#{tradeOffer.amountOffered}" />
+
+                    <h:outputText value="Resources wanted: " />
+                    <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
+
+                    <h:outputText value="Amount wanted: " />
+                    <h:outputText value="#{tradeOffer.amountWanted}" />
+
+                    <h:outputText value="Description: "/>
+                    <h:outputText value="#{tradeOffer.tradeDescription}" />
+
+                    <h:outputText value="Expire date: " />
+                    <h:outputText value="#{tradeOffer.expireDate}" />
+
+                    <p:commandButton value="Close" onclick="privateTradeDetails.hide()" />
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
 
     </ui:component>
 </html>

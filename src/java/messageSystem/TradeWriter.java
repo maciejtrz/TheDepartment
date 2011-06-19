@@ -142,7 +142,7 @@ public class TradeWriter extends MessageWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "expireTradeOfferDate").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expire date error",
-                    "Expire date of trade offer cannot be earlier than the current time!"));
+                    "Expiry date earlier than the current time"));
 
             error = true;
         }
@@ -152,27 +152,18 @@ public class TradeWriter extends MessageWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "offeredAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
-                    "Offered amount must be greater than 0"));
+                    "Amount has to be greater than 0"));
 
             error = true;
         }
 
-        if(getAmountOffered() <= 0) {
-            FacesContext.getCurrentInstance().addMessage(
-                    BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "offeredAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
-                    "Offered amount must be greater than 0"));
-
-            error = true;
-        }
 
         if(getAmountWanted() <= 0) {
             FacesContext.getCurrentInstance().addMessage(
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "wantedAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wanted Amount Limi",
-                    "Wanted amount must be greater than 0"));
+                    "Amount has to be greater than 0"));
 
             error = true;
         }
@@ -182,7 +173,7 @@ public class TradeWriter extends MessageWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendTradeOffer").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
-                    "Reasources wanted and offered cannot be of the same type"));
+                    "Wanted and offered have the same type"));
 
             error = true;
         }
@@ -198,13 +189,7 @@ public class TradeWriter extends MessageWriter implements Serializable {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendTradeOffer").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Sent trade",
-                    "You offered " + getAmountOffered() + ""
-                    + " of " + getResourceName(getResourcesOfferedType()) +
-                    " to " + getReceiverid() + " in exchange for " +
-                    getAmountWanted() + " of " +
-                    getResourceName(getResourcesWantedType()) + 
-                    "\n" + "Trade Subject: " + getSubject() + "\n" +
-                    "Tade Description: \n" + getTradeDescription()));
+                    "Private offer sent sucessfully"));
 
             getTradeOffer().cleanTradeOffer();
 

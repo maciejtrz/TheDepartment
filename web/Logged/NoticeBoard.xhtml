@@ -6,42 +6,42 @@
 
     <ui:component>
 
-        <p:dialog header="Notice board" widgetVar="noticeboard" modal="true" height="500" width="700"
+        <p:dialog header="Noticeboard" widgetVar="noticeboard" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <h:form>
 
                 <p:dataTable id="noticeBoard" var="tradeOffer" value="#{noticeMessageReader.offeredNoticeTrades}" >
-                    <p:column headerText="Trade sender">
+                    <p:column headerText="Author">
                         <h:outputText value="#{tradeOffer.senderid}" />
                     </p:column>
 
-                    <p:column headerText="Resource offered: ">
+                    <p:column headerText="Offered">
                         <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount offered: " >
+                    <p:column headerText="Quantity" >
                         <h:outputText value="#{tradeOffer.amountOffered}"/>
                     </p:column>
 
-                    <p:column headerText="Resources wanted: ">
+                    <p:column headerText="Wanted">
                         <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
                     </p:column>
 
-                    <p:column headerText="Amount wanted: ">
+                    <p:column headerText="Quantity">
                         <h:outputText value="#{tradeOffer.amountWanted}" />
                     </p:column>
 
-                    <p:column headerText="Expire date: ">
+                    <p:column headerText="Expires">
                         <h:outputText value="#{tradeOffer.expireDateText}" />
                     </p:column>
 
-                    <p:column headerText="Action: ">
-                        <h:commandButton value="Answer" >
+                    <p:column headerText="Action">
+                        <p:commandButton value="Answer" ajax="false" >
                             <f:setPropertyActionListener value="#{tradeOffer}" target="#{noticeMessageReader.answerTradeOffer}" />
-                        </h:commandButton>
+                        </p:commandButton>
 
-                        <p:commandButton value="Show Details"
+                        <p:commandButton value="Details"
                                          onclick="noticeOfferDetails.show()" />
                         <p:dialog header="Notice Offer Details"
                                   widgetVar="noticeOfferDetails"
@@ -50,28 +50,28 @@
                             <h:form>
                                 <h:panelGrid columns="2">
 
-                                    <h:outputText value="Sender: " />
+                                    <h:outputText value="Author" />
                                     <h:outputText value="#{tradeOffer.senderid}" />
 
-                                    <h:outputText value="Subject: " />
+                                    <h:outputText value="Subject" />
                                     <h:outputText value="#{tradeOffer.subject}" />
 
-                                    <h:outputText value="Resources offered: " />
+                                    <h:outputText value="Offered: " />
                                     <h:outputText value="#{tradeOffer.resourcesOfferedName}"/>
 
-                                    <h:outputText value="Amount offered: " />
+                                    <h:outputText value="Quantitiy" />
                                     <h:outputText value="#{tradeOffer.amountOffered}" />
 
-                                    <h:outputText value="Resources wanted: " />
+                                    <h:outputText value="Wanted" />
                                     <h:outputText value="#{tradeOffer.resourcesWantedName}"/>
 
-                                    <h:outputText value="Amount wanted: " />
+                                    <h:outputText value="Quantitiy" />
                                     <h:outputText value="#{tradeOffer.amountWanted}" />
 
-                                    <h:outputText value="Description: "/>
+                                    <h:outputText value="Description"/>
                                     <h:outputText value="#{tradeOffer.tradeDescription}" />
 
-                                    <h:outputText value="Expire date: " />
+                                    <h:outputText value="Expires" />
                                     <h:outputText value="#{tradeOffer.expireDate}" />
 
                                     <h:commandButton value="Answer"
@@ -94,50 +94,58 @@
                 <p:poll interval="30" update="noticeBoard" />
             </h:form>
 
-            <a onclick="noticeboard.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
-        <p:dialog header="Add notice-board offer" widgetVar="addnoticeoffer" modal="true" height="500" width="700"
+        <p:dialog header="Add Noticeboard Offer" widgetVar="addnoticeoffer" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <h:form >
 
-                <h:panelGrid id="newNoticeOfferGrid">
-                    <h:outputText value="Title of the trade: "/>
-                    <h:inputText value="#{noticeMessageWriter.subject}" />
+                <h:panelGrid id="newNoticeOfferGrid" columns="2">
+                    <h:panelGroup>
+                    <h:outputText value="Title:"/> <br/>
+                    <h:inputText value="#{noticeMessageWriter.subject}" style="width:300px"/>
+                    </h:panelGroup>
                     <br/>
-                    <h:outputText value="Offered resources:" />
+
+                    <h:panelGroup>
+                    <h:outputText value="Offered resources:" /> <br/>
                     <h:selectOneMenu value="#{noticeMessageWriter.resourcesOfferedType}">
                         <f:selectItems value="#{noticeMessageWriter.availableResources}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu> <br/>
 
-                    <h:outputText value="Offered amount: "/>
-                    <p:inputText id="offeredNoticeOfferAmount" value="#{noticeMessageWriter.amountOffered}" />
-                    <p:slider for="offeredNoticeOfferAmount"/>
+                    <h:outputText value="Offered amount:"/> 
+                    <p:inputText id="offeredNoticeOfferAmount" value="#{noticeMessageWriter.amountOffered}" /> <br/><br/>
+                    <p:slider for="offeredNoticeOfferAmount" style="width: 300px"/>
                     <p:message for="offeredNoticeOfferAmount" />
                     <br/>
-                    <h:outputText value="Wanted resources:" />
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                    <h:outputText value="Wanted resources:" /> <br/>
                     <h:selectOneMenu value="#{noticeMessageWriter.resourcesWantedType}">
                         <f:selectItems value="#{noticeMessageWriter.availableResources}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu> <br/>
 
-                    <h:outputText value="Wanted amount: "/>
-                    <p:inputText id="wantedNoticeOfferAmount" value="#{noticeMessageWriter.amountWanted}" />
-                    <p:slider for="wantedNoticeOfferAmount"/>
+                    <h:outputText value="Wanted amount:"/> 
+                    <p:inputText id="wantedNoticeOfferAmount" value="#{noticeMessageWriter.amountWanted}" /> <br/><br/>
+                    <p:slider for="wantedNoticeOfferAmount" style="width: 300px"/>
                     <p:message for="wantedNoticeOfferAmount"/>
                     <br/>
-                    <h:outputText value="Trade description (arguments?)"/>
+                    </h:panelGroup>
+                    
+                    <h:outputText value="Description"/>
                     <p:inputTextarea style="width:300px;height:100px;" effectDuration="400"
                                      value="#{noticeMessageWriter.tradeDescription}"/>
 
-                    <h:outputText value="Expire date: "/>
+                    <h:outputText value="Expiry date"/>
                     <p:calendar value="#{noticeMessageWriter.expireDate}"
                                 pattern="MM/dd/yyyy HH:mm"
                                 id="expireNoticeOfferDate"/>
                     <p:message for="expireNoticeOfferDate"/>
 
 
-                    <p:commandButton value="Make Trade Offer"
+                    <p:commandButton value="Submit"
                                      id="sendNoticeOfferTrade"
                                      action="#{noticeMessageWriter.sendNoticeOffer}"
                                      update="newNoticeOfferGrid,expireNoticeOfferDate"
@@ -146,7 +154,6 @@
                 </h:panelGrid>
 
             </h:form>
-            <a onclick="addnoticeoffer.hide()"> CLICK THIS TO HIDE </a>
         </p:dialog>
 
 

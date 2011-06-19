@@ -59,8 +59,8 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
             FacesContext.getCurrentInstance().addMessage(
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "expireNoticeOfferDate").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expire date error",
-                    "Expire date of trade offer cannot be earlier than the current time!"));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expiry date error",
+                    "Expiry date earlier than the current time"));
 
             error = false;
         }
@@ -70,7 +70,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "wantedNoticeOfferAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wanted Amount Limi",
-                    "Wanted amount must be greater than 0"));
+                    "Amount has be greater than 0"));
 
             error = false;
         }
@@ -80,7 +80,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "offeredNoticeOfferAmount").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Offered Amount Limi",
-                    "Offered amount must be greater than 0"));
+                    "Amount has be greater than 0"));
 
             error = false;
         }
@@ -90,7 +90,7 @@ public class NoticeMessageWriter extends TradeWriter implements Serializable  {
                     BasicUtils.findComponent(facesContext.getViewRoot(),
                     "sendNoticeOfferTrade").getClientId(facesContext),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resources type",
-                    "Reasources wanted and offered cannot be of the same type"));
+                    "Wanted and offered have the same type"));
 
             error = false;
         }

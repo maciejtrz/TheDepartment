@@ -12,9 +12,11 @@ import ConnectionDataBase.*;
 import Connections.ConnectionSingleton;
 import UserBeans.Auth;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import nameGenerator.NamesGenerator;
@@ -404,17 +406,21 @@ public class LecturersManager {
         /* Generating specialization. */
         ArrayList<LecturerBenefits> specList
                 = new ArrayList<LecturerBenefits>();
+        Set<String>generated_specializations = new HashSet<String>();
         int spec_index = rand.nextInt(specializations_numbers.length);
         int specializations_number = specializations_numbers[spec_index];
         
         for (int i = 0 ; i < specializations_number ; i ++) {
             String specialization
                     = specGenerator.generate();
-            int boost = (rand.nextInt(10) + 1);
+            if (!generated_specializations.contains(specialization)) {
+                generated_specializations.add(specialization);
+                int boost = (rand.nextInt(10) + 1);
 
-            /* Setting up the specialization. */
-            LecturerBenefits lb = new LecturerBenefits(specialization , boost);
-            specList.add(lb);
+                /* Setting up the specialization. */
+                LecturerBenefits lb = new LecturerBenefits(specialization , boost);
+                specList.add(lb);
+            }
         }
 
         return new Lecturer(name , price , usable , specList);

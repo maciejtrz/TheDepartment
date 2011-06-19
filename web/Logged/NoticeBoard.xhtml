@@ -103,7 +103,6 @@
 
                 <h:panelGrid id="newNoticeOfferGrid" columns="2">
                     <h:panelGroup>
-                    <br/>
                     <h:outputText value="Title:"/> <br/>
                     <h:inputText value="#{noticeMessageWriter.subject}" style="width:300px"/>
                     </h:panelGroup>
@@ -119,7 +118,7 @@
                     <p:inputText id="offeredNoticeOfferAmount" value="#{noticeMessageWriter.amountOffered}" /> <br/><br/>
                     <p:slider for="offeredNoticeOfferAmount" style="width: 300px"/>
                     <p:message for="offeredNoticeOfferAmount" />
-                    <br/><br/>
+                    <br/>
                     </h:panelGroup>
 
                     <h:panelGroup>
@@ -132,7 +131,7 @@
                     <p:inputText id="wantedNoticeOfferAmount" value="#{noticeMessageWriter.amountWanted}" /> <br/><br/>
                     <p:slider for="wantedNoticeOfferAmount" style="width: 300px"/>
                     <p:message for="wantedNoticeOfferAmount"/>
-                    <br/><br/>
+                    <br/>
                     </h:panelGroup>
                     
                     <h:outputText value="Description"/>

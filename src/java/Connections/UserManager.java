@@ -147,6 +147,18 @@ public class UserManager {
         return resources.getMoney();
     }
 
+    static synchronized public int getPhds(String username){
+        Playerresources resources = getResources(username);
+        return resources.getPhdsnumber();
+    }
+
+    static synchronized public int getStudents(String username){
+        Playerresources resources = getResources(username);
+            return resources.getUndergraduatesnumber();
+    }
+
+    
+
     static synchronized public boolean removeMoney(String username, int money) {
 
             boolean result = false;

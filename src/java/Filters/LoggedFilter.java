@@ -8,6 +8,7 @@ package Filters;
 import Connections.AuthorizationSingleton;
 import Connections.ConnectionSingleton;
 import Connections.UserManager;
+import ResearchPoints.AddResearch;
 import ResearchPoints.ResearchBag;
 import UserBeans.Auth;
 import UserBeans.BuyLecturers;
@@ -53,6 +54,8 @@ public class LoggedFilter implements Filter {
             TradeMessageReader tradeMessageReader = (TradeMessageReader)
                     session.getAttribute(ConnectionSingleton.tradeMessageReader);
 
+            AddResearch addResearch = (AddResearch) session.getAttribute(ConnectionSingleton.addResearch);
+
             if(auth == null || auth.getUsername() == null) {
      
                  res.sendRedirect(ConnectionSingleton.addAuth);
@@ -74,6 +77,11 @@ public class LoggedFilter implements Filter {
 
             if(!UserManager.isUserMonitored(auth.getUsername())) {
                 UserManager.addUser(auth);
+            }
+
+            if(addResearch == null || !addResearch.isInitialized()) {
+                res.sendRedirect(ConnectionSingleton.addResearchPage);
+                return;
             }
 
             if(auth.logging){

@@ -154,6 +154,8 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     public void setAcceptTradeOffer(TradeOffer acceptedTradeOffer) {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        System.out.println("Accepting the offer...");
        
         if(!acceptedTradeOffer.accept()) {
             

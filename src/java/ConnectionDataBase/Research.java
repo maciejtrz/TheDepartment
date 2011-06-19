@@ -61,6 +61,18 @@ public class Research  implements java.io.Serializable, Runnable {
         
     }
 
+    public void setResearchTime(int researchTime) {
+        this.researchTime = researchTime;
+    }
+
+    public void removeResearchTime(int diff) {
+        researchTime -= diff;
+    }
+
+    public int getResearchTime() {
+        return researchTime;
+    }
+
     public void addResearcher(Lecturer lec) {
         researchers.add(lec);
     }
@@ -120,15 +132,14 @@ public class Research  implements java.io.Serializable, Runnable {
         state = RUNNING;
 
         try {
-            researchTime = 30;
 
-            while (researchTime > 0) {
+            while (getResearchTime() > 0) {
 
                 while(state == STOPPED)
                     Thread.sleep(2000);
 
                 Thread.sleep(1000);
-                researchTime--;
+                removeResearchTime(getResearchBoost());
             }
 
         } catch (Exception ex) {
@@ -151,10 +162,6 @@ public class Research  implements java.io.Serializable, Runnable {
             }
 
         }
-    }
-
-    public Integer getResearchTime() {
-        return researchTime;
     }
 
     public void addResearchList(List<Research> ongoingResearch) {

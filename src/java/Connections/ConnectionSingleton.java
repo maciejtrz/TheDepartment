@@ -47,8 +47,9 @@ public class ConnectionSingleton {
     public static final String addAuth = "/TheDepartment/AddAuth.jsp";
     public static final String addResearchBag = "/TheDepartment/AddResearchBag.jsp";
     public static final String addBuyLecturers = "/TheDepartment/AddBuyLecturers.jsp";
- 
+    public static final String addResearchPage = "/TheDepartment/AddResearch.jsp";
 
+    public static final String addResearch = "addResearch";
     public static final String auth = "auth";
     public static final String researchBag = "researchBag";
     public static final String tradeMessageReader = "tradeMessageReader";

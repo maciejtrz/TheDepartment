@@ -7,6 +7,7 @@
     <property name="hibernate.connection.url">jdbc:postgresql://db:5432/g1027104_u</property>
     <property name="hibernate.connection.username">g1027104_u</property>
     <property name="hibernate.connection.password">EldyDqOUXi</property>
+
     <mapping resource="ConnectionDataBase/Events.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Extrastats.hbm.xml"/>
     <mapping resource="ConnectionDataBase/Lecturers.hbm.xml"/>

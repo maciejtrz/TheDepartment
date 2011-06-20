@@ -1,5 +1,5 @@
 package ConnectionDataBase;
-// Generated 18-Jun-2011 14:11:42 by Hibernate Tools 3.2.1.GA
+// Generated 20-Jun-2011 18:34:54 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -9,7 +9,6 @@ package ConnectionDataBase;
 public class Lecturers  implements java.io.Serializable {
 
 
-     private int lecturerid;
      private String lecturername;
      private Integer price;
      private Boolean usable;
@@ -18,25 +17,15 @@ public class Lecturers  implements java.io.Serializable {
     }
 
 	
-    public Lecturers(int lecturerid, String lecturername) {
-        this.lecturerid = lecturerid;
+    public Lecturers(String lecturername) {
         this.lecturername = lecturername;
     }
-
-    public Lecturers(int lecturerid, String lecturername, Integer price, Boolean usable) {
-       this.lecturerid = lecturerid;
+    public Lecturers(String lecturername, Integer price, Boolean usable) {
        this.lecturername = lecturername;
        this.price = price;
        this.usable = usable;
     }
    
-    public int getLecturerid() {
-        return this.lecturerid;
-    }
-    
-    public void setLecturerid(int lecturerid) {
-        this.lecturerid = lecturerid;
-    }
     public String getLecturername() {
         return this.lecturername;
     }

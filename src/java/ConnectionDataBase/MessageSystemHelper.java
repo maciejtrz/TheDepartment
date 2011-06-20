@@ -53,8 +53,13 @@ public class MessageSystemHelper extends AbstractHelper {
 
         Messagesystem msg = (Messagesystem) q.uniqueResult();
 
-        session.delete(msg);
-        commitTransaction(session);
+        if (msg != null) {
+            session.delete(msg);
+            commitTransaction(session);
+        }
+        else {
+            session.close();
+        }
     }
 
     public void deleteMsg(Messagesystem message) {

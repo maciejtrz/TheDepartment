@@ -73,7 +73,7 @@ public class LecturersPopulator extends Thread {
 
                 /* Sleep for five minutes. */
                 System.out.println(this.getName() + " is going to sleep.");
-                sleep(10000 * 60 * 1);
+                sleep(1000 * 60 * 1);
 
             } catch (InterruptedException ex) {
                 System.out.println(this.getName() + " I BROKE :((((((((((");

@@ -1,5 +1,7 @@
 package buildings;
 
+import ConnectionDataBase.Buildings;
+import ConnectionDataBase.BuildingsHelper;
 import ConnectionDataBase.BuildingsPositionHelper;
 import ConnectionDataBase.PlayerresourcesHelper;
 import Connections.UserManager;
@@ -52,7 +54,6 @@ public abstract class Building implements Serializable {
     }
 
     public int getUpgradeCost(String userName) {
-        // Just a stub, userName is ignored.
         return upgrade_base_cost;
     }
 
@@ -78,11 +79,8 @@ public abstract class Building implements Serializable {
         BuildingsPositionHelper posHelper
                 = new BuildingsPositionHelper();
 
-        PlayerresourcesHelper resourcesHelper
-                = new PlayerresourcesHelper();
-
         // Checking if allowed to build.
-        int cash = resourcesHelper.getMoney(playerName);
+        int cash = UserManager.getMoney(playerName);
         if (cash < cost) {
             // Cannot build that building.
             return false;

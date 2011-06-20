@@ -21,8 +21,10 @@ public class UpgradeBean {
 
     /** Creates a new instance of UpgradeBean */
     public UpgradeBean() {
+        System.out.println("Constructor called");
         playerName = utilities.BasicUtils.getUserName();
     }
+
 
     public void upgradeLabs() {
         BuildingFactory factory = new BuildingFactory();
@@ -80,7 +82,6 @@ public class UpgradeBean {
 
 
     public boolean getCanUpgradeLecRoom() {
-        System.out.println("The getter is called!");
         BuildingFactory factory = new BuildingFactory();
         LectureRoom lec_room = factory.getLecturerRoom();
 
@@ -114,8 +115,6 @@ public class UpgradeBean {
             position = helper.getPosition(playerName, Building.CODE_PROF_OFFICE_2);
         }
         return !prof_office.canUpdateProffesorOffice(playerName, position);
-    }
-
-    
+    } 
 
 }

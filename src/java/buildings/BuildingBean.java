@@ -32,7 +32,7 @@ public class BuildingBean implements Serializable {
     }
 
     public void setPlayersBuildings(List<Building> l) {
-        buildingList = l;
+        buildingList = utils.getAvailableBuildings(playerName);
     }
 
     public Building getSelectedBuilding() {

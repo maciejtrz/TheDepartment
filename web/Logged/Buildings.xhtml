@@ -73,7 +73,7 @@
         </p:dialog>
 
         <p:dialog header="Lecture Room lev 1" widgetVar="lr1" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()" >
               <p:panel>
 
                 <h:form>
@@ -84,11 +84,12 @@
                                       students. Not that any one cares whether
                                       students have any space or convenience
                                       during lectures. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       undergraduates capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" ajax="false" />
+                        <h:outputText value="Upgrade cost: 500"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" onclick="lr1.hide()"/>
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/crazy_student.jpg" width="275" height="400" />
@@ -100,7 +101,7 @@
         </p:dialog>
 
         <p:dialog header="Lecture Room lev 2" widgetVar="lr2" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
 
                 <h:form>
@@ -111,11 +112,12 @@
                                       students. Not that any one cares whether
                                       students have any space or convenience
                                       during lectures. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       undergraduates capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" ajax="false"/>
+                        <h:outputText value="Upgrade cost: 1000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" onclick="lr2.hide()"/>
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/crazy_student.jpg" width="275" height="400" />
@@ -147,7 +149,7 @@
         </p:dialog>
 
         <p:dialog header="PhD office lev 1" widgetVar="po1" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
                 <h:panelGrid  columns="2" style="text-align: center">
@@ -158,11 +160,12 @@
                                       without any access to the sun light
                                       allows you to recruit more of
                                       those batmans. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       batmans capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" ajax="false" />
+                         <h:outputText value="Upgrade cost: 1000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" onclick="po1.hide()" />
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/phd.jpeg" width="275" height="400" />
@@ -173,7 +176,7 @@
         </p:dialog>
 
         <p:dialog header="PhD office lev 2" widgetVar="po2" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
                 <h:panelGrid  columns="2" style="text-align: center">
@@ -184,11 +187,12 @@
                                       without any access to the sun light
                                       allows you to recruit more of
                                       those batmans. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       batmans capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" ajax="false" />
+                        <h:outputText value="Upgrade cost: 2000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" onclick="po2.hide()" />
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/phd.jpeg" width="275" height="400" />
@@ -222,7 +226,7 @@
         </p:dialog>
 
         <p:dialog header="Prof office lev 1" widgetVar="ro1" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
                 <h:panelGrid  columns="2" style="text-align: center">
@@ -232,11 +236,12 @@
                                       you to recruit more professors for the
                                       benefit of your research and for the
                                       peril of your students. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       precious professors capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" ajax="false"/>
+                        <h:outputText value="Upgrade cost: 2000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro1.hide()" />
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
@@ -248,7 +253,7 @@
         </p:dialog>
 
         <p:dialog header="Prof office lev 2" widgetVar="ro2" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
                 <h:panelGrid  columns="2" style="text-align: center">
@@ -258,11 +263,12 @@
                                       you to recruit more professors for the
                                       benefit of your research and for the
                                       peril of your students. " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       precious professors capacity." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" ajax="false"/>
+                        <h:outputText value="Upgrade cost: 4000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro2.hide()" />
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
@@ -295,7 +301,7 @@
         </p:dialog>
 
         <p:dialog header="Labolatories" widgetVar="lb1" modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
                 <h:panelGrid  columns="2" style="text-align: center">
@@ -307,11 +313,12 @@
                                       Labs also decreases the alcoholism of your
                                       students, as they do not have time to
                                       drink any more (which is sad). " />
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <h:outputText value="Upgrading labs increases
                                       your research power." />
-                         <br/><br/><br/><br/>
-                         <p:commandButton disabled="#{upgradeBean.canUpgradeLabs}" value="Upgrade" action="#{upgradeBean.upgradeLabs}" ajax="false" />
+                        <h:outputText value="Upgrade cost: 1000"/>
+                         <br/>
+                         <p:commandButton disabled="#{upgradeBean.canUpgradeLabs}" value="Upgrade" action="#{upgradeBean.upgradeLabs}" onclick="lb1.hide()"  />
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/geek.jpeg" width="200" height="400" />

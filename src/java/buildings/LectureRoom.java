@@ -55,7 +55,7 @@ public class LectureRoom extends Building {
                 Building.CODE_LECTURER_ROOM_1);
 
         /* Updating players money. */
-        UserManager.removeMoney(playerName, cost);
+        UserManager.removeMoney(playerName, getUpgradeCost(playerName));
 
         /* Upgradting students capacity. */
         CapacityHelper capacity = new CapacityHelper();
@@ -167,7 +167,7 @@ public class LectureRoom extends Building {
             // Upgrading to the room lvl_1
             buildingHelper.updateLectureRoom(playerName, MEDIUM_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_LECTURER_ROOM_2);
-            resourcesHelper.updateMoney(playerName, cash - cost);
+            UserManager.removeMoney(playerName, upgrade_cost);
         }
         else {
             if (!occupant.equals(CODE_LECTURER_ROOM_2)) {
@@ -176,7 +176,7 @@ public class LectureRoom extends Building {
             // Upgrading to the room lvl_2
             buildingHelper.updateLectureRoom(playerName, ADVANCED_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_LECTURER_ROOM_3);
-            resourcesHelper.updateMoney(playerName, cash - cost);
+            UserManager.removeMoney(playerName, upgrade_cost);
         }
 
         /* Upgradting students capacity. */
@@ -186,6 +186,21 @@ public class LectureRoom extends Building {
 
         return true;
     }
+
+    @Override
+    public int getUpgradeCost(String playerName) {
+        System.out.println("Upgrade cost getter called in labs!");
+        BuildingsHelper buildingHelper = new BuildingsHelper();
+        Buildings building_record = buildingHelper.getBuildings(playerName);
+        if (building_record == null) {
+            // This should not happen, problem with initialization.
+            return 0;
+        }
+        int cur_level = building_record.getLectureroom();
+        System.out.println("Upgrade cost returns : " + upgrade_base_cost * cur_level );
+        return upgrade_base_cost * cur_level;
+    }
+    
 
     public boolean canUpgradeLecturerRoom(String playerName, int position) {
                 // Getting all required helpers.

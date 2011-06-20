@@ -172,7 +172,7 @@ public class PhdOffice extends Building {
             // Upgrading to the room lvl_2
             buildingHelper.updatePhDsOffice(playerName, MEDIUM_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_PHD_OFFICE_2);
-            UserManager.removeMoney(playerName, cost);
+            UserManager.removeMoney(playerName, upgrade_cost);
         }
         else {
             if (!occupant.equals(CODE_PHD_OFFICE_2)) {
@@ -181,7 +181,7 @@ public class PhdOffice extends Building {
             // Upgrading to the room lvl_3
             buildingHelper.updatePhDsOffice(playerName, ADVANCED_LEVEL);
             posHelper.updateBuildingPosition(playerName, position, CODE_PHD_OFFICE_3);
-            UserManager.removeMoney(playerName, cost);
+            UserManager.removeMoney(playerName, upgrade_cost);
         }
 
         /* Upgradting PhD capacity. */
@@ -246,6 +246,19 @@ public class PhdOffice extends Building {
     public String getPicture() {
         // TODO CHANGE CODE ON LVLS
         return (this.CODE_PHD_OFFICE_1);
+    }
+
+
+   @Override
+    public int getUpgradeCost(String playerName) {
+        BuildingsHelper buildingHelper = new BuildingsHelper();
+        Buildings building_record = buildingHelper.getBuildings(playerName);
+        if (building_record == null) {
+            // This should not happen, problem with initialization.
+            return 0;
+        }
+        int cur_level = building_record.getPhdsoffice();
+        return upgrade_base_cost * cur_level;
     }
 
 }

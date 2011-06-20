@@ -136,7 +136,7 @@ public class Laboratories  extends Building {
         // Upgrading to the superlabs
         buildingHelper.updateLabolatories(playerName, MEDIUM_LEVEL);
         posHelper.updateBuildingPosition(playerName, position, CODE_SUPERLABS);
-        UserManager.removeMoney(playerName, cost);
+        UserManager.removeMoney(playerName, upgrade_base_cost);
 
         return true;
     }

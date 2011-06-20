@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
+import org.icefaces.application.PushRenderer;
 
 
 public class NoticeMonitor {
@@ -17,14 +18,14 @@ public class NoticeMonitor {
     private List<TradeOffer> listNotices = new ArrayList<TradeOffer>();
     private MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
 
+    public final static String noticeGroup = "noticeGroup";
+
     public NoticeMonitor() {
         List<Messagesystem> noticesDb =
                 messageSystemHelper.getMessages(MessageSingleton.NOTICE_BOARD, MessageSingleton.NOTICE_BOARD_OFFER);
 
         Set<TradeOffer> noticesToRemove = new HashSet<TradeOffer>();
         Date currentDate = new Date();
-
-        System.out.println("Number of notices to read from db: " + noticesDb.size());
 
         Iterator<Messagesystem> iterator = noticesDb.iterator();
 
@@ -75,6 +76,8 @@ public class NoticeMonitor {
                 MessageSingleton.NOTICE_BOARD_OFFER);
 
         tradeOffer.setMsgnumber(msgNumber);
+
+        PushRenderer.render(NoticeMonitor.noticeGroup);
     }
 
     public synchronized void update() {

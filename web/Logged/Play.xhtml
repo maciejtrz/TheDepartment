@@ -21,7 +21,7 @@ and open the template in the editor.
     </h:head>
 
 
-    <body>
+    <h:body>
 
 
         <ui:include src="Map.xhtml"/>
@@ -64,25 +64,6 @@ and open the template in the editor.
 
         </h:form>
 
-            <script type="text/javascript">
-            function updateElements(changed){
-
-            if (changed == "true") {
-
-            PrimeFaces.ab({formId:'tbar',source:'tbar:update',process:'@all',update:'growl tbar rform'});
-            }
-            return false;
-            }
-
-            function pollServer(fn)
-            {
-            $.post("/TheDepartment/Logged/PollQuery", function(data) {
-              fn(data);
-            });
-            }
-
-            setInterval( "pollServer(updateElements)", 1000 );
-            </script>
 
 
         <p:notificationBar position="bottom" effect="slide" widgetVar="bm1"><div align="center">
@@ -146,6 +127,6 @@ and open the template in the editor.
 
 
 
-    </body>
+    </h:body>
 </html>
 

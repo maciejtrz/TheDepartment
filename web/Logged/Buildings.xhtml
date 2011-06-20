@@ -10,7 +10,12 @@
 
         <script type="text/javascript" src="map.js"></script>
         <script language="JavaScript">
-            function reload(){
+            function reload(button){
+            nop.hide();
+            button.click();
+            setTimeout(reload_page, 300);
+            }
+            function reload_page() {
             window.location.reload(true);
             }
         </script>
@@ -72,7 +77,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Lecture Room lev 1" widgetVar="lr1" modal="true" height="500" width="700"
+        <p:dialog header="Lecture Room Level 1" widgetVar="lr1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()" >
               <p:panel>
 
@@ -100,7 +105,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Lecture Room lev 2" widgetVar="lr2" modal="true" height="500" width="700"
+        <p:dialog header="Lecture Room Level 2" widgetVar="lr2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
 
@@ -128,7 +133,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Lecture Room lev 3" widgetVar="lr3" modal="true" height="500" width="700"
+        <p:dialog header="Lecture Room Level 3" widgetVar="lr3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
             <p:panel>
@@ -148,7 +153,7 @@
 
         </p:dialog>
 
-        <p:dialog header="PhD office lev 1" widgetVar="po1" modal="true" height="500" width="700"
+        <p:dialog header="PhD Office Level 1" widgetVar="po1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -175,7 +180,7 @@
             </p:panel>
         </p:dialog>
 
-        <p:dialog header="PhD office lev 2" widgetVar="po2" modal="true" height="500" width="700"
+        <p:dialog header="PhD Office Level 2" widgetVar="po2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -203,7 +208,7 @@
 
         </p:dialog>
 
-        <p:dialog header="PhD office lev 3" widgetVar="po3" modal="true" height="500" width="700"
+        <p:dialog header="PhD Office Level 3" widgetVar="po3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
                 <h:form>
@@ -225,7 +230,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Prof office lev 1" widgetVar="ro1" modal="true" height="500" width="700"
+        <p:dialog header="Professor Office Level 1" widgetVar="ro1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -252,7 +257,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Prof office lev 2" widgetVar="ro2" modal="true" height="500" width="700"
+        <p:dialog header="Professor Office lev 2" widgetVar="ro2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -279,7 +284,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Prof office lev 3" widgetVar="ro3" modal="true" height="500" width="700"
+        <p:dialog header="Professor Office Level 3" widgetVar="ro3" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <p:panel>
                 <h:form>
@@ -300,7 +305,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Labolatories" widgetVar="lb1" modal="true" height="500" width="700"
+        <p:dialog header="Labolatories Level 1" widgetVar="lb1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -329,7 +334,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Superlabolatory" widgetVar="sb1" modal="true" height="500" width="700"
+        <p:dialog header="Laboratories Level 2" widgetVar="sb1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
            <p:panel>
                 <h:form>
@@ -361,7 +366,7 @@
 
         </p:dialog>
 
-        <p:dialog header="This is brain" widgetVar="br1" modal="true" height="500" width="700"
+        <p:dialog header="Brain" widgetVar="br1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
                <h:panelGrid columns="2" style="text-align: center" >
                     <h:outputText value = "Careful! You are inside the Brain of
@@ -376,7 +381,7 @@
 
         </p:dialog>
 
-        <p:dialog header="This is Queens Tower" widgetVar="qt1" modal="true" height="500" width="700"
+        <p:dialog header="Queens Tower" widgetVar="qt1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             <br/><br/>
                <h:panelGrid columns="1" style="text-align: center" >
@@ -394,11 +399,11 @@
 
 
         <h:form>
-            <p:dialog header="Building Site" widgetVar="nop" height="500" width="900" onHide="reload()"
-                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
+            <p:dialog header="Building Site" widgetVar="nop" height="500" width="900" 
+                      showEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
                 <div align="center">
                     <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
-                    <p:carousel widgetVar="ble" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
+                    <p:carousel id="carousel" widgetVar="ble" value="#{buildingbean.playersBuildings}" var="building" itemStyle="height:250px;width:500px;"
                                 style="position: relative; top:50px; " rows="1" effect="easeInStrong"
                                 >
                         <p:column>
@@ -409,7 +414,7 @@
                                 <h:panelGrid columns="1" cellpadding="5">
                                     <h:outputText value="#{building.info}" />
                                     <h:outputText value="Price: #{building.cost}" />
-                                    <p:commandButton id="buyBuildingsButton" value="Build" action="#{buildingbean.buy}" ondblclick="nop.hide()"
+                                    <p:commandButton id="buyBuildingsButton" value="Build" action="#{buildingbean.buy}" onclick="reload(this)" update="carousel"
                                                      actionListener="#{buildingbean.loadCurrentBuilding}" >
                                         <f:attribute name="input_building" value="#{building}"/>
                                     </p:commandButton>

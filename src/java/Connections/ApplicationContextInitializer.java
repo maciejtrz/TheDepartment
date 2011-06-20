@@ -29,6 +29,7 @@ public class ApplicationContextInitializer implements ServletContextListener {
            mgr.createStatsDeamon();
     }
 
+    
     public void contextDestroyed(ServletContextEvent sce) {
         UserManager.saveToDatabase();
     }

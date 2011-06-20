@@ -24,6 +24,7 @@ public class OffersSuperviser implements Runnable{
 
     public static void initializeOffersSupervise() {       
         Thread thread = new Thread(new OffersSuperviser());
+        thread.setDaemon(true);
         thread.start();
     }
 

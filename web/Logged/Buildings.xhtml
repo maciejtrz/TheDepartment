@@ -247,6 +247,8 @@
                         <h:outputText value="Upgrade cost: 2000"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro1.hide()" />
+                                                  <br/>
+                         <p:commandButton value="Manage Profs" onclick="profmanagement.show()"/>
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
@@ -275,6 +277,8 @@
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro2.hide()" />
 
+                         <br/>
+                         <p:commandButton value="Manage Profs" onclick="profmanagement.show()"/>
                     </h:panelGrid>
                     <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
                 </h:panelGrid>
@@ -295,9 +299,17 @@
                                       you to recruit more professors for the
                                       benefit of your research and for the
                                       peril of your students. " />
+                        <br/>
+                        <br/>
+                        <div align="center">
+                         <p:commandButton value="Manage Profs" onclick="profmanagement.show()"/>
+                        </div>
+
 
                     </h:panelGrid>
                     <h:graphicImage value="/images/prof.jpeg" width="200" height="400" />
+                                             <br/>
+
                 </h:panelGrid>
             </h:form>
 
@@ -429,5 +441,9 @@
             </p:dialog>
         </h:form>
 
+            <ui:include src="ProfManagment.xhtml"/>
     </ui:component>
+
+
+
 </html>

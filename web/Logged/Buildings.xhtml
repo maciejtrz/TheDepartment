@@ -92,7 +92,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       undergraduates capacity." />
-                        <h:outputText value="Upgrade cost: 500"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 500 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" onclick="lr1.hide()"/>
 
@@ -120,7 +120,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       undergraduates capacity." />
-                        <h:outputText value="Upgrade cost: 1000"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 1000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeLecRoom}" value="Upgrade" action="#{upgradeBean.upgradeLectureRoom}" onclick="lr2.hide()"/>
 
@@ -168,7 +168,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       batmans capacity." />
-                         <h:outputText value="Upgrade cost: 1000"/>
+                         <h:outputText style="font-weight: bold;" value="Upgrade cost: 1000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" onclick="po1.hide()" />
 
@@ -195,7 +195,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       batmans capacity." />
-                        <h:outputText value="Upgrade cost: 2000"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 2000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradePhdOffice}" value="Upgrade" action="#{upgradeBean.upgradePhdOffice}" onclick="po2.hide()" />
 
@@ -244,7 +244,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       precious professors capacity." />
-                        <h:outputText value="Upgrade cost: 2000"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 2000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro1.hide()" />
                                                   <br/>
@@ -259,7 +259,7 @@
 
         </p:dialog>
 
-        <p:dialog header="Professor Office lev 2" widgetVar="ro2" modal="true" height="500" width="700"
+        <p:dialog header="Professor Office Level 2" widgetVar="ro2" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" onHide="refreshAll()">
             <p:panel>
                 <h:form>
@@ -273,7 +273,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading increases your
                                       precious professors capacity." />
-                        <h:outputText value="Upgrade cost: 4000"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 4000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeProfOffice}" value="Upgrade" action="#{upgradeBean.upgradeProfessors}" onclick="ro2.hide()" />
 
@@ -333,7 +333,7 @@
                         <br/><br/><br/><br/>
                         <h:outputText value="Upgrading labs increases
                                       your research power." />
-                        <h:outputText value="Upgrade cost: 1000"/>
+                        <h:outputText style="font-weight: bold;" value="Upgrade cost: 1000 &#208;"/>
                          <br/>
                          <p:commandButton disabled="#{upgradeBean.canUpgradeLabs}" value="Upgrade" action="#{upgradeBean.upgradeLabs}" onclick="lb1.hide()"  />
 
@@ -371,10 +371,15 @@
 
         <p:dialog header="Student Union" widgetVar="su1" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
-                <h:panelGrid columns="1" >
+            <div style="text-align: center">
+                <br/><br/><br/>
                     <h:outputText value = "I am useless, sorry. 
                                   Try other buildings and do not click me again!" />
-                </h:panelGrid>
+
+                    <br/><br/><br/><br/>
+                    <h:graphicImage value="/images/icu.png"  />
+
+                </div>
 
         </p:dialog>
 
@@ -411,7 +416,7 @@
 
 
         <h:form>
-            <p:dialog header="Building Site" widgetVar="nop" height="500" width="900" 
+            <p:dialog header="Building Site" widgetVar="nop" height="500" width="700"
                       showEffect="fade" closeOnEscape="true" resizable="no" draggable="false">
                 <div align="center">
                     <br/><br/>Welcome to the building site. Please choose from from selection of buildings available to you.
@@ -425,7 +430,7 @@
 
                                 <h:panelGrid columns="1" cellpadding="5">
                                     <h:outputText value="#{building.info}" />
-                                    <h:outputText value="Price: #{building.cost}" />
+                                    <h:outputText style="font-weight: bold;" value="Price: #{building.cost} &#208;" />
                                     <p:commandButton id="buyBuildingsButton" value="Build" action="#{buildingbean.buy}" onclick="reload(this)" update="carousel"
                                                      actionListener="#{buildingbean.loadCurrentBuilding}" >
                                         <f:attribute name="input_building" value="#{building}"/>

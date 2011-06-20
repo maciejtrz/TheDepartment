@@ -42,11 +42,13 @@ public class LecturerManagement {
         return this.owned;
     }
 
-    public void delete(Lecturer l){
+    public void delete(){
+        Lecturer l = getSelected_lecturer();
+        System.out.println("Deleting lecturer");
         LecturersManager mgr = new LecturersManager(BasicUtils.getUserName());
         LecturersOwnedHelper help = new LecturersOwnedHelper();
         help.deleteLecturer(l.getName());
-        owned = mgr.getAvailabeLecturers();
+        owned = mgr.getOwnedLecturers();
 
     }
 

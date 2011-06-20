@@ -6,32 +6,33 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:component>
 
-          <h:form id="progmanform">
-       <p:dialog widgetVar="profmanagement" header="Manage your Profs!"  modal="true" height="500" width="700"
-                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
+        <p:dialog widgetVar="profmanagement" header="Manage your Profs!"  modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+            
+            <h:form id="progmanform">
                 <h:panelGrid id="profmanpanel">
                     <p:dataTable id="tableP" var="lecturer" value="#{LecturerManagement.owned}">
                         <p:column headerText="Name">
                             <h:outputText value="#{lecturer.name}"/>
                         </p:column>
                         <p:column headerText="Specialisations">
-                            <p:commandButton value="Specialisations" oncomplete="showspecman.show()" update=":profmanpanel:showspecman">
+                            <p:commandButton value="Specialisations" oncomplete="showspecman.show()" update=":progmanform:ShowSpecGridMan">
                                 <f:setPropertyActionListener target="#{LecturerManagement.selected_lecturer}" value="#{lecturer}"/>
                             </p:commandButton>
                         </p:column>
                         <p:column>
-                            <p:commandButton value="Fire!" update="tableP">
-                                <f:setPropertyActionListener target="#{LecturerManagement.delete}" value="#{lecturer}"/>
+                            <p:commandButton value="Fired!" update="tableP,progmanform,profform" action="#{LecturerManagement.delete}">
+                                <f:setPropertyActionListener target="#{LecturerManagement.selected_lecturer}" value="#{lecturer}"/>
                             </p:commandButton>
 
                         </p:column>
                     </p:dataTable>
-            </h:panelGrid>
+                </h:panelGrid>
 
-        </p:dialog>
 
-                    <p:dialog widgetVar="showspecman" height="180" width="400">
+
+                <p:dialog widgetVar="showspecman" height="180" width="200">
 
                     <h:panelGrid id="ShowSpecGridMan">
 
@@ -46,9 +47,11 @@
                         </p:dataTable>
 
                     </h:panelGrid>
-
-
                 </p:dialog>
-                    </h:form>
-      </ui:component>
+            </h:form>
+        </p:dialog>
+
+
+        
+    </ui:component>
 </html>

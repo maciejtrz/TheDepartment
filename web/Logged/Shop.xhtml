@@ -32,7 +32,7 @@
                                     </p:commandButton>
                                 </p:column>
                                 <p:column headerText="Purchase">
-                                    <p:commandButton id="but" value="Buy" action="#{buyLecturers.buy}" update="proftable,profform" >
+                                    <p:commandButton id="but" value="Buy" action="#{buyLecturers.buy}" update="proftable,profform,progmanform" >
                                         <f:setPropertyActionListener target="#{buyLecturers.selected_lecturer}" value="#{lec}"/>
                                     </p:commandButton>
                                 </p:column>
@@ -80,7 +80,7 @@
                         <h:column>
                             <div align="center">
                                 <h2>
-                                    <h:outputLabel for="students" value="Student - 0.5&#208;" />
+                                    <h:outputLabel for="students" value="Student - 0.5  &#208;" />
                                 </h2>
                                 You have <h:outputText value="#{shop.studentNumber}"/> students.
                                 <br/>
@@ -106,7 +106,7 @@
                         <h:column>
                             <div align="center">
                                 <h2>
-                                    <h:outputLabel for="phds" value="PhD - 20&#208;" />
+                                    <h:outputLabel for="phds" value="PhD - 20 &#208;" />
                                 </h2>
                                 You have <h:outputText value="#{shop.phdsNumber}"/> PhD(s).
                                 <br/>

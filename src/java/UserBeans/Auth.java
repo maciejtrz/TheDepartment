@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.icefaces.application.PushRenderer;
 import utilities.BasicUtils;
 
 public class Auth implements Serializable {
@@ -179,6 +180,8 @@ public class Auth implements Serializable {
     }
 
     public void notifyUserAboutMessage() {
+        PushRenderer.render(getUsername());
+        
         setHasNewMessage(true);
     }
 

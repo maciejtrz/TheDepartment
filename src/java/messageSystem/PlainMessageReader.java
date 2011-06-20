@@ -6,6 +6,8 @@
 package messageSystem;
 
 import java.io.Serializable;
+import org.icefaces.application.PushRenderer;
+import utilities.BasicUtils;
 
 /**
  *
@@ -17,6 +19,8 @@ public class PlainMessageReader extends MessageWriter implements Serializable  {
 
     public PlainMessageReader() {
         super(MessageSingleton.PLAIN_MESSAGE);
+
+        PushRenderer.addCurrentSession(BasicUtils.getUserName());
     }
 
     

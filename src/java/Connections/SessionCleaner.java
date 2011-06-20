@@ -46,7 +46,9 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
 
             Playerresources resources = auth.getResources();
             PlayerresourcesHelper resourcesHelper = new PlayerresourcesHelper();
-            resourcesHelper.updateResources(resources);
+            if (resources != null) {
+                resourcesHelper.updateResources(resources);
+            }
         }
 
     }

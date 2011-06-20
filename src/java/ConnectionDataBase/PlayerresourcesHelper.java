@@ -138,6 +138,9 @@ public class PlayerresourcesHelper extends AbstractHelper {
     }
 
     public void updateResources(Playerresources resources) {
+        if (resources == null) {
+            return;
+        }
         Session session = createNewSessionAndTransaction();
         session.saveOrUpdate(resources);
         commitTransaction(session);

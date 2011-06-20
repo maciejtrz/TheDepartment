@@ -11,6 +11,7 @@ import ResearchPoints.ResearchTreeNode;
 import UserBeans.Auth;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import messageSystem.TradeOffer;
 import resources.Resource;
@@ -36,7 +37,10 @@ public class UserManager {
         Iterator<String> iterator = sessionMap.keySet().iterator();
         while(iterator.hasNext()) {
             Auth auth = sessionMap.get(iterator.next());
-            saveToDatabase(auth.getResources());
+            Playerresources resources = auth.getResources();
+            if (resources != null) {
+                saveToDatabase(resources);
+            }
         }
 
         iterator = sessionMap.keySet().iterator();
@@ -44,11 +48,15 @@ public class UserManager {
             ResearchBag researchBag = sessionResearchBag.get(iterator.next());
 
             ResearchHelper researchHelper = new ResearchHelper();
-            researchHelper.deleteAllResearches(researchBag.getUserid());
+            String userId = researchBag.getUserid();
+            if (userId != null) {
+                researchHelper.deleteAllResearches(userId);
+                List<Integer> av_research = researchBag.getAvailableResearch();
 
-            if (!researchBag.getAvailableResearch().isEmpty()) {
-                researchHelper.addResearches(researchBag.getUserid(), researchBag.getAvailableResearch());
-           }
+                if (av_research != null && !av_research.isEmpty()) {
+                    researchHelper.addResearches(userId,av_research);
+                }
+            }
         }
 
     }

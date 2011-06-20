@@ -22,6 +22,7 @@ public class Lecturers  implements java.io.Serializable {
         this.lecturerid = lecturerid;
         this.lecturername = lecturername;
     }
+
     public Lecturers(int lecturerid, String lecturername, Integer price, Boolean usable) {
        this.lecturerid = lecturerid;
        this.lecturername = lecturername;

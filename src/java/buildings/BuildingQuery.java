@@ -56,13 +56,6 @@ public class BuildingQuery extends HttpServlet {
             else {
                 out.print(output);
             }
-            /*System.out.println("Printing all info of object!: " + this.toString() +
-                               " PlayerName: " + userName +
-                               " input_position: " + input_position +
-                               " input_buy: " + input_buy +
-                               " position: " + position +
-                               " output: " + output +
-                               " end of print: " + this.toString()); */
             if (input_buy.equals(BUILD_QUERY)) {
                 UserManager.setBuildingPosition(userName, position);
             }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package deamons;
 
 import java.util.logging.Level;
@@ -18,27 +17,25 @@ import rankings.StudentsRankingSingleton;
  */
 public class RankingDeamon implements Runnable {
 
-    public RankingDeamon() {
-    //    setDaemon(true);
+    private static final int SLEEP_TIME = 2;
 
+    public RankingDeamon() {
+        //    setDaemon(true);
     }
 
-    public void run(){
-        while(true){
+    public void run() {
+        while (true) {
 
-    MoneyRankingSingleton.produceRanking();
-    ResearchPointsRankingSingleton.produceRanking();
-    PhDsRankingSingleton.produceRanking();
-    StudentsRankingSingleton.produceRanking();
+            MoneyRankingSingleton.produceRanking();
+            ResearchPointsRankingSingleton.produceRanking();
+            PhDsRankingSingleton.produceRanking();
+            StudentsRankingSingleton.produceRanking();
 
-        try {
-            Thread.sleep(15*60*1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RankingDeamon.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                Thread.sleep(SLEEP_TIME * 60 * 1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(RankingDeamon.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        }
-}
-   
-
-
+    }
 }

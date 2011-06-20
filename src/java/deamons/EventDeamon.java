@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EventDeamon extends Thread {
 
-    private static final int SLEEP_TIME = 5;
+    private static final int SLEEP_TIME = 1;
 
     public EventDeamon() {
         setDaemon(true);
@@ -25,14 +25,15 @@ public class EventDeamon extends Thread {
        
         System.out.println("Event deamon started operating!");
 
+        boolean stop = false;
 
-        while (true) {
+        while (!stop) {
 
             try {
            /* Sleep for four minutes. */
            System.out.println("Event daemon " + this.getName() +
                    " is going to sleep for two minutes.");
-           sleep(1000 * 60 * SLEEP_TIME);
+           sleep(1000 * 34 * SLEEP_TIME);
 
            List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {
@@ -56,8 +57,6 @@ public class EventDeamon extends Thread {
                     }
 
                     // Initializing a random event.
-                    System.out.println("Initializing a random even for: " +
-                            idname);
                     LotteryManager mgr = new LotteryManager(idname);
                     mgr.readEventsFromDB();
                     Event e = mgr.getWinner();
@@ -65,20 +64,14 @@ public class EventDeamon extends Thread {
 
                     MessageSystemHelper helper = new MessageSystemHelper();
                     helper.createMessage("Main advisor",idname , e.getName(), e.getInfo(), 0);
-
-                    System.out.println
-                      ("For " + idname +" THE WINNER IS: " + e.getName());
-                    System.out.println("AND THE WINNER'S PROB: "
-                            + e.getNumOfTickets());
                     mgr.writeEventsToDB();
                 }
             }
             catch (Exception ex) {
                 ex.printStackTrace();
-                System.out.println("Event thread got interrupted. ");
+                System.out.println("Event thread " + getName() + " got interrupted. Stopping. ");
+                stop = true;
             }
-
-
         }
         
     }

@@ -17,24 +17,30 @@ import rankings.StudentsRankingSingleton;
  */
 public class RankingDeamon implements Runnable {
 
-    private static final int SLEEP_TIME = 2;
+    private static final int SLEEP_TIME = 1;
 
     public RankingDeamon() {
-        //    setDaemon(true);
     }
 
     public void run() {
-        while (true) {
+        boolean stopped = false;
+        System.out.println("Starting ranking deamon!");
+        while (!stopped) {
 
+            try {
+                Thread.sleep(SLEEP_TIME * 41 * 1000);
+
+            System.out.println("Ranking daemon woke up!");
             MoneyRankingSingleton.produceRanking();
             ResearchPointsRankingSingleton.produceRanking();
             PhDsRankingSingleton.produceRanking();
             StudentsRankingSingleton.produceRanking();
+            }
 
-            try {
-                Thread.sleep(SLEEP_TIME * 60 * 1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(RankingDeamon.class.getName()).log(Level.SEVERE, null, ex);
+            catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("Ranking daemon caught exception!");
+                stopped = true;
             }
         }
     }

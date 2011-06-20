@@ -69,6 +69,7 @@ public class DeamonManager {
         if (!ranking_deamon_started && ranking_deamon == null) {
             ranking_deamon_started = true;
             ranking_deamon = new Thread(new RankingDeamon());
+            ranking_deamon.setDaemon(true);
             ranking_deamon.start();
 
         }

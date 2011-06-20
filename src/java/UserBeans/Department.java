@@ -22,6 +22,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.BasicUtils;
+import utilities.LecturersManager;
 
 
 
@@ -43,11 +44,6 @@ public class Department implements Serializable {
     }
 
     public String deleteDepartment() throws IOException {
-        
-        // Deleting player resources.
-        //PlayerresourcesHelper playerresources = new PlayerresourcesHelper();
-        //playerresources.deleteResources(username);
-
 
 
         // Deleting department info.
@@ -69,9 +65,8 @@ public class Department implements Serializable {
 
 
         // Deleting lecturers onwed info.
-        LecturersOwnedHelper ownedHelper
-                = new LecturersOwnedHelper();
-        ownedHelper.deleteLecturer(username);
+        LecturersManager mgr = new LecturersManager(username);
+        mgr.removeAllOwnedLecturer();
 
         // Deleting research
         // TODO

@@ -45,14 +45,16 @@ public class StatsDeamon extends Thread {
     @Override
     public void run() {
 
+        boolean stopped = false;
         PlayerHelper playerHelper = new PlayerHelper();
+        System.out.println("Stats deamon " + getName() + " created ");
 
-        while(true) {
+        while(!stopped) {
 
             try {
             // Initially sleep for one unit of time.
-                System.out.println("Stats deamon operating");
-            sleep(SLEEP_TIME * 1000 * 30);
+            System.out.println("Stats deamon " + getName() +" sleeping");
+            sleep(SLEEP_TIME * 1000 * 47);
 
             // Iterating through a player list, updating all statistics.
             List<Players> allPlayers = playerHelper.getPlayers();
@@ -72,9 +74,11 @@ public class StatsDeamon extends Thread {
                 }
             }
 
-            } catch (InterruptedException ex) {
+            } catch (Exception ex) {
+                ex.printStackTrace();
                 System.out.println("Thread " + this.getName() + " operating as a"
                         + " stats deamon got interrupted.");
+                stopped = true;
             }
         }
     }

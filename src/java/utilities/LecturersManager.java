@@ -146,6 +146,16 @@ public class LecturersManager {
         return true;
     }
 
+    public void removeAllOwnedLecturer() {
+        List<Lecturer> lecturers = getOwnedLecturers();
+        LecturersOwnedHelper lecturersOwnedHelper = new LecturersOwnedHelper();
+        Iterator<Lecturer> it = lecturers.iterator();
+        while (it.hasNext()) {
+            String lecturerName = it.next().getName();
+            lecturersOwnedHelper.deleteLecturer(lecturerName);
+        }
+    }
+
     /* Adds lecturers to the players list if possible.*/
         public boolean addLecturer(int lecturerid) {
         ArrayList<Lecturer> ownedLecturers = getOwnedLecturers();

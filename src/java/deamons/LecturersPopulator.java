@@ -26,15 +26,17 @@ public class LecturersPopulator extends Thread {
         LecturersSpecializationsHelper specHelper = new LecturersSpecializationsHelper();
 
         DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
+        System.out.println("Lecturers thread " + getName() + " started");
         
+        boolean stopped = false;
 
-        while (true) {
+        while (!stopped) {
             try {
                 System.out.println(this.getName()
                         + " is repopulating available lecturers");
                 /* Sleep for five minutes. */
                 System.out.println(this.getName() + " is going to sleep.");
-                sleep(1000 * 60 * SLEEP_TIME);
+                sleep(1000 * 26 * SLEEP_TIME);
 
                 // Updating available lecturers for all players
 
@@ -73,8 +75,10 @@ public class LecturersPopulator extends Thread {
                     }
                 }
 
-            } catch (InterruptedException ex) {
-                System.out.println(this.getName() + " I BROKE :((((((((((");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println(this.getName() + " Lecturers thread broke!");
+                stopped = true;
             }
         }
     }

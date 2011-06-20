@@ -6,55 +6,66 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:component>
-        <p:dialog header="Buy Professor" widgetVar="buypro" modal="true" height="600" width="800"
+        <p:dialog id="profdial" header="Buy Professor" widgetVar="buypro" modal="true" height="600" width="800"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
-            <h:form>
-                <p:carousel id="karuz" value="#{buyLecturers.lecturers}" var="lecturer"
-                            rows="1" itemStyle="height:500px;width:700px;" effect="easeInStrong">
+            <h:form id="profform">
 
+                <div align="center">
+                    <h2> Buy some profsand improve your DoC performance</h2>
+                    Your Profssor capacity is <h:outputText value="#{buyLecturers.capacity}"/> professors
+                    <br/>
+                    You already have <h:outputText value="#{buyLecturers.profNumber}" /> professors
+                    <br/>
+                            <h:panelGrid id="profshop">
 
-
-                    <p:column>
-                        <h:panelGrid id ="panel" columns="2" style="width:100% ; height:100%">
-                            <h:column>
-                            <img src="ico/pro.png"/>
-                            </h:column>
-
-                            <h:panelGrid>
-                            <h:outputText value="Name: #{lecturer.name}" />
-                            <h:outputText value="Price: #{lecturer.price}" />
-
-                            <p:dataTable var="list" value="#{lecturer.specializations}" >
-                                <p:column headerText="Specialisation"  >
-                                    <h:outputText value="#{list.field}"/>
+                            <p:dataTable id="proftable" var="lec" value="#{buyLecturers.lecturers}" >
+                                <p:column headerText="Name"  >
+                                    <h:outputText value="#{lec.name}"/>
                                 </p:column>
-                                <p:column headerText="Boost">
-                                    <h:outputText value="#{list.boost}"/>
+                                <p:column headerText="Price">
+                                    <h:outputText value="#{lec.price}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Specialisations" oncomplete="showspec.show()" update=":profform:ShowSpecGrid">
+                                        <f:setPropertyActionListener target="#{buyLecturers.selected_lecturer}" value="#{lec}"/>
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Purchese">
+                                    <p:commandButton id="but" value="Buy" action="#{buyLecturers.buy}" update="proftable,profform" >
+                                        <f:setPropertyActionListener target="#{buyLecturers.selected_lecturer}" value="#{lec}"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
-
-                            <p:commandButton id="submitProf"
-                                             style="width:150px"
-                                             value="Buy!"
-                                             action="#{buyLecturers.buy}"
-                                             update="error,karuz">
-
-                                <f:setPropertyActionListener value="#{lecturer}" target="#{buyLecturers.selected_lecturer}" for="submitProf" />
-                            </p:commandButton>
                             </h:panelGrid>
 
-                        </h:panelGrid>
+                </div>
 
-                        <h:panelGrid id="error">
-                            <p:message for="submitProf"/>
-                        </h:panelGrid>
+
+                <p:dialog widgetVar="showspec" height="180" width="400" >
+
+                     <h:panelGrid id="ShowSpecGrid">
+
+
+                <p:dataTable  var="spec" value="#{buyLecturers.selected_lecturer.specializations}">
+                    <p:column headerText="Specialisation">
+                        <h:outputText value="#{spec.field}"/>
                     </p:column>
+                    <p:column headerText="Specialisation boost">
+                        <h:outputText value="#{spec.boost}"/>
+                    </p:column>
+                </p:dataTable>
 
-                </p:carousel>
-            </h:form>
+            </h:panelGrid>
+
         </p:dialog>
 
+            </h:form>
+
+           
+        </p:dialog>
+
+       
 
 
         <p:dialog header="Buy Students" widgetVar="buystu" modal="true" height="500" width="700"

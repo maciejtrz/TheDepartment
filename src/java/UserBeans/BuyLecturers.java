@@ -5,6 +5,7 @@ import ConnectionDataBase.LecturersAvailableHelper;
 import ConnectionDataBase.LecturersOwnedHelper;
 import ConnectionDataBase.Playerresources;
 import Connections.ConnectionSingleton;
+import Connections.UserManager;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -45,11 +46,11 @@ public class BuyLecturers  {
     }
 
     public Lecturer getSelected_lecturer () {
-        return selected_lecturer;
+        return this.selected_lecturer;
     }
 
     public void setSelected_lecturer (Lecturer lec) {
-        selected_lecturer = lec;
+        this.selected_lecturer = lec;
     }
 
     public List<LecturerBenefits> getBenefitsList() {
@@ -58,6 +59,7 @@ public class BuyLecturers  {
 
     public void buy() {
 
+        Lecturer l = selected_lecturer;
         System.out.println("buying prof");
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -67,23 +69,23 @@ public class BuyLecturers  {
         Playerresources resources = auth.getResources();
         CapacityHelper capacityhelper = new CapacityHelper();
         
-        System.out.println(" cases start");
+        System.out.println("cases start");
 
         if( capacityhelper.getCapacity(auth.getUsername()).getProfessorscapacity() <=  mgr.getOwnedLecturers().size() ){
 
             System.out.println("capacity fail");
 
                 FacesContext.getCurrentInstance().addMessage(
-                BasicUtils.findComponent(facesContext.getViewRoot(),"submitProf").getClientId(facesContext),
+                BasicUtils.findComponent(facesContext.getViewRoot(),"but").getClientId(facesContext),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR," Me ", "Not enought space for new Prof!!!"));
                 return;
 
-        } else if ( resources.getMoney() < selected_lecturer.getPrice()){
+        } else if ( resources.getMoney() < l.getPrice()){
 
             System.out.println("money fail");
 
              FacesContext.getCurrentInstance().addMessage(
-             BasicUtils.findComponent(facesContext.getViewRoot(),"submitProf").getClientId(facesContext),
+             BasicUtils.findComponent(facesContext.getViewRoot(),"but").getClientId(facesContext),
              new FacesMessage(FacesMessage.SEVERITY_ERROR," Me ", "This guy is too expensive for your DoC!!!"));
              return;
         }
@@ -100,12 +102,26 @@ public class BuyLecturers  {
         LecturersAvailableHelper avail = new LecturersAvailableHelper();
 
 
-        int price = getSelected_lecturer().getPrice();
-        avail.deleteLecturer(getSelected_lecturer().getName());
-        this.owned.addLecturer(getSelected_lecturer().getName(), username);
-        resources.setMoney(resources.getMoney()-price);
+        int price = l.getPrice();
+        avail.deleteLecturer(l.getName());
+        this.owned.addLecturer(l.getName(), username);
+        UserManager.removeMoney(username, price);
 
+        lecturers = mgr.getAvailabeLecturers();
 
+   
+
+    }
+
+    public String getCapacity(){
+        CapacityHelper capacityhelper = new CapacityHelper();
+        Integer cap = capacityhelper.getCapacity(username).getProfessorscapacity();
+        return cap.toString();
+    }
+
+    public String getProfNumber(){
+        Integer i = mgr.getOwnedLecturers().size();
+        return i.toString();
     }
 
 

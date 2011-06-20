@@ -9,6 +9,8 @@ import utilities.LecturersManager;
 
 public class LecturersPopulator extends Thread {
 
+    private static final int SLEEP_TIME = 1;
+
     public LecturersPopulator() {
         setDaemon(true);
     }
@@ -28,16 +30,16 @@ public class LecturersPopulator extends Thread {
 
         while (true) {
             try {
-
-
                 System.out.println(this.getName()
                         + " is repopulating available lecturers");
+                /* Sleep for five minutes. */
+                System.out.println(this.getName() + " is going to sleep.");
+                sleep(1000 * 60 * SLEEP_TIME);
 
                 // Updating available lecturers for all players
 
                 List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {
-                    System.out.println("You are right sir!");
                     continue;
                 }
                 Iterator<Players> it = allPlayers.iterator();
@@ -70,10 +72,6 @@ public class LecturersPopulator extends Thread {
                         manager.repopulateAvailableLec();
                     }
                 }
-
-                /* Sleep for five minutes. */
-                System.out.println(this.getName() + " is going to sleep.");
-                sleep(1000 * 60 * 1);
 
             } catch (InterruptedException ex) {
                 System.out.println(this.getName() + " I BROKE :((((((((((");

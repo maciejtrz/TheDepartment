@@ -39,6 +39,7 @@ public class ResearchBag implements Serializable {
             researchHelper = new ResearchHelper();
             
         }
+
     }
 
     public String getUserid() {

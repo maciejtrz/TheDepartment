@@ -12,7 +12,7 @@
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
 
        
-                <p:dataTable id="ongoingResearches" var="research" value="#{researchBag.researches}" widgetVar="researchTable">
+                <p:dataTable id="ongoingResearches" var="research" value="#{researchReader.researches}" widgetVar="researchTable">
 
                     <p:column headerText="Research Title">
                         <h:outputText value="#{research.name}" />
@@ -29,13 +29,12 @@
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
-                <p:poll interval="10" update="ongoingResearches" />
            
 
             <h3>Finished Researches</h3>
 
          
-                <p:tree value="#{researchBag.finishedReserchTree}" id="finishedResearches" var="node">
+                <p:tree value="#{researchReader.finishedReserchTree}" id="finishedResearches" var="node">
                     <p:treeNode>
                         <h:outputText value="#{node}"/>
                     </p:treeNode>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.icefaces.application.PushRenderer;
 import utilities.BasicUtils;
 
 public class AuctionMessageReader extends MessageWriter implements Serializable {
@@ -18,6 +19,8 @@ public class AuctionMessageReader extends MessageWriter implements Serializable 
     public AuctionMessageReader() {
         super(MessageSingleton.AUCTION_BOARD, MessageSingleton.AUCTION_OFFER);
         checked = false;
+
+        PushRenderer.addCurrentSession(AuctionMonitor.auctionGroup);
     }
 
     public List<Auction> getAuctionOffers() {

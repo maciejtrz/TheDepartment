@@ -184,13 +184,13 @@
     <managed-bean>
         <managed-bean-name>auctionMessageReader</managed-bean-name>
         <managed-bean-class>messageSystem.AuctionMessageReader</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>noticeMessageReader</managed-bean-name>
         <managed-bean-class>messageSystem.NoticeMessageReader</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
 
@@ -236,7 +236,9 @@
         <managed-bean-class>buildings.UpgradeBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    
 </faces-config>
+
 
 
 

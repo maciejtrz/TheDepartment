@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
+import org.icefaces.application.PushRenderer;
 
 /**
  *
@@ -25,6 +26,8 @@ public class AuctionMonitor {
     private List<Auction> listAuction = new ArrayList<Auction>();
     private MessageSystemHelper messageSystemHelper = new MessageSystemHelper();
     private AuctionhistoryHelper auctionHistoryHelper = new AuctionhistoryHelper();
+
+    public final static String auctionGroup = "auctionGroup";
 
     public AuctionMonitor() {
         List<Messagesystem> auctionsDb =
@@ -80,6 +83,9 @@ public class AuctionMonitor {
                 auction.encode(), MessageSingleton.AUCTION_OFFER);
 
         auction.setMsgnumber(msgNumber);
+
+        PushRenderer.render(auctionGroup);
+
     }
 
     public synchronized void update() {

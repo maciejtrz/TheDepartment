@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import messageSystem.TradeOffer;
+import org.icefaces.application.PushRenderer;
 import resources.Resource;
 import resources.ResourcesType;
 
@@ -59,6 +60,12 @@ public class UserManager {
             }
         }
 
+    }
+
+    public static void notifyAboutTradeOffer(String receiverid) {
+        if(isUserMonitored(receiverid)) {
+            PushRenderer.render(receiverid + "trading");
+        }
     }
 
 

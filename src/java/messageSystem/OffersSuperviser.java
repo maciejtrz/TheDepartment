@@ -22,17 +22,16 @@ public class OffersSuperviser implements Runnable{
         return noticeMonitor;
     }
 
-    public static void initializeOffersSupervise() {       
+    public static void initializeOffersSupervise() {
+        noticeMonitor = new NoticeMonitor();
+        auctionMonitor = new AuctionMonitor();
+
         Thread thread = new Thread(new OffersSuperviser());
         thread.setDaemon(true);
         thread.start();
     }
 
     public void run() {
-
-        noticeMonitor = new NoticeMonitor();
-        auctionMonitor = new AuctionMonitor();
-
         while(true) {
 
             try {

@@ -6,6 +6,7 @@ package messageSystem;
 
 import java.io.Serializable;
 import java.util.List;
+import org.icefaces.application.PushRenderer;
 import utilities.BasicUtils;
 
 /**
@@ -17,6 +18,8 @@ public class NoticeMessageReader extends MessageWriter implements Serializable  
 
     public NoticeMessageReader() {
         super(MessageSingleton.NOTICE_BOARD, MessageSingleton.NOTICE_BOARD_OFFER);
+
+        PushRenderer.addCurrentSession(NoticeMonitor.noticeGroup);
     }
     public List<TradeOffer> getOfferedNoticeTrades() {
         return OffersSuperviser.getNoticeMonitor().getNoticeOffers();

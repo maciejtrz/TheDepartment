@@ -50,7 +50,6 @@
                         </div>
                     </p:column>
                 </p:dataTable>
-                <p:poll interval="30" update="noticeBoard" />
 
 
                 <p:dialog header="Notice Offer Details"
@@ -150,7 +149,7 @@
 
                     <p:commandButton value="Submit"
                                      id="sendNoticeOfferTrade"
-                                     action="#{noticeMessageWriter.sendNoticeOffer}"
+                                     actionListener="#{noticeMessageWriter.sendNoticeOffer}"
                                      update="newNoticeOfferGrid,expireNoticeOfferDate,noticeBoardOfferForm"
                                      />
                     <p:message for="sendNoticeOfferTrade" />

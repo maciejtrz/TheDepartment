@@ -23,6 +23,4 @@ public class PlainMessageReader extends MessageWriter implements Serializable  {
         PushRenderer.addCurrentSession(BasicUtils.getUserName());
     }
 
-    
-
 }

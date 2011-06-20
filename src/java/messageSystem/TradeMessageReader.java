@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.icefaces.application.PushRenderer;
 import utilities.BasicUtils;
 
 public class TradeMessageReader extends MessageWriter implements Serializable {
@@ -34,14 +35,16 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
     private TradeOffer yourSelectedTradeOffer;
 
     public TradeMessageReader() {
-        super(null,MessageSingleton.TRADE_OFFER);
+        super(BasicUtils.getUserName(),MessageSingleton.TRADE_OFFER);
         checked = false;
         yourMessagesChecked = false;
+
+        setUsername(BasicUtils.getUserName());
+        PushRenderer.addCurrentSession(BasicUtils.getUserName() + "trading");
     }
 
     public void initialize(String username) {
-        System.out.println("Username in trade reader: " + username);
-        super.setUsername(username);
+        
     }
 
     public List<TradeOffer> getOfferedTrades() {

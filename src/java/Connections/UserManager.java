@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import messageSystem.TradeOffer;
+import org.icefaces.application.PushRenderer;
 import resources.Resource;
 import resources.ResourcesType;
 
@@ -51,6 +52,12 @@ public class UserManager {
            }
         }
 
+    }
+
+    public static void notifyAboutTradeOffer(String receiverid) {
+        if(isUserMonitored(receiverid)) {
+            PushRenderer.render(receiverid + "trading");
+        }
     }
 
 
@@ -139,6 +146,7 @@ public class UserManager {
             Playerresources resources = getResources(username);
             resources.setMoney(resources.getMoney() + money);
             saveResources(resources);
+            resourcesChange(username);
 
     }
 
@@ -169,6 +177,7 @@ public class UserManager {
                 resources.setMoney(resources.getMoney() - money);
                 saveResources(resources);
                 result = true;
+                resourcesChange(username);
             }
 
             return result;
@@ -179,6 +188,7 @@ public class UserManager {
             Playerresources resources = getResources(username);
             resources.setResearchpoints(resources.getResearchpoints()+researchPoints);
             saveResources(resources);
+            resourcesChange(username);
     }
 
 
@@ -192,6 +202,7 @@ public class UserManager {
                 resources.setMoney(resources.getPhdsnumber() - phdsnumber);
                 saveResources(resources);
                 result = true;
+                resourcesChange(username);
             }
 
             return result;
@@ -202,6 +213,7 @@ public class UserManager {
             Playerresources resources = getResources(username);
             resources.setPhdsnumber(resources.getPhdsnumber()+ phdsnumber);
             saveResources(resources);
+            resourcesChange(username);
     }
 
     static synchronized public boolean removeUndegraduatesnumber(String username, int undergraduatesnumber) {
@@ -214,9 +226,10 @@ public class UserManager {
                 resources.setMoney(resources.getUndergraduatesnumber() - undergraduatesnumber);
                 saveResources(resources);
                 result = true;
+                resourcesChange(username);
             }
 
-            return result;
+         return result;
 
     }
 
@@ -224,6 +237,8 @@ public class UserManager {
             Playerresources resources = getResources(username);
             resources.setUndergraduatesnumber(resources.getUndergraduatesnumber()+undergraduatesnumber);
             saveResources(resources);
+
+            resourcesChange(username);
     }
 
     static synchronized private void addResearchFromDB(Research research) {
@@ -287,10 +302,6 @@ public class UserManager {
     }
 
     synchronized public static boolean makeTrade(TradeOffer tradeOffer) {
-        
-
-        System.out.println("Trade between: " + tradeOffer.getSenderid() + " and " + tradeOffer.getReceiverid());
-
         Playerresources senResources = getResources(tradeOffer.getSenderid());
         Playerresources recResources = getResources(tradeOffer.getReceiverid());
 
@@ -303,16 +314,12 @@ public class UserManager {
                 resourceWanted.canRemove(recResources, tradeOffer.getAmountWanted())) {
             result = true;
 
-            System.out.println("Trade executed");
-
             resourceOffered.remove(senResources, tradeOffer.getAmountOffered());
             resourceOffered.add(recResources, tradeOffer.getAmountOffered());
 
             resourceWanted.remove(recResources, tradeOffer.getAmountWanted());
             resourceWanted.add(senResources, tradeOffer.getAmountWanted());
-        } else {
-            System.out.println("Trade not executed");
-        }
+        } 
 
         saveResources(senResources);
         saveResources(recResources);
@@ -328,15 +335,10 @@ public class UserManager {
     }
 
     public static void notifyAboutSendingMessage(String username) {
-        System.out.println("Notifying...");
-        System.out.println("User: " + username);
-        System.out.println("System contains auth: " + sessionMap.containsKey(username));
         if(isUserMonitored(username)) {
             Auth auth = getUser(username);
            
             auth.notifyAboutSendingMessage();
-            System.out.println("Notified...");
-            System.out.println("User: " + auth.getUsername());
         }
     }
 
@@ -379,6 +381,13 @@ public class UserManager {
         }
         else {
             return 0;
+        }
+    }
+
+
+    public static void resourcesChange(String username) {
+        if(isUserMonitored(username)) {
+            PushRenderer.render(username);
         }
     }
 

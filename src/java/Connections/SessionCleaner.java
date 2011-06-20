@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import org.icefaces.application.PushRenderer;
 
 public class SessionCleaner implements HttpSessionListener, HttpSessionAttributeListener {
 
@@ -31,6 +32,7 @@ public class SessionCleaner implements HttpSessionListener, HttpSessionAttribute
         if (event.getName().equals(ConnectionSingleton.idname)) {
 
             AuthorizationSingleton.updateUserStatus(event.getValue().toString(), false);
+            PushRenderer.addCurrentSession(ConnectionSingleton.idname);
 
         } else if (event.getName().equals(ConnectionSingleton.researchBag)) {
 

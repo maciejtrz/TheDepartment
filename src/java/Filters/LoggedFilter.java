@@ -51,8 +51,6 @@ public class LoggedFilter implements Filter {
 
             Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
             ResearchBag researchBag = (ResearchBag)session.getAttribute(ConnectionSingleton.researchBag);
-            TradeMessageReader tradeMessageReader = (TradeMessageReader)
-                    session.getAttribute(ConnectionSingleton.tradeMessageReader);
 
             AddResearch addResearch = (AddResearch) session.getAttribute(ConnectionSingleton.addResearch);
 
@@ -68,12 +66,7 @@ public class LoggedFilter implements Filter {
                 return;
             }
 
-            if(tradeMessageReader == null) {
-
-                res.sendRedirect(ConnectionSingleton.addTradeMessageReader);
-                return;
-                
-            }
+            
 
             if(!UserManager.isUserMonitored(auth.getUsername())) {
                 UserManager.addUser(auth);

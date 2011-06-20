@@ -5,6 +5,7 @@
 package messageSystem;
 
 import ConnectionDataBase.MessageSystemHelper;
+import Connections.UserManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -193,8 +194,14 @@ public class TradeWriter extends MessageWriter implements Serializable {
 
             getTradeOffer().cleanTradeOffer();
 
+            if(getMessageType() == MessageSingleton.TRADE_OFFER) {
+                UserManager.notifyAboutTradeOffer(getReceiverid());
+            }
+
             result = "success";
         }
+
+
 
         return result;
     }

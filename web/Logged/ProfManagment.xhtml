@@ -1,0 +1,54 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:component>
+
+          <h:form id="progmanform">
+       <p:dialog widgetVar="profmanagement" header="Manage your Profs!"  modal="true" height="500" width="700"
+                  showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
+
+                <h:panelGrid id="profmanpanel">
+                    <p:dataTable id="tableP" var="lecturer" value="#{LecturerManagement.owned}">
+                        <p:column headerText="Name">
+                            <h:outputText value="#{lecturer.name}"/>
+                        </p:column>
+                        <p:column headerText="Specialisations">
+                            <p:commandButton value="Specialisations" oncomplete="showspecman.show()" update=":profmanpanel:showspecman">
+                                <f:setPropertyActionListener target="#{LecturerManagement.selected_lecturer}" value="#{lecturer}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Fire!" update="tableP">
+                                <f:setPropertyActionListener target="#{LecturerManagement.delete}" value="#{lecturer}"/>
+                            </p:commandButton>
+
+                        </p:column>
+                    </p:dataTable>
+            </h:panelGrid>
+
+        </p:dialog>
+
+                    <p:dialog widgetVar="showspecman" height="180" width="400">
+
+                    <h:panelGrid id="ShowSpecGridMan">
+
+
+                        <p:dataTable  var="special" value="#{LecturerManagement.selected_lecturer.specializations}">
+                            <p:column headerText="Specialisation">
+                                <h:outputText value="#{special.field}"/>
+                            </p:column>
+                            <p:column headerText="Specialisation boost">
+                                <h:outputText value="#{special.boost}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:panelGrid>
+
+
+                </p:dialog>
+                    </h:form>
+      </ui:component>
+</html>

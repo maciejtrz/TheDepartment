@@ -236,7 +236,13 @@
         <managed-bean-class>buildings.UpgradeBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>LecturerManagement</managed-bean-name>
+        <managed-bean-class>utilities.LecturerManagement</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
+
 
 
 

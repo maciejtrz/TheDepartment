@@ -84,12 +84,12 @@
                                     <h:outputText value="#{noticeMessageReader.selectedNoticeOffer.expireDate}" />
 
                                     <br/>
-                                    <p:commandButton value="Accept"
-                                                     onclick="noticeOfferDetails.hide()" ajax="false">
+                                    <h:commandButton value="Accept"
+                                                     onclick="noticeOfferDetails.hide()">
                                         <f:setPropertyActionListener
                                             value="#{noticeMessageReader.selectedNoticeOffer}"
                                             target="#{noticeMessageReader.answerTradeOffer}" />
-                                    </p:commandButton>
+                                    </h:commandButton>
 
                                </h:panelGrid>
 

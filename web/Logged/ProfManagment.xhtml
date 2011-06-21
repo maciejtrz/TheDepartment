@@ -6,11 +6,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:component>
 
-
+<h:form id="progmanform">
         <p:dialog widgetVar="profmanagement" header="Manage your Profs!"  modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false" >
             
-            <h:form id="progmanform">
+            
                 <h:panelGrid id="profmanpanel">
                     <p:dataTable id="tableP" var="lecturer" value="#{LecturerManagement.owned}">
                         <p:column headerText="Name">
@@ -48,10 +48,9 @@
 
                     </h:panelGrid>
                 </p:dialog>
-            </h:form>
+            
         </p:dialog>
-
-
+</h:form>
         
     </ui:component>
 </html>

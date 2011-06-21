@@ -172,6 +172,8 @@ public class TradeMessageReader extends MessageWriter implements Serializable {
                     acceptedTradeOffer.getAmountWanted() + " of " + 
                     acceptedTradeOffer.getResourcesWantedName()));
 
+            PushRenderer.render(acceptedTradeOffer.getSenderid() + "trading");
+
         } else {
             offeredTrades.remove(acceptedTradeOffer);
         }

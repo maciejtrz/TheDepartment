@@ -199,6 +199,8 @@ public class TradeWriter extends MessageWriter implements Serializable {
             }
 
             result = "success";
+
+            tradeOffer = new TradeOffer();
         }
 
         return result;

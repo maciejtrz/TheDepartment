@@ -9,7 +9,7 @@ import utilities.LecturersManager;
 
 public class LecturersPopulator extends Thread {
 
-    private static final int SLEEP_TIME = 3;
+    private static final int SLEEP_TIME = 1;
 
     public LecturersPopulator() {
         setDaemon(true);
@@ -80,7 +80,7 @@ public class LecturersPopulator extends Thread {
 
             } catch (Exception ex) {
                 ex.printStackTrace();
-                System.out.println(this.getName() + " Lecturers thread broke!");
+                System.out.println(this.getName() + " Lecturers thread broke!!!!!!!!!!!!!!!!");
                 stopped = true;
             }
         }

@@ -21,8 +21,15 @@ and open the template in the editor.
     </h:head>
 
 
+
+
     <h:body>
 
+        <script language="JavaScript">
+            function reload_page() {
+            window.location.reload(true);
+            }
+        </script>
 
         <ui:include src="Map.xhtml"/>
 
@@ -32,7 +39,7 @@ and open the template in the editor.
         </h:form>
 
         <h:form id="tbar">
-            <p:toolbar>
+            <p:toolbar id="toolbarId">
                 <p:toolbarGroup  align="left">
                     <p:commandButton disabled="true" value="User" />  <h:outputText value="" /> <!-- SEPARATOR -->
                     <h:outputText value="#{auth.username}"  /> <h:outputText value="" /> <!-- SEPARATOR -->
@@ -57,7 +64,7 @@ and open the template in the editor.
 
                 <p:toolbarGroup align="right">
 
-                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{user.logoff}" value="Log out" />
+                    <p:commandButton type="push" image="ui-icon ui-icon-arrowrefresh-1-w" action="#{user.logoff}" value="Log out" oncomplete="reload_page()" />
                 </p:toolbarGroup>
 
             </p:toolbar>
@@ -128,8 +135,8 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu label="Delete" >
-                    <p:menuitem value="Department" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" />
-                    <p:menuitem value="User" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" />
+                    <p:menuitem value="Department" action="#{department.deleteDepartment}" icon="ui-icon ui-icon-close" oncomplete="reload_page()" />
+                    <p:menuitem value="User" action="#{user.deleteMe}" icon="ui-icon ui-icon-close" oncomplete="reload_page()"/>
                 </p:submenu>
 
             </p:menu>

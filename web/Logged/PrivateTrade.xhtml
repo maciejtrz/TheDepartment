@@ -162,9 +162,11 @@
 
                         <p:commandButton value="Accept"
                                          id="acceptButton"
-                                         update="offeredTrades"
-                                         oncomplete="privateTradeDetails.close()">
-                            <f:setPropertyActionListener value="#{tradeMessageReader.selectedShowTrade}" target="#{tradeMessageReader.acceptTradeOffer}" />
+                                         update="offeredTrades, :tbar:toolbarId"
+                                         oncomplete="privateTradeDetails.close()"
+                                         >
+                            <f:setPropertyActionListener value="#{tradeMessageReader.selectedShowTrade}" target="#{tradeMessageReader.acceptTradeOffer}"
+                                                         />
                         </p:commandButton>
 
                         <p:commandButton value="Decline"
@@ -266,7 +268,7 @@
                         <p:commandButton value="Remove"
                                          update="yourOfferedTrades">
                             <f:setPropertyActionListener
-                                value="#{yourTradeOffer}" target="#{tradeMessageReader.deleteTradeOffer}" />
+                                value="#{tradeMessageReader.yourSelectedShowTrade}" target="#{tradeMessageReader.deleteTradeOffer}" />
                         </p:commandButton>
                     </h:panelGrid>
 

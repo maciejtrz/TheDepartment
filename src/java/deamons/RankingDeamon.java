@@ -28,7 +28,7 @@ public class RankingDeamon implements Runnable {
         while (!stopped) {
 
             try {
-                Thread.sleep(SLEEP_TIME * 41 * 1000);
+                Thread.sleep(SLEEP_TIME * 60 * 1000);
 
             System.out.println("Ranking daemon woke up!");
             MoneyRankingSingleton.produceRanking();

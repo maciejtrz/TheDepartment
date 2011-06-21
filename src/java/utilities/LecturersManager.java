@@ -431,6 +431,7 @@ public class LecturersManager {
                 generated_specializations.add(specialization);
                 int boost = (rand.nextInt(10) + 1);
 
+                price += boost * 100;
                 /* Setting up the specialization. */
                 LecturerBenefits lb = new LecturerBenefits(specialization , boost);
                 specList.add(lb);

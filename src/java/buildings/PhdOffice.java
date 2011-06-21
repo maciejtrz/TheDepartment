@@ -17,7 +17,7 @@ public class PhdOffice extends Building {
         cost = 2000;
         max_level = ADVANCED_LEVEL;
         upgrade_base_cost = 1000;
-        capacity_base_upgrade = 100;
+        capacity_base_upgrade = 200;
     }
 
     @Override

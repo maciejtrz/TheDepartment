@@ -42,13 +42,13 @@ public class PubDemolished extends Event {
         pub.remove(playerName, pub_position);
 
         // Decreasing student satisfaction.
-        if (!decreaseSatisfaction(playerName, LotteryManager.HIGH)) {
+        if (!decreaseSatisfaction(playerName, LotteryManager.MEDIUM)) {
             // This should not happen.
             return false;
         }
 
         // Decreasing student alcoholizm level
-        if (!decreaseAlcoholizm(playerName, LotteryManager.HIGH)) {
+        if (!decreaseAlcoholizm(playerName, LotteryManager.MEDIUM)) {
             // This should never happen.
             return false;
         }

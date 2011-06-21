@@ -11,7 +11,7 @@ public class PlayerresourcesHelper extends AbstractHelper {
     public void createPlayerResources(String idname) {
         Playerresources playerResources = new Playerresources();
         playerResources.setIdname(idname);
-        playerResources.setMoney(100000);
+        playerResources.setMoney(10000);
         playerResources.setPhdsnumber(0);
         playerResources.setUndergraduatesnumber(0);
         playerResources.setResearchpoints(0);

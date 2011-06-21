@@ -25,7 +25,7 @@ public class TrescoMiracle extends Event {
         }
 
         // Decreasing students starvation.
-        decreaseStarvation(playerName, LotteryManager.HIGH);
+        decreaseStarvation(playerName, LotteryManager.LOW);
 
         return true;
     }

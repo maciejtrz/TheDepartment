@@ -19,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.TreeNode;
 import specializationsGenerator.SpecializationsGenerator;
@@ -228,6 +229,16 @@ public class AddResearch implements Serializable {
     public void startResearch() {
 
         confirmation = false;
+
+        if(!validateSubject()) {
+            return;
+        } else if(chosenLecturers.isEmpty()) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "lecturersList").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturer chosen",
+                    "You must chose at least one lecturer for your research!"));
+        }
         
         System.out.println("Chosen integer: " + getChosenResearch());
         System.out.println("Name: " + getResearchName());
@@ -292,133 +303,15 @@ public class AddResearch implements Serializable {
 
         clean();
 
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "subjectList").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "New Research", "You added new research!"));
+
     }
 
-    public String onFlowProcess(FlowEvent event) {
-
-        String currentStep = event.getOldStep();
-        String nextStep = event.getNewStep();
-
-        System.out.println("Old: " + event.getOldStep());
-        System.out.println("New: " + event.getNewStep());
-
-        String next = null;
-
-        if (currentStep.equals("researchSubject") && nextStep.equals("researchLecturers")
-                && getLecturerList().isEmpty()) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "subjectList").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturers available",
-                    "You must have at least one lecturer in your chosen subject!"));
-
-        } else if (currentStep.equals("researchSubject") && nextStep.equals("researchLecturers")
-                && availableResearches.isEmpty()) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "subjectList").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No research available",
-                    "You have no available research at given subject!"));
-
-        } else if (currentStep.equals("researchLecturers") && chosenLecturers.isEmpty()
-                && !nextStep.equals("researchSubject")) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "lecturersList").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturer chosen",
-                    "You must chose at least one lecturer for your research!"));
-
-        } else if(currentStep.equals("moneyAmount") && nextStep.equals("undegraduates")
-                 && getMoneyAmount() <= 0){
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "researchMoneyAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No money",
-                    "You must spend some money on your research!"));
-
-        } else if (currentStep.equals("moneyAmount") && nextStep.equals("undegraduates")
-                 && getMoneyAmount() > UserManager.getMoney(BasicUtils.getUserName())) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "researchMoneyAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No money",
-                    "You do not have so much money!"));
-
-        } else if (currentStep.equals("undegraduates") && nextStep.equals("phds")
-                 && getUndergraduates() > UserManager.getStudents(BasicUtils.getUserName())) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "undegraduatesAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No students",
-                    "You do not have so many students!"));
-
-        } else if (currentStep.equals("undegraduates") && nextStep.equals("phds")
-                 && getUndergraduates() < 0) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "undegraduatesAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No students",
-                    "You cannot assign negative number of students"));
-
-        } else if (currentStep.equals("phds") && nextStep.equals("confirmation")
-                 && getPhds() > UserManager.getStudents(BasicUtils.getUserName())) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "phdsAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No phds",
-                    "You do not have so many PhD students!"));
-
-        } else if (currentStep.equals("phds") && nextStep.equals("confirmation")
-                 && getPhds() < 0) {
-
-            next = currentStep;
-
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
-                    "phdsAmount").getClientId(facesContext),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No phds",
-                    "You cannot assign negative amount of phds!"));
-
-        } else if(currentStep.equals("confirmation") && nextStep.equals("undefined")) {
-
-            next = "researchSubject";
-
-        } else {
-
-            next = nextStep;
-
-        }
-
-        confirmation = next.equals("confirmation");
-
-        System.out.println("Current subject in startResearch: " + getSubject());
-
-        return next;
-    }
 
     public void clean() {
 
@@ -447,5 +340,39 @@ public class AddResearch implements Serializable {
 
     public TreeNode getRoot() {
         return ResearchTreeShowcase.getRoot();
+    }
+
+    public boolean validateSubject() {
+
+        boolean result = true;
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        
+        if(getLecturerList().isEmpty()) {
+            
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "subjectList").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No lecturers available",
+                    "You must have at least one lecturer in your chosen subject!"));
+             
+            result = false;
+        } else if(availableResearches.isEmpty()) {
+
+            
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "subjectList").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No research available",
+                    "You have no available research at given subject!"));
+            
+            result = false;
+        } else if(!facesContext.getMessageList("subjectList").isEmpty()) {
+
+            facesContext.addMessage(BasicUtils.findComponent(facesContext.getViewRoot(),
+                    "subjectList").getClientId(facesContext),
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, null, null));
+
+        }
+
+        return result;
     }
 }

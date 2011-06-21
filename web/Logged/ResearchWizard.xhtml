@@ -5,109 +5,24 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:component>
-        <h:form>
+        <h:form id="researchWizardForm">
 
        <p:dialog header="New Research" widgetVar="newres" modal="true" height="500" width="700"
                   showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="no" draggable="false"  >
 
             <p>Now, you must specify what research you would like to perform.</p>
 
-
-
-                <p:wizard widgetVar="wiz"  flowListener="#{addResearch.onFlowProcess}">
-
-                    <p:tab id="researchSubject" title="Category" >
-                        <p:panel>
-                            <h:selectOneMenu value="#{addResearch.subject}" id="subjectList" >
+                    <h:selectOneMenu value="#{addResearch.subject}" 
+                                     id="subjectList" >
                                 <f:selectItems value="#{addResearch.subjects}"/>
                             </h:selectOneMenu>
-                            <p:message for="subjectList" />
-                        </p:panel>
-                    </p:tab>
+                            
+                            <p:commandButton value="Create Research"
+                                             actionListener="#{addResearch.validateSubject}"
+                                             oncomplete="researchCreator.show()"
+                                             update=":researchWizardForm:researchCreatorGrid"/>
 
-                    <p:tab id="researchLecturers" title="Lecturers" >
-                        <p:panel >
-                            <h:selectManyListbox
-                                value="#{addResearch.lecturers}"
-                                id="lecturersList">
-                                <f:selectItems value="#{addResearch.lecturerList}"/>
-                            </h:selectManyListbox>
-
-                            <p:message for="lecturersList" />
-
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="availableResearches" title="Subject" >
-                        <p:panel>
-                            <h:selectOneMenu value="#{addResearch.chosenResearch}" >
-                                <f:selectItems value="#{addResearch.availableResearches}"/>
-                            </h:selectOneMenu>
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="moneyAmount" title="moneyAmount" >
-                        <p:panel>
-                            <h:outputText value="Money grant: "/>
-                                <p:spinner id="researchMoneyAmount"
-                                        value="#{addResearch.moneyAmount}"/>
-                                <p:message for="researchMoneyAmount" />
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="undegraduates" title="undegraduates" >
-                        <p:panel>
-                            <h:outputText value="Undegraduates amount: "/>
-                                <p:spinner id="undegraduatesAmount"
-                                       value="#{addResearch.undergraduates}"/>
-                                <p:message for="undegraduatesAmount" />
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="phds" title="phds" >
-                        <p:panel>
-                            <h:outputText value="Phds amount: "/>
-                                <p:spinner id="phdsAmount"
-                                       value="#{addResearch.phds}"/>
-                                <p:message for="phdsAmount" />
-                        </p:panel>
-                    </p:tab>
-
-                    <p:tab id="confirmation" title="Confirmation" >
-                        <p:panel>
-
-                            <h:panelGrid columns="2" border="1" >
-
-                                <h:outputText value="Name of Research: "/>
-                                <h:outputText value="#{addResearch.researchName}" />
-
-                                <h:outputText value="Money: " />
-                                <h:outputText value="#{addResearch.moneyAmount}" />
-
-                                <h:outputText value="Undergraduates: " />
-                                <h:outputText value="#{addResearch.undergraduates}" />
-
-                                <h:outputText value="Phds: " />
-                                <h:outputText value="#{addResearch.phds}" />
-
-
-                                <h:outputText value="Subject: "/>
-                                <h:outputText value="#{addResearch.subjectName}" />
-
-                            </h:panelGrid>
-                            <p:commandButton value="Add Research"
-                                             actionListener="#{addResearch.startResearch}"
-                                             update=":researchForm:researchTable"
-                                             onclick="wiz.next()"/>
-                            <p:commandButton actionListener="#{addResearch.clean}"
-                                             value="Clean"
-                                             onclick="wiz.next()"  />
-                        </p:panel>
-                    </p:tab>
-                </p:wizard>
-      
-
-            <h3>Available researches: </h3>
+                            <h3>Available researches: </h3>
 
 
                 <p:tree value="#{addResearch.root}" var="node">
@@ -116,6 +31,58 @@
                     </p:treeNode>
                 </p:tree>
 
+        </p:dialog>
+
+        <p:dialog header="Creating Research"
+                                  widgetVar="researchCreator"
+                                  resizable="false"
+                                  closeOnEscape="true"
+                                  height="400" width="600">
+
+            <h:panelGrid id="researchCreatorGrid" columns="3" >
+
+                <h:outputText value="Chosen subject: " />
+                <h:outputText value="#{addResearch.subjectName}" />
+                <p:message for="subjectList" />
+
+                <h:outputText value="Choose lecturers" />
+                <h:selectManyListbox
+                                value="#{addResearch.lecturers}"
+                                id="lecturersList">
+                                <f:selectItems value="#{addResearch.lecturerList}"/>
+                </h:selectManyListbox>
+                <p:message for="lecturersList" />
+
+                <h:outputText value="Choose research" />
+                <h:selectOneMenu value="#{addResearch.chosenResearch}" >
+                                <f:selectItems value="#{addResearch.availableResearches}"/>
+                </h:selectOneMenu>
+                <h:outputText value="" />
+
+                <h:outputText value="Money grant: "/>
+                <p:spinner id="researchMoneyAmount" min="0" max="#{auth.money}"
+                           value="#{addResearch.moneyAmount}" />
+                <p:message for="researchMoneyAmount" />
+
+                <h:outputText value="Undegraduates amount: "/>
+                <p:spinner id="undegraduatesAmount" min="0" max="#{auth.undergraduatesnumber}"
+                           value="#{addResearch.undergraduates}" />
+                <p:message for="undegraduatesAmount" />
+
+                <h:outputText value="Phds amount: "/>
+                <p:spinner id="phdsAmount" min="0" max="#{auth.phdsnumber}"
+                           value="#{addResearch.phds}"/>
+                <p:message for="phdsAmount" />
+
+                <p:commandButton value="Add Research"
+                                 actionListener="#{addResearch.startResearch}"
+                                 update=":researchWizardForm:researchCreatorGrid"/>
+               <p:commandButton actionListener="#{addResearch.clean}"
+                                value="Clean" 
+                                onclick="researchCreator.hide()" />
+
+            </h:panelGrid>
+            
         </p:dialog>
 
 </h:form>

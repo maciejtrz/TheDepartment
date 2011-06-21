@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EventDeamon extends Thread {
 
-    private static final int SLEEP_TIME = 1;
+    private static final int SLEEP_TIME = 2;
 
     public EventDeamon() {
         setDaemon(true);
@@ -33,7 +33,7 @@ public class EventDeamon extends Thread {
            /* Sleep for four minutes. */
            System.out.println("Event daemon " + this.getName() +
                    " is going to sleep for two minutes.");
-           sleep(1000 * 34 * SLEEP_TIME);
+           sleep(1000 * 60 * SLEEP_TIME);
 
            List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {

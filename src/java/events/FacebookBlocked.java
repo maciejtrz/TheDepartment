@@ -33,7 +33,7 @@ public class FacebookBlocked extends Event {
         }
         
         // Updating the databases if everything went ok
-        capHelper.updateStudentsCapacity(playerName, 100);
+        capHelper.updateStudentsCapacity(playerName, 50);
 
         return true;
     }

@@ -12,9 +12,9 @@ public class GirlsArrival extends Event {
 
         // Updating capacities.
         CapacityHelper capHelper = new CapacityHelper();
-        capHelper.updateStudentsCapacity(playerName, 100);
-        capHelper.updatePhDsCapacity(playerName, LotteryManager.MEGA);
-        capHelper.updateProfessorsCapacity(playerName, LotteryManager.HIGH);
+        capHelper.updateStudentsCapacity(playerName, 200);
+        capHelper.updatePhDsCapacity(playerName, 50);
+        capHelper.updateProfessorsCapacity(playerName, LotteryManager.LOW);
 
         return true;
     }
@@ -36,7 +36,7 @@ public class GirlsArrival extends Event {
 
     @Override
     public String getName() {
-        return ("100 young virgins arrival!");
+        return ("100 young girls arrival!");
     }
 
     @Override

@@ -33,8 +33,8 @@ public class HighRanking extends Event {
 
         // Increasing students and phds capacity.
         CapacityHelper capacityHelper = new CapacityHelper();
-        capacityHelper.updateStudentsCapacity(playerName, LotteryManager.HIGH);
-        capacityHelper.updatePhDsCapacity(playerName, LotteryManager.MEDIUM);
+        capacityHelper.updateStudentsCapacity(playerName, 250);
+        capacityHelper.updatePhDsCapacity(playerName, 50);
         capacityHelper.updateProfessorsCapacity(playerName, LotteryManager.LOW);
         
         return true;

@@ -25,7 +25,7 @@ public class MacChickenPromotion extends Event {
         }
 
         // Decreasing starvation
-        return decreaseSatisfaction(playerName, LotteryManager.MEGA);
+        return decreaseStarvation(playerName, LotteryManager.HIGH);
     }
 
     @Override

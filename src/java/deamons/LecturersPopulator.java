@@ -9,7 +9,7 @@ import utilities.LecturersManager;
 
 public class LecturersPopulator extends Thread {
 
-    private static final int SLEEP_TIME = 1;
+    private static final int SLEEP_TIME = 3;
 
     public LecturersPopulator() {
         setDaemon(true);
@@ -32,14 +32,14 @@ public class LecturersPopulator extends Thread {
 
         while (!stopped) {
             try {
+
+                // Initial run for the purpose of presentation after 30 sec.
+                sleep(1000*30);
+
                 System.out.println(this.getName()
                         + " is repopulating available lecturers");
-                /* Sleep for five minutes. */
-                System.out.println(this.getName() + " is going to sleep.");
-                sleep(1000 * 26 * SLEEP_TIME);
 
                 // Updating available lecturers for all players
-
                 List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {
                     continue;
@@ -73,6 +73,9 @@ public class LecturersPopulator extends Thread {
                         // Repopulating available lecturers.
                         manager.repopulateAvailableLec();
                     }
+                    /* Sleep for three minutes. */
+                    System.out.println(this.getName() + " is going to sleep.");
+                    sleep(1000 * 60 * SLEEP_TIME);
                 }
 
             } catch (Exception ex) {

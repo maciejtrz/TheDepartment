@@ -11,7 +11,7 @@ public class Malice extends Event {
         // No prerequirements.
 
         // Decreasing students satisfaction.
-        decreaseSatisfaction(playerName, LotteryManager.MEGA);
+        decreaseSatisfaction(playerName, LotteryManager.MEDIUM);
 
         // Decreasing students population.
         UserManager.removeUndegraduatesnumber(playerName, LotteryManager.MEGA);

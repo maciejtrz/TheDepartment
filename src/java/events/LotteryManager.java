@@ -37,9 +37,9 @@ public class LotteryManager {
     public static final String PRIVATE_INVESTOR_GRANT = "PRIVATE_GRANT";
 
     // Event special statistics update levels
-    public static final int LOW = 5;
-    public static final int MEDIUM = 10;
-    public static final int HIGH = 15;
+    public static final int LOW = 1;
+    public static final int MEDIUM = 5;
+    public static final int HIGH = 10;
     public static final int MEGA = 20;
 
     // Statistics upper and lower bound

@@ -26,7 +26,7 @@ public class StatsDeamon extends Thread {
     private static final int BOOST = 3;
 
     // The time a given thread sleeps in minutes.
-    private static final int SLEEP_TIME = 1;
+    private static final int SLEEP_TIME = 2;
 
     private BuildingsUtils b_utils;
 
@@ -54,7 +54,7 @@ public class StatsDeamon extends Thread {
             try {
             // Initially sleep for one unit of time.
             System.out.println("Stats deamon " + getName() +" sleeping");
-            sleep(SLEEP_TIME * 1000 * 47);
+            sleep(SLEEP_TIME * 1000 * 60);
 
             // Iterating through a player list, updating all statistics.
             List<Players> allPlayers = playerHelper.getPlayers();
@@ -163,9 +163,9 @@ public class StatsDeamon extends Thread {
     private void updateMoney(String playerName) {
 
         int update_money = 0;
-        int tresco_update = 200;
-        int mac_chicken_update = 300;
-        int doc_pub_update = 500;
+        int tresco_update = 50;
+        int mac_chicken_update = 100;
+        int doc_pub_update = 150;
 
         /* For each lecturers owned substract a small amount of cash. */
         LecturersManager mgr = new LecturersManager(playerName);

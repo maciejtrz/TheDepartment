@@ -21,7 +21,8 @@ public class NobelPrice extends Event {
     @Override
     public String getInfo() {
         return ("Impossible! You were awarded a noble price! The satisfaction of " +
-                "all your students increases dramatically. Also, the performance" +
+                "all your students increases dramatically Moreover, you get a "
+                + "1000 free research points. Finally, the performance" +
                 " of your lecturers increases!");
     }
 

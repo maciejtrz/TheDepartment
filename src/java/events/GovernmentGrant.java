@@ -15,7 +15,7 @@ public class GovernmentGrant extends Event {
         // Adding money
         Random rand = new Random();
         int grant = rand.nextInt(5) + 1;
-        UserManager.addMoney(playerName, grant * 1000);
+        UserManager.addMoney(playerName, grant * 500);
 
         return true;
     }

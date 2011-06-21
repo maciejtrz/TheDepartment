@@ -100,6 +100,8 @@ public class AuctionMonitor {
                 auctionHistoryHelper.deleteOffers(auction.getMsgnumber());
 
                 auction.finishAuction();
+
+                PushRenderer.render(auctionGroup);
             } else {
                 return;
             }
@@ -111,6 +113,9 @@ public class AuctionMonitor {
     }
 
     public synchronized boolean placeOffer(Auction auction, int offer) {
-        return auction.setHighestOffer(offer);
+        boolean result = auction.setHighestOffer(offer);
+        PushRenderer.render(auctionGroup);
+
+        return result;
     }
 }

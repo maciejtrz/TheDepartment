@@ -32,7 +32,7 @@
                                     </p:commandButton>
                                 </p:column>
                                 <p:column headerText="Purchase">
-                                    <p:commandButton id="but" value="Buy" action="#{buyLecturers.buy}" update="proftable,profform,progmanform" >
+                                    <p:commandButton id="but" value="Buy" action="#{buyLecturers.buy}" update="proftable,profform,:progmanform:profmanpanel" >
                                         <f:setPropertyActionListener target="#{buyLecturers.selected_lecturer}" value="#{lec}"/>
                                     </p:commandButton>
                                 </p:column>

@@ -180,7 +180,6 @@ public class Auth implements Serializable {
     }
 
     public void notifyUserAboutMessage() {
-        PushRenderer.render(getUsername());
         
         setHasNewMessage(true);
     }
@@ -197,6 +196,7 @@ public class Auth implements Serializable {
         if(getHasNewMessage()) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Messaging System","You've got a new message"));
+            PushRenderer.render(getUsername());
             setHasNewMessage(false);
         }
     }

@@ -89,6 +89,8 @@ public class NoticeMonitor {
                 listNotices.remove(noticeOffer);
 
                 messageSystemHelper.deleteMsg(noticeOffer.getMsgnumber());
+
+                PushRenderer.render(NoticeMonitor.noticeGroup);
             } else {
                 return;
             }
@@ -110,6 +112,8 @@ public class NoticeMonitor {
         if(result) {
             currentNotices.remove(noticeOffer);
             listNotices.remove(noticeOffer);
+
+            PushRenderer.render(NoticeMonitor.noticeGroup);
         }
 
         return result;

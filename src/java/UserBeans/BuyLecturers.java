@@ -65,8 +65,9 @@ public class BuyLecturers  {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         Auth auth = (Auth) session.getAttribute(ConnectionSingleton.auth);
+        String username = auth.getUsername();
 
-        Playerresources resources = auth.getResources();
+        int money = UserManager.getMoney(username);
         CapacityHelper capacityhelper = new CapacityHelper();
         
         System.out.println("cases start");
@@ -80,7 +81,7 @@ public class BuyLecturers  {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR," Me ", "Not enought space for new Prof!!!"));
                 return;
 
-        } else if ( resources.getMoney() < l.getPrice()){
+        } else if ( money < l.getPrice()){
 
             System.out.println("money fail");
 
@@ -104,7 +105,7 @@ public class BuyLecturers  {
 
         int price = l.getPrice();
         avail.deleteLecturer(l.getName());
-        this.owned.addLecturer(l.getName(), username);
+        owned.addLecturer(l.getName(), username);
         UserManager.removeMoney(username, price);
 
         lecturers = mgr.getAvailabeLecturers();

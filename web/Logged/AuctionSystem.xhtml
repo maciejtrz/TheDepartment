@@ -48,7 +48,7 @@
                         <div align="center">
                         <p:commandButton image="ui-icon ui-icon-newwin"
                                          oncomplete="auctionOfferDetails.show()"
-                                         update=":auctionTableForm:auctionOffersTableGrid">
+                                         update=":auctionTableForm:auctionDetailsForm:auctionOffersTableGrid">
 
                             <f:setPropertyActionListener value="#{auction}"
                                                          target="#{auctionMessageReader.selectedAuction}" />
@@ -62,6 +62,7 @@
                           widgetVar="auctionOfferDetails"
                           resizable="false"
                           closeOnEscape="true">
+                    <h:form id="auctionDetailsForm">
 
                     <h:panelGrid columns="2" id="auctionOffersTableGrid">
 
@@ -103,7 +104,7 @@
                         </h:panelGrid>
 
                     </h:panelGrid>
-
+                    </h:form>
                 </p:dialog>
 
             </h:form>
